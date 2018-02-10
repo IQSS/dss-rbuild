@@ -1,0 +1,51 @@
+---
+title: "Using Github"
+author: "Asher Spector"
+date: "February 10, 2018"
+output: html_document
+---
+
+This guide is a basic introduction to Git and Github for near-absolute beginners. It will start by discussing the importance of git and github, how to install git, and how to use git/github at a basic level. Lastly, it will provide links to further reading regarding advanced functionality for git.
+
+## 1. Why use git/github
+
+Git and github are actually two different things, and deserve their own sections. Before diving into specifics, however, it's important to recognize that git and github are just tools that developers use to more effectively organize their code. Git and github are designed to solve three main organizational problems.  
+
+First, imagine that two programmers (we'll refer to them as Carlos and Grace) are working together to try to build a website that automatically displays polling results from US elections, and suppose Grace  modifies a script to slightly change the method for aggregating polling data. It would be tedious for Carlos and Grace to email the script back and forth each time they updated it. Instead, they need a repository where they can easily update  and sync their code to make sure they're on the same page. Github allows programmers to create such repositories. 
+
+Second, imagine that farther along in the project, Grace decides that she needs to totally rewrite the code which stores and organizes polling data. Unfortunately, while Grace modifies the system which stores the data, it will be offline, which is unfortunate because Carlos needs to use the data for his work on the project. To avoid this dilemma, Git and Github allow programmers to create different versions, called branches, of their code. Using branching, Grace can modify the storage system, and in the meantime, Carlos can continue to use the old storage system for his work. 
+
+Third, suppose that once Grace and Carlos have finished their website, they want to publish all the statistical functions and tools they built so that other researchers can use those tools to reproduce Grace and Carlos's research. It's often tedious to write documentation about huge quantities of code, but thankfully, Git and Github offer tools that allow programmers to more easily document their code. 
+
+### What is git?
+
+Explain what a local repository is
+
+### What is github?
+
+Remote repositories
+
+## 2. Setting up Git/Github
+
+### Making a Github account
+
+### How to Install Git
+
+## 3. Starting to use Git/Github
+
+Commands to run through:
+
+Git add
+git commit (-m)
+git push
+git pull
+git clone
+
+This cheat sheet is great https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf
+
+This setup page is good too
+http://kbroman.org/github_tutorial/pages/init.html
+
+## 4. Further reading
+
+
