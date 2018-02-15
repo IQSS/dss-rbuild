@@ -126,6 +126,7 @@ $(document).ready(function () {
 </div>
 
 
+<p>Dev note: I recognize this is inefficiently written. When I finish writing out all the content, I will ruthlessly cut it down, don’t worry :)</p>
 <p>This guide is a basic introduction to Git and Github for near-absolute beginners. It will start by discussing the importance of git and github, how to install git, and how to use git/github at a basic level. Lastly, it will provide links to further reading regarding advanced functionality for git.</p>
 <div id="why-use-gitgithub" class="section level2">
 <h2>1. Why use git/github</h2>
@@ -135,17 +136,24 @@ $(document).ready(function () {
 <p>Third, suppose that once Grace and Carlos have finished their website, they want to publish all the statistical functions and tools they built so that other researchers can use those tools to reproduce Grace and Carlos’s research. It’s often tedious to write documentation about huge quantities of code, but thankfully, Git and Github offer tools that allow programmers to more easily document their code.</p>
 <div id="what-is-git" class="section level3">
 <h3>What is git?</h3>
-<p>Explain what a local repository is</p>
+<p>Git is a local version control system. In other words, Git automatically organizes and saves versions of code on your computer, but does not connect to the internet. It does this in two ways.</p>
+<p>First, Git sends discrete versions of code to a local database or repository on the computer on which it is installed. To understand this, imagine that Carlos is writing an R script which determines the proper weights for aggregating polling data, and at some point he finishes the first version of the script. At this point, Carlos can send his code to the local repository, in an action called <em>commiting</em> his script. We’ll discuss how to do this later, but note that scripts are not automatically committed to the repository. If Carlos deleted all the code in the script and saved it, he could still access the script by going into the repository. Moreover, the repository also stores all of the previous versions of code, and can backtrack through the various commits, so if Carlos decides the version of the script he built last year worked better, he can use git to access it.</p>
+<p>Second, Git can create branches, or separate versions of code, on the computer it’s installed to. Remember how Grace wanted to revamp the storage system for polling data without preventing Carlos from accessing the old storage system? Using Git, Grace should create a new <em>branch</em> in the repository. Creating a branch creates (for all practical purposes) an entirely separate version of the entire polling project in the Git repository, which Grace can modify and experiment with without compromising the functionality of the <em>master branch,</em> the original scripts that Grace had written. While she’s working, Grace can use Git to move back and forth between the branches: doing so will make the contents of her R scripts (which show up in the same folder on her computer) seem to magically change.</p>
+<p>__ insert graphic demonstrating this property of branching __</p>
+<p>Then, when Grace finishes designing and testing the new storage system, she can <em>merge</em> the two branches together, and Carlos’s scripts will automatically start using the new storage system.</p>
+<p>(Insert graphic about organization of git, including branches, )</p>
 </div>
 <div id="what-is-github" class="section level3">
 <h3>What is github?</h3>
-<p>Remote repositories</p>
+<p>Where Git creates <em>local</em> repositories on an individual computer, Github allows programmers to create <em>remote</em> repositories, stored online, for their code. This is pretty simple concept, but it’s extroardinarily useful. It means that when Grace finishes updating a series of scripts, she can simply <em>push</em> (push means send) them to Github, and then Carlos can in one command <em>pull</em> (download) the modified versions onto his computer to work with them. Github provides other important tools, but we will not discuss those until later.</p>
+<p>__ insert graphic about github, git, etc__</p>
 </div>
 </div>
 <div id="setting-up-gitgithub" class="section level2">
 <h2>2. Setting up Git/Github</h2>
 <div id="making-a-github-account" class="section level3">
 <h3>Making a Github account</h3>
+<p>Signing up for a Github is fairly simple - just go to github.com, click “sign up” in the upper right hand corner, and follow the instructions. We recommend, at least to begin with, getting a free version of Github. (Note: ask Simo - we recommend this right?)</p>
 </div>
 <div id="how-to-install-git" class="section level3">
 <h3>How to Install Git</h3>
@@ -156,9 +164,14 @@ $(document).ready(function () {
 <p>Commands to run through:</p>
 <p>Git add git commit (-m) git push git pull git clone</p>
 <p>This cheat sheet is great <a href="https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf" class="uri">https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf</a></p>
+<p>This setup page is good too <a href="http://kbroman.org/github_tutorial/pages/init.html" class="uri">http://kbroman.org/github_tutorial/pages/init.html</a></p>
 </div>
 <div id="further-reading" class="section level2">
 <h2>4. Further reading</h2>
+</div>
+<div id="sources-cited" class="section level2">
+<h2>5. Sources cited</h2>
+<p><a href="https://git-scm.com/book/en/v2/Getting-Started-Git-Basics" class="uri">https://git-scm.com/book/en/v2/Getting-Started-Git-Basics</a></p>
 </div>
 
 
