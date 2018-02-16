@@ -43,20 +43,56 @@ __ insert graphic about github, git, etc__
 
 ### Making a Github account
 
-Signing up for a Github is fairly simple - just go to github.com, click "sign up" in the upper right hand corner, and follow the instructions. We recommend, at least to begin with, getting a free version of Github. 
+Signing up for a Github is fairly simple - just go to github.com, click "sign up" in the upper right hand corner, and follow the instructions. We recommend, at least to begin with, getting a free version of Github.
 (Note: ask Simo - we recommend this right?)
 
-### How to Install Git
+### How to Install and Set Up Git
+
+Because Git is a form of *local* source control, it does require installation. To install Git onto your computer, go to one of the following sites:
+
+  * For Linux: Head to https://git-scm.com/download/linux and follow the instructions.
+  
+  * For Windows: Go to https://git-scm.com/download/win and the download should automatically start.
+  
+  * For Mac: Click on https://git-scm.com/download/mac and the download should automatically start. 
+
+If you are running Windows/Mac and the websites above download an installer, simply follow the instructions from the installer - it's fine to just use default settings for now. 
+
+Before you can start using git, you do have to do a one time set up. Git is built to track and organize different versions of code, so it will need you to set your username and email before it will let you start modifying programs. To set your username and email after installing, open the command line on your computer and type the following commands into it:
+
+```{R, eval=FALSE}
+$ git config --global user.name "Your Name"
+$ git config --global user.email "youremail@email.com"
+```
+
+__ insert screenshot of git bash/cmd line __
+
+Now you're ready to start using Git/Github!
 
 ## 3. Starting to use Git/Github
 
-Commands to run through:
+### Creating Projects
 
-Git add
-git commit (-m)
-git push
-git pull
-git clone
+Method 1: Start on Github, git clone
+
+Method 2: Git init
+
+### Modifying Projects
+
+git add
+git commit -m
+git push, git pull
+git remote add origin
+
+### Branching
+
+git checkout
+
+### Merge Conflicts
+
+Carlos and Grace mess up.
+
+Overall:
 
 This cheat sheet is great https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf
 
@@ -69,4 +105,5 @@ http://kbroman.org/github_tutorial/pages/init.html
 ## 5. Sources cited
 
 https://git-scm.com/book/en/v2/Getting-Started-Git-Basics
+https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup 
 
