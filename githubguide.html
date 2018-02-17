@@ -136,7 +136,7 @@ $(document).ready(function () {
 <p>Third, suppose that once Grace and Carlos have finished their website, they want to publish all the statistical functions and tools they built so that other researchers can use those tools to reproduce Grace and Carlos’s research. It’s often tedious to write documentation about huge quantities of code, but thankfully, Git and Github offer tools that allow programmers to more easily document their code.</p>
 <div id="what-is-git" class="section level3">
 <h3>What is git?</h3>
-<p>Git is a local version control system. In other words, Git automatically organizes and saves versions of code on your computer, but does not connect to the internet. It does this in two ways.</p>
+<p>Git is a local version control system. In other words, Git automatically organizes and saves versions of code on your computer, but does not connect to the internet: it’s purely accessible through the command prompt on a computer (there are also other ways to use git, but it’s generally best to use the command prompt). Git organizes code in two ways.</p>
 <p>First, Git sends discrete versions of code to a local database or repository on the computer on which it is installed. To understand this, imagine that Carlos is writing an R script which determines the proper weights for aggregating polling data, and at some point he finishes the first version of the script. At this point, Carlos can send his code to the local repository, in an action called <em>commiting</em> his script. We’ll discuss how to do this later, but note that scripts are not automatically committed to the repository. If Carlos deleted all the code in the script and saved it, he could still access the script by going into the repository. Moreover, the repository also stores all of the previous versions of code, and can backtrack through the various commits, so if Carlos decides the version of the script he built last year worked better, he can use git to access it.</p>
 <p>Second, Git can create branches, or separate versions of code, on the computer it’s installed to. Remember how Grace wanted to revamp the storage system for polling data without preventing Carlos from accessing the old storage system? Using Git, Grace should create a new <em>branch</em> in the repository. Creating a branch creates (for all practical purposes) an entirely separate version of the entire polling project in the Git repository, which Grace can modify and experiment with without compromising the functionality of the <em>master branch,</em> the original scripts that Grace had written. While she’s working, Grace can use Git to move back and forth between the branches: doing so will make the contents of her R scripts (which show up in the same folder on her computer) seem to magically change.</p>
 <p>__ insert graphic demonstrating this property of branching __</p>
@@ -173,10 +173,24 @@ $ git config --global user.email &quot;youremail@email.com&quot;</code></pre>
 </div>
 <div id="starting-to-use-gitgithub" class="section level2">
 <h2>3. Starting to use Git/Github</h2>
-<div id="creating-projects" class="section level3">
-<h3>Creating Projects</h3>
-<p>Method 1: Start on Github, git clone</p>
-<p>Method 2: Git init</p>
+<div id="creating-projects-and-repositories" class="section level3">
+<h3>Creating Projects and Repositories</h3>
+<p>The first step to using git is creating a project, or repository (repo for short). There are generally two ways to create a repo in Git.</p>
+<div id="method-1-start-your-project-on-github" class="section level5">
+<h5>Method 1: Start your project on Github</h5>
+<p>The first way to start a repo is by creating it on github. To do so, log into your Github account, click “Repositories” in the top tab, and then click the green “New” button on the right.</p>
+<p>__ do we want to insert pictures? __</p>
+<p>Github will prompt you to choose a repository name and description of the repo, which you should enter, and will also ask you whether you’d like to initialize the repository with a README. You should generally add README and .gitignore files, although we’ll discuss their functions and importance later. For now, just add the README.</p>
+<p>__ discussion of gitignores?? __</p>
+<p>Once you’ve created the repository on Github, the next step is to link it with a local repository on git. To do this, open the <em>command prompt</em> on your computer. You’ll need to enter a couple of commands to get the repo set up on your computer.</p>
+<p>First, you’ll need to set the <em>working directory</em> in the command prompt. The working directory is the location where git and command prompt will do all of their editing - if you add a file, it will add the file into your working directory. Thus, before you download your repository, you’ll want to navigate to the folder in which you want the repository to be located. For example, Carlos might want to put a repo in his “R” folder inside the “Documents” folder on my computer. To do this, you can use the ‘cd’ command, which stands for “change directory,” and then copy and paste the path of the folder you’d like to place the repository in. An example is given below:</p>
+<pre class="r"><code>$ cd C:/Users/Carlos/Documents/R</code></pre>
+<p>Next, you will need to tell git to download, or <em>clone</em>, the repo. You can do this using the “git clone” command, which allows you to download and sync a repository <em>for the first time.</em> This will download the repo, with all its contents, onto your computer and automatically set up a local version of the repo. See an example of the command below:</p>
+<pre class="r"><code>$ git clone https://github.com/Carlos_Account/test/</code></pre>
+</div>
+<div id="method-2-git-init" class="section level5">
+<h5>Method 2: Git init</h5>
+</div>
 </div>
 <div id="modifying-projects" class="section level3">
 <h3>Modifying Projects</h3>

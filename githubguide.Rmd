@@ -21,7 +21,7 @@ Third, suppose that once Grace and Carlos have finished their website, they want
 
 ### What is git?
 
-Git is a local version control system. In other words, Git automatically organizes and saves versions of code on your computer, but does not connect to the internet. It does this in two ways.
+Git is a local version control system. In other words, Git automatically organizes and saves versions of code on your computer, but does not connect to the internet: it's purely accessible through the command prompt on a computer (there are also other ways to use git, but it's generally best to use the command prompt). Git organizes code in two ways.
 
 First, Git sends discrete versions of code to a local database or repository on the computer on which it is installed. To understand this, imagine that Carlos is writing an R script which determines the proper weights for aggregating polling data, and at some point he finishes the first version of the script. At this point, Carlos can send his code to the local repository, in an action called *commiting* his script. We'll discuss how to do this later, but note that scripts are not automatically committed to the repository. If Carlos deleted all the code in the script and saved it, he could still access the script by going into the repository. Moreover, the repository also stores all of the previous versions of code, and can backtrack through the various commits, so if Carlos decides the version of the script he built last year worked better, he can use git to access it. 
 
@@ -40,6 +40,8 @@ Where Git creates *local* repositories on an individual computer, Github allows 
 __ insert graphic about github, git, etc__
 
 ## 2. Setting up Git/Github
+
+__ general problem - what about other OSs? __
 
 ### Making a Github account
 
@@ -71,11 +73,35 @@ Now you're ready to start using Git/Github!
 
 ## 3. Starting to use Git/Github
 
-### Creating Projects
+### Creating Projects and Repositories
 
-Method 1: Start on Github, git clone
+The first step to using git is creating a project, or repository (repo for short). There are generally two ways to create a repo in Git. 
 
-Method 2: Git init
+#####Method 1: Start your project on Github
+
+The first way to start a repo is by creating it on github. To do so, log into your Github account, click "Repositories" in the top tab, and then click the green "New" button on the right. 
+
+__ do we want to insert pictures? __
+
+Github will prompt you to choose a repository name and description of the repo, which you should enter, and will also ask you whether you'd like to initialize the repository with a README. You should generally add README and .gitignore files, although we'll discuss their functions and importance later. For now, just add the README. 
+
+__ discussion of gitignores?? __
+
+Once you've created the repository on Github, the next step is to link it with a local repository on git. To do this, open the *command prompt* on your computer. You'll need to enter a couple of commands to get the repo set up on your computer. 
+
+First, you'll need to set the *working directory* in the command prompt. The working directory is the location where git and command prompt will do all of their editing - if you add a file, it will add the file into your working directory. Thus, before you download your repository, you'll want to navigate to the folder in which you want the repository to be located. For example, Carlos might want to put a repo in his "R" folder inside the "Documents" folder on my computer. To do this, you can use the 'cd' command, which stands for "change directory," and then copy and paste the path of the folder you'd like to place the repository in. An example is given below:
+
+```{R, eval=FALSE}
+$ cd C:/Users/Carlos/Documents/R
+```
+
+Next, you will need to tell git to download, or *clone*, the repo. You can do this using the "git clone" command, which allows you to download and sync a repository *for the first time.* This will download the repo, with all its contents, onto your computer and automatically set up a local version of the repo. See an example of the command below:
+
+```{R, eval=FALSE}
+$ git clone https://github.com/Carlos_Account/test/
+```
+
+#####Method 2: Git init
 
 ### Modifying Projects
 
