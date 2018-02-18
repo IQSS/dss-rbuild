@@ -77,7 +77,7 @@ Now you're ready to start using Git/Github!
 
 The first step to using git is creating a project, or repository (repo for short). There are generally two ways to create a repo in Git. 
 
-#####Method 1: Start your project on Github
+##### Method 1: Start your project on Github
 
 The first way to start a repo is by creating it on github. To do so, log into your Github account, click "Repositories" in the top tab, and then click the green "New" button on the right. 
 
@@ -98,17 +98,45 @@ $ cd C:/Users/Carlos/Documents/R
 Next, you will need to tell git to download, or *clone*, the repo. You can do this using the "git clone" command, which allows you to download and sync a repository *for the first time.* This will download the repo, with all its contents, onto your computer and automatically set up a local version of the repo. See an example of the command below:
 
 ```{R, eval=FALSE}
-$ git clone https://github.com/Carlos_Account/test/
+$ git clone https://github.com/Carlos_Account/repository_name/
 ```
 
-#####Method 2: Git init
+##### Method 2: Git init
+
+You can also initialize repos through Git and then upload them to github. To do this, first create a folder where you'd like the repo to be located. Then, open the command line, and like before, navigate to the folder using the 'cd' command. Once you've navigated there, you can initialize the repo locally by typing "git init""
+
+```{R, eval=FALSE}
+$ cd C:/Users/Carlos/Documents/R/repository_name
+$ git init
+```
+
+This sets up a local repository! We'll go over how to link a local repository set up this way to github in the next section.
 
 ### Modifying Projects
 
-git add
-git commit -m
-git push, git pull
-git remote add origin
+Say you have created some code in your project directory and want to add it to the repository. To do this, you need to use three commands: *git add*, *git commit*, and *git push.* Note that sending scripts to the local repository is (perhaps counterintuitively) known as *commiting* them, not adding them. 
+
+First, you need to *add*  scripts to Git (adding scripts doesn't  add them to the repository - rather, it just lets Git know that you will eventually *commit* or send them to the repository). To do this, navigate to the correct working directory and type 'git add [your script's filepath]' to the directory. You can add multiple files in a row with no problem. 
+
+Second, you need to *commit* scripts, which means actually sending them to the local repository. To do this, simply type *git commit* to the command line after you've added all the scripts you want to send to the repository. Git will open a text editor and prompt you to add a message to explain what the commit is for - type in your desired message, then hit "escape" to leave the text editor, and type ":wq" to save and exit the message interface. Once you've committed files, all of the files you've previously added will be saved on your local repository. 
+
+```{R, eval=FALSE}
+$ cd C:/Users/Carlos/Documents/R/repository_name
+$ git add 'scriptname.R'
+$ git add 'scriptname2.R'
+$ git commit
+```
+
+Lastly, you need to *push* the files, which means sending them to Github online. Before you do this, if you created the repository locally and have not already done so, you'll need to specify to Git the url to send the commits to. To do this, type 'git remote add origin [your url]' into your command line. Then, you can *push* the file by writing 'git push -u origin master,' which will send the file to the Github repo. 
+
+
+```{R, eval=FALSE}
+$ git remote add origin https://github.com/user_name/repository_name
+$ got push -u origin master
+```
+
+
+__ git commit -m or git commit? Depends on the command line/bash distinction __
 
 ### Branching
 

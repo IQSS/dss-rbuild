@@ -151,6 +151,7 @@ $(document).ready(function () {
 </div>
 <div id="setting-up-gitgithub" class="section level2">
 <h2>2. Setting up Git/Github</h2>
+<p>__ general problem - what about other OSs? __</p>
 <div id="making-a-github-account" class="section level3">
 <h3>Making a Github account</h3>
 <p>Signing up for a Github is fairly simple - just go to github.com, click “sign up” in the upper right hand corner, and follow the instructions. We recommend, at least to begin with, getting a free version of Github. (Note: ask Simo - we recommend this right?)</p>
@@ -186,15 +187,29 @@ $ git config --global user.email &quot;youremail@email.com&quot;</code></pre>
 <p>First, you’ll need to set the <em>working directory</em> in the command prompt. The working directory is the location where git and command prompt will do all of their editing - if you add a file, it will add the file into your working directory. Thus, before you download your repository, you’ll want to navigate to the folder in which you want the repository to be located. For example, Carlos might want to put a repo in his “R” folder inside the “Documents” folder on my computer. To do this, you can use the ‘cd’ command, which stands for “change directory,” and then copy and paste the path of the folder you’d like to place the repository in. An example is given below:</p>
 <pre class="r"><code>$ cd C:/Users/Carlos/Documents/R</code></pre>
 <p>Next, you will need to tell git to download, or <em>clone</em>, the repo. You can do this using the “git clone” command, which allows you to download and sync a repository <em>for the first time.</em> This will download the repo, with all its contents, onto your computer and automatically set up a local version of the repo. See an example of the command below:</p>
-<pre class="r"><code>$ git clone https://github.com/Carlos_Account/test/</code></pre>
+<pre class="r"><code>$ git clone https://github.com/Carlos_Account/repository_name/</code></pre>
 </div>
 <div id="method-2-git-init" class="section level5">
 <h5>Method 2: Git init</h5>
+<p>You can also initialize repos through Git and then upload them to github. To do this, first create a folder where you’d like the repo to be located. Then, open the command line, and like before, navigate to the folder using the ‘cd’ command. Once you’ve navigated there, you can initialize the repo locally by typing “git init”&quot;</p>
+<pre class="r"><code>$ cd C:/Users/Carlos/Documents/R/repository_name
+$ git init</code></pre>
+<p>This sets up a local repository! We’ll go over how to link a local repository set up this way to github in the next section.</p>
 </div>
 </div>
 <div id="modifying-projects" class="section level3">
 <h3>Modifying Projects</h3>
-<p>git add git commit -m git push, git pull git remote add origin</p>
+<p>Say you have created some code in your project directory and want to add it to the repository. To do this, you need to use three commands: <em>git add</em>, <em>git commit</em>, and <em>git push.</em> Note that sending scripts to the local repository is (perhaps counterintuitively) known as <em>commiting</em> them, not adding them.</p>
+<p>First, you need to <em>add</em> scripts to Git (adding scripts doesn’t add them to the repository - rather, it just lets Git know that you will eventually <em>commit</em> or send them to the repository). To do this, navigate to the correct working directory and type ‘git add [your script’s filepath]’ to the directory. You can add multiple files in a row with no problem.</p>
+<p>Second, you need to <em>commit</em> scripts, which means actually sending them to the local repository. To do this, simply type <em>git commit</em> to the command line after you’ve added all the scripts you want to send to the repository. Git will open a text editor and prompt you to add a message to explain what the commit is for - type in your desired message, then hit “escape” to leave the text editor, and type “:wq” to save and exit the message interface. Once you’ve committed files, all of the files you’ve previously added will be saved on your local repository.</p>
+<pre class="r"><code>$ cd C:/Users/Carlos/Documents/R/repository_name
+$ git add 'scriptname.R'
+$ git add 'scriptname2.R'
+$ git commit</code></pre>
+<p>Lastly, you need to <em>push</em> the files, which means sending them to Github online. Before you do this, if you created the repository locally and have not already done so, you’ll need to specify to Git the url to send the commits to. To do this, type ‘git remote add origin [your url]’ into your command line. Then, you can <em>push</em> the file by writing ‘git push -u origin master,’ which will send the file to the Github repo.</p>
+<pre class="r"><code>$ git remote add origin https://github.com/user_name/repository_name
+$ got push =u origin master</code></pre>
+<p>__ git commit -m or git commit? Depends on the command line/bash distinction __</p>
 </div>
 <div id="branching" class="section level3">
 <h3>Branching</h3>
