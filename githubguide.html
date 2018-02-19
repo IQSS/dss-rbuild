@@ -127,6 +127,7 @@ $(document).ready(function () {
 
 
 <p>Dev note: I recognize this is inefficiently written. When I finish writing out all the content, I will ruthlessly cut it down, don’t worry :)</p>
+<p>Note to self: add git status in</p>
 <p>This guide is a basic introduction to Git and Github for near-absolute beginners. It will start by discussing the importance of git and github, how to install git, and how to use git/github at a basic level. Lastly, it will provide links to further reading regarding advanced functionality for git.</p>
 <div id="why-use-gitgithub" class="section level2">
 <h2>1. Why use git/github</h2>
@@ -208,12 +209,31 @@ $ git add 'scriptname2.R'
 $ git commit</code></pre>
 <p>Lastly, you need to <em>push</em> the files, which means sending them to Github online. Before you do this, if you created the repository locally and have not already done so, you’ll need to specify to Git the url to send the commits to. To do this, type ‘git remote add origin [your url]’ into your command line. Then, you can <em>push</em> the file by writing ‘git push -u origin master,’ which will send the file to the Github repo.</p>
 <pre class="r"><code>$ git remote add origin https://github.com/user_name/repository_name
-$ got push =u origin master</code></pre>
+$ git push -u origin master</code></pre>
 <p>__ git commit -m or git commit? Depends on the command line/bash distinction __</p>
 </div>
 <div id="branching" class="section level3">
 <h3>Branching</h3>
-<p>git checkout</p>
+<p>As we discussed earlier, branches allow you to modify scripts while simaltaneous keeping the old versions easily accessible. In practice, the way this works is that the branch you select in git changes the way that scripts you open using explorer/finder appear. For example, if Carlos has the following script as the master (default) branch in Git, the script might look something like this when he opens it on his computer:</p>
+<p>__ insert picture __</p>
+<p>However, if he uses Git to switch to a test branch, he might open the exact same file and see the following:</p>
+<p>__ insert picture __</p>
+<p>Let’s discuss how to actually use git to branch.</p>
+<div id="creating-and-switching-branches" class="section level5">
+<h5>Creating and Switching Branches</h5>
+<p>To create a branch, use the “git checkout” command followed with a “-b” and the name of the branch:</p>
+<pre class="r"><code>$ git checkout -b branch_name</code></pre>
+<p>This will create a new branch which is identical to the initial (master) branch. You can modify it as you like, and you will still be able to easily access the initial (master) branch. To do this, simply use the “git checkout” command without the “-b” and type the name of the branch you want to switch to:</p>
+<pre class="r"><code>$ git checkout switch_to_this_branch</code></pre>
+<p>Remember, switching to a branch will change the way the file shows up once you open it from your computer.</p>
+</div>
+<div id="merging-branches" class="section level5">
+<h5>Merging Branches</h5>
+<p>Suppose you have created a test branch, tested it to make sure it works, and now want to combine it with the original master branch. To do this, use the “git checkout” command in combination with the “git merge” command as follows:</p>
+<pre class="r"><code>$ git checkout master
+$ git merge test</code></pre>
+<p>These two commands will merge the test branch into the master branch, meaning that the master branch at the end of the merging will look like the test branch.</p>
+</div>
 </div>
 <div id="merge-conflicts" class="section level3">
 <h3>Merge Conflicts</h3>
