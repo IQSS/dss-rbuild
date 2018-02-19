@@ -7,6 +7,8 @@ output: html_document
 
 Dev note: I recognize this is inefficiently written. When I finish writing out all the content, I will ruthlessly cut it down, don't worry :) 
 
+Note to self: add git status in
+
 This guide is a basic introduction to Git and Github for near-absolute beginners. It will start by discussing the importance of git and github, how to install git, and how to use git/github at a basic level. Lastly, it will provide links to further reading regarding advanced functionality for git.
 
 ## 1. Why use git/github
@@ -132,7 +134,7 @@ Lastly, you need to *push* the files, which means sending them to Github online.
 
 ```{R, eval=FALSE}
 $ git remote add origin https://github.com/user_name/repository_name
-$ got push -u origin master
+$ git push -u origin master
 ```
 
 
@@ -140,9 +142,42 @@ __ git commit -m or git commit? Depends on the command line/bash distinction __
 
 ### Branching
 
-git checkout
+As we discussed earlier, branches allow you to modify scripts while simaltaneous keeping the old versions easily accessible. In practice, the way this works is that the branch you select in git changes the way that scripts you open using explorer/finder appear. For example, if Carlos has the following script as the master (default) branch in Git, the script might look something like this when he opens it on his computer: 
 
-### Merge Conflicts
+__ insert picture __
+
+However, if he uses Git to switch to a test branch, he might open the exact same file and see the following:
+
+__ insert picture __ 
+
+Let's discuss how to actually use git to branch.
+
+##### Creating and Switching Branches
+
+To create a branch, use the "git checkout" command followed with a "-b" and the name of the branch:
+
+```{r, eval=FALSE}
+$ git checkout -b branch_name
+```
+
+This will create a new branch which is identical to the initial (master) branch. You can modify it as you like, and you will still be able to easily access the initial (master) branch. To do this, simply use the "git checkout" command without the "-b" and type the name of the branch you want to switch to:
+```{r, eval=FALSE}
+$ git checkout switch_to_this_branch
+```
+
+Remember, switching to a branch will change the way the file shows up once you open it from your computer.
+
+##### Merging Branches
+
+Suppose you have created a test branch, tested it to make sure it works, and now want to combine it with the original master branch. To do this, use the "git checkout" command in combination with the "git merge" command as follows:
+```{r, eval=FALSE}
+$ git checkout master
+$ git merge test
+```
+
+These two commands will merge the test branch into the master branch, meaning that the master branch at the end of the merging will look like the test branch. 
+
+##### Merge Conflicts
 
 Carlos and Grace mess up.
 
@@ -154,6 +189,10 @@ This setup page is good too
 http://kbroman.org/github_tutorial/pages/init.html
 
 ## 4. Further reading
+
+### Cheat sheats
+
+### Advanced reading
 
 
 ## 5. Sources cited
