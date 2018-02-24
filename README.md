@@ -8,3 +8,4 @@ This aims to create guidelines that helps individuals develop packages using R.
 
 ## Structure
 githubguide - guide and intro to github
+rstudioguide - very brief guide/intro to rstudio
