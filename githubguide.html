@@ -211,6 +211,32 @@ $ git commit</code></pre>
 <pre class="r"><code>$ git remote add origin https://github.com/user_name/repository_name
 $ git push -u origin master</code></pre>
 <p>__ git commit -m or git commit? Depends on the command line/bash distinction __</p>
+<div id="accessing-older-versions-of-code" class="section level5">
+<h5>Accessing older versions of code</h5>
+<p>You should never be scared of git/github, because git/github only add information - they almost never delete it. In practice, this means that if you accidentally (or intentionally) commit horrible changes to your code, you can easily revert to a previous version. For example, let’s say Grace wrote some new functions for a script, deleted them (and committed the deltes) later on, but nowwants the functions back. She can easily access the older (nonempty) script using git. First, she should use the “git log” command to see what commits have been made recently.</p>
+<pre class="r"><code>$ git log</code></pre>
+<p>This command might give an output like this:</p>
+<pre class="r"><code>commit 06c347sa (HEAD -&gt; master, origin/master, origin/HEAD)
+Author: Grace Smith &lt;gracesmith@gmail.com&gt;
+Date:   Sun Feb 18 23:13:32 2018 -0500
+
+    Remove storage functions
+
+commit b69a14b
+Author: Grace Smith &lt;gracesmith@gmail.com&gt;
+Date:   Sat Feb 17 23:11:28 2018 -0500
+
+    Add storage functions
+
+commit 8a237d1
+Author: Grace Smith &lt;gracesmith@gmail.com&gt;
+Date:   Fri Feb 16 21:28:46 2018 -0500
+
+    Initial commit</code></pre>
+<p>Clearly, Grace should restore the second commit listed, named ‘b69a14b,’ in order to access the functions she deleted. To do so, Grace can use the “git reset” command.</p>
+<pre class="r"><code>$ git reset --soft b69a14b</code></pre>
+<p>This will update the current version of the script to the b69a14b version, which Grace can then inspect and test until she’s ready to commit it to git/github.</p>
+</div>
 </div>
 <div id="branching" class="section level3">
 <h3>Branching</h3>
@@ -234,21 +260,33 @@ $ git push -u origin master</code></pre>
 $ git merge test</code></pre>
 <p>These two commands will merge the test branch into the master branch, meaning that the master branch at the end of the merging will look like the test branch.</p>
 </div>
-</div>
-<div id="merge-conflicts" class="section level3">
-<h3>Merge Conflicts</h3>
-<p>Carlos and Grace mess up.</p>
+<div id="conflicts" class="section level5">
+<h5>Conflicts</h5>
+<p>Sometimes, however, Git will be unable to push, pull, or merge branches.</p>
 <p>Overall:</p>
 <p>This cheat sheet is great <a href="https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf" class="uri">https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf</a></p>
 <p>This setup page is good too <a href="http://kbroman.org/github_tutorial/pages/init.html" class="uri">http://kbroman.org/github_tutorial/pages/init.html</a></p>
 </div>
 </div>
+<div id="other-useful-commands" class="section level3">
+<h3>Other Useful Commands</h3>
+</div>
+<div id="tips-and-tricks" class="section level3">
+<h3>Tips and Tricks</h3>
+<div id="cheat-sheats" class="section level4">
+<h4>Cheat sheats</h4>
+</div>
+</div>
+</div>
 <div id="further-reading" class="section level2">
 <h2>4. Further reading</h2>
+<div id="advanced-reading" class="section level3">
+<h3>Advanced reading</h3>
+</div>
 </div>
 <div id="sources-cited" class="section level2">
 <h2>5. Sources cited</h2>
-<p><a href="https://git-scm.com/book/en/v2/Getting-Started-Git-Basics" class="uri">https://git-scm.com/book/en/v2/Getting-Started-Git-Basics</a> <a href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup" class="uri">https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup</a></p>
+<p><a href="https://git-scm.com/book/en/v2/Getting-Started-Git-Basics" class="uri">https://git-scm.com/book/en/v2/Getting-Started-Git-Basics</a> <a href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup" class="uri">https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup</a> <a href="https://www.git-tower.com/learn/git/faq/restore-repo-to-previous-revision" class="uri">https://www.git-tower.com/learn/git/faq/restore-repo-to-previous-revision</a></p>
 </div>
 
 

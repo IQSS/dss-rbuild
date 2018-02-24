@@ -140,13 +140,52 @@ $ git push -u origin master
 
 __ git commit -m or git commit? Depends on the command line/bash distinction __
 
+##### Accessing older versions of code
+
+You should never be scared of git/github, because git/github only add information - they almost never delete it. In practice, this means that if you accidentally (or intentionally) commit horrible changes to your code, you can easily revert to a previous version. For example, let's say Grace wrote some new functions for a script, deleted them (and committed the deltes) later on, but nowwants the functions back. She can easily access the older (nonempty) script using git. First, she should use the "git log" command to see what commits have been made recently.
+
+```{R, eval=FALSE}
+$ git log
+```
+
+This command might give an output like this:
+
+```{R, eval=FALSE}
+commit 06c347sa (HEAD -> master, origin/master, origin/HEAD)
+Author: Grace Smith <gracesmith@gmail.com>
+Date:   Sun Feb 18 23:13:32 2018 -0500
+
+    Remove storage functions
+
+commit b69a14b
+Author: Grace Smith <gracesmith@gmail.com>
+Date:   Sat Feb 17 23:11:28 2018 -0500
+
+    Add storage functions
+
+commit 8a237d1
+Author: Grace Smith <gracesmith@gmail.com>
+Date:   Fri Feb 16 21:28:46 2018 -0500
+
+    Initial commit
+
+```
+
+Clearly, Grace should restore the second commit listed, named 'b69a14b,' in order to access the functions she deleted. To do so, Grace can use the "git reset" command.
+
+```{r, eval=FALSE}
+$ git reset --soft b69a14b
+```
+
+This will update the current version of the script to the b69a14b version, which Grace can then inspect and test until she's ready to commit it to git/github. Note that there is alos a "git reset --hard" option, which works the same way, but is a pretty serious action to take because it will effectively delete all the commits prior to the version being restored. The soft option is usually a better way to go. 
+
 ### Branching
 
 As we discussed earlier, branches allow you to modify scripts while simaltaneous keeping the old versions easily accessible. In practice, the way this works is that the branch you select in git changes the way that scripts you open using explorer/finder appear. For example, if Carlos has the following script as the master (default) branch in Git, the script might look something like this when he opens it on his computer: 
 
 __ insert picture __
 
-However, if he uses Git to switch to a test branch, he might open the exact same file and see the following:
+However, if he uses Git to switch to a test branch, he might open the exact same file using his file explorer and see the following:
 
 __ insert picture __ 
 
@@ -177,9 +216,9 @@ $ git merge test
 
 These two commands will merge the test branch into the master branch, meaning that the master branch at the end of the merging will look like the test branch. 
 
-##### Merge Conflicts
+##### Conflicts
 
-Carlos and Grace mess up.
+Sometimes, however, Git will be unable to push, pull, or merge branches because it is getting conflicting information from two users. For example, if Grace modifies the following file 
 
 Overall:
 
@@ -188,9 +227,14 @@ This cheat sheet is great https://services.github.com/on-demand/downloads/github
 This setup page is good too
 http://kbroman.org/github_tutorial/pages/init.html
 
-## 4. Further reading
+### Other Useful Commands
 
-### Cheat sheats
+### Tips and Tricks
+
+#### Cheat sheats
+
+
+## 4. Further reading
 
 ### Advanced reading
 
@@ -199,4 +243,5 @@ http://kbroman.org/github_tutorial/pages/init.html
 
 https://git-scm.com/book/en/v2/Getting-Started-Git-Basics
 https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup 
+https://www.git-tower.com/learn/git/faq/restore-repo-to-previous-revision
 
