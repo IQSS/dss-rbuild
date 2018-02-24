@@ -140,7 +140,7 @@ $ git push -u origin master
 
 __ git commit -m or git commit? Depends on the command line/bash distinction __
 
-##### Accessing older versions of code
+#### Accessing older versions of code
 
 You should never be scared of git/github, because git/github only add information - they almost never delete it. In practice, this means that if you accidentally (or intentionally) commit horrible changes to your code, you can easily revert to a previous version. For example, let's say Grace wrote some new functions for a script, deleted them (and committed the deltes) later on, but nowwants the functions back. She can easily access the older (nonempty) script using git. First, she should use the "git log" command to see what commits have been made recently.
 
@@ -183,11 +183,11 @@ This will update the current version of the script to the b69a14b version, which
 
 As we discussed earlier, branches allow you to modify scripts while simaltaneous keeping the old versions easily accessible. In practice, the way this works is that the branch you select in git changes the way that scripts you open using explorer/finder appear. For example, if Carlos has the following script as the master (default) branch in Git, the script might look something like this when he opens it on his computer: 
 
-__ insert picture __
+![*Version 1 of the Hello World Script*](Images/hello1.png)
 
 However, if he uses Git to switch to a test branch, he might open the exact same file using his file explorer and see the following:
 
-__ insert picture __ 
+![*Version 2 of the Hello World Script*](Images/hello2.png)
 
 Let's discuss how to actually use git to branch.
 
@@ -216,31 +216,88 @@ $ git merge test
 
 These two commands will merge the test branch into the master branch, meaning that the master branch at the end of the merging will look like the test branch. 
 
-##### Conflicts
+### Conflicts
 
-Sometimes, however, Git will be unable to push, pull, or merge branches because it is getting conflicting information from two users. For example, if Grace modifies the following file 
+Sometimes, however, Git will be unable to push or pull branches because it is getting conflicting information from two users. For example, suppose Grace has written the following function, which calculates the squared error between two values:
 
-Overall:
+![*Original Version of Loss Script*](Images/loss0.png)
 
-This cheat sheet is great https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf
+This function clearly has a bug in it, because it claims to return the squared error, but instead, it returns the absolute value of the error. Carlos notices this, and modifies the function so that it accurately reports that it calculates the absolute value, and pushes his modified version to Github:
 
-This setup page is good too
-http://kbroman.org/github_tutorial/pages/init.html
+![*Carlos's Pushed Version of Loss Script*](Images/lossCarlos.png)
 
-### Other Useful Commands
+But before Grace realizes Carlos has modified the script, she also fixes the bug, but instead by changing the absolute value to a squaring function:
+
+![*Grace's Modified Version of Loss Script*](Images/lossGrace.png)
+
+Git is smart, so When Grace tries to push her version to github, git will recognize that the two versions of the script conflict. As a result, it will throw the following error:
+
+```{r, eval=FALSE}
+C:\Users\gracesmith\Documents\R\repo_name>git push
+To https://github.com/gracesmith/repo_name
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'https://github.com/gracesmith/repo_name'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+```
+
+Effectively, Git recognizes that Carlos has made modifications to the script which were pushed to Github that Grace doesn't have. This usually happens *when two programmers modify exactly the same line in the single script*, such as line 6 in the above examples. To solve this problem, Grace should follow Git's advice, and try the "git pull" command. This will lead to the following message from git:
+
+```{r, eval=FALSE}
+C:\Users\gracesmith\Documents\R\repo_name>git pull
+remote: Counting objects: 3, done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/gracesmith/repo_name
+   e719863..59fc0ba  master     -> origin/master
+Auto-merging scriptname.R
+CONFLICT (content): Merge conflict in scriptname.R
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+Again, Git is letting Grace know that it sees there's a conflict and that Git needs human help to fix it. Once Grace has pulled Carlos's changes, she can go open the script in her computer and should see something like the following:
+
+![*Conflicted Version of Loss Script*](Images/lossConflict.png)
+
+The "<<<<" and ">>>" lines are in the script to signal the beginning and end of a merge conflict, whereas the "===" line separates the two different versions. On the top is Grace's version and on the bottom is Carlos's. To resolve the merge conflict, Grace should manually select the two lines she prefers and then delete all of the "<, =, >" symbols to let Git know that the conflict has been resolved. Then, she can commit and push the file to Git, and she'll be good to go!
+
+Overall: merge conflicts are rather annoying and can be confusing, so the best way to avoid them is to clearly deliniate which programmers will be working on which sections of which scripts. This will prevent Git (and you) from getting confused.  
 
 ### Tips and Tricks
 
+Git can be confusing, but there are three general rules of thumb you can follow to figure out any bugs that come up:
+
+1. Git is super smart. If there's a bug and Git is recommending a particular way of fixing it, there's a very high chance that Git is right. 
+
+2. Use the git status command. After entering git status, git will give you a rundown of the status of the entire repository.  
+
+3. If that doesn't work (or you don't understand what is going on), you can always copy and paste the error from the command line into Google and reference stackexchange. There is a wealth of online help!
+
+Try not to worry too much! Git almost exclusively *adds information*, meaning that you can always just go back and restore a previous version - you'll never lose your work.
+
 #### Cheat sheats
 
+Lastly, there are a couple of cheat sheets that you can use to make your life easier. 
+
+* [Karl Broman's tutorial](http://kbroman.org/github_tutorial/pages/init.html) runs you through initializing a repository 
+
+* [This official github cheat sheet](https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf) lists all of the general commands you'll need
 
 ## 4. Further reading
 
-### Advanced reading
+If you're interested in learning more about Git and Github, you might want to take a look at the following resources:
 
+* The Software Carpentry Foundation has a great mid level git use tutorial [here](https://swcarpentry.github.io/git-novice/)
+
+* Atlassian has some wonderful advanced git use tutorials [here](https://www.atlassian.com/git/tutorials/advanced-overview)
 
 ## 5. Sources cited
 
+http://kbroman.org/github_tutorial/pages/init.html
 https://git-scm.com/book/en/v2/Getting-Started-Git-Basics
 https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup 
 https://www.git-tower.com/learn/git/faq/restore-repo-to-previous-revision
