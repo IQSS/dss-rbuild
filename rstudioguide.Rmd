@@ -59,7 +59,7 @@ To download and set up RStudio, follow the instructions below:
 
 2. Download the *installer* for your operating system, not the *zip/tarball.* The picture below illustrates what the webpage should look like. 
 
-![*RStudio Webpage*](Images/rstudio.png)
+![*RStudio Webpage*](./Images/rstudio.PNG)
 
 3. Let the installer run - it's fine again to just use the default options. 
 
@@ -71,7 +71,7 @@ and now you're ready!
 
 RStudio will split your screen into four parts, as shown below. We'll refer to them as the *script*, the *environment*, the *shell* or *console*, and the *Viewer.*
 
-![The RStudio Interface](Images/rstudio2.png)
+![The RStudio Interface](./Images/rstudio2.png)
 
 
 The *script* is in the upper left hand corner of the screen, and it's where you will do the bulk of your programming. To write an R script, click File>New File>R Script in the top left hand corner, and you can start programming! You can execute multiple lines of a script (or the entire thing) at a time by selecting the lines you want to run and clicking the green "Run" button on the right hand side of the script box. 
@@ -112,7 +112,7 @@ rm(list=ls())
 
 In the example below, you'll find a picture of the documentation for the lm function, which is used for linear modeling. 
 
-![How to quickly access documentation](Images/rstudio3.png)
+![How to quickly access documentation](Images/rstudio3.PNG)
 
 3. To get RStudio to stop executing some code, you can press the red "stop" button in the top right of the console section. Sometimes this won't appear, so you can also just hit "escape" instead.
 
