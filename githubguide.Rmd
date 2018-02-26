@@ -181,11 +181,11 @@ This will update the current version of the script to the b69a14b version, which
 
 As we discussed earlier, branches allow you to modify scripts while simaltaneous keeping the old versions easily accessible. In practice, the way this works is that the branch you select in git changes the way that scripts you open using explorer/finder appear. For example, if Carlos has the following script as the master (default) branch in Git, the script might look something like this when he opens it on his computer: 
 
-![*Version 1 of the Hello World Script*](Images/hello1.png)
+![*Version 1 of the Hello World Script*](Images/hello1.PNG)
 
 However, if he uses Git to switch to a test branch, he might open the exact same file using his file explorer and see the following:
 
-![*Version 2 of the Hello World Script*](Images/hello2.png)
+![*Version 2 of the Hello World Script*](Images/hello2.PNG)
 
 Let's discuss how to actually use git to branch.
 
@@ -218,15 +218,15 @@ These two commands will merge the test branch into the master branch, meaning th
 
 Sometimes, however, Git will be unable to push or pull branches because it is getting conflicting information from two users. For example, suppose Grace has written the following function, which calculates the squared error between two values:
 
-![*Original Version of Loss Script*](Images/loss0.png)
+![*Original Version of Loss Script*](Images/loss0.PNG)
 
 This function clearly has a bug in it, because it claims to return the squared error, but instead, it returns the absolute value of the error. Carlos notices this, and modifies the function so that it accurately reports that it calculates the absolute value, and pushes his modified version to Github:
 
-![*Carlos's Pushed Version of Loss Script*](Images/lossCarlos.png)
+![*Carlos's Pushed Version of Loss Script*](Images/lossCarlos.PNG)
 
 But before Grace realizes Carlos has modified the script, she also fixes the bug, but instead by changing the absolute value to a squaring function:
 
-![*Grace's Modified Version of Loss Script*](Images/lossGrace.png)
+![*Grace's Modified Version of Loss Script*](Images/lossGrace.PNG)
 
 Git is smart, so When Grace tries to push her version to github, git will recognize that the two versions of the script conflict. As a result, it will throw the following error:
 
@@ -259,7 +259,7 @@ Automatic merge failed; fix conflicts and then commit the result.
 
 Again, Git is letting Grace know that it sees there's a conflict and that Git needs human help to fix it. Once Grace has pulled Carlos's changes, she can go open the script in her computer and should see something like the following:
 
-![*Conflicted Version of Loss Script*](Images/lossConflict.png)
+![*Conflicted Version of Loss Script*](Images/lossConflict.PNG)
 
 The "<<<<" and ">>>" lines are in the script to signal the beginning and end of a merge conflict, whereas the "===" line separates the two different versions. On the top is Grace's version and on the bottom is Carlos's. To resolve the merge conflict, Grace should manually select the two lines she prefers and then delete all of the "<, =, >" symbols to let Git know that the conflict has been resolved. Then, she can commit and push the file to Git, and she'll be good to go!
 
