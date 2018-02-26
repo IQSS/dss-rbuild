@@ -7,8 +7,6 @@ output: html_document
 
 Dev note: I recognize this is inefficiently written. When I finish writing out all the content, I will ruthlessly cut it down, don't worry :) 
 
-Note to self: add git status in
-
 This guide is a basic introduction to Git and Github for near-absolute beginners. It will start by discussing the importance of git and github, how to install git, and how to use git/github at a basic level. Lastly, it will provide links to further reading regarding advanced functionality for git.
 
 ## 1. Why use git/github
