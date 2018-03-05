@@ -1,0 +1,85 @@
+---
+title: "Package Development in R"
+author: "Asher Spector"
+date: "March 2, 2018"
+output: html_document
+---
+
+This is currently mostly just an outline. 
+
+## 1. Motivation
+
+Imagine Grace has built an architecture for aggregating polling data, and you would like to use it in your own research project. So you go to github and you download Grace's repository, hoping to build on her research. One of the scripts you download looks like this. 
+
+![*This is not what packages should look like*](Images/badexample.PNG)
+
+When you read this script, you should notice at least a couple of problems.
+
+First, upon reading this code, most programmers would have absolutely no idea what it's supposed to do. Because this is a simple example, you might be able to guess that the lm function returns the squared difference of its inputs, and the sqt function takes the square root of negative numbers. But the "getvars" function is almost totally incomprehensible - what's it supposed to do? 
+
+Second, even if you could tell what the "getvars" function does, you'd have no idea how to use it, because you don't know how the "datapath.csv" csv file should be structured. 
+
+Third, it's very difficult to use this script in combination with other packages. The "lm" function has the same name as the "lm" function from the R Stats package, which is incredibly useful, and very commonly used. Giving a new function the same name as a base function will create extremely weird bugs or just cause a fatal error and end your entire session. 
+
+Lastly, and less obviously, you don't know what *version* of Grace's package this script is. Grace will probably update and modify her scripts over time, and unless you are aware of the contents of those changes, the script may behave differently than you expect.
+
+Yet never fear - packages don't need to be this way! Most packages are extremely well-built and easy to use. In this section, we'll demonstrate how to make sure your packages are like those packages. 
+
+## 2. Solutions
+
+In this section, we'll discuss the solutions to the problems outlined above. For each problem, we'll discuss the conceptual solution, and then we'll describe how the structure of R Packages allows users to integrate those solutions. Note that this section mostly just outlines package structure - we won't talk about actually creating things like documentation until the next couple sections. 
+
+### 2.1 Code Style
+
+The first solution is to write code differently. The script above has a couple problems with style. Specifically, note the difference between the following two code samples:
+
+```{r}
+sqt <- function(x){
+  if(x==0){return(x)}
+  else if(x>0){return(sqrt(x))}
+  else if(x<0){return(complex(real = 0, imaginary = sqrt(-x)))}
+}
+```
+
+
+```{r, eval=FALSE}
+
+# This function takes the complex square root of real numbers
+
+complex_sqrt <- function (x){
+  
+  # Return the normal square root if x > 0
+  if (x > 0 || x == 0){
+    return(x)
+  } 
+  
+  # Else return the complex square root
+
+  else {
+    return(complex(real = 0, imaginary = sqrt(-x)))
+  } 
+  
+}
+
+```
+
+Clearly, the second example is a lot more readable and a lot easier to understand. Later, we'll talk about specific coding guidelines, but for now, just remember that the goal of programming style guides is to make your code *readable* and therefore *useable*.
+
+### 2.2 Documentation
+
+Solves problem (2)
+
+### 2.3 Readme/Vignettes
+
+Solves problems (1), (2), (3)
+
+### 2.4 Namespace 
+
+- solves version control
+-
+
+Now that we've gone through this, we'll walk you through what Carlos *should* have done - the process of building an R package from start to finish. 
+
+Sources cited:
+
+http://r-pkgs.had.co.nz/intro.html
