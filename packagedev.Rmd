@@ -46,11 +46,11 @@ sqt <- function(x){
 
 # This function takes the complex square root of real numbers
 
-complex_sqrt <- function (x){
+general_sqrt <- function (x){
   
   # Return the normal square root if x > 0
   if (x > 0 || x == 0){
-    return(x)
+    return(sqrt(x))
   } 
   
   # Else return the complex square root
@@ -73,7 +73,7 @@ Of course, nobody wants to read through packaged code in order to guess what a f
 
 This documentation tells you what the scalep function does, what kinds of inputs it needs, what kind of output it returns, and gives you examples of how to use it. Documentation makes packages usable, and is suprisingly easy to write using devtools and roxygen2, so it's a critical part of any package. 
 
-### 2.3 Readme/Vignettes
+### 2.3 Description/Vignettes
 
 Solves problems (1), (2), (3)
 
@@ -136,7 +136,71 @@ Let's go through the fields and discuss what they mean. The first seven fields l
 11. **Encoding**: Just leave this as "UTF-8"; discussing what encodings are isn't super important for this guide. If you're dying to learn about encodings, visit [this webpage](https://www.w3.org/International/questions/qa-what-is-encoding). 
 12. **RoxygenNote**: Roxygen will automatically fill in the version of Roxygen2 used to build the package in this field. 
 
+(These fields are exceptionally important if you are building a package using tools from other packages)
+
+13. **Imports**: 
+14. **Suggests**: 
+
 Should we add in functions that require imports/suggested? probably... 
+
+### Step 3: Starting to Program
+
+Now, you're ready to start programming! Note that the coding you will do in package development is slightly different than the coding you'll normally do when writing R scripts. This is for a couple reasons:
+
+1. Code is run when it's built, not when it's loaded
+2. Try to make your code as general as possible
+3. Etc
+
+Go through code style.
+
+1. Comments
+2. Names
+3. Spacing/parenthesis + curly brackets
+4. 
+
+Give examples throughout from the "badexample."
+
+### Step 4: Documenting your package
+
+Creating documentation for your package is incredibly easy with Roxygen2. 
+
+For example, the following code generates the documentation for the "general_sqrt" function written above. 
+
+```{r, eval=FALSE}
+
+#' Generalized Square Roots
+#'
+#' \code{general_sqrt} returns the square root of any real number
+#'
+#' @param x A real number - integers or doubles are both acceptable.
+#' @return A complex value. If x is positive, the imaginary component is equal to 0;
+#' if x is negative, the real component is equal to 0.
+#'
+#' @examples
+#' general_sqrt(10)
+#' general_sqrt(-10)
+#' general_sqrt(-1)
+#'
+#' @export
+# This function takes the complex square root of real numbers
+
+general_sqrt <- function (x){
+
+  # Return the normal square root if x > 0
+  if (x > 0 || x == 0){
+    return(complex(real=sqrt(x), imaginary=0))
+  }
+
+  # Else return the complex square root
+
+  else {
+    return(complex(real = 0, imaginary = sqrt(-x)))
+  }
+
+}
+```
+
+![](Images/PackageSS/gensqrtdoc.PNG)
 
 Sources cited:
 
