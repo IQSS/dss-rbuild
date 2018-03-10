@@ -1,0 +1,15 @@
+Package: devex
+Type: Package
+Title: Package Development Example
+Date: 2018-03-01
+Version: 0.1.0
+Author: Asher Spector
+Maintainer: Asher Spector <amspector100@gmail.com>
+Description: Developed as a way to explain package structure and the package 
+    development process. Includes three very basic functions and documentation. 
+License: CC0
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
+
+
