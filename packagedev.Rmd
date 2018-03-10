@@ -5,7 +5,7 @@ date: "March 2, 2018"
 output: html_document
 ---
 
-This is currently mostly just an outline. 
+Note to self: add section 2 in after you write the section walking through pacakge creation. It will be easier. 
 
 ## 1. Motivation
 
@@ -15,9 +15,9 @@ Imagine Grace has built an architecture for aggregating polling data, and you wo
 
 When you read this script, you should notice at least a couple of problems.
 
-First, upon reading this code, most programmers would have absolutely no idea what it's supposed to do. Because this is a simple example, you might be able to guess that the lm function returns the squared difference of its inputs, and the sqt function takes the square root of negative numbers. But the "getvars" function is almost totally incomprehensible - what's it supposed to do? 
+First, upon reading this code, most programmers would have absolutely no idea what it's supposed to do. Because this is a simple example, you might be able to guess that the lm function returns the squared difference of its inputs, and the sqt function takes the square root of negative numbers. But the "scalep" function is almost totally incomprehensible - what's it supposed to do? 
 
-Second, even if you could tell what the "getvars" function does, you'd have no idea how to use it, because you don't know how the "datapath.csv" csv file should be structured. 
+Second, even if you could tell what the "scalep" function does, you'd have no idea how to use it, because you don't know how the "datapath.csv" csv file should be structured. 
 
 Third, it's very difficult to use this script in combination with other packages. The "lm" function has the same name as the "lm" function from the R Stats package, which is incredibly useful, and very commonly used. Giving a new function the same name as a base function will create extremely weird bugs or just cause a fatal error and end your entire session. 
 
@@ -63,11 +63,15 @@ complex_sqrt <- function (x){
 
 ```
 
-Clearly, the second example is a lot more readable and a lot easier to understand. Later, we'll talk about specific coding guidelines, but for now, just remember that the goal of programming style guides is to make your code *readable* and therefore *useable*.
+Clearly, the second example is a lot more readable and a lot easier to understand. Later, we'll talk about specific coding guidelines, but for now, just remember that the goal of programming style guides is to make your code *readable* and therefore *useable*. This will also make it a lot easier for others to fix and find bugs in your packaged code. 
 
 ### 2.2 Documentation
 
-Solves problem (2)
+Of course, nobody wants to read through packaged code in order to guess what a function does. Instead, packages also include documentation to tell users how to use different functions and objects developed in the package. For exampe, imagine you typed '?scalep' into the Console and got the following result:
+
+![*Documentation for scalep function*](Images/PackageSS/scalepdoc.PNG)
+
+This documentation tells you what the scalep function does, what kinds of inputs it needs, what kind of output it returns, and gives you examples of how to use it. Documentation makes packages usable, and is suprisingly easy to write using devtools and roxygen2, so it's a critical part of any package. 
 
 ### 2.3 Readme/Vignettes
 
@@ -76,9 +80,63 @@ Solves problems (1), (2), (3)
 ### 2.4 Namespace 
 
 - solves version control
--
+- explain that some functions are imports/exports
 
 Now that we've gone through this, we'll walk you through what Carlos *should* have done - the process of building an R package from start to finish. 
+
+## 3. The Walkthrough
+
+### Step 1: Initializing the Package
+
+RStudio makes it easy to create packages. To start, click File>New Project. Then, click "New Directory" when you see the screen below:
+
+![](Images/PackageSS/createproj1.PNG)
+
+Then click "R Package" when you see the screen below:
+
+![](Images/PackageSS/createproj2.PNG)
+
+Lastly, title your package. Your title should be something short and descriptive. Since we'll be walking through a development example, we'll title our new package "devex."
+
+![](Images/PackageSS/createproj3.PNG)
+
+Once you've created your package, your RStudio should look something like this. It should come preloaded with a "Hello World" script which includes a handy function that prints "Hello world."
+
+__ insert blank image of RStudio __
+
+Everything should look mostly the same except for the "Files" tab on the bottom right, which should include an ".Rproj" file, a "DESCRIPTION" file, a "NAMESPACE" file, and a folder titled "R." You should start by checking the little boxes next to the "NAMESPACE" file and the "Hello.R" R script inside the R file and clicking "delete" above them, just because we will have Roxygen2 automatically generate the namespace, and because presumably your package doesn't need a "Hello World" function. Note that your directory section might not include a "man" file just yet - that's because you haven't generated any documentation yet, but that's okay!
+
+You should also go to "Tools > Project Options" and select the following options, which will help you generate documentation and such using roxygen: 
+
+![](Images/PackageSS/userox.PNG)
+
+### Step 2: Modifying the DESCRIPTION File
+
+The DESCRIPTION file gives an extremely brief overview to the package. It includes critical information such as the author of the package, the title, a very short summary of its purpose, and the liscensing information. Double click on the "DESCRIPTION" file on in the files section to open and edit the DESCRIPTION tab. 
+
+DESCRIPTION is a DCF file. This file format may be unfamiliar to you, but it's quite simple. Each line contains a a fieldname and value, separated by a colon. Sometimes, values are long enough to require multiple lines, in which case they are indented by four spaces. For example, the DESCRIPTION file for the devex package might look something like this:
+
+![](Images/PackageSS/description.PNG)
+
+Let's go through the fields and discuss what they mean. The first seven fields listed are mandatory, meaning that if you do not include them, the development environment will throw an error later on when you're trying to build your package. 
+
+1. **Package**: This is the name of the package. It should match the package name you chose earlier, and you should probably just leave this as is. 
+2. **Title**: A short but more descriptive title of your package than its name.
+3. **Version**: The version of your package. Since you're creating this package for the first time, presumably it's version 0.1.0.
+4. **Author**: Here, you should add in your name. 
+5. **Maintainer**: Here, you should add in your name as well as a valid email enclosed in <> brackets. Note that if you do not enter a valid email, the development environment may throw errors later. 
+6. **Description**: This should be a one-paragraph *comprehensive* description of the package. It is necessarily a high level-description, but it should be a complete one. 
+7. **License**: You should add in a License, which describes how others can legally use the package. Most of the time (especially in the US), you should write 'CC0' in the License field, which implies that the package is open for all use, and you have relinquished all your rights to it. For more information on various licensing options, click [this link](https://cran.r-project.org/doc/manuals/r-release/R-exts.html#The-DESCRIPTION-file).
+  
+(Note all of the fields from this point on are optional, but encouraged!)
+
+8. **Type**: This describes what type of project you're creating - in this case, because you're creating a package, you should write "Package."
+9. **Date**: The date, in YYYY-MM-DD fashion. 
+10. **LazyData**: Write "true" after LazyData and the colon. Writing 'true' ensures that if you include any data with your package (which you frequently will), when another user loads your package, they won't automatically load up the data, but will only load it if it becomes necessary during their use. This option reduces the amount of RAM users have to expend when loading packages, especially if you are planning to include a lot of data with your package.
+11. **Encoding**: Just leave this as "UTF-8"; discussing what encodings are isn't super important for this guide. If you're dying to learn about encodings, visit [this webpage](https://www.w3.org/International/questions/qa-what-is-encoding). 
+12. **RoxygenNote**: Roxygen will automatically fill in the version of Roxygen2 used to build the package in this field. 
+
+Should we add in functions that require imports/suggested? probably... 
 
 Sources cited:
 
