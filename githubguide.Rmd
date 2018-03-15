@@ -5,7 +5,10 @@ date: "February 10, 2018"
 output: html_document
 ---
 
-Dev note: I recognize this is inefficiently written. When I finish writing out all the content, I will ruthlessly cut it down, don't worry :) 
+## 0. To do
+
+1. Add in link for template.gitignore
+
 
 This guide is a basic introduction to Git and Github for near-absolute beginners. It will start by discussing the importance of git and github, how to install git, and how to use git/github at a basic level. Lastly, it will provide links to further reading regarding advanced functionality for git.
 
@@ -177,6 +180,64 @@ $ git reset --soft b69a14b
 
 This will update the current version of the script to the b69a14b version, which Grace can then inspect and test until she's ready to commit it to git/github. Note that there is alos a "git reset --hard" option, which works the same way, but is a pretty serious action to take because it will effectively delete all the commits prior to the version being restored. The soft option is usually a better way to go. 
 
+#### The .gitignore file
+
+There's one more thing you should know about adding/modifying files that will make your life a lot easier. Sometimes, when modifying and commiting projects, you won't want to type out every individual file you've modified: you'll instead want to use the "git add ." command which will simply queue every modified file to be committed.
+
+```{r, eval=FALSE}
+$ git add .
+$ git commit -m 'Message here'
+$ git push
+```
+
+However, often, you'll have files in your directory which you do not want to commit or push to github because they'll clutter up the directory. For example, R directories create ".RHistory" and ".RData" files which will save your history and working environment. These are useful perhaps when writing code, but you don't want them taking up space in your final packaged product. 
+
+To solve this problem, you can use a *.gitignore file.* A .gitignore file tells git to ignore certain kinds of files when you write '$git add .'. For example, gitignore files are frequently configured to tell git to ignore csv files, .RData files, installer logs, and more. 
+
+Let's discuss how *.gitignore* files actually work. A .gitignore file is really just a glorified text file. However, its filename should be just '.gitignore', because that's how git recognizes it - then, if you put a file titled '.gitignore' in a directory you're working on, git will use the .gitignore file to decide what to ignore in that specific directory. For example, if Grace is working on a project in 'C:/Users/gracesmith/Documents/R/repo_name', she should create a '.gitignore' file inside that folder. 
+
+This still leaves an important question - how does git use the .gitignore file to decide what to ignore and what to recognize? Essentially, .gitignore files are just a bunch of independent lines of text, and each line tells git another specific pattern of filepath to ignore. For example, consider the following example of a .gitignore file:
+
+![](Images\gitignore3.PNG)
+
+Each line beginning with a '#' is just a comment explaining the function of that part of the .gitignore file. However, there are three basic syntactical rules you need to understand.
+
+1. If you write '.filetype', then all files which end with '.filetype' will be ignored by git. For example, the third line in the above example ".RHistory," so all files with a '.RHistory' in the file name (even if the files are in subdirectories) will be ignored. 
+
+2. If you write 'string,' then everything in the directory which contains that 'string' in it will be ignored. For example, if Grace wrote 'dog' in her .gitignore, then git would ignore both a file called 'dog.csv' and every file in a subdirectory called "dog".
+
+3. If you prepend a pattern with an asterisk \*, then the asterisk \* serves as a wildcard which can match 0 or more characters. For example, if I write "*car", then git will ignore the file "mycar". However, 
+
+4. If you prepend a pattern with a forward slash '/', then git will only ignore files which match that pattern in the parent (root) directory. For example, I might write '/.csv' in my gitignore file. This would cause git to ignore a file with the path "dog.csv", but it would not ignore a file called "data/dog.csv." 
+
+5. If you prepend a pattern with an exclamation mark, git will *not* ignore that pattern. For example, if Grace really wanted to make sure her pictures of her dog were pushed to Git, she might write '!dog.PNG' to ensure git did not ignore that picture. 
+
+The rules can seem confusing at times, but it's hard to go wrong - usually, there are at least 10 ways to ignore any given file you want to ignore. Moreover, the easiest thing to do to understand all of the syntax involved in writing .gitignores might be to visit Atlassian has a wonderful table of all of the various syntactical tricks you can use in your own gitignores, linked [here](https://www.atlassian.com/git/tutorials/gitignore). 
+
+To save you time, the wonderful [NaLette Brodnax](https://www.iq.harvard.edu/people/nalette-brodnax) has created a template .gitignore file which you can use to declutter your github repos. Using it requires three steps:
+
+Step 1: Download the file "template.gitignore" from [here](placeholder). It should look something like this when you open it:
+
+![](Images/gitignore.PNG)
+
+Step 2: Manually move the template file from your downloads folder to the directory of interest. For example, if Grace is working on a project in 'C:/Users/gracesmith/Documents/R/repo_name', she should copy the template into that folder. 
+
+Step 3: Right click on the 'template.gitignore' file in the folder and delete the 'template' part of the name, so that the file name is just '.gitignore'. This will help git recognize that your .gitignore file is in fact a .gitignore file. Your operating system might protest at this - Windows in particular freaks out at '.gitignore' files, which is why we initially named the template 'templates.gitignore' instead of just '.gitignore'. However, once the .gitignore file is in the correct directory, it's safe to change the path. Your end result should look something like this:
+
+![A .gitignore file](Images\gitignore2.PNG)
+
+It has no name, but it really will do what it is intended to do.
+
+If you decide to create your own .gitignore file, you can follow very similar steps. 
+
+1. Go into the directory you want and create a blank text file called 'template.gitignore'. It's necessary at first to keep the 'template' part because otherwise some operating systems will not let you create the file.
+
+2. Right click on the file, rename it and delete the 'template' part so the filename is just '.gitignore.'
+
+3. Start writing your gitignore file!
+
+.gitignore files aren't glamerous, but they really are important - nobody wants to work with cluttered repositories.
+
 ### Branching
 
 As we discussed earlier, branches allow you to modify scripts while simaltaneous keeping the old versions easily accessible. In practice, the way this works is that the branch you select in git changes the way that scripts you open using explorer/finder appear. For example, if Carlos has the following script as the master (default) branch in Git, the script might look something like this when he opens it on his computer: 
@@ -299,4 +360,3 @@ http://kbroman.org/github_tutorial/pages/init.html
 https://git-scm.com/book/en/v2/Getting-Started-Git-Basics
 https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup 
 https://www.git-tower.com/learn/git/faq/restore-repo-to-previous-revision
-
