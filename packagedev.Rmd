@@ -145,11 +145,14 @@ Should we add in functions that require imports/suggested? probably...
 
 ### Step 3: Starting to Program
 
-Now, you're ready to start programming! Note that the coding you will do in package development is slightly different than the coding you'll normally do when writing R scripts. This is for a couple reasons:
+All of your code should be in scripts in the 'R' file created in the RStudio package development environment, as shown below:
 
-1. Code is run when it's built, not when it's loaded
-2. Try to make your code as general as possible
-3. Etc
+![](Images/code1.PNG)
+
+The coding you will do in package development is slightly different than the coding you'll normally do when writing R scripts. This is for a couple reasons:
+
+1. When you write a script and load that script using source(script_name), the code in the script runs when you load it (specifically, when you run the 'source' command). On the other hand, the code in a package is run when the package is *built* on your computer. As a result, your code should mostly be focused on building functions, as opposed to a series of actions which the computer ought to take. 
+2. Unlike your personal scripts, other people will be using your package, and if your package is good, they'll be using it in ways you didn't anticipate. This means you ought to really try to make sure your code is as general as possible and can support a variety of approaches and implementations. 
 
 Go through code style.
 
@@ -158,7 +161,7 @@ Go through code style.
 3. Spacing/parenthesis + curly brackets
 4. 
 
-Give examples throughout from the "badexample."
+
 
 ### Step 4: Documenting your package
 
