@@ -5,7 +5,9 @@ date: "March 2, 2018"
 output: html_document
 ---
 
-Note to self: add section 2 in after you write the section walking through pacakge creation. It will be easier. 
+To do: 
+1. Add in pictures
+2. Add in examples of "general" coding comments
 
 ## 1. Motivation
 
@@ -154,14 +156,61 @@ The coding you will do in package development is slightly different than the cod
 1. When you write a script and load that script using source(script_name), the code in the script runs when you load it (specifically, when you run the 'source' command). On the other hand, the code in a package is run when the package is *built* on your computer. As a result, your code should mostly be focused on building functions, as opposed to a series of actions which the computer ought to take. 
 2. Unlike your personal scripts, other people will be using your package, and if your package is good, they'll be using it in ways you didn't anticipate. This means you ought to really try to make sure your code is as general as possible and can support a variety of approaches and implementations. 
 
-Go through code style.
+_examples_
 
-1. Comments
-2. Names
-3. Spacing/parenthesis + curly brackets
-4. 
+You should also take care to organize your functions properly. It's probably a bad idea to stick them all into one script and title it "functions." Instead, you should organize functions by their purposes - for example, a variety of loss functions might go into a single script. Of course, some very complicated functions might deserve their own script. The file names of the script should be descriptive - for example, a script of loss functions might be named "loss_functions.R". 
 
+Now let's talk about specific elements of code style. These are shortened and adapted from [Hadley Wickham's book on R package development](http://r-pkgs.had.co.nz/r.html), which in turn were adapted from Google's R style guide. For more advice on everything from naming variables to curly bracket placement, head to that aforementioned link.
 
+1. **Comments**: Comments are the best (and easiest) way to make your code readable. In general, you err on the side of commenting too much rather than too little, and your comments should explain the *motivation* of your code as opposed to what your code actually does (although admittedly the line between those two things is a bit blurry). Moreover, you can use lines of '# ---------------------------' or '# ==================' to separate distinct sections of your code. Here's a good, if simple, example of commenting:
+
+```{r}
+
+# This function returns the squared difference element-wise between two vectors
+
+loss <- function(x,y){
+
+  error <- (x-y)**2
+
+  return(error)
+}
+
+#---------------------------------------------------------------------------
+
+# Takes the square root of any real number, returning a complex number
+
+general_sqrt <- function (x){
+
+  # Return the normal square root if x > 0
+  if (x > 0 || x == 0){
+    return(complex(real=sqrt(x), imaginary=0))
+  }
+
+  # Else return the complex square root
+
+  else {
+    return(complex(real = 0, imaginary = sqrt(-x)))
+  }
+
+}
+```
+
+2. **Names**: Naming variables and functions is tricky - names should be descriptive but concise, and variable names should generally be nouns whereas function names tend to be verbs. Moreover, most R developers keep their function/variable names all lowercase and separate multiple words with underscores. There are no strict rules on this, but at the very least it's nice to be consistent with *some* rules because it makes your code more readable.
+
+```{r}
+# Bad examples
+f <- function(x){
+  return(sqrt(x))
+}
+s <- read.table(path)
+
+# Good examples
+take_sqrt <- function(x){
+  return(sqrt(x))
+}
+car_data <- read.table(path)
+
+```
 
 ### Step 4: Documenting your package
 
