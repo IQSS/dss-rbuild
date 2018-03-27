@@ -9,7 +9,7 @@ To do:
 1. Add in pictures
 2. Add in examples of "general" coding comments
 3. Add in documentation for data (also s3/s4 classes and reference classes?)
-4. Overall and specific description of documentation
+4. Improve the examples! Need to give examples of imports and suggests etc. Do this first - maybe on 3/27/18
 
 This page will walk you through the structure, motivation, and process of building packages in R. We'd like to extend a huge thank you to Hadley Wickham's book [R packages](http://r-pkgs.had.co.nz/r.html#r); this part of the guide is basically a condensed and simplified version of that book. A huge portion of the credit should go to him. 
 
@@ -85,8 +85,9 @@ The Description file of an R Package helps solve each one of the first three pro
 
 ### 2.4 Namespace 
 
-- solves version control
-- explain that some functions are imports/exports
+The namespace is a bit more complicated than the other parts of the package structure. The purpose of the namespace is make sure your package doesn't conflict with other packages. For example, if your package includes some data labelled 'lm', a good namespace will ensure that using that data in conjunction with the R stats package (which has a function called 'lm') will *not* throw an error. How exactly the namespace does this is a bit complicated and beyond the scope of this guide, so if you're dying for more specifics, you should [read through this wonderful page](http://r-pkgs.had.co.nz/namespace.html). Thankfully, Roxygen2 will automatically generate a namespace for you - we'll discuss how to do this a little later. 
+
+Remember: the namespace will help your package play nice with others in the event of name conflicts, but it's still better to name your functions so that the they don't overlap with names of other commonly used functions if possible. 
 
 Now that we've gone through the overall structure of packages, we'll walk you through what Grace *should* have done - the process of building an R package from start to finish. 
 
@@ -350,7 +351,15 @@ Note that inside the R script, the documentation appears right above the definit
 
 6. You may choose to write '@export' at the end of your documentation block. You should only do this if you want other people to use the function that you're exporting, because exporting it will make sure it shows up in the namespace. Most functions you write won't be exported - for example, if you write a helper function like 'loss' which is only used in service of a larger function, it shouldn't be exported (exporting too many functions 'clutters' the namespace). Normally, a function as simple as 'general_sqrt' probably wouldn't be exported, but we have exported it for the sake of providing a simple examption. 
 
+Once you've written all your documentation, it's fairly simple to check what it looks like. You should either hit Control+Shift+D, or head to Build>Document in the top pane, which will then automatically generate your documentation. Then, if you've documented a function, you can type ?[function name] into the console, and the documentation should automatically pop up!
+
+(If 'Build' does not show any subobptions and Control+Shift+D is not doing what you expect, it's possible that RStudio does not realize you're supposed to be working inside a package. To get this to happen, in the "Files" tab in the lower right hand corner of RStudio, navigate to your project, and click on the [Project_Name.Rproj] file. Then RStudio should automatically restart and open the project, and you should be able to build or document the package. A picture of what you should click is given below.)
+
+![*Here, you would click devex.Rproj to open the package*](Images/PackageSS/openproj.PNG)
+
 ## Step 5: Building Your Package
+
+You're almost done at this point! You've written your functions, modified the description, documented your functions, and presumably exported some of them; you're now ready to *build* your package. Specifically, you should go to Build > 
 
 Sources cited:
 
