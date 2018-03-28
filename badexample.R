@@ -1,5 +1,7 @@
 # Functions for later use
 
+require(ggplot2)
+
 lm <- function(x,y){
   e <- (x-y)**2
   return(e)
@@ -20,6 +22,7 @@ scalep <- function(d, x=1){
     i <- i + 1
   }
   r <- x*r
+  qplot(r, geom='histogram')
   return(r)
 }
 
@@ -27,6 +30,6 @@ scalep <- function(d, x=1){
 #Remember: For example use:
 setwd('C:/Users/amspe/Documents/R/packageguidelines')
 d <- read.csv('datapath.csv', header=TRUE, sep=',')
-getvars(d)
+scalep(d)
 
 #Remember - there is a bug in this example!!! Super important! In line 17, it should say length(d[,1])+1, otherwise it will ignore the last row.
