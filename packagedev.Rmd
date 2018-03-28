@@ -9,7 +9,7 @@ To do:
 1. Add in pictures
 2. Add in examples of "general" coding comments
 3. Add in documentation for data (also s3/s4 classes and reference classes?)
-4. Improve the examples! Need to give examples of imports and suggests etc. Do this first - maybe on 3/27/18
+4. Update scalep documentation image
 
 This page will walk you through the structure, motivation, and process of building packages in R. We'd like to extend a huge thank you to Hadley Wickham's book [R packages](http://r-pkgs.had.co.nz/r.html#r); this part of the guide is basically a condensed and simplified version of that book. A huge portion of the credit should go to him. 
 
@@ -153,6 +153,8 @@ Should we add in functions that require imports/suggested? probably...
 
 ### Step 3.3: Starting to Program
 
+#### Step 3.3.1: General Coding Guidelines
+
 All of your code should be in scripts in the 'R' file created in the RStudio package development environment, as shown below:
 
 ![](Images/PackageSS/code1.PNG)
@@ -161,10 +163,56 @@ The coding you will do in package development is slightly different than the cod
 
 1. When you write a script and load that script using source(script_name), the code in the script runs when you load it (specifically, when you run the 'source' command). On the other hand, the code in a package is run when the package is *built* on your computer. As a result, your code should mostly be focused on building functions, as opposed to a series of actions which the computer ought to take. 
 2. Unlike your personal scripts, other people will be using your package, and if your package is good, they'll be using it in ways you didn't anticipate. This means you ought to really try to make sure your code is as general as possible and can support a variety of approaches and implementations. 
+3. Also, because other people will be using your package, you should avoid modifying the global RStudio landscape with your package. This means avoiding using functions like require(), library(), or source(); instead, there are other alternatives which can accomplish the same goal without changing the global environment and potentially giving other users an unwanted surprise. For example, instead of using library() and require(), you should be listing your necessary imports in the DESCRIPTION file, as outlinted above. Consider the bad example listed at the beginning of this section, where you saw something that looked like this:
 
-_examples_
+```{r, eval=FALSE}
+# Functions for later use
+
+require(ggplot2)
+
+ ...
+
+scalep <- function(d, x=1){
+ ...
+  qplot(r, geom='histogram')
+ ...
+}
+
+```
+
+This is a bad example, because it uses "require." Instead, you should be listing your packages' necessary dependencies in the DESCRIPTION file, and then RStudio will make sure anyone who loads your package also loads the other packages you used to write your package (also, when users install your package, RStudio will also make sure that the other packages necessary are installed for other users too). The one catch is that you'll now have to append 'packagename::' in front of the imported functions you want to use, otherwise RStudio won't recognize them. Thus, in the previous example, the code should look something like:
+
+```{r, eval=FALSE}
+
+ ...
+
+scalep <- function(d, x=1){
+ ...
+  ggplot2::qplot(r, geom='histogram')
+ ...
+}
+
+```
+
+The last thing you should know is that if you want your package to plot things, you will have to surround the "plot" commands with a print statement, like this:
+
+```{r, eval=FALSE}
+
+ ...
+
+scalep <- function(d, x=1){
+ ...
+  print(ggplot2::qplot(r, geom='histogram'))
+ ...
+}
+
+
+```
+
 
 You should also take care to organize your functions properly. It's probably a bad idea to stick them all into one script and title it "functions." Instead, you should organize functions by their purposes - for example, a variety of loss functions might go into a single script. Of course, some very complicated functions might deserve their own script. The file names of the script should be descriptive - for example, a script of loss functions might be named "loss_functions.R". 
+
+#### Step 3.3.2: Code Style
 
 Now let's talk about specific elements of code style. These are shortened and adapted from [Hadley Wickham's book on R package development](http://r-pkgs.had.co.nz/r.html), which in turn were adapted from Google's R style guide. For more advice on everything from naming variables to curly bracket placement, head to that aforementioned link.
 
@@ -356,6 +404,8 @@ Once you've written all your documentation, it's fairly simple to check what it 
 (If 'Build' does not show any subobptions and Control+Shift+D is not doing what you expect, it's possible that RStudio does not realize you're supposed to be working inside a package. To get this to happen, in the "Files" tab in the lower right hand corner of RStudio, navigate to your project, and click on the [Project_Name.Rproj] file. Then RStudio should automatically restart and open the project, and you should be able to build or document the package. A picture of what you should click is given below.)
 
 ![*Here, you would click devex.Rproj to open the package*](Images/PackageSS/openproj.PNG)
+
+After documenting your package, you can also click the '/man' folder to inspect the documentation html files Roxygen2 generates, but it will probably be less informative than simply typing ?[function name] into the console. 
 
 ## Step 5: Building Your Package
 

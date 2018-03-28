@@ -6,6 +6,7 @@
 #' @param d Two column dataframe, filled with numeric values
 #' @param x Optional scaling constant, by default set to 1
 #' @return A numeric vector of the same length as the columns of the Dataframe.
+#' It will also graph a histogram of the result using ggplot2's qplot function.
 #'
 #' @examples
 #' income <- c(30000, 40000, 20000, 50000)
@@ -22,6 +23,7 @@ scalep <- function(d, x=1){
     r <- append(r, row[[2]]/row[[1]])
     i <- i + 1
   }
+  print(ggplot2::qplot(r, geom='histogram'))
   r <- x*r
   return(r)
 }
