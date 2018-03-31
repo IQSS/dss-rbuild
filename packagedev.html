@@ -125,7 +125,7 @@ $(document).ready(function () {
 </div>
 
 
-<p>To do: 1. Add in pictures 2. Add in examples of “general” coding comments 3. Add in documentation for data (also s3/s4 classes and reference classes?) 4. Update scalep documentation image</p>
+<p>To do: 1. Add in pictures 2. Add in examples of “general” coding comments 3. Add in documentation for data (also s3/s4 classes and reference classes?) 4. Update scalep documentation image 5. Do carlos and I switch places a lot?</p>
 <p>This page will walk you through the structure, motivation, and process of building packages in R. We’d like to extend a huge thank you to Hadley Wickham’s book <a href="http://r-pkgs.had.co.nz/r.html#r">R packages</a>; this part of the guide is basically a condensed and simplified version of that book. A huge portion of the credit should go to him.</p>
 <div id="motivation" class="section level2">
 <h2>1. Motivation</h2>
@@ -246,11 +246,15 @@ general_sqrt &lt;- function (x) {
 </ol>
 <p>(These fields are exceptionally important if you are building a package using tools from other packages)</p>
 <ol start="13" style="list-style-type: decimal">
-<li><strong>Imports</strong>:</li>
-<li><strong>Suggests</strong>:</li>
-<li><strong>Depends</strong>:</li>
+<li><strong>Imports</strong>: In this field, you should list the packages which your package needs to function. Each package should be indented, separated by a comma, and given its own line. For example, a pacakge which requires ggplot2, nlme, and rpart might have an ‘imports’ field which looks like this:</li>
 </ol>
-<p>Should we add in functions that require imports/suggested? probably…</p>
+<div class="figure">
+<img src="data:image/png;base64,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" />
+
+</div>
+<ol start="14" style="list-style-type: decimal">
+<li><strong>Suggests</strong>: Sometimes, your package will run</li>
+</ol>
 </div>
 <div id="step-3.3-starting-to-program" class="section level3">
 <h3>Step 3.3: Starting to Program</h3>
@@ -464,9 +468,43 @@ general_sqrt &lt;- function (x) {
 </div>
 <p>After documenting your package, you can also click the ‘/man’ folder to inspect the documentation html files Roxygen2 generates, but it will probably be less informative than simply typing ?[function name] into the console.</p>
 </div>
+<div id="step-3.5-optional-adding-and-documenting-data" class="section level3">
+<h3>Step 3.5 (Optional): Adding and Documenting Data</h3>
+<p>Sometimes, you’ll want to include data as part of your package, either to serve as an example for users or because your functions need it to work. Let’s walk through how to include (and document) data in your package. Note that there are at least two kinds of data you should think about including, but for both kinds of data, you should generally save them as ‘.rdata’ or ‘.rda’ files (which are the same thing), because the ‘.rdata’ file format was built for R and has a couple of advantages.</p>
+<div id="step-3.5.1-including-data-which-should-be-available-to-users" class="section level4">
+<h4>Step 3.5.1: Including data which should be available to users</h4>
+<p>All of the data you want to be available to users should be saved in a folder called “data” inside your project. The way to do this is to write and run a script which loads your data into R and then uses the devtools function “use_data” to save it to a path inside ‘data.’ Even if you do not already have a folder called ‘data’ in your package, the use_data function will make it for you. Note that for this to work, your working directory must be set to the package you’re writing, otherwise devtools won’t know where to put your data.</p>
+<p>For example, when documenting the scalep function, Carlos might want to include data as an example of a way to use scalep. To this end, he’s generated a (totally fake) csv file which lists 100 people’s income and luxury spending, and has saved it to the</p>
+<pre class="r"><code>luxspending &lt;- read.csv('C:/Users/Carlos/Documents/R/datapath.csv', header=TRUE, sep=',')
+devtools::use_data(luxspending)</code></pre>
+<p>Data in your ‘data’ folder will effectively always be exported, so you always must document it. To document data, you should create an R Script in your ‘R’ directory called [‘data.R’] and use Roxygen2 to document the data similarly to the way you’d document a function. For example, Carlos might document the aforementioned data in the following way:</p>
+<pre class="r"><code>#' Luxury spending of 100 individuals
+#'
+#' This dataset lists the net incomes and the luxury spending
+#' of 100 individuals.
+#'
+#' @format A data frame with 100 rows and 2 columns.
+#' \describe{
+#'   \item{Income}{Total Income, in USD}
+#'   \item{Luxury Spending}{Spending on luxury goods, in USD}
+#'}
+#' @source This dataset was \underline{randomly generated}
+#' and is intended only to be used as an example for package
+#' development and the scalep function.
+&quot;luxspending&quot;</code></pre>
+<p>This should all look pretty similar to documenting functions. Note that ‘<span class="citation">@format</span>’ is a tag which will allow you to describe the structure of a dataset, and it’s good practice to list what each column measures in this section. The ‘<span class="citation">@source</span>’ section describes where the data came from. Never write ‘<span class="citation">@export</span>’ in this section, as data here is already automatically exported.</p>
 </div>
-<div id="step-5-building-your-package" class="section level2">
-<h2>Step 5: Building Your Package</h2>
+<div id="step-3.5.2-including-data-for-your-functions" class="section level4">
+<h4>Step 3.5.2: Including data for your functions:</h4>
+<p>Some functions may rely on a predefined set of coefficients or other inputs which need to be included in the package. However, users shouldn’t generally have access to such data because otherwise they might accidentally radically change the way your function works. It’s best to put such data in ‘R/sysdata.rda’, because then users won’t easily be able to access and accidentally modify it. As before, the way to include data in this way is to write a script which loads the data into R and then use the ‘use_data’ function to save it, but you should also include a parameter ‘interior = TRUE’ in the function call to let R know that this is interior, not exterior, data. For example, if one of Carlos’s functions functions depended on a matrix called “coefficients”, he might run the following code:</p>
+<pre class="r"><code>coefficients &lt;- read.csv('C:/Users/Carlos/Documents/R/coefs.csv', header=TRUE, sep=',')
+devtools::use_data(coefficients, interior = TRUE)</code></pre>
+<p>Data in ‘R/sysdata.rda’ is never exported, so there’s no need to document it.</p>
+</div>
+</div>
+</div>
+<div id="step-4-building-your-package" class="section level2">
+<h2>Step 4: Building Your Package</h2>
 <p>You’re almost done at this point! You’ve written your functions, modified the description, documented your functions, and presumably exported some of them; you’re now ready to <em>build</em> your package. Specifically, you should go to Build &gt;</p>
 <p>Sources cited:</p>
 <p><a href="http://r-pkgs.had.co.nz/intro.html" class="uri">http://r-pkgs.had.co.nz/intro.html</a></p>
