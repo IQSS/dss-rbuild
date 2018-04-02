@@ -13,10 +13,11 @@ scalep(d, x = 1)
 }
 \value{
 A numeric vector of the same length as the columns of the Dataframe.
-It will also graph a histogram of the result using ggplot2's qplot function.
 }
 \description{
 \code{scalep} returns the second column divided element-wise by the first, scaled (multiplied) by an optional scalar.
+It will also graph a histogram of the result using ggplot2's qplot function,
+or the default histogram function if ggplot2 is unavailable.
 }
 \examples{
 income <- c(30000, 40000, 20000, 50000)
