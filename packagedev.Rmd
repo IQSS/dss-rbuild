@@ -7,11 +7,9 @@ output: html_document
 
 To do: 
 1. Add in pictures
-2. Add in examples of "general" coding comments
 3. Add in documentation for s3/s4 classes
 4. Update all images
 5. Do carlos and I switch places a lot?
-6. Suggests section
 
 This page will walk you through the structure, motivation, and process of building packages in R. We'd like to extend a huge thank you to Hadley Wickham's book [R packages](http://r-pkgs.had.co.nz/r.html#r); this part of the guide is basically a condensed and simplified version of that book. A huge portion of the credit should go to him. 
 
@@ -113,7 +111,7 @@ Once you've created your package, your RStudio should look something like this. 
 
 __ insert blank image of RStudio __
 
-Everything should look mostly the same except for the "Files" tab on the bottom right, which should include an ".Rproj" file, a "DESCRIPTION" file, a "NAMESPACE" file, and a folder titled "R." You should start by checking the little boxes next to the "NAMESPACE" file and the "Hello.R" R script inside the R file and clicking "delete" above them, just because we will have Roxygen2 automatically generate the namespace, and because presumably your package doesn't need a "Hello World" function. Note that your directory section might not include a "man" file just yet - that's because you haven't generated any documentation yet, but that's okay!
+Everything should look mostly the same as normal except for the "Files" tab on the bottom right, which should include an ".Rproj" file, a "DESCRIPTION" file, a "NAMESPACE" file, and a folder titled "R." You should start by checking the little boxes next to the "NAMESPACE" file and the "Hello.R" R script inside the R file and clicking "delete" above them, just because we will have Roxygen2 automatically generate the namespace, and because presumably your package doesn't need a "Hello World" function. Note that your directory section might not include a "man" file just yet - that's because you haven't generated any documentation yet, but that's okay!
 
 You should also go to "Tools > Project Options" and select the following options, which will help you generate documentation and such using roxygen2: 
 
@@ -151,8 +149,32 @@ Let's go through the fields and discuss what they mean. The first seven fields l
 
 ![](Images/PackageSS/imports.PNG)
 
-14. **Suggests**: Sometimes, your package will run 
+14. **Suggests**: Sometimes, your package will not really *require* the use of other packages, but it might offer a couple of extra wrappers/functions with those other packages. When those extra functions aren't strictly necessary, it's a good idea to have your package *suggest* imports. For example, if Carlos modified the scalep function to look like the following code, he might put ggplot2 in the 'suggests' part of the description. 
 
+```{r, eval=FALSE}
+
+
+scalep <- function(d, x=1){
+  ...
+  
+  # If ggplot2 is available, use its qplot function - else, use the default hist function
+  
+  if (requireNamespace("ggplot2", quietly = TRUE)) {
+    ggplot2::qplot(r, geom='histogram')
+  } else { 
+    hist(r)
+  }
+  
+  ...
+  
+}
+```
+
+Here, the function 'requireNameSpace' checks if 'ggplot2' is available, and if not, the function uses the (slightly less pretty) default histogram function. 
+
+Once you know which packages to list in the 'suggests' section, you can list them exactly the same way you'd list functions in the 'imports' section: each package is indented, separated by a comma, and gets its own line. 
+
+In general, it's best to suggest functions instead of requiring them if you barely use them in your package. This will give users a bit more flexibility, because it won't force them to download packages they will probably never use. 
 
 ### Step 3.3: Starting to Program
 
@@ -436,9 +458,9 @@ Data in your 'data' folder will effectively always be exported, so you always mu
 #' @format A data frame with 100 rows and 2 columns.
 #' \describe{
 #'   \item{Income}{Total Income, in USD}
-#'   \item{Luxury Spending}{Spending on luxury goods, in USD}
+#'   \item{Luxury_goods}{Spending on luxury goods, in USD}
 #'}
-#' @source This dataset was \underline{randomly generated}
+#' @source This dataset was randomly generated
 #' and is intended only to be used as an example for package
 #' development and the scalep function.
 "luxspending"
@@ -458,8 +480,13 @@ Data in 'R/sysdata.rda' is never exported, so there's no need to document it.
 
 ## Step 4: Building Your Package
 
-You're almost done at this point! You've written your functions, modified the description, documented your functions, and presumably exported some of them; you're now ready to *build* your package. Specifically, you should go to Build > 
+You're almost done at this point! You've written your functions, modified the description, documented your functions, and presumably exported some of them; you're now ready to *build* your package. Specifically, you should go to Build > Check Package. If you don't see any options under Build, you probably need to open your .Rproj file in the "file" section of RStudio (upon doing this, RStudio should restart briefly and then you will see more Build options).
 
-Sources cited:
+Upon checking the package, RStudio will tell you if there are any warnings or errors raised by its automatic checking process. For example, it might tell you that a piece of documentation mismatches its complimentary function, or that the package needs an extra dependence. It's best to fix all of the problems RStudio points out, whether they are warnings or errors. 
 
-http://r-pkgs.had.co.nz/intro.html
+Lastly, you can go to Build > Install and Restart, and then RStudio will build your package, restart, and load your package into R (using the library command). Then, you can use your package!
+
+## Sources cited:
+
+A huge thank you again to Hadley Wickham and his book R Packages, linked [here](http://r-pkgs.had.co.nz/intro.html). 
+
