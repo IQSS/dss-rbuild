@@ -17,16 +17,29 @@
 #' scalep(d, x=3)
 #'
 #' @export
+#'
 scalep <- function(d, x=1){
-  r <- c()
+
+  # Intialize resulting vector
+  result <- c()
+
+  # Iterate through and divide column 2 of d by column 1 of d
   i <- 0
-  while(i < length(d[,1])+1){
+  while(i < length(d[ ,1]) + 1){
     row <- d[i,]
-    r <- append(r, row[[2]]/row[[1]])
+    result <- append(result, row[[2]]/row[[1]])
     i <- i + 1
   }
-  print(ggplot2::qplot(r, geom='histogram'))
-  r <- x*r
-  return(r)
+
+  # Print the graph using either ggplot2 or the hist function
+  if (requireNamespace("ggplot2", quietly = TRUE)) {
+    print(ggplot2::qplot(result, geom='histogram'))
+  } else {
+    print(hist(result))
+  }
+
+  # Return the result, multiplying by the optional scalar
+  result <- x*result
+  return(result)
 }
 

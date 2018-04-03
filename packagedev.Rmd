@@ -6,10 +6,8 @@ output: html_document
 ---
 
 To do: 
-1. Add in pictures
-3. Add in documentation for s3/s4 classes
-4. Update all images
-5. Do carlos and I switch places a lot?
+1. Should I add in documentation for s3/s4 classes?
+2. Should I go into more detail for NAMESPACE?
 
 This page will walk you through the structure, motivation, and process of building packages in R. We'd like to extend a huge thank you to Hadley Wickham's book [R packages](http://r-pkgs.had.co.nz/r.html#r); this part of the guide is basically a condensed and simplified version of that book. A huge portion of the credit should go to him. 
 
@@ -149,7 +147,7 @@ Let's go through the fields and discuss what they mean. The first seven fields l
 
 ![](Images/PackageSS/imports.PNG)
 
-14. **Suggests**: Sometimes, your package will not really *require* the use of other packages, but it might offer a couple of extra wrappers/functions with those other packages. When those extra functions aren't strictly necessary, it's a good idea to have your package *suggest* imports. For example, if Carlos modified the scalep function to look like the following code, he might put ggplot2 in the 'suggests' part of the description. 
+14. **Suggests**: Sometimes, your package will not really *require* the use of other packages, but it might offer a couple of extra wrappers/functions with those other packages. When those extra functions aren't strictly necessary, it's a good idea to have your package *suggest* imports. For example, if Grace modified the scalep function to look like the following code, she might put ggplot2 in the 'suggests' part of the description. 
 
 ```{r, eval=FALSE}
 
@@ -440,14 +438,14 @@ Sometimes, you'll want to include data as part of your package, either to serve 
 
 All of the data you want to be available to users should be saved in a folder called "data" inside your project. The way to do this is to write and run a script which loads your data into R and then uses the devtools function "use_data" to save it to a path inside 'data.' Even if you do not already have a folder called 'data' in your package, the use_data function will make it for you. Note that for this to work, your working directory must be set to the package you're writing, otherwise devtools won't know where to put your data. 
 
-For example, when documenting the scalep function, Carlos might want to include data as an example of a way to use scalep. To this end, he's generated a (totally fake) csv file which lists 100 people's income and luxury spending, and has saved it to the   
+For example, when documenting the scalep function, Grace might want to include data as an example of a way to use scalep. To this end, she's generated a (totally fake) csv file which lists 100 people's income and luxury spending, and has saved it to the   
 
 ```{r, eval=FALSE}
 luxspending <- read.csv('C:/Users/Carlos/Documents/R/datapath.csv', header=TRUE, sep=',')
 devtools::use_data(luxspending)
 ```
 
-Data in your 'data' folder will effectively always be exported, so you always must document it. To document data, you should create an R Script in your 'R' directory called ['data.R'] and use Roxygen2 to document the data similarly to the way you'd document a function. For example, Carlos might document the aforementioned data in the following way:
+Data in your 'data' folder will effectively always be exported, so you always must document it. To document data, you should create an R Script in your 'R' directory called ['data.R'] and use Roxygen2 to document the data similarly to the way you'd document a function. For example, Grace might document the aforementioned data in the following way:
 
 ```{r, eval=FALSE}
 #' Luxury spending of 100 individuals
@@ -485,6 +483,10 @@ You're almost done at this point! You've written your functions, modified the de
 Upon checking the package, RStudio will tell you if there are any warnings or errors raised by its automatic checking process. For example, it might tell you that a piece of documentation mismatches its complimentary function, or that the package needs an extra dependence. It's best to fix all of the problems RStudio points out, whether they are warnings or errors. 
 
 Lastly, you can go to Build > Install and Restart, and then RStudio will build your package, restart, and load your package into R (using the library command). Then, you can use your package!
+
+## Last tips and recommendations
+
+
 
 ## Sources cited:
 
