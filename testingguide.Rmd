@@ -1,0 +1,49 @@
+---
+title: "testingguide"
+author: "Asher Spector"
+date: "April 7, 2018"
+output: html_document
+---
+
+### 0. To-do
+
+## 1. Why should you test?
+
+Suppose Grace has created a package and have been using it for a while, but she decides she'd like to modify one function to improve it. She modifies her function, tests it a bit, and then pushes her package to git. Yet two weeks later, Carlos discovers that the changes she made created a bug in *another* function in the package! This situation is very annoying, especially if Carlos has no idea what has caused the bug or how to fix it. 
+
+The solution to problems like this is to testing your package *systematically* and *automatically*. If Grace had rigorously tested the entire package before pushing it to git, Carlos would never have had to deal with the new bug- Grace would have found out immediately. In other words, a good principle in package devleopment is to make sure your code *fails as fast as possible,* so you can find out and fix it. Of course, all programmers test their code, but not everyone tests systematically and automatically. 
+
+In this guide, we'll broadly talk about three kinds of tests. First, we'll talk creating automatic *unit tests*, which are tests of individual blocks of code (usually individual functions or classes). Then, we'll talk about *integration tests*, which are tests of how individual blocks of code work in combination. Lastly, we'll talk about making your package *developer-proof* - i.e. if you have collaborators, or someone tries to fix your package, you can proactively prevent them from breaking anything important. 
+
+## 2. Unit Tests
+
+### 2.1: What are unit tests?
+
+*Unit tests* compare the actual output of a block of code to its expected output. For example, the following test tests whether the "generalized square root" function actually returns $2$ as the square root of $4$.  
+
+```{r, eval=FALSE}
+expect_equal(general_sqrt(4), complex(2, 0))
+```
+
+We'll talk a little more about how exactly to create tests down below, but hopefully this makes the general concept clear (you've also probably been using the general concept as you program). 
+
+
+### 2.2: Setting up the testing environment
+
+Creating unit tests is actually quite easy, thanks to a package called 'testtthat' which works in combination with devtools. To begin, you should make 'testthat' is installed by running the following code:
+
+```{r, eval=FALSE}
+install.packages('testthat')
+```
+
+Next, you'll want to make sure R recognizes you're working on a package (you can do this by navigating to the .Rproj file in the 'files' tab in the bottom right corner of RStudio and clicking on it). Then, you can run the following command in the console:
+
+```{r, eval=FALSE}
+devtools::use_testthat()
+```
+
+
+
+## 3. Integrated Tests
+
+## 4. 

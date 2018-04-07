@@ -8,7 +8,7 @@ output: html_document
 ## 0. To do
 
 1. Add in link for template.gitignore
-
+2. Fix the fact that Carlos/Grace/I switch places a bit
 
 This guide is a basic introduction to Git and Github for near-absolute beginners. It will start by discussing the importance of git and github, how to install git, and how to use git/github at a basic level. Lastly, it will provide links to further reading regarding advanced functionality for git.
 
@@ -49,7 +49,6 @@ __ general problem - what about other OSs? __
 ### Making a Github account
 
 Signing up for a Github is fairly simple - just go to github.com, click "sign up" in the upper right hand corner, and follow the instructions. We recommend, at least to begin with, getting a free version of Github.
-(Note: ask Simo - we recommend this right?)
 
 ### How to Install and Set Up Git
 
@@ -70,7 +69,9 @@ $ git config --global user.name "Your Name"
 $ git config --global user.email "youremail@email.com"
 ```
 
-__ insert screenshot of git bash/cmd line __
+You might not get explicit confirmation from the command line - for example, when I set the username/email, I see the image below - but don't worry, Git has still got the message.
+
+![](Images/configglobals.PNG)
 
 Now you're ready to start using Git/Github!
 
@@ -82,13 +83,11 @@ The first step to using git is creating a project, or repository (repo for short
 
 ##### Method 1: Start your project on Github
 
-The first way to start a repo is by creating it on github. To do so, log into your Github account, click "Repositories" in the top tab, and then click the green "New" button on the right. 
+The first way to start a repo is by creating it on github. To do so, log into your Github account. Look near the top-right for your profile icon, click it, and click "Your Profile." Then you should see "Repositories" in the top tab, and then click the green "New" button on the right. 
 
-__ do we want to insert pictures? __
+![](Images/gitdashboard.PNG)
 
 Github will prompt you to choose a repository name and description of the repo, which you should enter, and will also ask you whether you'd like to initialize the repository with a README. You should generally add README and .gitignore files, although we'll discuss their functions and importance later. For now, just add the README. 
-
-__ discussion of gitignores?? __
 
 Once you've created the repository on Github, the next step is to link it with a local repository on git. To do this, open the *command prompt* on your computer. You'll need to enter a couple of commands to get the repo set up on your computer. 
 
@@ -130,6 +129,20 @@ $ git add 'scriptname2.R'
 $ git commit
 ```
 
+The following command line code produces something like this:
+
+![](Images/committing1.PNG)
+
+Depending on the OS you're running (and perhaps the IDE), you might also be able to add your comment directly into the command line, which is a bit easier. You can do this by typing "commit -m" followed by your message in quotes.
+
+```{r, eval=FALSE}
+$ cd C:/Users/Carlos/Documents/R/repository_name
+$ git add 'scriptname.R'
+$ git add 'scriptname2.R'
+$ git commit -m "Fixed small bug"
+```
+
+
 Lastly, you need to *push* the files, which means sending them to Github online. Before you do this, if you created the repository locally and have not already done so, you'll need to specify to Git the url to send the commits to. To do this, type 'git remote add origin [your url]' into your command line. Then, you can *push* the file by writing 'git push -u origin master,' which will send the file to the Github repo. 
 
 
@@ -137,9 +150,6 @@ Lastly, you need to *push* the files, which means sending them to Github online.
 $ git remote add origin https://github.com/user_name/repository_name
 $ git push -u origin master
 ```
-
-
-__ git commit -m or git commit? Depends on the command line/bash distinction __
 
 #### Accessing older versions of code
 
