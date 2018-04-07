@@ -5,9 +5,10 @@ date: "March 2, 2018"
 output: html_document
 ---
 
-To do: 
+## 0. To do: 
 1. Should I add in documentation for s3/s4 classes?
 2. Should I go into more detail for NAMESPACE?
+3. Publish devex
 
 This page will walk you through the structure, motivation, and process of building packages in R. We'd like to extend a huge thank you to Hadley Wickham's book [R packages](http://r-pkgs.had.co.nz/r.html#r); this part of the guide is basically a condensed and simplified version of that book. A huge portion of the credit should go to him. 
 
@@ -441,7 +442,7 @@ All of the data you want to be available to users should be saved in a folder ca
 For example, when documenting the scalep function, Grace might want to include data as an example of a way to use scalep. To this end, she's generated a (totally fake) csv file which lists 100 people's income and luxury spending, and has saved it to the   
 
 ```{r, eval=FALSE}
-luxspending <- read.csv('C:/Users/Carlos/Documents/R/datapath.csv', header=TRUE, sep=',')
+luxspending <- read.csv('C:/Users/Grace/Documents/R/datapath.csv', header=TRUE, sep=',')
 devtools::use_data(luxspending)
 ```
 
@@ -467,10 +468,10 @@ Data in your 'data' folder will effectively always be exported, so you always mu
 This should all look pretty similar to documenting functions. Note that '@format' is a tag which will allow you to describe the structure of a dataset, and it's good practice to list what each column measures in this section. The '@source' section describes where the data came from. Never write '@export' in this section, as data here is already automatically exported.
 
 #### Step 3.5.2: Including data for your functions: 
-Some functions may rely on a predefined set of coefficients or other inputs which need to be included in the package. However, users shouldn't generally have access to such data because otherwise they might accidentally radically change the way your function works. It's best to put such data in 'R/sysdata.rda', because then users won't easily be able to access and accidentally modify it. As before, the way to include data in this way is to write a script which loads the data into R and then use the 'use_data' function to save it, but you should also include a parameter 'interior = TRUE' in the function call to let R know that this is interior, not exterior, data. For example, if one of Carlos's functions functions depended on a matrix called "coefficients", he might run the following code:
+Some functions may rely on a predefined set of coefficients or other inputs which need to be included in the package. However, users shouldn't generally have access to such data because otherwise they might accidentally radically change the way your function works. It's best to put such data in 'R/sysdata.rda', because then users won't easily be able to access and accidentally modify it. As before, the way to include data in this way is to write a script which loads the data into R and then use the 'use_data' function to save it, but you should also include a parameter 'interior = TRUE' in the function call to let R know that this is interior, not exterior, data. For example, if one of Grace's functions functions depended on a matrix called "coefficients", he might run the following code:
 
 ```{r, eval=FALSE}
-coefficients <- read.csv('C:/Users/Carlos/Documents/R/coefs.csv', header=TRUE, sep=',')
+coefficients <- read.csv('C:/Users/Grace/Documents/R/coefs.csv', header=TRUE, sep=',')
 devtools::use_data(coefficients, interior = TRUE)
 ```
 
@@ -484,9 +485,13 @@ Upon checking the package, RStudio will tell you if there are any warnings or er
 
 Lastly, you can go to Build > Install and Restart, and then RStudio will build your package, restart, and load your package into R (using the library command). Then, you can use your package!
 
-## Last tips and recommendations
+## Tips and Tricks
 
+First, there's a wonderful cheat sheet for package development linked [here](https://www.rstudio.com/wp-content/uploads/2015/06/devtools-cheatsheet.pdf).
 
+Second, if you are looking for a quick (and very simple) example of a package, the devex package can be found here. If you're having trouble understanding the workflow for package development, it's worth looking through the devex package and making sure you understand all its components. Better yet, you can practice using roxygen2 and devtools by creating a very small/useless package (2-3 simple functions).
+
+Third, if you're having trouble, you can always just reference stackexchange. 
 
 ## Sources cited:
 
