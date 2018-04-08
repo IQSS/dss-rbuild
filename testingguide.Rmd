@@ -19,14 +19,17 @@ In this guide, we'll broadly talk about three kinds of tests. First, we'll talk 
 
 ### 2.1: What are unit tests?
 
-*Unit tests* compare the actual output of a block of code to its expected output. For example, the following test tests whether the "generalized square root" function actually returns $2$ as the square root of $4$.  
+__ this answer is not really descriptive __
+
+Tests in general compare the actual output of a block of code to its expected output. For example, the following test tests whether the "generalized square root" function actually returns $2$ as the square root of $4$.   
 
 ```{r, eval=FALSE}
-expect_equal(general_sqrt(4), complex(2, 0))
+expect_equal(general_sqrt(4), complex(real = 2, imaginary = 0))
 ```
 
-We'll talk a little more about how exactly to create tests down below, but hopefully this makes the general concept clear (you've also probably been using the general concept as you program). 
+*Unit tests* usually run automatically on the computer of the developer who is modifying a package - for example, if Grace is updating her package, unit tests on her updates will run on her computer. 
 
+We'll talk a little more about how exactly to create tests down below, but hopefully this makes the general concept clear (you've also probably been using the general concept as you program). 
 
 ### 2.2: Setting up the testing environment
 
@@ -42,6 +45,64 @@ Next, you'll want to make sure R recognizes you're working on a package (you can
 devtools::use_testthat()
 ```
 
+This will do a couple of things. First, it will add 'testthat' to the Suggests part of the DESCRIPTION, which will help other collaborators know to use testthat when modifying/working on the package. It will also create a 'tests/testthat' directory in your project, as well a file called 'test/testthat.R', as shown below.
+
+![](Images/TestSS/devtoolstestthat.PNG)
+
+### 2.3: Expectations
+
+Before understanding what a unit test is, we need to properly describe an expectation. An expectation tests whether the actual output of a single function call is what the developer expected. The 'testthat' package has a number of functions which compare outputs to expected values. When calling one of these functions, one of two things can happen:
+
+1. If the actual output matches the expectation, nothing will happen!
+2. If the actual output does not match the expectation, it will throw an error. 
+
+For example, 'expect_equal()' uses the base R function 'all.equal()' to check whether an output is (approximately) equal to an expectation. In the following code, the first function call will do nothing - the second function call will throw an error, displayed below. 
+
+```{r, eval = FALSE, error = TRUE}
+library(testthat)
+testthat::expect_equal(2, 2)
+testthat::expect_equal(2, 4)
+```
+![](Images/TestSS/expectationerror.PNG)
+
+Here's an (abbreviated) list of the expectation functions:
+
+1. **expect_equal**, as aforementioned, checks equality using the "all.equal()" base function.
+2. **expect_identical** checks equality using the "identical()" base function. Generally, it's better to use "expect_equal" because lots of R functions use numerical approximations which will cause expect_identical to fail when you don't want it to. 
+3. **expect_match**, **expect_output**, **expect_message**, **expect_warning**, and **expect_error** all respectively test whether a string, output, warning, or error match a regular expression. For example, the following two expectations functions will not throw errors:
+
+```{r}
+testthat::expect_match('hello1234', 'hello')
+testthat::expect_warning(sqrt(-2), 'NaNs produced')
+```
+respectively because 'hello1234' contains 'hello', and because the error message produced by sqrt(-2) contains the phrase 'NaNs produced'.
+
+4. **expect_is** tests whether an object inherets from a class, specified in quotes. For example, the following test passes:
+
+```{r}
+testthat::expect_is(sqrt(2), 'numeric')
+```
+
+5. **expect_true** and **expect_false** respectively expect a statement to evaluate to true or false.
+
+### 2.4: Structure of unit tests
+
+Each *unit test* should use a couple of expectations to test a single core function. It should use the function "test_that" (from the "testthat" package). "test_that" takes two parameters: a string, which describes the test, and a couple of expectations, surrounded by curly braces. For example, the following code will test whether the general_sqrt function from the devex package returns a complex number. 
+
+```{r, eval=FALSE}
+test_that("Returns complex number", {
+  expect_is(general_sqrt(-2), 'complex')
+  expect_is(general_sqrt(2), 'complex')
+  expect_is(general_sqrt(0), 'complex')
+})
+```
+
+
+
+
+### 2.5: Tips for making good tests
+
+### 2.6: Automating testing
 
 
 ## 3. Integrated Tests
