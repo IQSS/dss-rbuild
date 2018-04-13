@@ -7,7 +7,8 @@
 general_sqrt(x)
 }
 \arguments{
-\item{x}{A real number - integers or doubles are both acceptable.}
+\item{x}{A real number - integers or doubles are both acceptable.
+Vectors must be of length 1.}
 }
 \value{
 A complex value. If x is positive, the imaginary component is equal to 0;

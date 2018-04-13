@@ -1,7 +1,7 @@
 
 #' Squared Difference Function
 #'
-#' \code{loss} returns the squard difference element-wise between two vectors
+#' \code{loss} returns the squared difference element-wise between two vectors
 #' @param x A numeric vector
 #' @param y Another numeric vector, of the same length as x
 #' @return A numeric vector of the same length as x and y

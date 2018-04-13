@@ -15,7 +15,7 @@ loss(x, y)
 A numeric vector of the same length as x and y
 }
 \description{
-\code{loss} returns the squard difference element-wise between two vectors
+\code{loss} returns the squared difference element-wise between two vectors
 }
 \examples{
 loss(c(1,2,3), c(2,3,4))
