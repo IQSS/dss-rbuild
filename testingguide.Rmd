@@ -87,7 +87,7 @@ testthat::expect_is(sqrt(2), 'numeric')
 
 ### 2.4: Structure of unit tests
 
-Each *unit test* should use a couple of expectations to test a single core function. It should use the function "test_that" (from the "testthat" package). "test_that" takes two parameters: a string, which describes the test, and a couple of expectations, surrounded by curly braces. For example, the following code will test whether the general_sqrt function from the devex package returns a complex number. 
+Each *unit test* (which is written in an R script) should use a couple of expectations to test a single core function. It should use the function "test_that" (from the "testthat" package). "test_that" takes two parameters: a string, which describes the test, and a couple of expectations, surrounded by curly braces. For example, the following code will test whether the general_sqrt function from the devex package returns a complex number. 
 
 ```{r, eval=FALSE}
 test_that("Returns complex number", {
@@ -97,8 +97,41 @@ test_that("Returns complex number", {
 })
 ```
 
+Multiple tests with similar functions should be put in the same file, and those test files must be put in the tests/testthat/ directory. Moreover, their name must start with the word 'test' - this will help RStudio automatically run your tests for you.  For example, in the devex package, there are two very simple helper functions ('general_sqrt' and 'loss') and one moderately complex function ('scalep'). As a result, the devex package has exactly two testing files: one called 'testhelpers,' which tests the helper functions, and another called 'testscalep', which tests the scalep function. The testhelpers file looks like this:
 
+```{r, eval=FALSE}
+library(devex)
+context("generalized sqrt and loss")
 
+# Generalized sqrt ---------------------------------------
+
+test_that("Returns complex number", {
+  expect_is(general_sqrt(-2), 'complex')
+  expect_is(general_sqrt(2), 'complex')
+  expect_is(general_sqrt(0), 'complex')
+})
+
+test_that("Returns correct sqrt", {
+  expect_equal(general_sqrt(-1.53), complex(real = 0, imaginary = sqrt(1.53)))
+  expect_equal(general_sqrt(-2), complex(real = 0, imaginary = sqrt(2)))
+})
+
+test_that("Warnings for vectors of length > 1", {
+  expect_warning(general_sqrt(c(2, 0)))
+  expect_warning(general_sqrt(c(-2, 0, 2)), 'NaNs produced')
+})
+
+# Loss ---------------------------------------------------
+
+test_that("Returns correct loss", {
+  expect_equal(loss(0, 3), 9)
+  expect_equal(loss(c(1, 1, 1), c(1, 2, 3)), c(0, 1, 4))
+  expect_equal(loss(c(-1, -5, -2), c(0, 0, 0)), c(1, 25, 4))
+})
+
+```
+
+Each test file, as demonstrated above, needs to load the package of interest (using 'library' is fine) and also should supply a string which succinctly describes the general purpose of all of the tests in the test file to the 'context' function. 
 
 ### 2.5: Tips for making good tests
 
