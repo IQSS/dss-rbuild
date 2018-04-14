@@ -40,6 +40,11 @@ loss <- function(x,y){
 
 general_sqrt <- function (x){
 
+  # Issue warning for longer vectors
+  if (length(x) > 1) {
+    warning('Argument of general_sqrt has length greater than 1')
+  }
+
   # Return the normal square root if x > 0
   if (x > 0 || x == 0){
     return(complex(real = sqrt(x), imaginary = 0))
