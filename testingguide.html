@@ -163,7 +163,7 @@ $(document).ready(function () {
 <li>If the actual output matches the expectation, nothing will happen!</li>
 <li>If the actual output does not match the expectation, it will throw an error.</li>
 </ol>
-<p>For example, ‘expect_equal()’ uses the base R function ‘all.equal()’ to check whether an output is (approximately) equal to an expectation. In the following code, the first function call will do nothing - the second function call will throw an error.</p>
+<p>For example, ‘expect_equal()’ uses the base R function ‘all.equal()’ to check whether an output is (approximately) equal to an expectation. In the following code, the first function call will do nothing - the second function call will throw an error, displayed below.</p>
 <pre class="r"><code>library(testthat)
 testthat::expect_equal(2, 2)
 testthat::expect_equal(2, 4)</code></pre>
@@ -171,28 +171,151 @@ testthat::expect_equal(2, 4)</code></pre>
 <img src="data:image/png;base64,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" />
 
 </div>
+<p>Here’s an (abbreviated) list of the expectation functions:</p>
+<ol style="list-style-type: decimal">
+<li><strong>expect_equal</strong>, as aforementioned, checks equality using the “all.equal()” base function.</li>
+<li><strong>expect_identical</strong> checks equality using the “identical()” base function. Generally, it’s better to use “expect_equal” because lots of R functions use numerical approximations which will cause expect_identical to fail when you don’t want it to.</li>
+<li><strong>expect_match</strong>, <strong>expect_output</strong>, <strong>expect_message</strong>, <strong>expect_warning</strong>, and <strong>expect_error</strong> all respectively test whether a string, output, warning, or error match a regular expression. For example, the following two expectations functions will not throw errors:</li>
+</ol>
+<pre class="r"><code>testthat::expect_match('hello1234', 'hello')
+testthat::expect_warning(sqrt(-2), 'NaNs produced')</code></pre>
+<p>respectively because ‘hello1234’ contains ‘hello’, and because the error message produced by sqrt(-2) contains the phrase ‘NaNs produced’.</p>
+<ol start="4" style="list-style-type: decimal">
+<li><strong>expect_is</strong> tests whether an object inherets from a class, specified in quotes. For example, the following test passes:</li>
+</ol>
+<pre class="r"><code>testthat::expect_is(sqrt(2), 'numeric')</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li><strong>expect_true</strong> and <strong>expect_false</strong> respectively expect a statement to evaluate to true or false.</li>
+</ol>
 </div>
 <div id="structure-of-unit-tests" class="section level3">
 <h3>2.4: Structure of unit tests</h3>
-<p>Each <em>unit test</em> should use a couple of expectations to test a single core function. It should use the function “test_that” (from the “testthat” package). “test_that” takes two parameters: a string, which describes the test, and a couple of expectations, surrounded by curly braces. For example, the following code will test whether the general_sqrt function from the devex package returns a complex number.</p>
+<p>Each <em>unit test</em> (which is written in an R script) should use a couple of expectations to test a single core function. It should use the function “test_that” (from the “testthat” package). “test_that” takes two parameters: a string, which describes the test, and a couple of expectations, surrounded by curly braces. For example, the following code will test whether the general_sqrt function from the devex package returns a complex number.</p>
 <pre class="r"><code>test_that(&quot;Returns complex number&quot;, {
   expect_is(general_sqrt(-2), 'complex')
   expect_is(general_sqrt(2), 'complex')
   expect_is(general_sqrt(0), 'complex')
 })</code></pre>
+<p>Multiple tests with similar functions should be put in the same file, and those test files must be put in the tests/testthat/ directory. Moreover, their name must start with the word ‘test’ - this will help RStudio automatically run your tests for you. For example, in the devex package, there are two very simple helper functions (‘general_sqrt’ and ‘loss’) and one moderately complex function (‘scalep’). As a result, the devex package has exactly two testing files: one called ‘testhelpers,’ which tests the helper functions, and another called ‘testscalep’, which tests the scalep function. The testhelpers file looks like this:</p>
+<pre class="r"><code>library(devex)
+context(&quot;generalized sqrt and loss&quot;)
+
+# Generalized sqrt ---------------------------------------
+
+test_that(&quot;Returns complex number&quot;, {
+  expect_is(general_sqrt(-2), 'complex')
+  expect_is(general_sqrt(2), 'complex')
+  expect_is(general_sqrt(0), 'complex')
+})
+
+test_that(&quot;Returns correct sqrt&quot;, {
+  expect_equal(general_sqrt(-1.53), complex(real = 0, imaginary = sqrt(1.53)))
+  expect_equal(general_sqrt(-2), complex(real = 0, imaginary = sqrt(2)))
+})
+
+test_that(&quot;Warnings for vectors of length &gt; 1&quot;, {
+  expect_warning(general_sqrt(c(2, 0)))
+  expect_warning(general_sqrt(c(-2, 0, 2)), 'NaNs produced')
+})
+
+# Loss ---------------------------------------------------
+
+test_that(&quot;Returns correct loss&quot;, {
+  expect_equal(loss(0, 3, 9)
+  expect_equal(loss(c(1, 1, 1), c(1, 2, 3)), c(0, 1, 4))
+  expect_equal(loss(c(-1, -5, -2), c(0, 0, 0)), c(1, 25, 4))
+})</code></pre>
+<p>Each test file, as demonstrated above, needs to load the package of interest (using ‘library’ is fine) and also should supply a string which succinctly describes the general purpose of all of the tests in the test file to the ‘context’ function.</p>
+<p>You can run all of the tests in the test/testthat directory by clicking Build&gt;Check Package or Control Shift E. If any test throws an error, RStudio will report two things. First, it will report the string given in the test which was given to the ‘test_that’ function call. Second, it will report the filename of the test file as well as the line of code that threw an error. For example, running the above tests yields the following result:</p>
+<div class="figure">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoAAAAB8CAYAAAD5AgFoAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAABgzSURBVHhe7Z1Jrus2FobvqCa1IyNAdmMUajVOFuNkAzXO+EGzjDN+UxUPG4mU2By19rW+DxDes3REnoYSf6vx/eoBAAAA4FIgAAEAAAAuBgIQAAAA4GIgAAEAAAAuBgIQAAAA4GIgAAEAAAAuBgIQAAAA4GIgAAEAAAAuBgIQAAAA4GIgAAEAAAAuBgLQ8uzvX1/97dH5zzDlef/qv0yOhuX26MkWAADA9wQBaEEALsGKQQQgAADAt+VAAXimqNL0VbPZ29fPFpR1AfjZsQMAAHwCCEDL3r5+tghCAAIAAHxvDhCATgAkz4sNy91sjege/f02br/dn6mo6Exb0favr5u1GdH0pbcR0dI97v3Nb0/7Mlh/b0kbqdBZEHuTvE8z4bVTDnNxlERcXgAqY2/6AwAAAEfzuiuARriIqLk//XYRBiIIBjHQ9Q8RComgMWKoy7XX6MtSs/F9ixh5+P6eTnQl2sT4+Aj+GjpjI/vMm9T40yLyKeRAchYLr11ymPO17v/6K4BLagoAAABH8SIBOAqBmFRY+P0TsVCiLlgcNRu3LfVH0eYgwPznAY0/LXI+xeyVw5yvdf/XC0CNPwqs8DY+FBabEmyKCzbYlBZssCkt2HyezYsEoNuWdSi6XTje+ryZYLqFImaKQpgk23Lruv4pPonwsn65xSY6QeNPi1Ybbnvsx7gsyaE29pH1AnBJTQEAAOAoXisA58opgxEJz/DsnRENlfbKYklo+5Num6+zwsf4MNwGPuEKYLkNt317DnWxx2wRgA5NTQEAAOAoXnsLuCgiCtjLmWufuavZ5LZN12VsXioA98phph9/2bjU93YBGFGsaYXGZW1bD2yKCzbYlBZssCkt2HyezYECMDyjVhAK3rH0eTC5MuQ/ywsX4YUMS2d2Eadzb9M2+rLUbHKiZbpuKrjEH/dGsE10gsafFgohtUsOg6/OTq7M3W43K2zXCcBK7ItqCgAAAEdxoAA0dOlPlEyv9LjbgOn24S1XEQteiITtt5sRCnnV0ezLUrTRCEBDvL/xTW4FPx9OBM7EksafKgoBaNglh0ZIDjayvdF3XQAaSrEvrSkAAAAcwrECEAAAAADeDgQgAAAAwMVAAAIAAABcDAQgAAAAwMVAAAIAAABcDAQgAAAAwMVAAAIAAABcDAQgAAAAwMVAAAIAAABcjFEA7vB35eZ/Eg0AAAAA3g2uAAIAAABcDAQgAAAAwMXgFjAAAADAxeAKIAAAAMDFQAACAAAAXAwEIAAAAMDFQAACAAAAXAwEIAAAAMDFQAACAAAAXIzLCMDuee9v4Sdrbvf+0fkNcD7do7/fqMXxdGbcS65v/Y0kAwBAxDECsHv2j7uZdO73/i7/mkn+mcw/z/5uJv90Uur6h4iCI35M0P5+YfCh65+Pm/l8WyE8zL4STxCSdpH4HmaLoInL2Yz7j8u4X97mdg/9COttZBnTnLExguGeFmw/jPiT/IX2RZgvr0U5ruz48b9fORdB5XamtZjvG/NueZZx6vq4ifiTf5clGAAAPpwDBKCb6JJ52E768SQ/n1TthDUIqT1xAiydANeJzeBjPGd3nQjKp/d7WVydFaJGmPrPI/N25EqOFZ6Dz+ts5uTa8VdLF+ZHQy4fdt2ivjRxjdj2JZ7K+FpSiznvl+eRZbkCAIBrsLsAtBNpZqJNJ/l0UipPvoKzXXfFTnD7T+fYmjDLo5lIl8S1XHSkPq+3ScnbON+mOXe2W2uR76ucpzmauDz2y4dpu3GlcWktUtbbHJPnmAW5AgCAy7CzACxfWUsn2GhSat4C3DoZ5iZA7+ci0SGuun0eXcmRJXEtFR3e56q409hMKdj4W7Xpeme7uhbD7V//OaDIVYomLofNse2wvs+rBOAheU7Q+AYAAFdjZwFYmWySSd7b3d0tsIxe3JXpVZbxhZBlAtDs6fa14vHW3+XWbxLqsrj0oiM8txi3ucYmR8lGs+9CTheAThCH/mpXfV8mANWxrOXo9gEA4DvyWgH4eNh/S5PynsjLG/Y5MOnXKAIrljb023UmhiAEZ4JLF1dLdAR/rc+FF2mW2tglUWDB56mnpfUb2FkAzuKa5tL2F62z/WT6N+whAGf+vCrPCUe3DwAA35HX3wL2oiC3z5HYq0E79Fl85k4R1+uuOsUUbEpibRP5vsp5KKGJy1jZW/aZpTk+Y75jnmN0uQIAgGvxFi+BhEnwvEnK9b/HpFsUtkIjrncWgMtFmY7cbdjlYlwf17TZUlyvqsVReR7R+AYAAFdjdwGYnXitEIpv8WUmJX97bj5ROdtltwgnyE+1hH3lNwqTFyW0yG8byk/ARHvJbWDxrSRshWJctck/086Mo2zkWUL3DON8P2e7rRbhipdrYMvvAFbjknZzNS5ccTu/FgfneUDjGwAAXI0DBKBh1Q9Bh0l4OjnvMBnK7+PZ5/XcIs8ALm+qczFF7YhP98QpTVwhnvky7qeZtPU2ub6mojXeJvV6pAXzBNuNwsSIsG1/CaQdu1xVzG+PH1Mo52dai7U2r8mzj3HSX1gGlwAA4LIcIwABAAAA4G1BAAIAAABcDAQgAAAAwMVAAM7wz1+V3mSOn6da/CIJLKNci/dFXjJyz3yGJX1OFL4f22r6/c4b7rirP1/8Ifjn1Y99E/9o9qsXc9wZ+HrZl0r9qhdxoACUv5ohD/vfvtmJRCc67IHCwXEw308AzseFOQ4YJN+aPWv6Pc4b7yoAd55Tnv4t/Pv8pcDxr0XJMn3Z7904pl5XnePsS5v+TTnJwTyv7XHYHj/hL3fFf0jifA4QgCYwGTgyICVBBwzMES8QcsvBWf2Mg8O9LVqsj/xkygVPAOt514nzDD419n3jep/zRi2ud6vlAXNK4eegBCsA4l+usH/1KfdG/pl5Or9enzHHCS4/iT4w9Qw/RTZF4nbjQvaL664ch5OfNnM/dVb49YWJ7dkcfAv46APk6PbLfMrBIXEU8yeD85VfT74drxuPr+dTY983rvc5b9Tieuda7uObrUPu3GYn5HA72P30VxAN8z7PzNP59fqUOW6enyDkSqLer7dfEkqPBpRz7r5AxHlzF1pKU2lxLJ7ANQSg/d258UDOHcxuQERLoyD5gyPnT31d538M2PY5bS/+vTyxNz6l/QmurbXfIuLL3dJf/K1Ytg1+K3LYjiu/XeKKaddC146QXIqXb/XGPsmz/Xbvt9vFxJxpp4rP29hGvKR1SfJitt0f05q2cqig+K0ycyLSjLGJTciRs3P+jtviJT157hL7HvXyVP1ZUNMl5M8bnmot8rnJxV4f85p66fuqIr+/msSwB6Nvq/G1zYUj9Qlt2/97/5NzoSqHntbx1RzPO9er5U9Ea46TW5hxX7N2mn3l/d7/eB/7GbDnyHgM1H87tTYHzZief+14q5wziufr47mIAHwmP7jrLsmWEu4HQmOQtQ6OkfK6MJjtFhkkycAPJym/Rg4E2acwEFcPIMmF79eKwagPiXHoTpXDVlzR9jDZmnZKJ2Ozc6EWynasj2MO5bkNe5IZ/Bnbd58FczJa/dCe86s0Hu2YkZwNNfX+pE43cqih4IftL5qgNGPM5zA9eZscmX3S1s+Ifb966fwR6nEtJX/eMDRrEeVm05gP1OJS9tVERILslxP7a9mhHjZHufOljK+wXvoZj5VUAAYavjRrumQ81/ry7bbq1fQnJT9Wx77Gdly7iW+qviK/Qw5kv92Pd9dP4l9hDMQXRCT+Ym2r9ZB9ZS417T8kHsmV35DFtVW3OYZr3gIeBqf/nDAOuhq1gyP1p7yu3Efeh+LksQWbC3eiswNervLZPuKTYYZsDltx5bbn8hMo1ULTTn5fe4APOfT7GJt9clqLJb/Nie74qkEutuWkcTrSE5pmjHkb1Zg7I3bfzuZ6af0RanEtJ38Ma2qRy83UN82YD9Ti0vS1BLnlJrndQwhu8cORr7Mgbfv1GSEy77Pmi76muvFc68ttWzM28uPRkd+W9yO11faV8zvG96XKT42Jz37uyvUrPjo7F0PRtUIeHH68m/nT9tP8a1e1to7lIwSgvWqVLNOD238TlUEZ2eWLmx+8U/QHh3ZdTCkuWXInrg3Yg0GEnsRt/rVXDKQP8SHuS5NDXVz6XJRqoWkn3+50MhxvPbhvtDkv9FRiyQpmw3DFxn+u5mMBs/6k3VjQu37iWo5LqLu3mTmd45zYd6mX2h+h7dMSaueNtAZhSWuR+jFdl/d1rQCs97WCLvzkyhYhuN2PugD0x4iMkZAzP17mfbZzWK+pNK0dz+2+0m3TdTp/YvRznLednjeyS9xXvq2Yfc7Pc3/yfcaiT/bJ58VR9j093vwcZmxn55uBdh6O4hJXAN3gFHHj7UoTgOWNBGDDh31wfd0T4eeFYBSfLoe6uPS5OF4AOsyJxcTrnnGUySnni4ZKLGrRUcvHMmzNfMM27qRz1099jGlsAmfGvrFean+E/eoh1M4bmlqkfkzX5X1FAE6wdY6/DAVyAkDWGX+N3/M+2znUHTua8dzuK902XbfEH4d+jvO2UwHY7Cvf1pyt5+e4nyDIUnHnvhTI+tySE4Il33PrfZ+zXAbcPgtKsxsXEIAZmzMFoJ9UUh9bfrcGzJ64vu5346ePWWK7yeehf20OW3Hlttf2KdVC0477PN03X7eI4uSgoRZLfps78cQnmFobC7GxjJNY2qRmjC0Zhy+KfVW9tP4IO9bDkB9/mjzn/Jiuc591Y74Wl6avJbzXLeDa+d+OAb/BjQcnONz/TR7V43XJsRNRHM9b67XcH/248W0PCdX2VYupwC7Hu/s8m1ekbe9zPA7ylHzPr6/OO6ti2ocXC0BfiNXBt9oXpoMxnIyOEIDjvrLePoBtJl452aQ+Kvy2g8LY+LYc8k1oegLdmkMfS+TPcLIbcqDNoa7e+lyUaqFrJ5zAw6rhdkKIQ65IJBOSxCW5mIoALfX4XdvGn8lV1DS+ehvLcPlLxXyEZox5mzCmHcZm9iB2qFWmH8Muse9YL50/wp718P2uqkXOj/m65pgfqNVL11cbUx/b/x7CL7BPPWwdZrUWwjET+WvG+jP74kF9zDdrumg871Av9ZziyI9V16710W/I/s6dqq9GLRflJ/g1jv2RTD/+eI/XSdvus8t1Es+Msu+Dj2FTpq8Ya1/v7DAOEIB+oNpizJc0zlrRNDQGUMAUYHiVXK6EmMq4X+HO7RsOtHpB8geHwQx8e8K1fclAzfmo89td9vZt2cWIyeIBuTaHkp6JmAsHb9ygKoetuJbmolQLbTtywnA+Sn6Gb/Ihh3KC8QLd2Zj94x+AXUwrfkljND6sT9OTb7uNJcxqO0E1xmztQx7dkp7YPfEY8W3FYWyOfed6tf0R9q1H8bxhqNci50duXWPMxxTrpe2rgXwBzo2TxSyZU5SY2KX2w1uqCaa/IYdmsec7v2lKa8zXarp0PO9QL92c4siP1dBu3I4ZZxmn2301xtSi/Li2xpzEFHKRnBvdGHP/F3uZu6dox2F8DMqSz4/FzrU5n8/h4CuAAO/FK79tAbwCxnwB/2V9H5F6FRqiDZSECygiDv2qF4AAhM9lcutGvpG6b/1+BcCnwZhfhlxlsldrcld8YA4CcDs+h/fH6rsXe4EAhM9FbvNMbkEUL8UDfAKMeTgUBOAngQAEAAAAuBgIQAAAAICLgQAEAAAAuBgIQAAAAICLgQAEAAAAuBgIQAAAAICLgQAEAAAAuBgIQAAAAICLgQAEAAAAuBgIQAAAAICLgQAEAAAAuBgIQAAAAICLgQAEAAAAuBgIQAAAAICLgQAEAAAAuBgIwMvzZ//jX//u//qt858/ERfj/375vf/p18BS/uz//uXX/n+SR7/8WDVmyrX45z9j23bZsV62beoPADCAALw8CEBoMxdQXf9z1ZDR1WJvwYYABABIOUAA+hN8Zvnxhzf5eM4UVZq+ajZ7+3pm7Huxl89nxv6pfTkQgAAAx3KYAPxeAmBv3m1yrtns7et3rP9ePp8Z+6f25UAAAgAcywsF4Gj387f/9n+Z/9srhclJWmPTp9v+9Wv/47c/Jyd6XTvBTtr4e9VcF/bPLf/t//FWlu73/scv4/a//jPxuTNtRdvFJ7EZ0fSlt5nmJu3LYP1NnwFLa7wg9iqjPyPTdTqf7aTvt9llGtPOPqvaOaXuhmY7Coyv43E1XaJjpDk2NLVIqQq2Vg4N6bj4vf8bAQgAkPByARgmJntilgknIwBrNm5iMZPRH76/MGklE4ymL2G0WycAA40ceB9/DD77fgefu/5vmeCCrxYjdrpce42+LDWbMea/gnD+w02eyS174+OQY8NPY5PPk8afGrn9p+uUPg+M+cyz1edAo53T6r6kHQ2tuLRjQ2jVwlEUgM0cGmz/o83PP/w5AQEIADDwegFYnQhaNvm+fv4mVyPiKy+avvakloP8BJhOeH5/Y9OesGp9BWo2udwo2hwmYv95QONPjdz+03VLfX4HAXhm3Ze0o2FhfopjQ9giADU51NgAAMB5L4HMTviaSaVhU5pohisA/vPSCWwztf4K+bHLKFrHW1i/2isZ5Ylrax5z23Lruv4f8UkmV+uXW14pANs+B95BALptce7GZf+669vR0MqPdmwIWwSgJod5XxGAAAApb/EMYJmGzXcWgI0J0GEm7j/C81XybGO5vfV5zG2br7MTqNzWG269vf4KYMvnkTcSgKfWXdOOhnpf+rEh7CAAq/vmfUUAAgCkfG8BWNheugXc9mkvav35CXDpZFR8rmprHnPbpusyNmcKQC/oq/5U+30HAfiKukcU29FQ6yuz7TABqMmh82faPgIQACDlmwvA8tWHdAJY5tP6iTIQJrnChBMEjfFx3C5Xa/xneag+eZO583HGojbQ6MtSs8nlZrpuOvGKPyKyc5O8xp8aYX8Xv32A/5dfbU1HfzQ+x4xt5tnqc6DRzll1X9SOBkVuVWNDaNXCURRsrRwahlitu8Yf+4Ww0B4AwEU57xlAWZKTfm1SCWhs4uedZJFbXfHkIOjaGX3fKgANRohOf4YjbtPdmku3D28lywTuRU/Y/tcvYULL0OjLUrTJ5SazLt7f+CaCO0yss7xq/KlhJvkhdol75o/S5wGF6Njqc6DRzil1X9pOk1puDUvGxlYBaKjm0GL68CJUtsmt71p7AABX5AABCAAAAADvDAIQAAAA4GIgAAEAAAAuBgJwFc/+/vXVf90e/erHqjbjfLg9tnvwvJtYJJ6wnByX7f+luQQAALgWCMBVfJYAjHmFGEMAAgAAnMsBAtCLo8xyf3qTt+UYUXUMrxCAnyM6AQAArsxhAvB7iKgpCEAEIAAAwOfzIgHobKaTflYIdI/+fjPrxV7avT/nQmFi8/V1i+xy/kzXeX+yy91s9VbiX7ytcEmze9z722B36++P2Oex79hO/F2Gsh2bm5v3xdtUapMXY7r8WBT1Sv199A8EIAAAwKm87gqgEQpWBATB8rwbQXDrk928zf3pV3ZeiMQix+43FRpGFJl93OecPyUflb6blh8icqZiy+BEoolj8HkSp+/DitQgDE0MLk5roETZjsnZ4Iuhy+U5on41rpGfBfUKNt3T5wcBCAAAcBovvQXcPdyVqfszt09eZKUCxdtUxUOu7ZKPWt9LAjC/v4szXClzNum+2n5jVrYziDT/ecJ6AbigXlUbAAAAOJrzXgIpKA47+cv2mQAotGOXmpiakhMtJSFTWj+lIABL4mq46mU/LPCnhradrn/KLVfx12wLSyll6wWg2xb3MS5pvab7IwABAADO5eUvgTQFoELcIQAD83Uuv/Nb0qWUbRaAi2vR6hMAAAD25g1uAd/7Z3gOLBEPXmRVhYHGJuOPF2RzH7W+FwRgYf/cLeDURp+zEU07GZujbwErajHNGwIQAADgXF7+EkjQAuPzgO6zJQg1s3JsTV7wiD57GxEViU0XPo1iTdbYlw5uN9v33Mdg2xIjJQHoxYziJZC0b2XOEjTtTEVZZ/zL5DmiLsYa+VHUy+XHiGG7Qm5PO38QgAAAAOdx3jOAslRFUBAH6RuqIthmP/EyFQtGZM1+6iQWIUaYWBEmy02uxFUEl21rbCf/xmxZAAran4EZqfhTRNlOHI/JkQjTILpy/TWvxjXy066XyZ0XoS43IkrN/xGAAAAAp3GAAAQAAACAdwYBCAAAAHAxEIAAAAAAFwMBCAAAAHAxEIAAAAAAFwMBCAAAAHAxEIAAAAAAFwMBCAAAAHAxEIAAAAAAFwMBCAAAAHAxEIAAAAAAFwMBCAAAAHAp+v7/gCINz742IGsAAAAASUVORK5CYII=" />
+
+</div>
+<p>This indicates that line 18 of testhelpers.R failed in the test “Warnings for vectors of length &gt; 1.” Looking at the test code reveals that the general_sqrt function does not return a warning for positive vectors of length greater than one.</p>
+<pre class="r"><code>expect_warning(general_sqrt(c(2, 0)))</code></pre>
+<p>To fix this, it might be worth adding in an extra line or two which ensures that the input to general_sqrt is as it should be (in order to prevent users from getting unexpected results).</p>
 </div>
 <div id="tips-for-making-good-tests" class="section level3">
 <h3>2.5: Tips for making good tests</h3>
+<p>Good tests have a couple of characteristics.</p>
+<p><strong>First</strong>, good tests have high <em>coverage,</em> meaning that they test a large percentage of the lines of code of the package. For example, the code for the general_sqrt function is as follows:</p>
+<pre class="r"><code># This function takes the complex square root of real numbers
+
+general_sqrt &lt;- function (x){
+  
+  # Issue warning for longer vectors
+  if (length(x) &gt; 1) {
+    warning('Argument of general_sqrt has length greater than 1')
+  }
+
+  # Return the normal square root if x &gt; 0
+  if (x &gt; 0 || x == 0){
+    return(complex(real = sqrt(x), imaginary = 0))
+  }
+
+  # Else return the complex square root
+
+  else {
+    return(complex(real = 0, imaginary = sqrt(-x)))
+  }
+
+}</code></pre>
+<p>The following test has low coverage for the general_sqrt function:</p>
+<pre class="r"><code>test_that(&quot;Returns correct sqrt&quot;, {
+  expect_equal(general_sqrt(-1.53), complex(real = 0, imaginary = sqrt(1.53)))
+  expect_equal(general_sqrt(-2), complex(real = 0, imaginary = sqrt(2)))
+})</code></pre>
+<p>because it only tests whether general_sqrt returns the correct square root for negative numbers. This test thus only covers half of the code in general_sqrt, because the mechanism for dealing with nonnegative numbers is entirely separate. The following test is a better example, because it tests both positive and negative numbers.</p>
+<pre class="r"><code>test_that(&quot;Returns correct sqrt&quot;, {
+  expect_equal(general_sqrt(1.53), complex(real = sqrt(1.53), imaginary = 0))
+  expect_equal(general_sqrt(-2), complex(real = 0, imaginary = sqrt(2)))
+})</code></pre>
+<p>**Second*, it’s important to remember that coverage is only important because tests with high coverage tend to test all the different functionalities of a package. It’s possible to have tests which have very high coverage but aren’t great tests. Consider the following example.</p>
+<pre class="r"><code>print_it &lt;- function(text){
+  print('hello')
+}
+
+testthat::expect_warning(print_it('hi'), NA)</code></pre>
+<pre><code>## [1] &quot;hello&quot;</code></pre>
+<p>This expectation has 100% coverage because it will run every line of code (the expectation will also pass because no warning will be thrown). However, it’s not sufficient alone because it doesn’t actually test whether print_it returns the desired output: in this case, print_it will always print ‘hello’. In other words, the expectation does not test all of the functionality of the function.</p>
+<p><strong>Third</strong>, tests should run relatively quickly, if possible. Sometimes, it’s okay to maximize coverage even if you don’t test every single functionality to save time, because <em>usually</em> high coverage ensures you test most of the functionality of the package. This is particularly true because lots of integrated testing software (which we’ll discuss in integrated tests) will not be able to easily run tests which take too long. More on that later.</p>
+<p><strong>Fourth</strong>, tests should be clear to the reader, because sometimes there are bugs in tests too. If others eventually help develop or maintain your packages, they’ll want to know what it means when a test fails. Moreover, for large packages, you yourself may have trouble remembering the exact details of every test you’ve written. Making tests clear will help. In practice, this your tests should return clear error messages and be readable. For example, the following test is a bad example, for two reasons:</p>
+<pre class="r"><code>sigmoid &lt;- function(x, a, b){
+  return(exp(a*x)/(exp(a*x) + b))
+}
+
+test_that('sigmoid output', {
+  expect_equal(sigmoid(0.3068528, 1, 1.3591409), 0.5, 10^-7)
+})</code></pre>
+<p>The string ‘sigmoid output’ does not describe the purpose of the test, which is to test the precision of the sigmoid output. This means that if the test fails, it will be hard to tell what’s wrong. Additionally, the purpose of the test is not clear to begin with - what do the seemingly random decimals mean? At the very least, it’s probably worth putting comments in explaining the point of the test, as shown below.</p>
+<pre class="r"><code>sigmoid &lt;- function(x, a, b){
+  return(exp(a*x)/(exp(a*x) + b))
+}
+
+test_that('test sigmoid precision', {
+  
+  # Check sigmoid(ln(e/2), ln(e/2), e/2) is very close to 1/2.
+
+  expect_equal(sigmoid(0.3068528, 1, 1.3591409), 0.5, 10^-7)
+})</code></pre>
+<p>This test is a bit more interpretable and delivers a better error message.</p>
 </div>
-<div id="automating-testing" class="section level3">
-<h3>2.6: Automating testing</h3>
+<div id="automated-checks" class="section level3">
+<h3>2.6: Automated Checks</h3>
+<p>The control + shift + E automated check function of RStudio is really wonderful. It’s worth noting that every check it performs is relatively important, and if RStudio signals any warnings or errors, it’s definitely worth fixing them. It’s also probably worth fixing any “notes” it issues. You can read more about what each type of check in the automated check does, but suffice to say it will run all of your tests for you as well as a few more to make sure your package is well put together. Read more about the automated check (here)[<a href="http://r-pkgs.had.co.nz/check.html#check" class="uri">http://r-pkgs.had.co.nz/check.html#check</a>].</p>
 </div>
 </div>
 <div id="integrated-tests" class="section level2">
 <h2>3. Integrated Tests</h2>
 </div>
-<div id="section" class="section level2">
-<h2>4.</h2>
+<div id="developer-proofing" class="section level2">
+<h2>4. Developer-Proofing</h2>
+</div>
+<div id="sources-cited." class="section level2">
+<h2>5. Sources cited.</h2>
+<p><a href="https://github.com/IQSS/social_science_software_toolkit/blob/master/testing/recommended_testing_tools_R.md#recommended-testing-tools-and-process-for-r-packages" class="uri">https://github.com/IQSS/social_science_software_toolkit/blob/master/testing/recommended_testing_tools_R.md#recommended-testing-tools-and-process-for-r-packages</a></p>
+<p><a href="http://r-pkgs.had.co.nz/tests.html" class="uri">http://r-pkgs.had.co.nz/tests.html</a></p>
+<p><a href="http://slides.com/christophergandrud/failing-faster#/24" class="uri">http://slides.com/christophergandrud/failing-faster#/24</a></p>
 </div>
 
 

@@ -124,7 +124,7 @@ test_that("Warnings for vectors of length > 1", {
 # Loss ---------------------------------------------------
 
 test_that("Returns correct loss", {
-  expect_equal(loss(0, 3), 9)
+  expect_equal(loss(0, 3, 9)
   expect_equal(loss(c(1, 1, 1), c(1, 2, 3)), c(0, 1, 4))
   expect_equal(loss(c(-1, -5, -2), c(0, 0, 0)), c(1, 25, 4))
 })
@@ -133,11 +133,131 @@ test_that("Returns correct loss", {
 
 Each test file, as demonstrated above, needs to load the package of interest (using 'library' is fine) and also should supply a string which succinctly describes the general purpose of all of the tests in the test file to the 'context' function. 
 
+You can run all of the tests in the test/testthat directory by clicking Build>Check Package or Control Shift E. If any test throws an error, RStudio will report two things. First, it will report the string given in the test which was given to the 'test_that' function call. Second, it will report the filename of the test file as well as the line of code that threw an error. For example, running the above tests yields the following result:
+
+![](Images/TestSS/testthaterror1.PNG)
+
+This indicates that line 18 of testhelpers.R failed in the test "Warnings for vectors of length > 1." Looking at the test code reveals that the general_sqrt function does not return a warning for positive vectors of length greater than one.
+
+```{r, eval = FALSE}
+expect_warning(general_sqrt(c(2, 0)))
+```
+
+To fix this, it might be worth adding in an extra line or two which ensures that the input to general_sqrt is as it should be (in order to prevent users from getting unexpected results).
+
 ### 2.5: Tips for making good tests
 
-### 2.6: Automating testing
+Good tests have a couple of characteristics.
 
+**First**, good tests have high *coverage,* meaning that they test a large percentage of the lines of code of the package. For example, the code for the general_sqrt function is as follows:
+
+```{r, eval = FALSE}
+# This function takes the complex square root of real numbers
+
+general_sqrt <- function (x){
+  
+  # Issue warning for longer vectors
+  if (length(x) > 1) {
+    warning('Argument of general_sqrt has length greater than 1')
+  }
+
+  # Return the normal square root if x > 0
+  if (x > 0 || x == 0){
+    return(complex(real = sqrt(x), imaginary = 0))
+  }
+
+  # Else return the complex square root
+
+  else {
+    return(complex(real = 0, imaginary = sqrt(-x)))
+  }
+
+}
+
+```
+
+The following test has low coverage for the general_sqrt function:
+
+```{r, eval = FALSE}
+test_that("Returns correct sqrt", {
+  expect_equal(general_sqrt(-1.53), complex(real = 0, imaginary = sqrt(1.53)))
+  expect_equal(general_sqrt(-2), complex(real = 0, imaginary = sqrt(2)))
+})
+
+```
+
+because it only tests whether general_sqrt returns the correct square root for negative numbers. This test thus only covers half of the code in general_sqrt, because the mechanism for dealing with nonnegative numbers is entirely separate. The following test is a better example, because it tests both positive and negative numbers.
+
+```{r, eval = FALSE}
+
+test_that("Returns correct sqrt", {
+  expect_equal(general_sqrt(1.53), complex(real = sqrt(1.53), imaginary = 0))
+  expect_equal(general_sqrt(-2), complex(real = 0, imaginary = sqrt(2)))
+})
+
+```
+
+**Second*, it's important to remember that coverage is only important because tests with high coverage tend to test all the different functionalities of a package. It's possible to have tests which have very high coverage but aren't great tests. Consider the following example.
+
+```{r}
+
+print_it <- function(text){
+  print('hello')
+}
+
+testthat::expect_warning(print_it('hi'), NA)
+
+```
+
+This expectation has 100% coverage because it will run every line of code (the expectation will also pass because no warning will be thrown). However, it's not sufficient alone because it doesn't actually test whether print_it returns the desired output: in this case, print_it will always print 'hello'. In other words, the expectation does not test all of the functionality of the function.
+
+**Third**, tests should run relatively quickly, if possible. Sometimes, it's okay to maximize coverage even if you don't test every single functionality to save time, because *usually* high coverage ensures you test most of the functionality of the package. This is particularly true because lots of integrated testing software (which we'll discuss in integrated tests) will not be able to easily run tests which take too long. More on that later. 
+
+**Fourth**, tests should be clear to the reader, because sometimes there are bugs in tests too. If others eventually help develop or maintain your packages, they'll want to know what it means when a test fails. Moreover, for large packages, you yourself may have trouble remembering the exact details of every test you've written. Making tests clear will help. In practice, this your tests should return clear error messages and be readable. For example, the following test is a bad example, for two reasons:
+
+```{r, eval = FALSE}
+
+sigmoid <- function(x, a, b){
+  return(exp(a*x)/(exp(a*x) + b))
+}
+
+test_that('sigmoid output', {
+  expect_equal(sigmoid(0.3068528, 1, 1.3591409), 0.5, 10^-7)
+})
+
+```
+
+The string 'sigmoid output' does not describe the purpose of the test, which is to test the precision of the sigmoid output. This means that if the test fails, it will be hard to tell what's wrong. Additionally, the purpose of the test is not clear to begin with - what do the seemingly random decimals mean? At the very least, it's probably worth putting comments in explaining the point of the test, as shown below.
+
+```{r, eval = FALSE}
+
+sigmoid <- function(x, a, b){
+  return(exp(a*x)/(exp(a*x) + b))
+}
+
+test_that('test sigmoid precision', {
+  
+  # Check sigmoid(ln(e/2), ln(e/2), e/2) is very close to 1/2.
+
+  expect_equal(sigmoid(0.3068528, 1, 1.3591409), 0.5, 10^-7)
+})
+
+```
+
+This test is a bit more interpretable and delivers a better error message.
+
+### 2.6: Automated Checks
+
+The control + shift + E automated check function of RStudio is really wonderful. It's worth noting that every check it performs is relatively important, and if RStudio signals any warnings or errors, it's definitely worth fixing them. It's also probably worth fixing any "notes" it issues. You can read more about what each type of check in the automated check does, but suffice to say it will run all of your tests for you as well as a few more to make sure your package is well put together. Read more about the automated check (here)[http://r-pkgs.had.co.nz/check.html#check].
 
 ## 3. Integrated Tests
 
-## 4. 
+## 4. Developer-Proofing 
+
+## 5. Sources cited.
+
+https://github.com/IQSS/social_science_software_toolkit/blob/master/testing/recommended_testing_tools_R.md#recommended-testing-tools-and-process-for-r-packages
+
+http://r-pkgs.had.co.nz/tests.html
+
+http://slides.com/christophergandrud/failing-faster#/24
