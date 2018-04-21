@@ -254,6 +254,8 @@ The control + shift + E automated check function of RStudio is really wonderful.
 
 Up to this point, you probably have not been pushing to Github too often. However, in large projects/packages where many programmers are working on the same package at once, it's important to ensure each programmer continuously commits changes to github to make sure all the changes are compatible with each other. This process of rapid updating of packages is referred to as *continuous integration*, and it can be very difficult to manage properly (it is sometimes referred to as *integration hell*, specifically because developers often waste lots of hours trying to make code integrate properly). Thankfully, there are two wonderful free continuous integration services that will make your life a lot easier. If you're using windows, you'll want to use the service called *Appveyor* - if you're using Mac or Linux, you'll want to use the service called *Travis CI*. 
 
+Continuous integration services make it easy to continuously push projects to github. Specifically, both Appveyor and Travis CI link to github and will run your build and tests for you on what are called virtual machines in the cloud. 
+
 Step 1: Go to Travis/Appveyor, sign up
  
 Step 2: Enable on Github
