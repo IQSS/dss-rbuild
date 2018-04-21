@@ -307,6 +307,11 @@ test_that('test sigmoid precision', {
 </div>
 <div id="integrated-tests" class="section level2">
 <h2>3. Integrated Tests</h2>
+<p>Up to this point, you probably have not been pushing to Github too often. However, in large projects/packages where many programmers are working on the same package at once, it’s important to ensure each programmer continuously commits changes to github to make sure all the changes are compatible with each other. This process of rapid updating of packages is referred to as <em>continuous integration</em>, and it can be very difficult to manage properly (it is sometimes referred to as <em>integration hell</em>, specifically because developers often waste lots of hours trying to make code integrate properly). Thankfully, there are two wonderful free continuous integration services that will make your life a lot easier. If you’re using windows, you’ll want to use the service called <em>Appveyor</em> - if you’re using Mac or Linux, you’ll want to use the service called <em>Travis CI</em>.</p>
+<p>Step 1: Go to Travis/Appveyor, sign up</p>
+<p>Step 2: Enable on Github</p>
+<p>Step 3: Run devtools::use_appveyor() or devtools::use_travis()</p>
+<p>Step 4: Adapt</p>
 </div>
 <div id="developer-proofing" class="section level2">
 <h2>4. Developer-Proofing</h2>
