@@ -7,7 +7,12 @@ init:
         Invoke-WebRequest http://raw.github.com/krlmlr/r-appveyor/master/scripts/appveyor-tool.ps1 -OutFile "..\appveyor-tool.ps1"
         Import-Module '..\appveyor-tool.ps1'
 
-# Add before_build section because devex is in a subdirectory
+# Add before_build and matrix section because devex is in a subdirectory
+
+environment:
+  matrix:
+  - TEST_DIR: patch
+  - TEST_DIR: pkg
 
 before_build:
    ps: |
