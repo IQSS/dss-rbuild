@@ -7,6 +7,15 @@ init:
         Invoke-WebRequest http://raw.github.com/krlmlr/r-appveyor/master/scripts/appveyor-tool.ps1 -OutFile "..\appveyor-tool.ps1"
         Import-Module '..\appveyor-tool.ps1'
 
+# Add before_build section because devex is in a subdirectory
+
+before_build:
+   ps: |
+        cp ..\travis-tool.sh R-package\travis-tool.sh
+        cp travis-tool.sh.cmd R-package\travis-tools.sh.cmd
+        cd R-package
+        bash -c "echo '^travis-tool\.sh\.cmd$' >> .Rbuildignore"
+
 install:
   ps: Bootstrap
 
