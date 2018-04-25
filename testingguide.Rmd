@@ -7,6 +7,8 @@ output: html_document
 
 ### 0. To-do
 
+1. Explain the point of integrated tests more!! And what they actually do!!
+
 ## 1. Why should you test?
 
 Suppose Grace has created a package and have been using it for a while, but she decides she'd like to modify one function to improve it. She modifies her function, tests it a bit, and then pushes her package to git. Yet two weeks later, Carlos discovers that the changes she made created a bug in *another* function in the package! This situation is very annoying, especially if Carlos has no idea what has caused the bug or how to fix it. 
@@ -256,13 +258,32 @@ Up to this point, you probably have not been pushing to Github too often. Howeve
 
 Continuous integration services make it easy to continuously push projects to github. Specifically, both Appveyor and Travis CI link to github and will run your build and tests for you on what are called virtual machines in the cloud. 
 
-Step 1: Go to Travis/Appveyor, sign up
- 
-Step 2: Enable on Github
+**Step 1**: To get started using continuous integration services, head to the Travis CI (Linux/Mac OS) or AppVeyor (Windows) website and "sign up"" by signing into Github. At some point, Travis/AppVeyor will ask you to authorize its connection to Github, which you should authorize.
 
-Step 3: Run devtools::use_appveyor() or devtools::use_travis()
+**Step 2**: Once you authorize the connection, you need to specifically select which repos you'd like to use Travis/AppVeyor with. For example (in AppVeyor), upon signing up, you'll see something like this screen:
 
-Step 4: Adapt 
+![](Images/TestSS/appveyor1.PNG)
+
+You should click "new project" and then select the specific repo you'd like to use in combination with Travis/Appveyor. This means that you should at least initialize your project and push it to Github before you start using Travis/Appveyor. 
+
+**Step 3**: Depending on whether you're using Appveyor or Travis, you should run devtools::use_appveyor() or devtools::use_travis() in the console with your package open. This will create a file named 'appveyor.yml' or 'travis.yml' in the root directory of your package. These '.yml' files will tell AppVeyor/Travis what to do. It's actually not too important to understand everything they do, just because the devtools template generally works pretty well. However, you occasionally will have to modify it to suit specific needs. AppVeyor and Travis CI both have great documentation, linked [here for Appveyor](https://www.appveyor.com/docs/build-configuration/) and [here for Travis](https://docs.travis-ci.com/user/languages/r/). 
+
+(Note - devtools also adds 'appveyor.yml' and 'travis.yml' to the .Rbuildignore to reduce clutter in your package.)
+
+**Step 4**: If you are working with many other developers on a single package, you should also add a '.gitattributes' file into the root of your directory. This is because different operating systems handle different characters, for example line terminators, slightly differently. Modern Mac and Unix/Linux systems use '\n' to terminate the end of each line, in what is called the "line feed" or "LF" system, whereas Windows uses '\r\n' in the 'Carriage Return Line Feed' or CRLF system. The point is that The '.gitattributes' file will ensure that each developer uses exactly the same line endings, because you can set the 'text' setting which controls the method of writing lineterminators.
+
+The way it works is that the '.gitattribute' file should be a line of path-patterns followed by specific attributes. These path-patterns (for a refresher, see the Atlanian guide [here](https://www.atlassian.com/git/tutorials/saving-changes/gitignore)) are exactly the same path-patterns used in the .gitignore file, just for a different purpose. For example, one line might be
+```{r, eval=FALSE}
+* text=auto
+```
+where the "*" refers to all files in the root directory, and the 'text=auto' sets the 'text' attribute to auto. Alternatively, you could write
+```{r, eval=FALSE}
+R/* text=lf
+```
+which forces all the scripts directly in the R subdireectory to use the 'lf' line terminator. You can personalize the gitattributes file if you like, but you can also just use the sample .gitattributes [here](https://github.com/krlmlr/r-appveyor/blob/master/.gitattributes). You can download this file and move it to the root directory of your package (it must be in the root directory). 
+
+The git attributes file actually is useful for setting a variety of other attributes besides line endings, although some of them are a bit technical. If you're curious to find out more about what the .gitattributes file can do, the full documentation is linked [here](https://git-scm.com/docs/gitattributes). 
+
 
 ## 4. Developer-Proofing 
 
