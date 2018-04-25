@@ -14,5 +14,5 @@ This aims to create guidelines that helps individuals develop packages using R.
 
 [Overview to proper way to build packages](./packagedev.Rmd)
 
-[Guide to testing packages](./testtingguide.Rmd)
+[Guide to testing packages](./testingguide.Rmd)
 
