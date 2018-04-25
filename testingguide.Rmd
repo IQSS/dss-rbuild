@@ -7,7 +7,8 @@ output: html_document
 
 ### 0. To-do
 
-1. Explain the point of integrated tests more!! And what they actually do!!
+1. More description of .yml files?
+2. I need to figure out if there are relevant deployment options for CI services. 
 
 ## 1. Why should you test?
 
@@ -21,15 +22,13 @@ In this guide, we'll broadly talk about three kinds of tests. First, we'll talk 
 
 ### 2.1: What are unit tests?
 
-__ this answer is not really descriptive __
-
 Tests in general compare the actual output of a block of code to its expected output. For example, the following test tests whether the "generalized square root" function actually returns $2$ as the square root of $4$.   
 
 ```{r, eval=FALSE}
 expect_equal(general_sqrt(4), complex(real = 2, imaginary = 0))
 ```
 
-*Unit tests* usually run automatically on the computer of the developer who is modifying a package - for example, if Grace is updating her package, unit tests on her updates will run on her computer. 
+*Unit tests* usually run on the computer of the developer who is modifying a package - for example, if Grace is updating her package, unit tests on her updates will run on her computer. Unit tests also should run automatically upon building a package. 
 
 We'll talk a little more about how exactly to create tests down below, but hopefully this makes the general concept clear (you've also probably been using the general concept as you program). 
 
@@ -254,9 +253,18 @@ The control + shift + E automated check function of RStudio is really wonderful.
 
 ## 3. Integrated Tests
 
-Up to this point, you probably have not been pushing to Github too often. However, in large projects/packages where many programmers are working on the same package at once, it's important to ensure each programmer continuously commits changes to github to make sure all the changes are compatible with each other. This process of rapid updating of packages is referred to as *continuous integration*, and it can be very difficult to manage properly (it is sometimes referred to as *integration hell*, specifically because developers often waste lots of hours trying to make code integrate properly). Thankfully, there are two wonderful free continuous integration services that will make your life a lot easier. If you're using windows, you'll want to use the service called *Appveyor* - if you're using Mac or Linux, you'll want to use the service called *Travis CI*. 
 
-Continuous integration services make it easy to continuously push projects to github. Specifically, both Appveyor and Travis CI link to github and will run your build and tests for you on what are called virtual machines in the cloud. 
+### 3.1 Motivation
+
+Up to this point, you probably have not been pushing to Github too often. However, in large projects/packages where many programmers are working on the same package at once, it's important to ensure each programmer continuously commits changes to github to make sure all the changes are compatible with each other. This process of rapid updating of packages is referred to as *continuous integration*, and it can be very difficult to manage properly (it is sometimes referred to as *integration hell*, specifically because developers often waste lots of hours trying to make code integrate properly). When you commit changes continuously, it does not guarentee that all the changes will be compatible. However, if there are compatibility problems in updates, it does ensure that you'll be able to find those problems more easily, because each individual change/commit is smaller. Thankfully, there are two wonderful free continuous integration services that will make your life a lot easier. If you're using windows, you'll want to use the service called *Appveyor* - if you're using Mac or Linux, you'll want to use the service called *Travis CI*. Continuous integration services make it easy to continuously push projects to github. Specifically, both Appveyor and Travis CI link to github and will run your build and tests for you on what are called virtual machines in the cloud. 
+
+Maybe the principle of continuous integration makes sense, but why are continuous integration services useful? Why can't each developer build packages,  run the tests locally, and then only push changes to github if the tests are successful?  There are three answers to this question. 
+
+1. For large projects, it often takes a long time to build them. Being able to build them on the cloud (using Appveyor/Travis) saves an enormous amount of time. (This is especially true for programming languages besides R, but it's true for R too!)
+2. Sometimes there may be global environmental settings on your particular computer which change the way the package works and the way tests run. Building and testing the package in a "clean" environment online makes the testing more robust. 
+3. Lastly, CI services offer settings to automatically 'deploy' or publish successful builds, for example by publishing code for a website. These are a bit beyond the scope of this guide, but they are documented [here (Appveyor)](https://www.appveyor.com/docs/deployment/) and [here (Travis)](https://docs.travis-ci.com/user/deployment/). 
+
+### 3.2 Setting up Integrated Tests
 
 **Step 1**: To get started using continuous integration services, head to the Travis CI (Linux/Mac OS) or AppVeyor (Windows) website and "sign up"" by signing into Github. At some point, Travis/AppVeyor will ask you to authorize its connection to Github, which you should authorize.
 
@@ -284,10 +292,32 @@ which forces all the scripts directly in the R subdireectory to use the 'lf' lin
 
 The git attributes file actually is useful for setting a variety of other attributes besides line endings, although some of them are a bit technical. If you're curious to find out more about what the .gitattributes file can do, the full documentation is linked [here](https://git-scm.com/docs/gitattributes). 
 
+Once you do all of this, you're set to go! When you push changes to github, Travis/AppVeyor will automatically build and test the package for you. For example on Appveyor, if you sign in, you should see something like this:
+
+![](Images/TestSS/appveyor2.PNG)
+
+and if your build succeeded, you'll see a green line at the bottom like this:
+
+![](Images/TestSS/appveyor3.PNG)
+
+otherwise you'll see an error. If your build takes a while, that's okay - you don't need to wait for it to build, because Travis/Appveyor will email you automatically if the test fails. And that's all there is to it! 
 
 ## 4. Developer-Proofing 
 
-## 5. Sources cited.
+## 5. Tips and Tricks
+
+
+When testing, there are a couple of key principles to keep in mind:
+
+1. You want to expose bugs as quickly as possible so they don't create even larger headaches down the road! As Christopher Gandrud puts it, testing is all about 'failing faster.' To this end, you should continuously test your packages. 
+2. Make sure your tests *cover* the package code and also test all of the key functionality of the package. In an ideal world, a package should pass all of its tests only if all of its core functionality is bug-free. 
+3. Test names, organization, and error messages must be descriptive and easy to understand. One of the main purposes of tests is to inform you *where* your code is failing, and to understand that, you need informative error messages. Otherwise, you will find yourself spending hours traversing your code to find bugs.  
+
+The devtools cheatsheet, linked [here](https://www.rstudio.com/wp-content/uploads/2015/03/devtools-cheatsheet.pdf), references a lot of the key components of the testthat package. 
+
+Lastly, working with .yml files can occasionally be difficult, although devtools should make it pretty to set up in the broad majority of cases. As always, when you run into errors, make full use of stackexchange and online resources provided by AppVeyor/Travis. 
+
+## 6. Sources cited.
 
 https://github.com/IQSS/social_science_software_toolkit/blob/master/testing/recommended_testing_tools_R.md#recommended-testing-tools-and-process-for-r-packages
 
