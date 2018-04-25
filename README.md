@@ -13,3 +13,6 @@ This aims to create guidelines that helps individuals develop packages using R.
 [Very brief guide/intro to rstudio](./rstudioguide.Rmd)
 
 [Overview to proper way to build packages](./packagedev.Rmd)
+
+[Guide to testing packages](./testtingguide.Rmd)
+
