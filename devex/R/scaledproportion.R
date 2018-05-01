@@ -1,45 +1,44 @@
 
-#' Scaled Proportion of Two Column Dataframe
+#' Scaled Proportion of Two Vectors
 #'
-#' \code{scalep} returns the second column divided element-wise by the first, scaled (multiplied) by an optional scalar.
-#' It will also graph a histogram of the result using ggplot2's qplot function,
-#' or the default histogram function if ggplot2 is unavailable.
+#' \code{scalep} returns the 'factors' argument divided element-wise by the 'divisors' argument, scaled (multiplied) by an optional scalar.
+#' It will also graph a histogram of the result using ggplot2's qplot function, or the default histogram function if ggplot2 is unavailable.
 #'
-#' @param d Two column dataframe, filled with numeric values
-#' @param x Optional scaling constant, by default set to 1
-#' @return A numeric vector of the same length as the columns of the Dataframe.
+#' @param factors A vector of doubles or integers.
+#' @param divisors A vector of doubles or integers of the same length as the 'factors' argument.
+#' @param x An optional scalaing constant, default value set to 1.
+#' @return A numeric vector of the same length as the factors argument.
 #'
 #'
 #' @examples
 #' income <- c(30000, 40000, 20000, 50000)
 #' spending <- c(3000, 4000, 500, 100)
-#' d <- data.frame(income, spending)
-#' scalep(d, x=3)
+#' scalep(spending, income, constant = 3)
 #'
 #' @export
 #'
-scalep <- function(d, x=1){
+scalep <- function(factors, divisors, constant = 1) {
 
-  # Intialize resulting vector
-  result <- c()
+  # Let user know these are specified
+  if (is.null(divisors)) { print('Divisors must be specified') }
+  if (is.null(factors)) { print('factors must be specified') }
 
-  # Iterate through and divide column 2 of d by column 1 of d
-  i <- 0
-  while(i < length(d[ ,1]) + 1){
-    row <- d[i,]
-    result <- append(result, row[[2]]/row[[1]])
-    i <- i + 1
+
+  # Check divisors and factors are the same length
+  if (length(divisors) != length(factors)) {
+    warning('Length of divisors argument is not equal to length of factors argument')
   }
+
+  # Divide and multiply by optional scalar
+  proportions <- constant*factors/divisors
 
   # Print the graph using either ggplot2 or the hist function
   if (requireNamespace("ggplot2", quietly = TRUE)) {
-    print(ggplot2::qplot(result, geom='histogram'))
+    print(ggplot2::qplot(proportions, geom='histogram'))
   } else {
-    print(hist(result))
+    print(hist(proportions))
   }
 
-  # Return the result, multiplying by the optional scalar
-  result <- x*result
-  return(result)
+  # Return the result
+  return(proportions)
 }
-

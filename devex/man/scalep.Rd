@@ -2,27 +2,27 @@
 % Please edit documentation in R/scaledproportion.R
 \name{scalep}
 \alias{scalep}
-\title{Scaled Proportion of Two Column Dataframe}
+\title{Scaled Proportion of Two Vectors}
 \usage{
-scalep(d, x = 1)
+scalep(factors, divisors, constant = 1)
 }
 \arguments{
-\item{d}{Two column dataframe, filled with numeric values}
+\item{factors}{A vector of doubles or integers.}
 
-\item{x}{Optional scaling constant, by default set to 1}
+\item{divisors}{A vector of doubles or integers of the same length as the 'factors' argument.}
+
+\item{x}{An optional scalaing constant, default value set to 1.}
 }
 \value{
-A numeric vector of the same length as the columns of the Dataframe.
+A numeric vector of the same length as the factors argument.
 }
 \description{
-\code{scalep} returns the second column divided element-wise by the first, scaled (multiplied) by an optional scalar.
-It will also graph a histogram of the result using ggplot2's qplot function,
-or the default histogram function if ggplot2 is unavailable.
+\code{scalep} returns the 'factors' argument divided element-wise by the 'divisors' argument, scaled (multiplied) by an optional scalar.
+It will also graph a histogram of the result using ggplot2's qplot function, or the default histogram function if ggplot2 is unavailable.
 }
 \examples{
 income <- c(30000, 40000, 20000, 50000)
 spending <- c(3000, 4000, 500, 100)
-d <- data.frame(income, spending)
-scalep(d, x=3)
+scalep(spending, income, x=3)
 
 }

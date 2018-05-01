@@ -365,6 +365,71 @@ Overall, different organizations and programmers have different styles and guide
 2. Whatever style guide you follow, following it *consistently* is key to making your code readable
 3. You should generally adapt to follow the conventions of the organization you're working under/for
 
+### Step 3.3.3: Warnings and Simplicity
+
+Consider the case of the scalep function, which currently takes a 2-column dataframe as an input, divides the second column by the first, and returns/graphs some scaled proportion of the quotient vector. One version of this functions, which follows almost all of the guidelines above, might look like this:
+
+```{r, eval = FALSE}
+scalep <- function(d, x=1){
+
+  # Intialize resulting vector
+  result <- c()
+
+  # Iterate through and divide column 2 of d by column 1 of d
+  i <- 0
+  while(i < length(d[ ,1]) + 1){
+    row <- d[i,]
+    result <- append(result, row[[2]]/row[[1]])
+    i <- i + 1
+  }
+
+  # Print the graph using either ggplot2 or the hist function
+  if (requireNamespace("ggplot2", quietly = TRUE)) {
+    print(ggplot2::qplot(result, geom='histogram'))
+  } else {
+    print(hist(result))
+  }
+
+  # Return the result, multiplying by the optional scalar
+  result <- x*result
+  return(result)
+}
+```
+
+However, this function still has a couple of problems. It's not super easy to use because (a) it's understandably hard for other programmers to remember which column is divided by which and (b) there's a simpler way to accomplish the code above which will make it more readable. Specifically, it might be easier to just have arguments called 'factors' and 'divisors' and then divide them, like this
+
+```{r, eval=FALSE}
+scalep <- function(factors, divisors, constant = 1) {
+
+  # Divide and multiply by optional scalar
+  proportions <- constant*factors/divisors
+
+  # Print the graph using either ggplot2 or the hist function
+  if (requireNamespace("ggplot2", quietly = TRUE)) {
+    print(ggplot2::qplot(proportions, geom='histogram'))
+  } else {
+    print(hist(proportions))
+  }
+
+  # Return the result
+  return(proportions)
+}
+
+```
+
+The new argument structure will make it a bit easier to use. Similarly, the new structure simplifies the code, making it a bit more readable. However, it does pose one problem: whereas the previous structure mandated that the two vectors be the same length (because they were part of a dataframe), in this function, the two vectors might not be the same length and the function would not always throw an error (specifically, if 'factors' has a length which is is an integer multiple of the length of 'divisors', R will not warn the user at all). This problem is a type of **silent error** (silent errors are bugs which do not issue warnings or errors). Silent errors are terrible because they make bug-hunting extremely difficult: in large repositories of code, it becomes nearly impossible to find which specific line is causing problems without some kind of warning. Thus, it's also worth adding in a couple of lines to warn the user if the factors and divisors are of different lengths, as is outlined below: 
+
+```{r, eval=FALSE}
+
+  # Check divisors and factors are the same length
+  if (length(divisors) != length(factors)) {
+    warning('Length of divisors argument is not equal to length of factors argument')
+  }
+
+```
+
+To summarize, this subsection thus contained three core ideas: (1) make your code simple, (2) make it easy to use by labeling arguments, and (3) always avoid silent errors. 
+
 ### Step 3.4: Documenting your package
 
 (Note: here, we describe how to document functions. For a more detailed description of how to document S3, S4, and reference classes, check out [this page](http://r-pkgs.had.co.nz/man.html).)
