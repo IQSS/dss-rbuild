@@ -8,11 +8,13 @@ This aims to create guidelines that helps individuals develop packages using R.
 
 ## Contents
 
-[Guide and intro to github](./githubguide.Rmd)
+[Introduction](./introduction.Rmd)
 
-[Very brief guide/intro to rstudio](./rstudioguide.Rmd)
+[Brief introduction to rstudio](./rstudioguide.Rmd)
 
-[Overview to proper way to build packages](./packagedev.Rmd)
+[Introduction to git and github](./githubguide.Rmd)
 
-[Guide to testing packages](./testingguide.Rmd)
+[Overview of proper way to build packages](./packagedev.Rmd)
+
+[Guide on testing packages](./testingguide.Rmd)
 
