@@ -2,15 +2,23 @@
 title: "Using Github"
 author: "Asher Spector"
 date: "February 10, 2018"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float:
+      collapsed: true
+      smooth_scroll: false
 ---
 
 ## 0. To do
 
 1. Add in link for template.gitignore
 2. Fix the fact that Carlos/Grace/I switch places a bit
+3. Add in graphics for git
+4. Maybe reorganize headers
 
-This guide is a basic introduction to Git and Github for near-absolute beginners. It will start by discussing the importance of git and github, how to install git, and how to use git/github at a basic level. Lastly, it will provide links to further reading regarding advanced functionality for git.
+This guide is a basic introduction to Git and Github for total beginners. We'll discuss the importance of git and github, how to install git, and how to use git/github at a basic level. For the intellectually (or practically) curious, we'll also provide links to further reading regarding advanced functionality for git.
 
 ## 1. Why use git/github
 
@@ -22,7 +30,7 @@ Second, imagine that farther along in the project, Grace decides that she needs 
 
 Third, suppose that once Grace and Carlos have finished their website, they want to publish all the statistical functions and tools they built so that other researchers can use those tools to reproduce Grace and Carlos's research. It's often tedious to write documentation about huge quantities of code, but thankfully, Git and Github offer tools that allow programmers to more easily document their code. 
 
-### What is git?
+### 1.1 What is git?
 
 Git is a local version control system. In other words, Git automatically organizes and saves versions of code on your computer, but does not connect to the internet: it's purely accessible through the command prompt on a computer (there are also other ways to use git, but it's generally best to use the command prompt). Git organizes code in two ways.
 
@@ -36,7 +44,7 @@ Then, when Grace finishes designing and testing the new storage system, she can 
 
 (Insert graphic about organization of git, including branches, )
 
-### What is github?
+### 1.2 What is github?
 
 Where Git creates *local* repositories on an individual computer, Github allows programmers to create *remote* repositories, stored online, for their code. This is pretty simple concept, but it's extroardinarily useful. It means that when Grace finishes updating a series of scripts, she can simply *push* (push means send) them to Github, and then Carlos can in one command *pull* (download) the modified versions onto his computer to work with them. Github provides other important tools, but we will not discuss those until later. 
 
@@ -46,11 +54,11 @@ __ insert graphic about github, git, etc__
 
 __ general problem - what about other OSs? __
 
-### Making a Github account
+### 2.1 Making a Github account
 
 Signing up for a Github is fairly simple - just go to github.com, click "sign up" in the upper right hand corner, and follow the instructions. We recommend, at least to begin with, getting a free version of Github.
 
-### How to Install and Set Up Git
+### 2.2 How to Install and Set Up Git
 
 Because Git is a form of *local* source control, it does require installation. To install Git onto your computer, go to one of the following sites:
 
@@ -77,7 +85,7 @@ Now you're ready to start using Git/Github!
 
 ## 3. Starting to use Git/Github
 
-### Creating Projects and Repositories
+### 3.1 Creating Projects and Repositories
 
 The first step to using git is creating a project, or repository (repo for short). There are generally two ways to create a repo in Git. 
 
@@ -114,7 +122,7 @@ $ git init
 
 This sets up a local repository! We'll go over how to link a local repository set up this way to github in the next section.
 
-### Modifying Projects
+### 3.2 Modifying Projects
 
 Say you have created some code in your project directory and want to add it to the repository. To do this, you need to use three commands: *git add*, *git commit*, and *git push.* Note that sending scripts to the local repository is (perhaps counterintuitively) known as *commiting* them, not adding them. 
 
@@ -151,7 +159,7 @@ $ git remote add origin https://github.com/user_name/repository_name
 $ git push -u origin master
 ```
 
-#### Accessing older versions of code
+### 3.3 Accessing older versions of code
 
 You should never be scared of git/github, because git/github only add information - they almost never delete it. In practice, this means that if you accidentally (or intentionally) commit horrible changes to your code, you can easily revert to a previous version. For example, let's say Grace wrote some new functions for a script, deleted them (and committed the deltes) later on, but nowwants the functions back. She can easily access the older (nonempty) script using git. First, she should use the "git log" command to see what commits have been made recently.
 
@@ -190,7 +198,7 @@ $ git reset --soft b69a14b
 
 This will update the current version of the script to the b69a14b version, which Grace can then inspect and test until she's ready to commit it to git/github. Note that there is alos a "git reset --hard" option, which works the same way, but is a pretty serious action to take because it will effectively delete all the commits prior to the version being restored. The soft option is usually a better way to go. 
 
-#### The .gitignore file
+### 3.4 The .gitignore file
 
 There's one more thing you should know about adding/modifying files that will make your life a lot easier. Sometimes, when modifying and commiting projects, you won't want to type out every individual file you've modified: you'll instead want to use the "git add ." command which will simply queue every modified file to be committed.
 
@@ -248,7 +256,7 @@ If you decide to create your own .gitignore file, you can follow very similar st
 
 .gitignore files aren't glamerous, but they really are important - nobody wants to work with cluttered repositories.
 
-### Branching
+### 3.4 Branching
 
 As we discussed earlier, branches allow you to modify scripts while simaltaneous keeping the old versions easily accessible. In practice, the way this works is that the branch you select in git changes the way that scripts you open using explorer/finder appear. For example, if Carlos has the following script as the master (default) branch in Git, the script might look something like this when he opens it on his computer: 
 
@@ -285,7 +293,7 @@ $ git merge test
 
 These two commands will merge the test branch into the master branch, meaning that the master branch at the end of the merging will look like the test branch. 
 
-### Conflicts
+### 3.5 Conflicts
 
 Sometimes, however, Git will be unable to push or pull branches because it is getting conflicting information from two users. For example, suppose Grace has written the following function, which calculates the squared error between two values:
 
@@ -336,7 +344,7 @@ The "<<<<" and ">>>" lines are in the script to signal the beginning and end of 
 
 Overall: merge conflicts are rather annoying and can be confusing, so the best way to avoid them is to clearly deliniate which programmers will be working on which sections of which scripts. This will prevent Git (and you) from getting confused.  
 
-### Tips and Tricks
+### 3.6 Tips and Tricks
 
 Git can be confusing, but there are three general rules of thumb you can follow to figure out any bugs that come up:
 
@@ -348,7 +356,7 @@ Git can be confusing, but there are three general rules of thumb you can follow 
 
 Try not to worry too much! Git almost exclusively *adds information*, meaning that you can always just go back and restore a previous version - you'll never lose your work.
 
-#### Cheat sheats
+### 3.7 Cheat sheats
 
 Lastly, there are a couple of cheat sheets that you can use to make your life easier. 
 

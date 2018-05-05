@@ -2,13 +2,17 @@
 title: "testingguide"
 author: "Asher Spector"
 date: "April 7, 2018"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float:
+      collapsed: true
+      smooth_scroll: false
+
 ---
 
-### 0. To-do
-
-1. More description of .yml files?
-2. I need to figure out if there are relevant deployment options for CI services. 
+This page will walk you through the proper way to test packages using the testthat helper package. Another quick reminder: for those who do not want to use RStudio, it's worth following along by reading the [testthat documentation](https://www.rdocumentation.org/packages/testthat/versions/2.0.0) and [source code](https://www.rdocumentation.org/packages/testthat/versions/2.0.0/source). If you've installed and read through the RStudio guide, you're good to go!
 
 ## 1. Why should you test?
 
@@ -253,7 +257,6 @@ The control + shift + E automated check function of RStudio is really wonderful.
 
 ## 3. Integrated Tests
 
-
 ### 3.1 Motivation
 
 Up to this point, you probably have not been pushing to Github too often. However, in large projects/packages where many programmers are working on the same package at once, it's important to ensure each programmer continuously commits changes to github to make sure all the changes are compatible with each other. This process of rapid updating of packages is referred to as *continuous integration*, and it can be very difficult to manage properly (it is sometimes referred to as *integration hell*, specifically because developers often waste lots of hours trying to make code integrate properly). When you commit changes continuously, it does not guarentee that all the changes will be compatible. However, if there are compatibility problems in updates, it does ensure that you'll be able to find those problems more easily, because each individual change/commit is smaller. Thankfully, there are two wonderful free continuous integration services that will make your life a lot easier. If you're using windows, you'll want to use the service called *Appveyor* - if you're using Mac or Linux, you'll want to use the service called *Travis CI*. Continuous integration services make it easy to continuously push projects to github. Specifically, both Appveyor and Travis CI link to github and will run your build and tests for you on what are called virtual machines in the cloud. 
@@ -264,7 +267,18 @@ Maybe the principle of continuous integration makes sense, but why are continuou
 2. Sometimes there may be global environmental settings on your particular computer which change the way the package works and the way tests run. Building and testing the package in a "clean" environment online makes the testing more robust. 
 3. Lastly, CI services offer settings to automatically 'deploy' or publish successful builds, for example by publishing code for a website. These are a bit beyond the scope of this guide, but they are documented [here (Appveyor)](https://www.appveyor.com/docs/deployment/) and [here (Travis)](https://docs.travis-ci.com/user/deployment/). 
 
-### 3.2 Setting up Integrated Tests
+### 3.2 The integrated testing workflow
+
+It's important to note that Travis/Appveyor do not prevent you from pushing bad code to a repo - if you break your package and all your tests fail on Travis/Appveyor, you can still push the broken version to the master branch on Github. As a result, most developer teams use the following workflow to keep the master branch working at all times.
+
+1. The sets up a "master repo" with a master branch on Github. 
+2. Each developer on the team creates a copy (also called a *fork*) of the master repo. Thus, each developer has their own repository.
+3. Each developer makes changes to the project and then pushes those changes to their personal fork. After each push, Appveyor/Travis build the package and test it. 
+4. If the Appveyor/Travis builds are successful, the developper will likely send a pull request to the master branch of the master repo, which will probably be accepted. 
+
+This workflow allows each developer to make changes in their own repo and continuously build them using Travis/Appveyor without potentially breaking the master repo's copy. 
+
+### 3.3 Setting up Integrated Tests
 
 **Step 1**: To get started using continuous integration services, head to the Travis CI (Linux/Mac OS) or AppVeyor (Windows) website and "sign up"" by signing into Github. At some point, Travis/AppVeyor will ask you to authorize its connection to Github, which you should authorize.
 
@@ -274,9 +288,18 @@ Maybe the principle of continuous integration makes sense, but why are continuou
 
 You should click "new project" and then select the specific repo you'd like to use in combination with Travis/Appveyor. This means that you should at least initialize your project and push it to Github before you start using Travis/Appveyor. 
 
-**Step 3**: Depending on whether you're using Appveyor or Travis, you should run devtools::use_appveyor() or devtools::use_travis() in the console with your package open. This will create a file named 'appveyor.yml' or 'travis.yml' in the root directory of your package. These '.yml' files will tell AppVeyor/Travis what to do. It's actually not too important to understand everything they do, just because the devtools template generally works pretty well. However, you occasionally will have to modify it to suit specific needs. AppVeyor and Travis CI both have great documentation, linked [here for Appveyor](https://www.appveyor.com/docs/build-configuration/) and [here for Travis](https://docs.travis-ci.com/user/languages/r/). 
+**Step 3**: Depending on whether you're using Appveyor or Travis, you should run devtools::use_appveyor() or devtools::use_travis() in the console with your package open. This will create a file named 'appveyor.yml' or 'travis.yml' in the root directory of your package. These '.yml' files will tell AppVeyor/Travis what to do. It's actually not too important to understand everything they do, just because the devtools template generally works pretty well. However, you occasionally will have to modify it to suit specific needs. AppVeyor and Travis CI both have great documentation, linked [here for Appveyor](https://www.appveyor.com/docs/build-configuration/) and [here for Travis](https://docs.travis-ci.com/user/languages/r/).
 
 (Note - devtools also adds 'appveyor.yml' and 'travis.yml' to the .Rbuildignore to reduce clutter in your package.)
+
+Lastly, if you're using Travis, it's important to talk quickly about dependencies in packages. Travis was not originally designed for R projects, so occasionally it's a bit shaky, specifically with regard to dependencies in packages (i.e. Travis will build your package online, but if your package depends on ggplot2, then Travis have to install ggplot2 before building your package). By default, Travis/Appveyor automatically install anything listed in the dependencies listed in the DESCRIPTION file for your project. However, occasionally something goes wrong. If you get error messages that look like Travis did not install of the dependencies, it's worth specifying them in the .yml file. You can by adding a line like the following:
+
+```{r, eval = FALSE}
+
+r_packages: package_name
+
+```
+ in the .yml file (this will install the package the same way that RStudio installs it when you run 'install.packages'). If you'd like to install a package using a different method (i.e. from a Github version of the package), there are lots of options listed in the [R-specific Travis documentation](https://docs.travis-ci.com/user/languages/r/). However, it's important to remember that this is generally NOT necessary - Travis/Appveyor do a pretty good job of automatically detecting/installing dependencies as long as your DESCRIPTION file specifies them.
 
 **Step 4**: If you are working with many other developers on a single package, you should also add a '.gitattributes' file into the root of your directory. This is because different operating systems handle different characters, for example line terminators, slightly differently. Modern Mac and Unix/Linux systems use '\n' to terminate the end of each line, in what is called the "line feed" or "LF" system, whereas Windows uses '\r\n' in the 'Carriage Return Line Feed' or CRLF system. The point is that The '.gitattributes' file will ensure that each developer uses exactly the same line endings, because you can set the 'text' setting which controls the method of writing lineterminators.
 
@@ -288,7 +311,7 @@ where the "*" refers to all files in the root directory, and the 'text=auto' set
 ```{r, eval=FALSE}
 R/* text=lf
 ```
-which forces all the scripts directly in the R subdireectory to use the 'lf' line terminator. You can personalize the gitattributes file if you like, but you can also just use the sample .gitattributes [here](https://github.com/krlmlr/r-appveyor/blob/master/.gitattributes). You can download this file and move it to the root directory of your package (it must be in the root directory). 
+which forces all the scripts directly in the R subdirectory to use the 'lf' line terminator. You can personalize the gitattributes file if you like, but you can also just use the sample .gitattributes [here](https://github.com/krlmlr/r-appveyor/blob/master/.gitattributes). You can download this file and move it to the root directory of your package (it must be in the root directory). 
 
 The git attributes file actually is useful for setting a variety of other attributes besides line endings, although some of them are a bit technical. If you're curious to find out more about what the .gitattributes file can do, the full documentation is linked [here](https://git-scm.com/docs/gitattributes). 
 
@@ -302,10 +325,7 @@ and if your build succeeded, you'll see a green line at the bottom like this:
 
 otherwise you'll see an error. If your build takes a while, that's okay - you don't need to wait for it to build, because Travis/Appveyor will email you automatically if the test fails. And that's all there is to it! 
 
-## 4. Developer-Proofing 
-
-## 5. Tips and Tricks
-
+## 4. Tips and Tricks
 
 When testing, there are a couple of key principles to keep in mind:
 
@@ -317,7 +337,7 @@ The devtools cheatsheet, linked [here](https://www.rstudio.com/wp-content/upload
 
 Lastly, working with .yml files can occasionally be difficult, although devtools should make it pretty to set up in the broad majority of cases. As always, when you run into errors, make full use of stackexchange and online resources provided by AppVeyor/Travis. 
 
-## 6. Sources cited.
+## 5. Sources cited.
 
 https://github.com/IQSS/social_science_software_toolkit/blob/master/testing/recommended_testing_tools_R.md#recommended-testing-tools-and-process-for-r-packages
 

@@ -2,12 +2,13 @@
 #' Scaled Proportion of Two Vectors
 #'
 #' \code{scalep} returns the 'factors' argument divided element-wise by the 'divisors' argument, scaled (multiplied) by an optional scalar.
-#' It will also graph a histogram of the result using ggplot2's qplot function, or the default histogram function if ggplot2 is unavailable.
 #'
 #' @param factors A vector of doubles or integers.
 #' @param divisors A vector of doubles or integers of the same length as the 'factors' argument.
 #' @param x An optional scalaing constant, default value set to 1.
-#' @return A numeric vector of the same length as the factors argument.
+#' @param graph If True, scalep will graph a histogram of the result using ggplot2's qplot function, or the default histogram function if ggplot2 is unavailable.
+#'  Graph is set by default to False.
+#' @return A vector of doubles of the same length as the factors argument.
 #'
 #'
 #' @examples
@@ -17,7 +18,7 @@
 #'
 #' @export
 #'
-scalep <- function(factors, divisors, constant = 1) {
+scalep <- function(factors, divisors, constant = 1, graph = FALSE) {
 
   # Let user know these are specified
   if (is.null(divisors)) { print('Divisors must be specified') }
@@ -32,10 +33,10 @@ scalep <- function(factors, divisors, constant = 1) {
   # Divide and multiply by optional scalar
   proportions <- constant*factors/divisors
 
-  # Print the graph using either ggplot2 or the hist function
-  if (requireNamespace("ggplot2", quietly = TRUE)) {
+  # If graph = True, print the graph using either ggplot2 or the hist function
+  if (requireNamespace("ggplot2", quietly = TRUE) & graph) {
     print(ggplot2::qplot(proportions, geom='histogram'))
-  } else {
+  } else if (graph) {
     print(hist(proportions))
   }
 

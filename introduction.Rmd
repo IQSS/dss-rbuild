@@ -2,10 +2,21 @@
 title: "Introduction"
 author: "Asher Spector"
 date: "May 1, 2018"
-output: html_document
----
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float:
+      collapsed: true
+      smooth_scroll: false
 
-### 0. To-do
+---
+### -1. Overall to-do
+
+2. Run through for consistency, figure out how to publish best
+3. Is there an rtools problem?
+
+### 0. To-do for intro
 
 1. Finish acknowledgements
 2. Maybe revamp?
@@ -31,14 +42,14 @@ Also, this guide is still under development, and we take feedback! If you find a
 
 Almost nothing! You don't need to know anything about Github, Rstudio, or package structure. However, this guide does assume you know how to do some programming in R. For example, if you want to develop a package which downloads and analyzes the content of politicians' tweets, this guide will help you structure your code, but it won't teach you how to scrape Twitter. 
 
-### 4. Acknowledgements
+### 4. Major Acknowledgements
 
 It's worth acknowledging a couple of people who helped make this guide possible.
 
 1. A huge thanks to Simo Goshev at the IQSS, who helped design the structure of the guide and edited the content. 
 2. This guide was written for a different audience, but a lot of its structure and content is based on Hadley Wickham's book [R Packages](http://r-pkgs.had.co.nz/). A huge thanks to him as well.
 
-
+We'll also be citing specific sources on each page in the guide.
 
 
 
