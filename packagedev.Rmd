@@ -2,15 +2,19 @@
 title: "Package Development in R"
 author: "Asher Spector"
 date: "March 2, 2018"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float:
+      collapsed: true
+      smooth_scroll: false
+
 ---
 
-## 0. To do: 
-1. Should I add in documentation for s3/s4 classes?
-2. Should I go into more detail for NAMESPACE?
-3. Publish devex
+This page will walk you through the structure, motivation, and process of building packages in R. We'd like to extend a huge thank you to Hadley Wickham's book [R packages](http://r-pkgs.had.co.nz/r.html#r); this part of the guide is basically a significantly condensed and simplified version of that book. A huge portion of the credit should go to him. 
 
-This page will walk you through the structure, motivation, and process of building packages in R. We'd like to extend a huge thank you to Hadley Wickham's book [R packages](http://r-pkgs.had.co.nz/r.html#r); this part of the guide is basically a condensed and simplified version of that book. A huge portion of the credit should go to him. 
+A quick reminder for readers who do not want to use RStudio: this part of the guide will walk you through using devtools, so if you can't use RStudio, it's worth following along by looking at the [source code](https://www.rdocumentation.org/packages/devtools/versions/1.13.3/source) and [documentation](https://www.rdocumentation.org/packages/devtools/versions/1.13.3) for devtools.
 
 ## 1. Motivation
 
@@ -428,6 +432,26 @@ The new argument structure will make it a bit easier to use. Similarly, the new 
 
 ```
 
+Lastly, it's just worth adding an extra optional argument to let your users turn off the graphing feature of scalep, just to make the function more useable, as follows:
+
+```{r, eval = FALSE}
+
+scalep <- function(factors, divisors, constant = 1, graph = FALSE) {
+  
+  ...
+
+  # If graph = True, print the graph using either ggplot2 or the hist function
+  if (requireNamespace("ggplot2", quietly = TRUE) & graph) {
+    print(ggplot2::qplot(proportions, geom='histogram'))
+  } else if (graph) {
+    print(hist(proportions))
+  }
+  
+  ...
+
+```
+
+
 To summarize, this subsection thus contained three core ideas: (1) make your code simple, (2) make it easy to use by labeling arguments, and (3) always avoid silent errors. 
 
 ### Step 3.4: Documenting your package
@@ -542,7 +566,7 @@ devtools::use_data(coefficients, interior = TRUE)
 
 Data in 'R/sysdata.rda' is never exported, so there's no need to document it. 
 
-## Step 4: Building Your Package
+### Step 3.6: Building Your Package
 
 You're almost done at this point! You've written your functions, modified the description, documented your functions, and presumably exported some of them; you're now ready to *build* your package. Specifically, you should go to Build > Check Package. If you don't see any options under Build, you probably need to open your .Rproj file in the "file" section of RStudio (upon doing this, RStudio should restart briefly and then you will see more Build options).
 
@@ -550,7 +574,7 @@ Upon checking the package, RStudio will tell you if there are any warnings or er
 
 Lastly, you can go to Build > Install and Restart, and then RStudio will build your package, restart, and load your package into R (using the library command). Then, you can use your package!
 
-## Tips and Tricks
+## 4. Tips and Tricks
 
 First, there's a wonderful cheat sheet for package development linked [here](https://www.rstudio.com/wp-content/uploads/2015/06/devtools-cheatsheet.pdf).
 
@@ -558,7 +582,7 @@ Second, if you are looking for a quick (and very simple) example of a package, t
 
 Third, if you're having trouble, you can always just reference stackexchange. 
 
-## Sources cited:
+## 5. Sources cited:
 
 A huge thank you again to Hadley Wickham and his book R Packages, linked [here](http://r-pkgs.had.co.nz/intro.html). 
 

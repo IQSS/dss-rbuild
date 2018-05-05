@@ -2,12 +2,18 @@
 title: "rstudioguide"
 author: "Asher Spector"
 date: "February 24, 2018"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float:
+      collapsed: true
+      smooth_scroll: false
 ---
 
-This guide will help users set up and install RStudio. It assumes they are already somewhat familiar with R: for Harvard students, at around the Gov 2000/2001 level. If you already have RStudio installed and are comfortable using it, feel free to skip this section. 
+This guide will help users set up and install RStudio (we assume they are already somewhat familiar with R). If you already have RStudio installed and are comfortable using it, feel free to skip this section. Lastly, if you really don't want to use RStudio, we'll offer some alternatives in the first main section.
 
-## 1. Why use RStudio
+## 1. Why use RStudio 
 
 RStudio has two main advantages, which is why we recommend it for package development.
 
@@ -15,9 +21,15 @@ First, RStudio is generally built to make users' lives easier. It automatically 
 
 Second, RStudio has a suite of tools which make it easy to build well-documented and comprehensible packages. Since this guide discusses package development, RStudio is the natural tool of choice. 
 
+### 1.1 What if you don't want to use RStudio?
+
+Some users might not want to use RStudio. That's not the end of the world - you can develop packages without RStudio, it's just a little bit more difficult. We highly recommend RStudio because it plays very nicely with the devtools and testthat packages (and a lot of this guide will be devoted to showing users around devtools/testthat). As a result, if you'd prefer not to use RStudio, you can probably just use the devtools/testthat functions directly by looking at their documentation and source code, as linked below. However, it also might be worth trying RStudio, at least for the duration of this guide. 
+
+Here are the links to the current (as of 5.4.18) versions of the [devtools documentation](https://www.rdocumentation.org/packages/devtools/versions/1.13.3) and [source code](https://www.rdocumentation.org/packages/devtools/versions/1.13.3/source), and the [testthat documentation](https://www.rdocumentation.org/packages/testthat/versions/2.0.0) and [source code](https://www.rdocumentation.org/packages/testthat/versions/2.0.0/source). If you don't use RStudio, you'll probably want to look through these as you work through the guide. 
+
 ## 2. Setting up RStudio
 
-#### Setting up R
+### 2.1 Setting up R
 
 Presumably you've already been working with R, but you should make sure you have a recent enough version of R intalled. To do so, type "R.Version()" into the editor you've been working with previously. It should return an output titled "$version.string$", for example:
 ```{r}
@@ -34,7 +46,7 @@ If the number after the R version string is anything lower than 3.0.1, you'll ha
 
 maybe use this? https://www.r-statistics.com/2015/06/a-step-by-step-screenshots-tutorial-for-upgrading-r-on-windows/ 
 
-### Downloading Development Tools
+### 2.2 Downloading Development Tools
 
 You'll also want to download some packages and tools that are important for package development. If you are running Windows, you can do so by following the instructions below:
 
@@ -51,7 +63,7 @@ install.packages('devtools')
 install.packages('roxygen2')
 ```
 
-#### Setting up RStudio
+### 2.3 Setting up RStudio
 
 To download and set up RStudio, follow the instructions below:
 
@@ -67,7 +79,7 @@ and now you're ready!
 
 ## 3. Basic RStudio Use
 
-### Screen Breakdown
+### 3.1 Screen Breakdown
 
 RStudio will split your screen into four parts, as shown below. We'll refer to them as the *script*, the *environment*, the *shell* or *console*, and the *Viewer.*
 
@@ -86,7 +98,7 @@ On the upper right hand corner of the screen, you can see the *environment* you'
 
 On the bottom right hand side is the *Viewer.* Any plots you generate in R will automatically show up there. Additionally, as we'll discuss in a secnd, documentation of functions and packages will appear in the right hand corner. You can also use it to see the file structure of your working directory and the packages you're using by clicking "files" or "packages.""
 
-### Basic Commands
+### 3.2 Basic Commands
 
 Presumably you're already familiar with R, but you should know a couple of commands specific to RStudio:
 

@@ -4,12 +4,15 @@
 \alias{scalep}
 \title{Scaled Proportion of Two Vectors}
 \usage{
-scalep(factors, divisors, constant = 1)
+scalep(factors, divisors, constant = 1, graph = FALSE)
 }
 \arguments{
 \item{factors}{A vector of doubles or integers.}
 
 \item{divisors}{A vector of doubles or integers of the same length as the 'factors' argument.}
+
+\item{graph}{If True, scalep will graph a histogram of the result using ggplot2's qplot function, or the default histogram function if ggplot2 is unavailable.
+Graph is set by default to False.}
 
 \item{x}{An optional scalaing constant, default value set to 1.}
 }
@@ -18,11 +21,10 @@ A numeric vector of the same length as the factors argument.
 }
 \description{
 \code{scalep} returns the 'factors' argument divided element-wise by the 'divisors' argument, scaled (multiplied) by an optional scalar.
-It will also graph a histogram of the result using ggplot2's qplot function, or the default histogram function if ggplot2 is unavailable.
 }
 \examples{
 income <- c(30000, 40000, 20000, 50000)
 spending <- c(3000, 4000, 500, 100)
-scalep(spending, income, x=3)
+scalep(spending, income, constant = 3)
 
 }
