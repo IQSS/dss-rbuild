@@ -14,11 +14,11 @@ output:
 
 This page will walk you through the structure, motivation, and process of building packages in R. We'd like to extend a huge thank you to Hadley Wickham's book [R packages](http://r-pkgs.had.co.nz/r.html#r); this part of the guide is basically a significantly condensed and simplified version of that book. A huge portion of the credit should go to him. 
 
-A quick reminder for readers who do not want to use RStudio: this part of the guide will walk you through using devtools, so if you can't use RStudio, it's worth following along by looking at the [source code](https://www.rdocumentation.org/packages/devtools/versions/1.13.3/source) and [documentation](https://www.rdocumentation.org/packages/devtools/versions/1.13.3) for devtools.
+A quick reminder for readers who do not want to use RStudio: this part of the guide relies on the devtools package, so if you can't use RStudio, it's worth following along by looking at the [source code](https://www.rdocumentation.org/packages/devtools/versions/1.13.3/source) and [documentation](https://www.rdocumentation.org/packages/devtools/versions/1.13.3) for devtools.
 
 ## 1. Motivation
 
-Imagine Grace has built an architecture for aggregating polling data, and you would like to use it in your own research project. So you go to github and you download Grace's repository, hoping to build on her research. One of the scripts you download looks like this. 
+Imagine Grace has built an architecture for aggregating polling data, and you would like to use it in your own research project. So you go to GitHub and you download Grace's repository, hoping to build on her research. One of the scripts you download looks like this. 
 
 ![*This is not what packages should look like*](Images/badexample.PNG)
 
@@ -26,9 +26,9 @@ When you read this script, you should notice at least a couple of problems.
 
 First, upon reading this code, most programmers would have absolutely no idea what it's supposed to do. Because this is a simple example, you might be able to guess that the lm function returns the squared difference of its inputs, and the sqt function takes the square root of negative numbers. But the "scalep" function is almost totally incomprehensible - what's it supposed to do? 
 
-Second, even if you could tell what the "scalep" function does, you'd have no idea how to use it, because you don't know how the "datapath.csv" csv file should be structured. 
+Second, even if you could tell what the "scalep" function does, you'd have no idea how to use it, because you don't know how the "d" input should be structured. 
 
-Third, it's very difficult to use this script in combination with other packages. The "lm" function has the same name as the "lm" function from the R Stats package, which is incredibly useful, and very commonly used. Giving a new function the same name as a base function will create extremely weird bugs or just cause a fatal error and end your entire session. 
+Third, it's very difficult to use this script in combination with other packages. The "lm" function has the same name as the "lm" function from the R Stats package, which is incredibly useful, and very commonly used. Giving a new function the same name as a base or commonly used function will create extremely weird bugs or just cause a fatal error and end your entire session. 
 
 Lastly, and less obviously, you don't know what *version* of Grace's package this script is. Grace will probably update and modify her scripts over time, and unless you are aware of the contents of those changes, the script may behave differently than you expect.
 
@@ -84,11 +84,11 @@ This documentation tells you what the scalep function does, what kinds of inputs
 
 ### 2.3 Description
 
-The Description file of an R Package helps solve each one of the first three problems. It briefly outlines everything the package does, as well as the version of the pacakge and who maintains it. Perhaps most importantly for newer users, it also documents the dependencies of your package. For example, if you wrote a package which relies heavily on the boot package version 1.3-20, your description will document that, so your users don't have to spend hours searching for the exact package necessary to make your package work. 
+The DESCRIPTION file of an R Package helps solve each one of the first three problems. It briefly outlines the purpose of the package, as well as the version of the pacakge and who maintains it. Perhaps most importantly for newer users, it also documents the dependencies of your package. For example, if you wrote a package which relies heavily on the boot package version 1.3-20, your description will document that, so your users don't have to spend hours searching for the exact package necessary to make your package work. 
 
 ### 2.4 Namespace 
 
-The namespace is a bit more complicated than the other parts of the package structure. The purpose of the namespace is make sure your package doesn't conflict with other packages. For example, if your package includes some data labelled 'lm', a good namespace will ensure that using that data in conjunction with the R stats package (which has a function called 'lm') will *not* throw an error. How exactly the namespace does this is a bit complicated and beyond the scope of this guide, so if you're dying for more specifics, you should [read through this wonderful page](http://r-pkgs.had.co.nz/namespace.html). Thankfully, Roxygen2 will automatically generate a namespace for you - we'll discuss how to do this a little later. 
+The namespace is a bit more complicated than the other parts of the package structure. The purpose of the namespace is make sure your package works in combination with other packages. For example, if your package includes some data labelled 'lm', a good namespace will ensure that using that data in conjunction with the R stats package (which has a function called 'lm') will *not* throw an error. How exactly the namespace does this is a bit complicated and beyond the scope of this guide, so if you're dying for more specifics, you should [read through this wonderful page](http://r-pkgs.had.co.nz/namespace.html). Thankfully, Roxygen2 will automatically generate a namespace for you - we'll discuss how to do this a little later. 
 
 Remember: the namespace will help your package play nice with others in the event of name conflicts, but it's still better to name your functions so that the they don't overlap with names of other commonly used functions if possible. 
 
@@ -106,17 +106,17 @@ Then click "R Package" when you see the screen below:
 
 ![](Images/PackageSS/createproj2.PNG)
 
-Lastly, title your package. Your title should be something short and descriptive. Since we'll be walking through a development example, we'll title our new package "devex."
+Lastly, name your package. Your name should be something short and descriptive. Since we'll be walking through a development example, we'll title our new package "devex."
 
 ![](Images/PackageSS/createproj3.PNG)
 
 Once you've created your package, your RStudio should look something like this. It should come preloaded with a "Hello World" script which includes a handy function that prints "Hello world."
 
-__ insert blank image of RStudio __
+![](Images/PackageSS/projectinit.PNG)
 
-Everything should look mostly the same as normal except for the "Files" tab on the bottom right, which should include an ".Rproj" file, a "DESCRIPTION" file, a "NAMESPACE" file, and a folder titled "R." You should start by checking the little boxes next to the "NAMESPACE" file and the "Hello.R" R script inside the R file and clicking "delete" above them, just because we will have Roxygen2 automatically generate the namespace, and because presumably your package doesn't need a "Hello World" function. Note that your directory section might not include a "man" file just yet - that's because you haven't generated any documentation yet, but that's okay!
+Everything should look mostly the same as normal except for the "Files" tab on the bottom right, which should include an ".Rproj" file, a "DESCRIPTION" file, a "NAMESPACE" file, and a folder titled "R." You should start by checking the little boxes next to the "NAMESPACE" file and the "Hello.R" R script inside the R file and clicking "delete" above them, just because we will have Roxygen2 automatically generate the namespace, and because presumably your package doesn't need a "Hello World" function. 
 
-You should also go to "Tools > Project Options" and select the following options, which will help you generate documentation and such using roxygen2: 
+You should also go to "Tools > Project Options" and select the following options, which will help you generate documentation using roxygen2: 
 
 ![](Images/PackageSS/userox.PNG)
 
@@ -148,7 +148,7 @@ Let's go through the fields and discuss what they mean. The first seven fields l
 
 (These fields are exceptionally important if you are building a package using tools from other packages)
 
-13. **Imports**: In this field, you should list the packages which your package needs to function. Each package should be indented, separated by a comma, and given its own line. For example, a pacakge which requires ggplot2, nlme, and rpart might have an 'imports' field which looks like this:
+13. **Imports**: In this field, you should list the packages which your package needs to function. Each package should be indented by two spaces, separated by a comma, and given its own line. For example, a pacakge which requires ggplot2, nlme, and rpart might have an 'imports' field which looks like this:
 
 ![](Images/PackageSS/imports.PNG)
 
@@ -175,7 +175,7 @@ scalep <- function(d, x=1){
 
 Here, the function 'requireNameSpace' checks if 'ggplot2' is available, and if not, the function uses the (slightly less pretty) default histogram function. 
 
-Once you know which packages to list in the 'suggests' section, you can list them exactly the same way you'd list functions in the 'imports' section: each package is indented, separated by a comma, and gets its own line. 
+Once you know which packages to list in the 'suggests' section, you can list them exactly the same way you'd list functions in the 'imports' section: each package is indented by two spaces, separated by a comma, and gets its own line. 
 
 In general, it's best to suggest functions instead of requiring them if you barely use them in your package. This will give users a bit more flexibility, because it won't force them to download packages they will probably never use. 
 
@@ -244,7 +244,7 @@ You should also take care to organize your functions properly. It's probably a b
 
 Now let's talk about specific elements of code style. These are shortened and adapted from [Hadley Wickham's book on R package development](http://r-pkgs.had.co.nz/r.html), which in turn were adapted from Google's R style guide. For more advice on everything from naming variables to curly bracket placement, head to that aforementioned link.
 
-1. **Comments**: Comments are the best (and easiest) way to make your code readable. In general, you err on the side of commenting too much rather than too little, and your comments should explain the *motivation* of your code as opposed to what your code actually does (although admittedly the line between those two things is a bit blurry). Moreover, you can use lines of '# ---------------------------' or '# ==================' to separate distinct sections of your code. Here's a good, if simple, example of commenting:
+1. **Comments**: Comments are the best (and easiest) way to make your code readable. In general, you should err on the side of commenting too much rather than too little, and your comments should explain the *motivation* of your code as opposed to what your code actually does (although admittedly the line between those two things is a bit blurry). Moreover, you can use lines of '# ---------------------------' or '# ==================' to separate distinct sections of your code. Here's a good, if simple, example of commenting:
 
 ```{r}
 
@@ -337,7 +337,7 @@ if (condition) {
   do(x)
 }         # The else should be on this line
 else {
-  do(y)   # Should be indented with two spaces
+do(y)   # This line should be indented with two spaces
 }
 
 
@@ -366,12 +366,12 @@ my_function = function(argument_1 = 'this string is extremely long',
 Overall, different organizations and programmers have different styles and guidelines for specific coding style. Some programming guides might require you to avoid [camelCase](http://wiki.c2.com/?CamelCase); others might mandate its use. We've tried to document some pretty broadly accepted norms, but in general, you should remember:
 
 1. Your goal should always be to make your code readable!
-2. Whatever style guide you follow, following it *consistently* is key to making your code readable
+2. Whatever style guide you follow, follow it *consistently* to make your code readable
 3. You should generally adapt to follow the conventions of the organization you're working under/for
 
 ### Step 3.3.3: Warnings and Simplicity
 
-Consider the case of the scalep function, which currently takes a 2-column dataframe as an input, divides the second column by the first, and returns/graphs some scaled proportion of the quotient vector. One version of this functions, which follows almost all of the guidelines above, might look like this:
+Consider the case of the scalep function, which currently takes a 2-column dataframe as an input, divides the second column by the first, and returns/graphs some scaled proportion of the quotient vector. One version of this function, which follows almost all of the guidelines above, might look like this:
 
 ```{r, eval = FALSE}
 scalep <- function(d, x=1){
@@ -510,7 +510,7 @@ Note that inside the R script, the documentation appears right above the definit
 
 5. You *must* provide examples of your function's use. These are pretty critical, because a lot of programmers will just skip straight to the examples (and only look at the rest of the documentation if the examples are unclear). 
 
-6. You may choose to write '@export' at the end of your documentation block. You should only do this if you want other people to use the function that you're exporting, because exporting it will make sure it shows up in the namespace. Most functions you write won't be exported - for example, if you write a helper function like 'loss' which is only used in service of a larger function, it shouldn't be exported (exporting too many functions 'clutters' the namespace). Normally, a function as simple as 'general_sqrt' probably wouldn't be exported, but we have exported it for the sake of providing a simple examption. 
+6. You may choose to write '@export' at the end of your documentation block. You should only do this if you want other people to use the function that you're exporting, because exporting it will make sure it shows up in the namespace. Most functions you write won't be exported - for example, if you write a helper function like 'loss' which is only used in service of a larger function, it shouldn't be exported (exporting too many functions 'clutters' the namespace). Normally, a function as simple as 'general_sqrt' probably wouldn't be exported, but we have exported it for the sake of providing a simple example. 
 
 Once you've written all your documentation, it's fairly simple to check what it looks like. You should either hit Control+Shift+D, or head to Build>Document in the top pane, which will then automatically generate your documentation. Then, if you've documented a function, you can type ?[function name] into the console, and the documentation should automatically pop up!
 
@@ -522,7 +522,7 @@ After documenting your package, you can also click the '/man' folder to inspect 
 
 ### Step 3.5 (Optional): Adding and Documenting Data
 
-Sometimes, you'll want to include data as part of your package, either to serve as an example for users or because your functions need it to work. Let's walk through how to include (and document) data in your package. Note that there are at least two kinds of data you should think about including, but for both kinds of data, you should generally save them as '.rdata' or '.rda' files (which are the same thing), because the '.rdata' file format was built for R and has a couple of advantages. 
+Sometimes, you'll want to include data as part of your package, either to serve as an example for users or because your functions need it to work. Let's walk through how to include (and document) data in your package. Note that there are at least two kinds of data you should think about including, but for both kinds of data, you should generally save them as '.rdata' or '.rda' files (which are the same thing).
 
 #### Step 3.5.1: Including data which should be available to users
 
