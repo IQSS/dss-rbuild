@@ -226,22 +226,26 @@ div.tocify {
 <p>This guide has gone through a solid amount of material. We’ve covered:</p>
 <ol style="list-style-type: decimal">
 <li>The motivation behind using RStudio and how to set up and use it</li>
-<li>The purpose of Git/Gitub and how to use their basic functionality, covering everything from branching to merge conflicts</li>
+<li>The purpose of Git/GitHub and how to use their basic functionality, covering everything from branching to merge conflicts</li>
 <li>The proper way to structure and develop packages using RStudio and devtools (and roxygen2)</li>
 <li>The proper way to test packages using testthat (and devtools)</li>
 </ol>
-<p>As you build larger and more complex packages however, you might need a deeper understanding of package structure and development in R than the one provided in this package. For a slightly more in-depth explanation of package development, you’ll want to reference Hadley Wickham’s <a href="http://r-pkgs.had.co.nz/">R Packages</a>. For a serious dive into package mechanics, you might want to consult the official <a href="https://cran.r-project.org/doc/manuals/R-exts.html#Creating-R-packages">R Extensions Manual</a>, which is published by CRAN. However, at least for mid-sized packages, this guide probably has given you most of what you need to know.</p>
-<p>Of course, you might also want to develop packages in other programming languages besides R. You’ll be happy to learn that quite a lot of the components of package development are very similar in other languages! For example, the setup.py file in Python packages serves many of the same purposes as the DESCRIPTION file in R. Moreover, Git and Github support every programming language, and Travis/Appveyor support almost every major programming language (in fact, Travis/Appveyor support most languages <em>better</em> than they support R, although their R support is great too). However, devtools, roxygen2, testthat, and RStudio are unfortunately R-specific tools, which is too bad, because they’re extremely useful. Thankfully, there are equivilent packages for most other major programming languages. To help you out, we’ve compiled a list of helpful package-building tools for a variety of other languages.</p>
+<div id="advanced-tools-for-r" class="section level4">
+<h4>Advanced tools for R</h4>
+<p>As you build larger and more complex packages, you might need a deeper understanding of package structure and development in R than the one provided in this package. For a slightly more in-depth explanation of package development, you’ll want to reference Hadley Wickham’s <a href="http://r-pkgs.had.co.nz/">R Packages</a>. For a serious dive into package mechanics, you might want to consult the official <a href="https://cran.r-project.org/doc/manuals/R-exts.html#Creating-R-packages">R Extensions Manual</a>, which is published by CRAN. However, at least for mid-sized packages, this guide probably has given you most of what you need to know.</p>
+</div>
+<div id="python-and-other-languages" class="section level4">
+<h4>Python and Other Languages</h4>
+<p>Of course, you might also want to develop packages in other programming languages besides R. You’ll be happy to learn that quite a lot of the components of package development are very similar in other languages! For example, the setup.py file in Python packages serves many of the same purposes as the DESCRIPTION file in R. Moreover, Git and Github support every programming language, and Travis/Appveyor support almost every major programming language (in fact, Travis/Appveyor support most languages <em>better</em> than they support R, although their R support is great too). However, devtools, roxygen2, testthat, and RStudio are unfortunately R-specific tools, which is too bad, because they’re extremely useful. Thankfully, there are equivilent packages for most other major programming languages. Although we unfortunately can’t compile a list of every package-building tool for every major language, we have written a list of helpful tools for Python (because it and R are the most popular languages for data science). Specifically,</p>
 <ol style="list-style-type: decimal">
-<li>Python:
-<ol style="list-style-type: lower-alpha">
 <li><a href="https://packaging.python.org/tutorials/distributing-packages/#setup-py">This link from the PyPA (Python Packaging Authority)</a> provides an overview to package structure in Python.</li>
 <li><a href="https://setuptools.readthedocs.io/en/latest/setuptools.html">This link from the setuptools documentation</a> explains some of the best practices for building packages in python using the <em>setuptools</em> package. It’s a bit like devtools (but not exactly the same).</li>
 <li>Like roxygen2, <a href="http://www.sphinx-doc.org/en/master/">Sphinx</a> can automatically generate documentation by parsing Python source code.</li>
 <li>Like testthat (although a bit more technical), the default Python package <em>unittest</em> can help you write unit tests in Python more easily.</li>
 <li><a href="https://www.jetbrains.com/pycharm/">Pycharm</a> is a development environment which integrates a lot of the useful tools mentioned above and provides a framework for creating packages easily. There are also tons of wonderful IDE’s for python, many of which are listed <a href="https://wiki.python.org/moin/IntegratedDevelopmentEnvironments">here</a>.</li>
-</ol></li>
 </ol>
+<p>That’s it for this guide! We hope you learned something useful. Again, if you have any comments on material, you should email <a href="mailto:amspector100@gmail.com">amspector100@gmail.com</a> with them.</p>
+</div>
 
 
 

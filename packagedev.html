@@ -680,8 +680,8 @@ devtools::use_data(coefficients, interior = TRUE)</code></pre>
 <p>Data in ‘R/sysdata.rda’ is never exported, so there’s no need to document it.</p>
 </div>
 </div>
-<div id="step-4-building-your-package" class="section level3">
-<h3>Step 4: Building Your Package</h3>
+<div id="step-3.6-building-your-package" class="section level3">
+<h3>Step 3.6: Building Your Package</h3>
 <p>You’re almost done at this point! You’ve written your functions, modified the description, documented your functions, and presumably exported some of them; you’re now ready to <em>build</em> your package. Specifically, you should go to Build &gt; Check Package. If you don’t see any options under Build, you probably need to open your .Rproj file in the “file” section of RStudio (upon doing this, RStudio should restart briefly and then you will see more Build options).</p>
 <p>Upon checking the package, RStudio will tell you if there are any warnings or errors raised by its automatic checking process. For example, it might tell you that a piece of documentation mismatches its complimentary function, or that the package needs an extra dependence. It’s best to fix all of the problems RStudio points out, whether they are warnings or errors.</p>
 <p>Lastly, you can go to Build &gt; Install and Restart, and then RStudio will build your package, restart, and load your package into R (using the library command). Then, you can use your package!</p>
