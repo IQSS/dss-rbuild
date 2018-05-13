@@ -12,7 +12,7 @@ output:
 
 ---
 
-This page will walk you through the proper way to test packages using the testthat helper package. Another quick reminder: for those who do not want to use RStudio, it's worth following along by reading the [testthat documentation](https://www.rdocumentation.org/packages/testthat/versions/2.0.0) and [source code](https://www.rdocumentation.org/packages/testthat/versions/2.0.0/source). If you've installed and read through the RStudio guide, you're good to go!
+The previous page in the guide discussed [package structure](./packagedev.Rmd). The next page in the guide is the  [Conclusion](./conclusion.Rmd). This page will walk you through the proper way to test packages using the testthat helper package. Another quick reminder: for those who do not want to use RStudio, it's worth following along by reading the [testthat documentation](https://www.rdocumentation.org/packages/testthat/versions/2.0.0) and [source code](https://www.rdocumentation.org/packages/testthat/versions/2.0.0/source). If you've installed and read through the RStudio guide, you're good to go!
 
 ## 1. Why should you test?
 

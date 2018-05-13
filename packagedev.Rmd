@@ -12,7 +12,7 @@ output:
 
 ---
 
-This page will walk you through the structure, motivation, and process of building packages in R. We'd like to extend a huge thank you to Hadley Wickham's book [R packages](http://r-pkgs.had.co.nz/r.html#r); this part of the guide is basically a significantly condensed and simplified version of that book. A huge portion of the credit should go to him. 
+The previous page in the guide discussed [GitHub](./githubguide.Rmd). The next page in the guide will discuss [testing packages](./testingguide.Rmd). This page will walk you through the structure, motivation, and process of building packages in R. We'd like to extend a huge thank you to Hadley Wickham's book [R packages](http://r-pkgs.had.co.nz/r.html#r); this part of the guide is basically a significantly condensed and simplified version of that book. A huge portion of the credit should go to him. 
 
 A quick reminder for readers who do not want to use RStudio: this part of the guide relies on the devtools package, so if you can't use RStudio, it's worth following along by looking at the [source code](https://www.rdocumentation.org/packages/devtools/versions/1.13.3/source) and [documentation](https://www.rdocumentation.org/packages/devtools/versions/1.13.3) for devtools.
 
