@@ -11,15 +11,6 @@ output:
       smooth_scroll: false
 
 ---
-### -1. Overall to-do
-
-2. Run through for consistency, figure out how to publish best
-3. Is there an rtools problem?
-
-### 0. To-do for intro
-
-1. Finish acknowledgements
-2. Maybe revamp?
 
 ### 1. What is a package?
 

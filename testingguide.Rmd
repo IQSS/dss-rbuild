@@ -16,17 +16,17 @@ This page will walk you through the proper way to test packages using the testth
 
 ## 1. Why should you test?
 
-Suppose Grace has created a package and have been using it for a while, but she decides she'd like to modify one function to improve it. She modifies her function, tests it a bit, and then pushes her package to git. Yet two weeks later, Carlos discovers that the changes she made created a bug in *another* function in the package! This situation is very annoying, especially if Carlos has no idea what has caused the bug or how to fix it. 
+Suppose Grace has created a package and has been using it for a while, but she decides she'd like to modify one function to improve it. She modifies her function, tests it a bit, and then pushes her package to GitHub. Yet two weeks later, Carlos discovers that the changes she made created a bug in *another* function in the package! This situation is very annoying, especially if Carlos has no idea what has caused the bug or how to fix it. 
 
-The solution to problems like this is to testing your package *systematically* and *automatically*. If Grace had rigorously tested the entire package before pushing it to git, Carlos would never have had to deal with the new bug- Grace would have found out immediately. In other words, a good principle in package devleopment is to make sure your code *fails as fast as possible,* so you can find out and fix it. Of course, all programmers test their code, but not everyone tests systematically and automatically. 
+The solution to problems like this is to testing your package *systematically* and *automatically*. If Grace had rigorously tested the entire package before pushing it to GitHub, Carlos would never have had to deal with the new bug- Grace would have found out immediately. In other words, a good principle in package devleopment is to make sure your code *fails as fast as possible,* so you can find out and fix it. Of course, all programmers test their code, but not everyone tests systematically and automatically. 
 
-In this guide, we'll broadly talk about three kinds of tests. First, we'll talk creating automatic *unit tests*, which are tests of individual blocks of code (usually individual functions or classes). Then, we'll talk about *integration tests*, which are tests of how individual blocks of code work in combination. Lastly, we'll talk about making your package *developer-proof* - i.e. if you have collaborators, or someone tries to fix your package, you can proactively prevent them from breaking anything important. 
+We'll split this page of the guide into two big parts. First, we'll talk creating automatic *unit tests*, which test individual blocks of code (usually individual functions or classes). Second, we'll talk about the process of *continuous integration* (CI), whch is a process designed to help you test your code continuously in collaboration with others without spending huge amounts of time waiting for testing to finish. Ideally, by the end of this guide, you should be aiming to make your packages *developer-proof* - i.e. if you have collaborators, or someone tries to fix your package, you can proactively prevent them from breaking anything important by developing high-quality tests and using a CI workflow.
 
 ## 2. Unit Tests
 
 ### 2.1: What are unit tests?
 
-Tests in general compare the actual output of a block of code to its expected output. For example, the following test tests whether the "generalized square root" function actually returns $2$ as the square root of $4$.   
+Tests compare the *expected* output of a block of code to its *actual* output. For example, the following test tests whether the "generalized square root" function actually returns $2$ as the square root of $4$.   
 
 ```{r, eval=FALSE}
 expect_equal(general_sqrt(4), complex(real = 2, imaginary = 0))
@@ -38,7 +38,7 @@ We'll talk a little more about how exactly to create tests down below, but hopef
 
 ### 2.2: Setting up the testing environment
 
-Creating unit tests is actually quite easy, thanks to a package called 'testtthat' which works in combination with devtools. To begin, you should make 'testthat' is installed by running the following code:
+Creating unit tests is actually quite easy, thanks to a package called 'testtthat' which works in combination with devtools. To begin, you should make sure 'testthat' is installed by running the following code:
 
 ```{r, eval=FALSE}
 install.packages('testthat')
@@ -56,7 +56,7 @@ This will do a couple of things. First, it will add 'testthat' to the Suggests p
 
 ### 2.3: Expectations
 
-Before understanding what a unit test is, we need to properly describe an expectation. An expectation tests whether the actual output of a single function call is what the developer expected. The 'testthat' package has a number of functions which compare outputs to expected values. When calling one of these functions, one of two things can happen:
+Before discussing how to write unit tests, we need to properly describe an expectation. An expectation tests whether the actual output of a single function call is what the developer expected. The 'testthat' package has a number of functions which compare outputs to expected values. When calling one of these functions, one of two things can happen:
 
 1. If the actual output matches the expectation, nothing will happen!
 2. If the actual output does not match the expectation, it will throw an error. 
@@ -80,7 +80,7 @@ Here's an (abbreviated) list of the expectation functions:
 testthat::expect_match('hello1234', 'hello')
 testthat::expect_warning(sqrt(-2), 'NaNs produced')
 ```
-respectively because 'hello1234' contains 'hello', and because the error message produced by sqrt(-2) contains the phrase 'NaNs produced'.
+The tests do not fail because (i) 'hello1234' contains 'hello' and (ii) the error message produced by sqrt(-2) contains the phrase 'NaNs produced'.
 
 4. **expect_is** tests whether an object inherets from a class, specified in quotes. For example, the following test passes:
 
@@ -90,7 +90,7 @@ testthat::expect_is(sqrt(2), 'numeric')
 
 5. **expect_true** and **expect_false** respectively expect a statement to evaluate to true or false.
 
-### 2.4: Structure of unit tests
+### 2.4: Structure and Location of Unit Tests
 
 Each *unit test* (which is written in an R script) should use a couple of expectations to test a single core function. It should use the function "test_that" (from the "testthat" package). "test_that" takes two parameters: a string, which describes the test, and a couple of expectations, surrounded by curly braces. For example, the following code will test whether the general_sqrt function from the devex package returns a complex number. 
 
@@ -202,7 +202,7 @@ test_that("Returns correct sqrt", {
 
 ```
 
-**Second*, it's important to remember that coverage is only important because tests with high coverage tend to test all the different functionalities of a package. It's possible to have tests which have very high coverage but aren't great tests. Consider the following example.
+**Second**, it's important to remember that coverage is only important because tests with high coverage tend to test all the different functionalities of a package. It's possible to have tests which have very high coverage but aren't great tests. Consider the following example.
 
 ```{r}
 
@@ -218,7 +218,7 @@ This expectation has 100% coverage because it will run every line of code (the e
 
 **Third**, tests should run relatively quickly, if possible. Sometimes, it's okay to maximize coverage even if you don't test every single functionality to save time, because *usually* high coverage ensures you test most of the functionality of the package. This is particularly true because lots of integrated testing software (which we'll discuss in integrated tests) will not be able to easily run tests which take too long. More on that later. 
 
-**Fourth**, tests should be clear to the reader, because sometimes there are bugs in tests too. If others eventually help develop or maintain your packages, they'll want to know what it means when a test fails. Moreover, for large packages, you yourself may have trouble remembering the exact details of every test you've written. Making tests clear will help. In practice, this your tests should return clear error messages and be readable. For example, the following test is a bad example, for two reasons:
+**Fourth**, tests should be clear to the reader, because sometimes there are bugs in tests too. If others eventually help develop or maintain your packages, they'll want to know what it means when a test fails. Moreover, for large packages, you yourself may have trouble remembering the exact details of every test you've written. Thus, your tests should return clear error messages and be readable. For example, the following test is a bad example, for two reasons:
 
 ```{r, eval = FALSE}
 
@@ -251,17 +251,23 @@ test_that('test sigmoid precision', {
 
 This test is a bit more interpretable and delivers a better error message.
 
-### 2.6: Automated Checks
+### 2.6: Automated Checks and Automated Testing
 
-The control + shift + E automated check function of RStudio is really wonderful. It's worth noting that every check it performs is relatively important, and if RStudio signals any warnings or errors, it's definitely worth fixing them. It's also probably worth fixing any "notes" it issues. You can read more about what each type of check in the automated check does, but suffice to say it will run all of your tests for you as well as a few more to make sure your package is well put together. Read more about the automated check (here)[http://r-pkgs.had.co.nz/check.html#check].
+Before you *build* your package, you should *check* it using the automated check feature in RStudio, which is really wonderful. Running an automated check will ensure your documentation is up to date, check a variety of other parts of your package, and most importantly, it will automatically run all of your unit tests. During and after the check, it will report which tests failed (and which lines of code caused those failures. Even your pakage passes all of its tests, you might still see additional warnings for other reasons, as exemplified below:
+
+![](Images/TestSS/autobuildresults.PNG)
+
+Although it's not necessary to understand every check that RStudio runs, it's worth noting that every check it performs is relatively important, and if RStudio signals any warnings or errors, it's definitely worth fixing them. It's also probably worth fixing any "notes" it issues. If you're curious, you can read more about what each type of check in the automated check does (here)[http://r-pkgs.had.co.nz/check.html#check].
 
 ## 3. Integrated Tests
 
 ### 3.1 Motivation
 
-Up to this point, you probably have not been pushing to Github too often. However, in large projects/packages where many programmers are working on the same package at once, it's important to ensure each programmer continuously commits changes to github to make sure all the changes are compatible with each other. This process of rapid updating of packages is referred to as *continuous integration*, and it can be very difficult to manage properly (it is sometimes referred to as *integration hell*, specifically because developers often waste lots of hours trying to make code integrate properly). When you commit changes continuously, it does not guarentee that all the changes will be compatible. However, if there are compatibility problems in updates, it does ensure that you'll be able to find those problems more easily, because each individual change/commit is smaller. Thankfully, there are two wonderful free continuous integration services that will make your life a lot easier. If you're using windows, you'll want to use the service called *Appveyor* - if you're using Mac or Linux, you'll want to use the service called *Travis CI*. Continuous integration services make it easy to continuously push projects to github. Specifically, both Appveyor and Travis CI link to github and will run your build and tests for you on what are called virtual machines in the cloud. 
+Up to this point, you probably have not been pushing to GitHub too often. However, in large projects/packages where many programmers are working on the same package at once, it's important to ensure each programmer continuously commits changes to GitHub to make sure all the changes are compatible with each other. This process of rapid updating of packages is referred to as *continuous integration*, and it can be very difficult to manage properly (it is sometimes referred to as *integration hell*, specifically because developers often waste lots of hours trying to make code integrate properly). When you commit changes continuously, it does not guarentee that all the changes will be compatible. However, if there are compatibility problems in updates, it does ensure that you'll be able to find those problems more easily, because each individual change/commit is smaller. 
 
-Maybe the principle of continuous integration makes sense, but why are continuous integration services useful? Why can't each developer build packages,  run the tests locally, and then only push changes to github if the tests are successful?  There are three answers to this question. 
+For reasons we'll discuss in a second, continuous integration is a bit easier said than done. Thankfully, there are two wonderful free continuous integration services that will make your life a lot easier. If you're using windows, you'll want to use the service called *Appveyor* - if you're using Mac or Linux, you'll want to use the service called *Travis CI*. These services will make continuous integration easy, specifically because both Appveyor and Travis CI link to GitHub and will run your build and tests for you on what are called virtual machines in the cloud. 
+
+Maybe the principle of continuous integration makes sense, but why are continuous integration services useful? Why can't each developer build packages,  run the tests locally, and then only push changes to GitHub if the tests are successful?  There are three answers to this question. 
 
 1. For large projects, it often takes a long time to build them. Being able to build them on the cloud (using Appveyor/Travis) saves an enormous amount of time. (This is especially true for programming languages besides R, but it's true for R too!)
 2. Sometimes there may be global environmental settings on your particular computer which change the way the package works and the way tests run. Building and testing the package in a "clean" environment online makes the testing more robust. 
@@ -269,39 +275,39 @@ Maybe the principle of continuous integration makes sense, but why are continuou
 
 ### 3.2 The integrated testing workflow
 
-It's important to note that Travis/Appveyor do not prevent you from pushing bad code to a repo - if you break your package and all your tests fail on Travis/Appveyor, you can still push the broken version to the master branch on Github. As a result, most developer teams use the following workflow to keep the master branch working at all times.
+It's important to note that Travis/Appveyor do not prevent you from pushing bad code to a repo - if you break your package and all your tests fail on Travis/Appveyor, you can still push the broken version to the master branch on GitHub. As a result, most developer teams use the following workflow to keep the master branch working at all times.
 
-1. The sets up a "master repo" with a master branch on Github. 
+1. Someone sets up a "master repo" with a master branch on GitHub. 
 2. Each developer on the team creates a copy (also called a *fork*) of the master repo. Thus, each developer has their own repository.
-3. Each developer makes changes to the project and then pushes those changes to their personal fork. After each push, Appveyor/Travis build the package and test it. 
+3. Each developer makes changes to the project and then pushes those changes to their personal fork. After each push, Appveyor or Travis builds the package and test it. 
 4. If the Appveyor/Travis builds are successful, the developper will likely send a pull request to the master branch of the master repo, which will probably be accepted. 
 
 This workflow allows each developer to make changes in their own repo and continuously build them using Travis/Appveyor without potentially breaking the master repo's copy. 
 
 ### 3.3 Setting up Integrated Tests
 
-**Step 1**: To get started using continuous integration services, head to the Travis CI (Linux/Mac OS) or AppVeyor (Windows) website and "sign up"" by signing into Github. At some point, Travis/AppVeyor will ask you to authorize its connection to Github, which you should authorize.
+**Step 1**: To get started using continuous integration services, head to the Travis CI (Linux/Mac OS) or AppVeyor (Windows) website and "sign up"" by signing into GitHub. At some point, Travis/AppVeyor will ask you to authorize its connection to GitHub, which you should authorize.
 
 **Step 2**: Once you authorize the connection, you need to specifically select which repos you'd like to use Travis/AppVeyor with. For example (in AppVeyor), upon signing up, you'll see something like this screen:
 
 ![](Images/TestSS/appveyor1.PNG)
 
-You should click "new project" and then select the specific repo you'd like to use in combination with Travis/Appveyor. This means that you should at least initialize your project and push it to Github before you start using Travis/Appveyor. 
+You should click "new project" and then select the specific repo you'd like to use in combination with Travis/Appveyor. This means that you should at least initialize your project and push it to GitHub before you start using Travis/Appveyor. 
 
 **Step 3**: Depending on whether you're using Appveyor or Travis, you should run devtools::use_appveyor() or devtools::use_travis() in the console with your package open. This will create a file named 'appveyor.yml' or 'travis.yml' in the root directory of your package. These '.yml' files will tell AppVeyor/Travis what to do. It's actually not too important to understand everything they do, just because the devtools template generally works pretty well. However, you occasionally will have to modify it to suit specific needs. AppVeyor and Travis CI both have great documentation, linked [here for Appveyor](https://www.appveyor.com/docs/build-configuration/) and [here for Travis](https://docs.travis-ci.com/user/languages/r/).
 
 (Note - devtools also adds 'appveyor.yml' and 'travis.yml' to the .Rbuildignore to reduce clutter in your package.)
 
-Lastly, if you're using Travis, it's important to talk quickly about dependencies in packages. Travis was not originally designed for R projects, so occasionally it's a bit shaky, specifically with regard to dependencies in packages (i.e. Travis will build your package online, but if your package depends on ggplot2, then Travis have to install ggplot2 before building your package). By default, Travis/Appveyor automatically install anything listed in the dependencies listed in the DESCRIPTION file for your project. However, occasionally something goes wrong. If you get error messages that look like Travis did not install of the dependencies, it's worth specifying them in the .yml file. You can by adding a line like the following:
+**Step 3.5: Dependency Issues**: If you're using Travis, it's important to talk quickly about dependencies in packages. Travis was not originally designed for R projects, so occasionally it's a bit shaky, specifically with regard to dependencies in packages (i.e. Travis will build your package online, but if your package depends on ggplot2, then Travis have to install ggplot2 before building your package). By default, Travis/Appveyor automatically install anything listed in the dependencies listed in the DESCRIPTION file for your project. However, occasionally something goes wrong. If you get error messages that look like Travis did not install of the dependencies, it's worth specifying them in the .yml file. You can by adding a line like the following:
 
 ```{r, eval = FALSE}
 
 r_packages: package_name
 
 ```
- in the .yml file (this will install the package the same way that RStudio installs it when you run 'install.packages'). If you'd like to install a package using a different method (i.e. from a Github version of the package), there are lots of options listed in the [R-specific Travis documentation](https://docs.travis-ci.com/user/languages/r/). However, it's important to remember that this is generally NOT necessary - Travis/Appveyor do a pretty good job of automatically detecting/installing dependencies as long as your DESCRIPTION file specifies them.
+ in the .yml file (this will install the package the same way that RStudio installs it when you run 'install.packages'). If you'd like to install a package using a different method (i.e. from a GitHub version of the package), there are lots of options listed in the [R-specific Travis documentation](https://docs.travis-ci.com/user/languages/r/). However, it's important to remember that this is generally NOT necessary - Travis/Appveyor do a pretty good job of automatically detecting/installing dependencies as long as your DESCRIPTION file specifies them.
 
-**Step 4**: If you are working with many other developers on a single package, you should also add a '.gitattributes' file into the root of your directory. This is because different operating systems handle different characters, for example line terminators, slightly differently. Modern Mac and Unix/Linux systems use '\n' to terminate the end of each line, in what is called the "line feed" or "LF" system, whereas Windows uses '\r\n' in the 'Carriage Return Line Feed' or CRLF system. The point is that The '.gitattributes' file will ensure that each developer uses exactly the same line endings, because you can set the 'text' setting which controls the method of writing lineterminators.
+**Step 4**: If you are working with many other developers on a single package, you should also add a '.gitattributes' file into the root of your directory. This is because different operating systems handle different characters, for example line terminators, slightly differently. Modern Mac and Unix/Linux systems use '$\n$' to terminate the end of each line, in what is called the "line feed" or "LF" system, whereas Windows uses '$\r\n$' in the 'Carriage Return Line Feed' or CRLF system. The point is that the '.gitattributes' file will ensure that each developer uses exactly the same line endings, because you can set the 'text' setting which controls the method of writing lineterminators.
 
 The way it works is that the '.gitattribute' file should be a line of path-patterns followed by specific attributes. These path-patterns (for a refresher, see the Atlanian guide [here](https://www.atlassian.com/git/tutorials/saving-changes/gitignore)) are exactly the same path-patterns used in the .gitignore file, just for a different purpose. For example, one line might be
 ```{r, eval=FALSE}
@@ -311,11 +317,11 @@ where the "*" refers to all files in the root directory, and the 'text=auto' set
 ```{r, eval=FALSE}
 R/* text=lf
 ```
-which forces all the scripts directly in the R subdirectory to use the 'lf' line terminator. You can personalize the gitattributes file if you like, but you can also just use the sample .gitattributes [here](https://github.com/krlmlr/r-appveyor/blob/master/.gitattributes). You can download this file and move it to the root directory of your package (it must be in the root directory). 
+which forces all the scripts directly in the R subdirectory to use the 'lf' line terminator. You can personalize the gitattributes file if you like, but you can also just use the sample .gitattributes linked [here](https://GitHub.com/krlmlr/r-appveyor/blob/master/.gitattributes). You can download this file and move it to the root directory of your package (it must be in the root directory). 
 
 The git attributes file actually is useful for setting a variety of other attributes besides line endings, although some of them are a bit technical. If you're curious to find out more about what the .gitattributes file can do, the full documentation is linked [here](https://git-scm.com/docs/gitattributes). 
 
-Once you do all of this, you're set to go! When you push changes to github, Travis/AppVeyor will automatically build and test the package for you. For example on Appveyor, if you sign in, you should see something like this:
+Once you do all of this, you're set to go! When you push changes to GitHub, Travis/AppVeyor will automatically build and test the package for you. For example on Appveyor, if you sign in, you should see something like this:
 
 ![](Images/TestSS/appveyor2.PNG)
 
@@ -339,8 +345,6 @@ Lastly, working with .yml files can occasionally be difficult, although devtools
 
 ## 5. Sources cited.
 
-https://github.com/IQSS/social_science_software_toolkit/blob/master/testing/recommended_testing_tools_R.md#recommended-testing-tools-and-process-for-r-packages
+We used the Testing chapter of [R Packages by Hadley Wickham](http://r-pkgs.had.co.nz/tests.html), [Christopher Gandrud's 'Failing Faster' Presentation](
+http://slides.com/christophergandrud/failing-faster#/24), and [Christopher Gandrud's Broader Testing Guidelines](https://github.com/IQSS/social_science_software_toolkit/blob/master/testing/recommended_testing_tools_R.md#recommended-testing-tools-and-process-for-r-packages) to help write this particular page of the guide. 
 
-http://r-pkgs.had.co.nz/tests.html
-
-http://slides.com/christophergandrud/failing-faster#/24

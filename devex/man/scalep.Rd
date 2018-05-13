@@ -17,7 +17,7 @@ Graph is set by default to False.}
 \item{x}{An optional scalaing constant, default value set to 1.}
 }
 \value{
-A numeric vector of the same length as the factors argument.
+A vector of doubles of the same length as the factors argument.
 }
 \description{
 \code{scalep} returns the 'factors' argument divided element-wise by the 'divisors' argument, scaled (multiplied) by an optional scalar.

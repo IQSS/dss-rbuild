@@ -1,5 +1,5 @@
 ---
-title: "Using Github"
+title: "Using GitHub"
 author: "Asher Spector"
 date: "February 10, 2018"
 output: 
@@ -11,52 +11,40 @@ output:
       smooth_scroll: false
 ---
 
-## 0. To do
+The previous page in the guide discussed [RStudio](./rstudioguide.Rmd). The next page in the guide discusses [Package Structure in R](./packagedev.Rmd). This page is an introduction to Git and GitHub for beginners. In it, we'll motivate Git/GitHub, and then discuss what precisely Git/GitHub do and how to use them.
 
-1. Add in link for template.gitignore
-2. Fix the fact that Carlos/Grace/I switch places a bit
-3. Add in graphics for git
-4. Maybe reorganize headers
+## 1. Why use Git/GitHub?
 
-This guide is a basic introduction to Git and Github for total beginners. We'll discuss the importance of git and github, how to install git, and how to use git/github at a basic level. For the intellectually (or practically) curious, we'll also provide links to further reading regarding advanced functionality for git.
+Git and GitHub are actually two different things, and deserve their own sections. Before diving into specifics, however, we should talk about why Git/GitHub exist in the first place. Broadly, Git and GitHub are just tools that developers use to organize their code, which specifically solve three main organizational problems.
 
-## 1. Why use git/github
+First, imagine that two programmers (we'll refer to them as Carlos and Grace) are working together to build a website that automatically displays polling results from US elections, and suppose Grace  modifies a script to change the method for aggregating polling data. It would be tedious for Carlos and Grace to email the script back and forth each time they updated it. Instead, they need a *repository* where they can update and sync their code to make sure they're on the same page. GitHub allows programmers to create such repositories. 
 
-Git and github are actually two different things, and deserve their own sections. Before diving into specifics, however, it's important to recognize that git and github are just tools that developers use to more effectively organize their code. Git and github are designed to solve three main organizational problems.  
+Second, imagine that farther along in the project, Grace decides that she needs to totally rewrite the code which stores and organizes polling data. Unfortunately, while Grace modifies the system which stores the data, it will be offline, which is unfortunate because Carlos needs to use the data for his work on the project. To avoid this dilemma, Git and GitHub allow programmers to create different versions, called branches, of their code. By branching, Grace can modify the storage system, and in the meantime, Carlos can continue to use the old storage system for his work. 
 
-First, imagine that two programmers (we'll refer to them as Carlos and Grace) are working together to try to build a website that automatically displays polling results from US elections, and suppose Grace  modifies a script to slightly change the method for aggregating polling data. It would be tedious for Carlos and Grace to email the script back and forth each time they updated it. Instead, they need a repository where they can easily update  and sync their code to make sure they're on the same page. Github allows programmers to create such repositories. 
+Third, suppose that once Grace and Carlos have finished their website, they want to publish all the statistical functions and tools they built so that other researchers can use those tools to reproduce Grace and Carlos's research. Putting all of their work on GitHub is probably the quickest and easiest way to make it accessible to other researchers.
 
-Second, imagine that farther along in the project, Grace decides that she needs to totally rewrite the code which stores and organizes polling data. Unfortunately, while Grace modifies the system which stores the data, it will be offline, which is unfortunate because Carlos needs to use the data for his work on the project. To avoid this dilemma, Git and Github allow programmers to create different versions, called branches, of their code. Using branching, Grace can modify the storage system, and in the meantime, Carlos can continue to use the old storage system for his work. 
+### 1.1 What is Git?
 
-Third, suppose that once Grace and Carlos have finished their website, they want to publish all the statistical functions and tools they built so that other researchers can use those tools to reproduce Grace and Carlos's research. It's often tedious to write documentation about huge quantities of code, but thankfully, Git and Github offer tools that allow programmers to more easily document their code. 
+![](Images/gitgraphic.PNG)
 
-### 1.1 What is git?
+Git is a local version control system. In other words, Git automatically organizes and saves versions of code on your computer, but does not connect to the internet: it's purely accessible through the command prompt on a computer (there are also other ways to use Git, but it's generally best to use the command prompt). Git organizes code in two ways.
 
-Git is a local version control system. In other words, Git automatically organizes and saves versions of code on your computer, but does not connect to the internet: it's purely accessible through the command prompt on a computer (there are also other ways to use git, but it's generally best to use the command prompt). Git organizes code in two ways.
+First, Git sends discrete versions of code to a local database or repository on the computer on which it is installed. To understand this, imagine that Carlos is writing an R script which determines the proper weights for aggregating polling data, and at some point he finishes the first version of the script. At this point, Carlos can send his code to the local repository, in an action called *commiting* his script. We'll discuss how to do this later, but note that scripts are not automatically committed to the repository. If Carlos deleted all the code in the script and saved it, he could still access the script by going into the repository. Moreover, the repository also stores all of the previous versions of code, and can backtrack through the various commits, so if Carlos decides the version of the script he built last year worked better, he can use Git to access it. 
 
-First, Git sends discrete versions of code to a local database or repository on the computer on which it is installed. To understand this, imagine that Carlos is writing an R script which determines the proper weights for aggregating polling data, and at some point he finishes the first version of the script. At this point, Carlos can send his code to the local repository, in an action called *commiting* his script. We'll discuss how to do this later, but note that scripts are not automatically committed to the repository. If Carlos deleted all the code in the script and saved it, he could still access the script by going into the repository. Moreover, the repository also stores all of the previous versions of code, and can backtrack through the various commits, so if Carlos decides the version of the script he built last year worked better, he can use git to access it. 
+Second, Git can create branches, or separate versions of code, on the computer it's installed to. Remember how Grace wanted to revamp the storage system for polling data without preventing Carlos from accessing the old storage system? Using Git, Grace should create a new *branch* in the repository. For most practical purposes, each branch exists as a separate version of the entire polling project in the Git repository, allowing Grace to modify and experiment without compromising the functionality of the *master* or original branch. 
 
-Second, Git can create branches, or separate versions of code, on the computer it's installed to. Remember how Grace wanted to revamp the storage system for polling data without preventing Carlos from accessing the old storage system? Using Git, Grace should create a new *branch* in the repository. Creating a branch creates (for all practical purposes) an entirely separate version of the entire polling project in the Git repository, which Grace can modify and experiment with without compromising the functionality of the *master branch,* the original scripts that Grace had written. While she's working, Grace can use Git to move back and forth between the branches: doing so will make the contents of her R scripts (which show up in the same folder on her computer) seem to magically change. 
+While she's working, Grace can use Git to move back and forth between the branches. Then, when she finishes designing and testing the new storage system, she can *merge* the two branches together, and Carlos's scripts will automatically start using the new storage system. 
 
-__ insert graphic demonstrating this property of branching __
 
-Then, when Grace finishes designing and testing the new storage system, she can *merge* the two branches together, and Carlos's scripts will automatically start using the new storage system. 
+### 1.2 What is GitHub?
 
-(Insert graphic about organization of git, including branches, )
+Where Git creates *local* repositories on an individual computer, GitHub allows programmers to create *remote* repositories, stored online, for their code. This is pretty simple concept, but it's extroardinarily useful. It means that when Grace finishes updating a series of scripts, she can simply *push* (push means send) them to GitHub, and then Carlos can in one command *pull* (download) the modified versions onto his computer to work with them. GitHub provides other important tools, but we will not discuss those until later. 
 
-### 1.2 What is github?
+## 2. Setting up Git/GitHub
 
-Where Git creates *local* repositories on an individual computer, Github allows programmers to create *remote* repositories, stored online, for their code. This is pretty simple concept, but it's extroardinarily useful. It means that when Grace finishes updating a series of scripts, she can simply *push* (push means send) them to Github, and then Carlos can in one command *pull* (download) the modified versions onto his computer to work with them. Github provides other important tools, but we will not discuss those until later. 
+### 2.1 Making a GitHub account
 
-__ insert graphic about github, git, etc__
-
-## 2. Setting up Git/Github
-
-__ general problem - what about other OSs? __
-
-### 2.1 Making a Github account
-
-Signing up for a Github is fairly simple - just go to github.com, click "sign up" in the upper right hand corner, and follow the instructions. We recommend, at least to begin with, getting a free version of Github.
+Signing up for a GitHub is fairly simple - just go to GitHub.com, click "sign up" in the upper right hand corner, and follow the instructions. We recommend, at least to begin with, getting a free version of GitHub.
 
 ### 2.2 How to Install and Set Up Git
 
@@ -68,38 +56,38 @@ Because Git is a form of *local* source control, it does require installation. T
   
   * For Mac: Click on https://git-scm.com/download/mac and the download should automatically start. 
 
-If you are running Windows/Mac and the websites above download an installer, simply follow the instructions from the installer - it's fine to just use default settings for now. 
+If you are running Windows/Mac and the websites above download an installer, simply follow the instructions from the installer - it's fine to just use default settings. 
 
-Before you can start using git, you do have to do a one time set up. Git is built to track and organize different versions of code, so it will need you to set your username and email before it will let you start modifying programs. To set your username and email after installing, open the command line on your computer and type the following commands into it:
+Before you can start using Git, you do have to do a one time set up. Git is built to track and organize old versions of code, so it will need you to set your username and email before it will let you start modifying programs. To set your username and email after installing, open the command line on your computer and type the following commands into it:
 
 ```{R, eval=FALSE}
 $ git config --global user.name "Your Name"
 $ git config --global user.email "youremail@email.com"
 ```
 
-You might not get explicit confirmation from the command line - for example, when I set the username/email, I see the image below - but don't worry, Git has still got the message.
+You might not get explicit confirmation from the command line - for example, when I set the username/email, I see the image below - but don't worry, Git has still received the message.
 
 ![](Images/configglobals.PNG)
 
-Now you're ready to start using Git/Github!
+Now you're ready to start using Git/GitHub!
 
-## 3. Starting to use Git/Github
+## 3. Starting to use Git/GitHub
 
 ### 3.1 Creating Projects and Repositories
 
 The first step to using git is creating a project, or repository (repo for short). There are generally two ways to create a repo in Git. 
 
-##### Method 1: Start your project on Github
+##### Method 1: Start your project on GitHub
 
-The first way to start a repo is by creating it on github. To do so, log into your Github account. Look near the top-right for your profile icon, click it, and click "Your Profile." Then you should see "Repositories" in the top tab, and then click the green "New" button on the right. 
+The first way to start a repo is by creating it on GitHub. To do so, log into your GitHub account. Look near the top-right for your profile icon, click it, and click "Your Profile." Then you should see "Repositories" in the top tab, and then click the green "New" button on the right. 
 
 ![](Images/gitdashboard.PNG)
 
-Github will prompt you to choose a repository name and description of the repo, which you should enter, and will also ask you whether you'd like to initialize the repository with a README. You should generally add README and .gitignore files, although we'll discuss their functions and importance later. For now, just add the README. 
+GitHub will prompt you to choose a repository name and description of the repo, which you should enter, and will also ask you whether you'd like to initialize the repository with a README. You should generally add README and .gitignore files, although we'll discuss their functions and importance later. For now, just add the README. 
 
-Once you've created the repository on Github, the next step is to link it with a local repository on git. To do this, open the *command prompt* on your computer. You'll need to enter a couple of commands to get the repo set up on your computer. 
+Once you've created the repository on GitHub, the next step is to link it with a local Git repository. To do this, open the *command prompt* on your computer. You'll need to enter a couple of commands to get the repo set up on your computer. 
 
-First, you'll need to set the *working directory* in the command prompt. The working directory is the location where git and command prompt will do all of their editing - if you add a file, it will add the file into your working directory. Thus, before you download your repository, you'll want to navigate to the folder in which you want the repository to be located. For example, Carlos might want to put a repo in his "R" folder inside the "Documents" folder on my computer. To do this, you can use the 'cd' command, which stands for "change directory," and then copy and paste the path of the folder you'd like to place the repository in. An example is given below:
+First, you'll need to set the *working directory* in the command prompt. The working directory is the location where Git and command prompt will execute all of your commands - ie. if you tell Git to create a new file, the new file will be located your working directory. Thus, before you download your repository, you'll want to navigate to the folder in which you want the repository to be located. For example, Carlos might want to put a repo in his "R" folder inside the "Documents" folder on his computer. To do this, he'd use the 'cd' command, which stands for "change directory," and then copy and paste the path of the folder he'd like to place the repository in. An example is given below:
 
 ```{R, eval=FALSE}
 $ cd C:/Users/Carlos/Documents/R
@@ -108,19 +96,19 @@ $ cd C:/Users/Carlos/Documents/R
 Next, you will need to tell git to download, or *clone*, the repo. You can do this using the "git clone" command, which allows you to download and sync a repository *for the first time.* This will download the repo, with all its contents, onto your computer and automatically set up a local version of the repo. See an example of the command below:
 
 ```{R, eval=FALSE}
-$ git clone https://github.com/Carlos_Account/repository_name/
+$ git clone https://GitHub.com/Carlos_Account/repository_name/
 ```
 
 ##### Method 2: Git init
 
-You can also initialize repos through Git and then upload them to github. To do this, first create a folder where you'd like the repo to be located. Then, open the command line, and like before, navigate to the folder using the 'cd' command. Once you've navigated there, you can initialize the repo locally by typing "git init""
+You can also initialize repos through Git and then upload them to GitHub. To do this, first create a folder where you'd like the repo to be located. Then, open the command line, and like before, navigate to the folder using the 'cd' command. Once you've navigated there, you can initialize the repo locally by typing "git init""
 
 ```{R, eval=FALSE}
 $ cd C:/Users/Carlos/Documents/R/repository_name
 $ git init
 ```
 
-This sets up a local repository! We'll go over how to link a local repository set up this way to github in the next section.
+This sets up a local repository! We'll go over how to link a local repository set up this way to GitHub in the next section.
 
 ### 3.2 Modifying Projects
 
@@ -151,17 +139,17 @@ $ git commit -m "Fixed small bug"
 ```
 
 
-Lastly, you need to *push* the files, which means sending them to Github online. Before you do this, if you created the repository locally and have not already done so, you'll need to specify to Git the url to send the commits to. To do this, type 'git remote add origin [your url]' into your command line. Then, you can *push* the file by writing 'git push -u origin master,' which will send the file to the Github repo. 
+Lastly, you need to *push* the files, which means sending them to GitHub online. Before you do this, if you created the repository locally and have not already done so, you'll need to specify to Git the url to send the commits to. To do this, type 'git remote add origin [your url]' into your command line. Then, you can *push* the file by writing 'git push -u origin master,' which will send the file to the GitHub repo. 
 
 
 ```{R, eval=FALSE}
-$ git remote add origin https://github.com/user_name/repository_name
+$ git remote add origin https://GitHub.com/user_name/repository_name
 $ git push -u origin master
 ```
 
 ### 3.3 Accessing older versions of code
 
-You should never be scared of git/github, because git/github only add information - they almost never delete it. In practice, this means that if you accidentally (or intentionally) commit horrible changes to your code, you can easily revert to a previous version. For example, let's say Grace wrote some new functions for a script, deleted them (and committed the deltes) later on, but nowwants the functions back. She can easily access the older (nonempty) script using git. First, she should use the "git log" command to see what commits have been made recently.
+You should never be scared of Git/GitHub, because they only add information - they almost never delete it. In practice, this means that if you commit horrible changes to your code, you can easily revert to a previous version. For example, let's say Grace wrote some new functions for a script, deleted them and committed the deletes later on, but now wants the functions back. She can easily access the older script using Git. First, she should use the "git log" command to see what commits have been made recently.
 
 ```{R, eval=FALSE}
 $ git log
@@ -196,7 +184,7 @@ Clearly, Grace should restore the second commit listed, named 'b69a14b,' in orde
 $ git reset --soft b69a14b
 ```
 
-This will update the current version of the script to the b69a14b version, which Grace can then inspect and test until she's ready to commit it to git/github. Note that there is alos a "git reset --hard" option, which works the same way, but is a pretty serious action to take because it will effectively delete all the commits prior to the version being restored. The soft option is usually a better way to go. 
+This will update the current version of the script to the b69a14b version, which Grace can then inspect and test until she's ready to commit it to Git/GitHub. Note that there is alos a "git reset --hard" option, which works the same way, but is a pretty serious action to take because it will effectively delete all the commits prior to the version being restored. The soft option is almost always a better choice. 
 
 ### 3.4 The .gitignore file
 
@@ -208,33 +196,33 @@ $ git commit -m 'Message here'
 $ git push
 ```
 
-However, often, you'll have files in your directory which you do not want to commit or push to github because they'll clutter up the directory. For example, R directories create ".RHistory" and ".RData" files which will save your history and working environment. These are useful perhaps when writing code, but you don't want them taking up space in your final packaged product. 
+However, often, you'll have files in your directory which you do not want to commit or push to GitHub because they'll clutter up the directory. For example, R directories create ".RHistory" and ".RData" files which will save your history and working environment. These are useful perhaps when writing code, but you don't want them taking up space in your final packaged product. 
 
-To solve this problem, you can use a *.gitignore file.* A .gitignore file tells git to ignore certain kinds of files when you write '$git add .'. For example, gitignore files are frequently configured to tell git to ignore csv files, .RData files, installer logs, and more. 
+To solve this problem, you can use a *.gitignore file.* A .gitignore file tells Git to ignore certain kinds of files when you write 'git add .'. For example, gitignore files are frequently configured to tell git to ignore csv files, .RData files, installer logs, and more. 
 
-Let's discuss how *.gitignore* files actually work. A .gitignore file is really just a glorified text file. However, its filename should be just '.gitignore', because that's how git recognizes it - then, if you put a file titled '.gitignore' in a directory you're working on, git will use the .gitignore file to decide what to ignore in that specific directory. For example, if Grace is working on a project in 'C:/Users/gracesmith/Documents/R/repo_name', she should create a '.gitignore' file inside that folder. 
+Let's discuss how *.gitignore* files actually work. A .gitignore file is really just a glorified text file. However, its filename should be just '.gitignore', because that's how Git recognizes it - then, if you put a file titled '.gitignore' in a directory you're working on, Git will use the .gitignore file to decide what to ignore in that specific directory. For example, if Grace is working on a project in 'C:/Users/gracesmith/Documents/R/repo_name', she should create a '.gitignore' file inside that folder. 
 
-This still leaves an important question - how does git use the .gitignore file to decide what to ignore and what to recognize? Essentially, .gitignore files are just a bunch of independent lines of text, and each line tells git another specific pattern of filepath to ignore. For example, consider the following example of a .gitignore file:
+This still leaves an important question - how does Git use the .gitignore file to which files to ignore? Essentially, .gitignore files are just a bunch of independent lines of text, and each line tells git another specific pattern of filepath to ignore. For example, consider the following example of a .gitignore file:
 
 ![](Images\gitignore3.PNG)
 
-Each line beginning with a '#' is just a comment explaining the function of that part of the .gitignore file. However, there are three basic syntactical rules you need to understand.
+Each line beginning with a '#' is just a comment explaining the function of that part of the .gitignore file. However, there are a couple basic syntactical rules you need to understand.
 
-1. If you write '.filetype', then all files which end with '.filetype' will be ignored by git. For example, the third line in the above example ".RHistory," so all files with a '.RHistory' in the file name (even if the files are in subdirectories) will be ignored. 
+1. If you write '.filetype', then all files which end with '.filetype' will be ignored by git. For example, the third line in the above example reads .RHistory," so all files with a '.RHistory' in the file name (even if the files are in subdirectories) will be ignored. 
 
 2. If you write 'string,' then everything in the directory which contains that 'string' in it will be ignored. For example, if Grace wrote 'dog' in her .gitignore, then git would ignore both a file called 'dog.csv' and every file in a subdirectory called "dog".
 
-3. If you prepend a pattern with an asterisk \*, then the asterisk \* serves as a wildcard which can match 0 or more characters. For example, if I write "*car", then git will ignore the file "mycar". However, 
+3. If you prepend a pattern with an asterisk \*, then the asterisk \* serves as a wildcard which can match 0 or more characters. For example, if I write "*car", then git will ignore the file "mycar.R". 
 
 4. If you prepend a pattern with a forward slash '/', then git will only ignore files which match that pattern in the parent (root) directory. For example, I might write '/.csv' in my gitignore file. This would cause git to ignore a file with the path "dog.csv", but it would not ignore a file called "data/dog.csv." 
 
 5. If you prepend a pattern with an exclamation mark, git will *not* ignore that pattern. For example, if Grace really wanted to make sure her pictures of her dog were pushed to Git, she might write '!dog.PNG' to ensure git did not ignore that picture. 
 
-The rules can seem confusing at times, but it's hard to go wrong - usually, there are at least 10 ways to ignore any given file you want to ignore. Moreover, the easiest thing to do to understand all of the syntax involved in writing .gitignores might be to visit Atlassian has a wonderful table of all of the various syntactical tricks you can use in your own gitignores, linked [here](https://www.atlassian.com/git/tutorials/gitignore). 
+The rules can seem confusing at times, but it's hard to go wrong - usually, there are at least 10 ways to ignore any given file you want to ignore. Moreover, if you're still confused, you might visit Atlassian, which has a wonderful table of all of the various syntactical tricks you can use in your own gitignores, linked [here](https://www.atlassian.com/git/tutorials/gitignore). 
 
-To save you time, the wonderful [NaLette Brodnax](https://www.iq.harvard.edu/people/nalette-brodnax) has created a template .gitignore file which you can use to declutter your github repos. Using it requires three steps:
+Lastly (and most importantly), to save you time, the wonderful [NaLette Brodnax](https://www.iq.harvard.edu/people/nalette-brodnax) has created a template .gitignore file which you can use to declutter your GitHub repos. Using it requires three steps:
 
-Step 1: Download the file "template.gitignore" from [here](placeholder). It should look something like this when you open it:
+Step 1: Download the file "template.gitignore" from [here](.\template.gitignore). It should look something like this when you open it:
 
 ![](Images/gitignore.PNG)
 
@@ -244,7 +232,7 @@ Step 3: Right click on the 'template.gitignore' file in the folder and delete th
 
 ![A .gitignore file](Images\gitignore2.PNG)
 
-It has no name, but it really will do what it is intended to do.
+It has no name, but it will serve its intended purpose.
 
 If you decide to create your own .gitignore file, you can follow very similar steps. 
 
@@ -258,13 +246,15 @@ If you decide to create your own .gitignore file, you can follow very similar st
 
 ### 3.4 Branching
 
+![](Images/branchinggraphic.PNG)
+
 As we discussed earlier, branches allow you to modify scripts while simaltaneous keeping the old versions easily accessible. In practice, the way this works is that the branch you select in git changes the way that scripts you open using explorer/finder appear. For example, if Carlos has the following script as the master (default) branch in Git, the script might look something like this when he opens it on his computer: 
 
-![*Version 1 of the Hello World Script*](Images/hello1.PNG)
+![*Master Branch of the Hello World Script*](Images/hello1.PNG)
 
 However, if he uses Git to switch to a test branch, he might open the exact same file using his file explorer and see the following:
 
-![*Version 2 of the Hello World Script*](Images/hello2.PNG)
+![*Test Branch of the Hello World Script*](Images/hello2.PNG)
 
 Let's discuss how to actually use git to branch.
 
@@ -288,7 +278,7 @@ Remember, switching to a branch will change the way the file shows up once you o
 Suppose you have created a test branch, tested it to make sure it works, and now want to combine it with the original master branch. To do this, use the "git checkout" command in combination with the "git merge" command as follows:
 ```{r, eval=FALSE}
 $ git checkout master
-$ git merge test
+$ git merge test_branch_name
 ```
 
 These two commands will merge the test branch into the master branch, meaning that the master branch at the end of the merging will look like the test branch. 
@@ -299,7 +289,7 @@ Sometimes, however, Git will be unable to push or pull branches because it is ge
 
 ![*Original Version of Loss Script*](Images/loss0.PNG)
 
-This function clearly has a bug in it, because it claims to return the squared error, but instead, it returns the absolute value of the error. Carlos notices this, and modifies the function so that it accurately reports that it calculates the absolute value, and pushes his modified version to Github:
+This function clearly has a bug in it, because it claims to return the squared error, but instead, it returns the absolute value of the error. Carlos notices this, and modifies the function so that it accurately reports that it calculates the absolute value, and pushes his modified version to GitHub:
 
 ![*Carlos's Pushed Version of Loss Script*](Images/lossCarlos.PNG)
 
@@ -307,13 +297,13 @@ But before Grace realizes Carlos has modified the script, she also fixes the bug
 
 ![*Grace's Modified Version of Loss Script*](Images/lossGrace.PNG)
 
-Git is smart, so When Grace tries to push her version to github, git will recognize that the two versions of the script conflict. As a result, it will throw the following error:
+Git is smart, so when Grace tries to push her version to GitHub, Git will recognize that the two versions of the script conflict. As a result, it will throw the following error:
 
 ```{r, eval=FALSE}
 C:\Users\gracesmith\Documents\R\repo_name>git push
-To https://github.com/gracesmith/repo_name
+To https://GitHub.com/gracesmith/repo_name
  ! [rejected]        master -> master (fetch first)
-error: failed to push some refs to 'https://github.com/gracesmith/repo_name'
+error: failed to push some refs to 'https://GitHub.com/gracesmith/repo_name'
 hint: Updates were rejected because the remote contains work that you do
 hint: not have locally. This is usually caused by another repository pushing
 hint: to the same ref. You may want to first integrate the remote changes
@@ -321,7 +311,7 @@ hint: (e.g., 'git pull ...') before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 ```
 
-Effectively, Git recognizes that Carlos has made modifications to the script which were pushed to Github that Grace doesn't have. This usually happens *when two programmers modify exactly the same line in the single script*, such as line 6 in the above examples. To solve this problem, Grace should follow Git's advice, and try the "git pull" command. This will lead to the following message from git:
+Effectively, Git recognizes that Carlos has made modifications to the script which were pushed to GitHub that Grace doesn't have. This usually happens *when two programmers modify exactly the same line in the single script*, such as line 6 in the above examples. To solve this problem, Grace should follow Git's advice, and try the "git pull" command. This will lead to the following message from git:
 
 ```{r, eval=FALSE}
 C:\Users\gracesmith\Documents\R\repo_name>git pull
@@ -329,7 +319,7 @@ remote: Counting objects: 3, done.
 remote: Compressing objects: 100% (3/3), done.
 remote: Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
 Unpacking objects: 100% (3/3), done.
-From https://github.com/gracesmith/repo_name
+From https://GitHub.com/gracesmith/repo_name
    e719863..59fc0ba  master     -> origin/master
 Auto-merging scriptname.R
 CONFLICT (content): Merge conflict in scriptname.R
@@ -340,17 +330,17 @@ Again, Git is letting Grace know that it sees there's a conflict and that Git ne
 
 ![*Conflicted Version of Loss Script*](Images/lossConflict.PNG)
 
-The "<<<<" and ">>>" lines are in the script to signal the beginning and end of a merge conflict, whereas the "===" line separates the two different versions. On the top is Grace's version and on the bottom is Carlos's. To resolve the merge conflict, Grace should manually select the two lines she prefers and then delete all of the "<, =, >" symbols to let Git know that the conflict has been resolved. Then, she can commit and push the file to Git, and she'll be good to go!
+The "<<<<" and ">>>>" lines are in the script to signal the beginning and end of a merge conflict, whereas the "===" line separates the two different versions. On the top is Grace's version and on the bottom is Carlos's. To resolve the merge conflict, Grace should manually select the two lines she prefers and then delete all of the "<, =, >" symbols to let Git know that the conflict has been resolved. Then, she can commit and push the file to Git, and she'll be good to go!
 
 Overall: merge conflicts are rather annoying and can be confusing, so the best way to avoid them is to clearly deliniate which programmers will be working on which sections of which scripts. This will prevent Git (and you) from getting confused.  
 
 ### 3.6 Tips and Tricks
 
-Git can be confusing, but there are three general rules of thumb you can follow to figure out any bugs that come up:
+Git can be confusing, but there are three general rules of thumb you can follow to figure out any bugs that come up.
 
 1. Git is super smart. If there's a bug and Git is recommending a particular way of fixing it, there's a very high chance that Git is right. 
 
-2. Use the git status command. After entering git status, git will give you a rundown of the status of the entire repository.  
+2. Use the git status command. After entering git status, Git will give you a rundown of the status of the entire repository.  
 
 3. If that doesn't work (or you don't understand what is going on), you can always copy and paste the error from the command line into Google and reference stackexchange. There is a wealth of online help!
 
@@ -360,21 +350,19 @@ Try not to worry too much! Git almost exclusively *adds information*, meaning th
 
 Lastly, there are a couple of cheat sheets that you can use to make your life easier. 
 
-* [Karl Broman's tutorial](http://kbroman.org/github_tutorial/pages/init.html) runs you through initializing a repository 
+* [Karl Broman's tutorial](http://kbroman.org/GitHub_tutorial/pages/init.html) runs you through initializing a repository 
 
-* [This official github cheat sheet](https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf) lists all of the general commands you'll need
+* [This official GitHub cheat sheet](https://services.GitHub.com/on-demand/downloads/GitHub-git-cheat-sheet.pdf) lists all of the general commands you'll need
 
 ## 4. Further reading
 
-If you're interested in learning more about Git and Github, you might want to take a look at the following resources:
+If you're interested in learning more about Git and GitHub, you might want to take a look at the following resources:
 
-* The Software Carpentry Foundation has a great mid level git use tutorial [here](https://swcarpentry.github.io/git-novice/)
+* The Software Carpentry Foundation has a great mid level Git tutorial [here](https://swcarpentry.GitHub.io/git-novice/)
 
-* Atlassian has some wonderful advanced git use tutorials [here](https://www.atlassian.com/git/tutorials/advanced-overview)
+* Atlassian has some wonderful advanced Git tutorials [here](https://www.atlassian.com/git/tutorials/advanced-overview)
 
 ## 5. Sources cited
 
-http://kbroman.org/github_tutorial/pages/init.html
-https://git-scm.com/book/en/v2/Getting-Started-Git-Basics
-https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup 
-https://www.git-tower.com/learn/git/faq/restore-repo-to-previous-revision
+We used [Karl Broma's Book](http://kbroman.org/GitHub_tutorial/pages/init.html), a [Git-Tower post](https://www.git-tower.com/learn/git/faq/restore-repo-to-previous-revision
+), and the GitHub documentation [here](https://git-scm.com/book/en/v2/Getting-Started-Git-Basics) and  [here](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup) to help write this guide. 
