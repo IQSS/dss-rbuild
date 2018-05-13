@@ -12,6 +12,8 @@ output:
 
 ---
 
+If you want to skip the introduction, the next page in this guide is the guide to [RStudio](./rstudioguide.html). There's also a table of contents in section $2$. 
+
 ### 1. What is a package?
 
 Let's say you wrote a script like this in R and wanted to make it easy for others to use.
@@ -20,12 +22,16 @@ Let's say you wrote a script like this in R and wanted to make it easy for other
 
 As you can probably tell, other users may not understand exactly what this script is supposed to do and how to use it. Even if they take the time to read through the source code and eventually figure it out, it might have been faster for them to just write the functions themselves. Packages solve this problem. Loosely speaking, *packages* are structured collections of code which aim to make your code easily sharable and reproducible. For example, any good package includes *documentation* which describes its functionality and use. Developing packages can be painstaking, but thankfully there are lots of tools today which make it extremely simple to create robust packages. This guide aims to run through how to use those tools and develop packages in R.
 
-### 2. What's the structure of this guide?
+### 2. Table of Contents
 
 This guide is organized into two big parts. 
 
-1. In the first part of this guide, we'll run through how to use two pieces of software - [RStudio](./rstudioguide.Rmd) and [Github](./githubguide.Rmd) - which make developing packages a lot easier. 
-2. In the second part of this guide, we'll run through [the proper way to structure packages](./packagedev.Rmd) and [the proper way to test them](./testingguide.Rmd) during development. 
+1. In the first part of this guide, we'll run through how to use two pieces of software  which make developing packages a lot easier. 
+    a. First, we'll talk about [RStudio](./rstudioguide.html).
+    b. Then we'll talk about [Github](./githubguide.html).
+2. In the second part of this guide, we'll run through:
+    a. [The proper way to structure packages](./packagedev.html)
+    b. and then [the proper way to test packages](./testingguide.html) during development. 
 
 Also, this guide is still under development, and we take feedback! If you find anything confusing or think the guide misses important contant, please email amspector100@gmail.com.
 
