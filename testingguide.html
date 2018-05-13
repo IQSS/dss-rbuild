@@ -223,7 +223,7 @@ div.tocify {
 </div>
 
 
-<p>This page will walk you through the proper way to test packages using the testthat helper package. Another quick reminder: for those who do not want to use RStudio, it’s worth following along by reading the <a href="https://www.rdocumentation.org/packages/testthat/versions/2.0.0">testthat documentation</a> and <a href="https://www.rdocumentation.org/packages/testthat/versions/2.0.0/source">source code</a>. If you’ve installed and read through the RStudio guide, you’re good to go!</p>
+<p>The previous page in the guide discussed <a href="./packagedev.Rmd">package structure</a>. The next page in the guide is the <a href="./conclusion.Rmd">Conclusion</a>. This page will walk you through the proper way to test packages using the testthat helper package. Another quick reminder: for those who do not want to use RStudio, it’s worth following along by reading the <a href="https://www.rdocumentation.org/packages/testthat/versions/2.0.0">testthat documentation</a> and <a href="https://www.rdocumentation.org/packages/testthat/versions/2.0.0/source">source code</a>. If you’ve installed and read through the RStudio guide, you’re good to go!</p>
 <div id="why-should-you-test" class="section level2">
 <h2>1. Why should you test?</h2>
 <p>Suppose Grace has created a package and has been using it for a while, but she decides she’d like to modify one function to improve it. She modifies her function, tests it a bit, and then pushes her package to GitHub. Yet two weeks later, Carlos discovers that the changes she made created a bug in <em>another</em> function in the package! This situation is very annoying, especially if Carlos has no idea what has caused the bug or how to fix it.</p>
