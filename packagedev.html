@@ -225,6 +225,7 @@ div.tocify {
 
 <p>The previous page in the guide discussed <a href="./githubguide.html">GitHub</a>. The next page in the guide will discuss <a href="./testingguide.html">testing packages</a>. This page will walk you through the structure, motivation, and process of building packages in R. We’d like to extend a huge thank you to Hadley Wickham’s book <a href="http://r-pkgs.had.co.nz/r.html#r">R packages</a>; this part of the guide is basically a significantly condensed and simplified version of that book. A huge portion of the credit should go to him.</p>
 <p>A quick reminder for readers who do not want to use RStudio: this part of the guide relies on the devtools package, so if you can’t use RStudio, it’s worth following along by looking at the <a href="https://www.rdocumentation.org/packages/devtools/versions/1.13.3/source">source code</a> and <a href="https://www.rdocumentation.org/packages/devtools/versions/1.13.3">documentation</a> for devtools.</p>
+<p>Lastly, you can find the ‘devex’ example package linked <a href="https://github.com/amspector100/packageguidelines/tree/master/devex">here, on GitHub</a>, if you’d like to look through it while reading the guide.</p>
 <div id="motivation" class="section level2">
 <h2>1. Motivation</h2>
 <p>Imagine Grace has built an architecture for aggregating polling data, and you would like to use it in your own research project. So you go to GitHub and you download Grace’s repository, hoping to build on her research. One of the scripts you download looks like this.</p>
@@ -286,6 +287,22 @@ general_sqrt &lt;- function (x) {
 <p>The namespace is a bit more complicated than the other parts of the package structure. The purpose of the namespace is make sure your package works in combination with other packages. For example, if your package includes some data labelled ‘lm’, a good namespace will ensure that using that data in conjunction with the R stats package (which has a function called ‘lm’) will <em>not</em> throw an error. How exactly the namespace does this is a bit complicated and beyond the scope of this guide, so if you’re dying for more specifics, you should <a href="http://r-pkgs.had.co.nz/namespace.html">read through this wonderful page</a>. Thankfully, Roxygen2 will automatically generate a namespace for you - we’ll discuss how to do this a little later.</p>
 <p>Remember: the namespace will help your package play nice with others in the event of name conflicts, but it’s still better to name your functions so that the they don’t overlap with names of other commonly used functions if possible.</p>
 <p>Now that we’ve gone through the overall structure of packages, we’ll walk you through what Grace <em>should</em> have done - the process of building an R package from start to finish.</p>
+</div>
+<div id="the-readme" class="section level3">
+<h3>2.5 The README</h3>
+<p>The README file is a bit different than the others, because your package will actually work fine even if you don’t have one. However, if you want other people to ever use your package, it’s best to have a README. The purpose of a README is basically to bridge the gap between the DESCRIPTION and the actual documentation in your package. In other words, someone using your package might know what it does in a general sense from your DESCRIPTION, but they won’t necessarily know exactly how to set up the package or how to use specific functions. The README takes care of that. In general, READMEs should do at least two things, with a couple of optional ones:</p>
+<p>(Important):</p>
+<ol style="list-style-type: decimal">
+<li>Offer a longer (one to three paragraph) description of the package</li>
+<li>Help users install and set up the package</li>
+</ol>
+<p>(Optional from here on):</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Tell developers what to do if they want to contribute to your package</li>
+<li>Help contributers figure out how to run the packages’ unit tests (we’ll talk more about unit tests in the next section)</li>
+<li>Offer some acknowledgements</li>
+</ol>
+<p>This template linked <a href="https://gist.github.com/PurpleBooth/109311bb0361f32d87a2">here</a> is pretty good. Again, because your package will technicaly function without your README, the actual structure and content of a README can be flexible. However, just remember that if you don’t have a README which outlines why and how to use your package, other developers are unlikely to want to use it.</p>
 </div>
 </div>
 <div id="the-walkthrough" class="section level2">

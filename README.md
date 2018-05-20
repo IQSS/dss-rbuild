@@ -9,7 +9,7 @@ This aims to create guidelines to help individuals develop packages using R. It 
 
 ## Contents
 
-[Introduction](./introduction.Rmd)
+[Introduction](./index.Rmd)
 
 [Brief introduction to rstudio](./rstudioguide.Rmd)
 
@@ -21,4 +21,6 @@ This aims to create guidelines to help individuals develop packages using R. It 
 
 [Conclusion](./conclusion.Rmd)
 
-This repo also includes the *devex* package in a subdirectory, which serves as a very simple example of a package in R. 
+This repo also includes the *devex* package in a subdirectory, which serves as a very simple example of a package in R. You can find it [at this link](https://github.com/amspector100/packageguidelines/tree/master/devex). 
+
+For more information about the guide, see the [Introduction](./index.Rmd). For more information about the devex package, see either the DESCRIPTION file or the Readme in [this subdirectory](https://github.com/amspector100/packageguidelines/tree/master/devex). 
