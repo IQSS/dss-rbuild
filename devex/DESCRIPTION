@@ -1,7 +1,6 @@
 Package: devex
 Type: Package
 Title: Package Development Example
-Date: 2018-03-01
 Version: 0.1.0
 Author: Asher Spector
 Maintainer: Asher Spector <amspector100@gmail.com>
@@ -16,3 +15,4 @@ Imports:
   ggplot2
 Suggests: 
   testthat,
+URL: amspector100.github.io

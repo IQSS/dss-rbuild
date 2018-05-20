@@ -14,6 +14,8 @@ output:
 
 The previous page in the guide discussed [package structure](./packagedev.html). The next page in the guide is the  [Conclusion](./conclusion.html). This page will walk you through the proper way to test packages using the testthat helper package. Another quick reminder: for those who do not want to use RStudio, it's worth following along by reading the [testthat documentation](https://www.rdocumentation.org/packages/testthat/versions/2.0.0) and [source code](https://www.rdocumentation.org/packages/testthat/versions/2.0.0/source). If you've installed and read through the RStudio guide, you're good to go!
 
+You can find the 'devex' example package linked [here, on GitHub](https://github.com/amspector100/packageguidelines/tree/master/devex), if you'd like to look through it while reading the guide. 
+
 ## 1. Why should you test?
 
 Suppose Grace has created a package and has been using it for a while, but she decides she'd like to modify one function to improve it. She modifies her function, tests it a bit, and then pushes her package to GitHub. Yet two weeks later, Carlos discovers that the changes she made created a bug in *another* function in the package! This situation is very annoying, especially if Carlos has no idea what has caused the bug or how to fix it. 
@@ -258,6 +260,36 @@ Before you *build* your package, you should *check* it using the automated check
 ![](Images/TestSS/autobuildresults.PNG)
 
 Although it's not necessary to understand every check that RStudio runs, it's worth noting that every check it performs is relatively important, and if RStudio signals any warnings or errors, it's definitely worth fixing them. It's also probably worth fixing any "notes" it issues. If you're curious, you can read more about what each type of check in the automated check does (here)[http://r-pkgs.had.co.nz/check.html#check].
+
+### 2.7: Bonus: The goodpractice Package
+
+The aforementioned automated checking system for R is pretty good, but there is a slightly more comprehensive version: the goodpractice package. The goodpractice package has an informative name - the entire purpose of the package is to check whether your package follows proper package development conventions and procedures (i.e. whether your package follows good practices). For example, running the goodpractice package on the devex package yielded the following helpful results:
+
+![](Images/TestSS/goodpractice1.PNG)
+
+Using the goodpractice package to get a result like that is very simple. If you don't have RStudio, using goodpractice is well documented in [vignettes on Github](https://github.com/MangoTheCat/goodpractice/blob/master/vignettes/goodpractice.Rmd), and of course all of the source code is available on GitHub and [here](https://www.rdocumentation.org/packages/goodpractice/versions/1.0.2/source). For RStudio users, we'll through the key points of using goodpractice below.
+
+To install the goodpractice package, just run the following command in the RStudio console:
+```{r, eval=FALSE}
+install.packages('goodpractice')
+```
+
+Once you've installed the goodpractice package, you basically only need to know a single function from it: the 'gp()' or 'goodpractice()' functions (which do exactly the same thing). These functions will run comprehensive automated checks on your package, and take exactly one input, the path of your built package. However, it's important to note that the path of your *built* package is not identical to the path of the repo containing it. For example, I work on the 'devex' package in "C:/Users/amspe/Documents/R/packageguidelines/devex", but the built package lives at "C:/Users/amspe/Documents/R/win-library/3.5/devex". For goodpractice to work, you need to use the paths of the *second* form, i.e. where the built package lives. If you don't know this path immediately, you can use the "system.file" function to retrieve it for you, as demonstrated below.
+
+```{r, eval = FALSE}
+# Retrieve path
+package_path <- system.file(package = 'devex')
+
+# Check package
+library(goodpractice)
+gp(package_path)
+```
+
+And that's it! The goodpractice package is a bit picky, so it's okay to leave a few concerns unresolved, but in general it gives good advice. If you're very diligent, you might eventually see a result like this:
+
+![](Images/TestSS/goodpractice2.PNG)
+
+which signals that your package conforms to all goodpractices. Lastly, although it's beyond the scope of this guide, you ought to know that you can create custom checks using the goodpractice package, as documented [here](https://github.com/MangoTheCat/goodpractice/blob/master/vignettes/custom_checks.Rmd).
 
 ## 3. Integrated Tests
 

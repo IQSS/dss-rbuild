@@ -18,6 +18,8 @@ This guide has gone through a solid amount of material. We've covered:
 3. The proper way to structure and develop packages using RStudio and devtools (and roxygen2)
 4. The proper way to test packages using testthat (and devtools)
 
+Again, to see a the example 'devex' package, go to [this GitHub link](https://github.com/amspector100/packageguidelines/tree/master/devex), which you can inspect online or clone.
+
 #### Advanced tools for R
 
 As you build larger and more complex packages, you might need a deeper understanding of package structure and development in R than the one provided in this package. For a slightly more in-depth explanation of package development, you'll want to reference Hadley Wickham's [R Packages](http://r-pkgs.had.co.nz/). For a serious dive into package mechanics, you might want to consult the official [R Extensions Manual](https://cran.r-project.org/doc/manuals/R-exts.html#Creating-R-packages), which is published by CRAN. However, at least for mid-sized packages, this guide probably has given you most of what you need to know.
