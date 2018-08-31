@@ -1,13 +1,19 @@
 ---
 title: "Package Development in R"
 author: "Asher Spector"
+date: "August 31, 2018"
 description: "This guide walks through the process of developing R package"
 github-repo: "amspector100/packageguidelines"
 ---
 
+<style>
+body {
+text-align: justify}
+</style>
+
 # Introduction
 
-If you want to skip the introduction, the next page in this guide is the guide to [RStudio](./rstudioguide.html). You might also want to look at the Table of Contents below. You can find the 'devex' example package linked [here, on GitHub](https://github.com/amspector100/packageguidelines/tree/master/devex). 
+If you want to skip the introduction, the next page in this guide is the guide to [RStudio](./development-with-rstudio.html). You might also want to look at the Table of Contents below. You can find the 'devex' example package linked [here, on GitHub](https://github.com/amspector100/packageguidelines/tree/master/devex). 
 
 ## What is a package?
 
@@ -22,11 +28,11 @@ As you can probably tell, other users may not understand exactly what this scrip
 This guide is organized into two big parts. 
 
 1. In the first part of this guide, we'll run through how to use two pieces of software  which make developing packages a lot easier. 
-    a. First, we'll talk about [RStudio](./rstudioguide.html).
-    b. Then we'll talk about [GitHub](./githubguide.html).
+    a. First, we'll talk about [RStudio](./development-with-rstudio.html).
+    b. Then we'll talk about [GitHub](./github.html).
 2. In the second part of this guide, we'll run through:
-    a. [The proper way to structure packages](./packagedev.html)
-    b. and then [the proper way to test packages](./testingguide.html) during development. 
+    a. [The proper way to structure packages](./package-structure.html)
+    b. and then [the proper way to test packages](./testing.html) during development. 
     
 Lastly, we also wrote a small development example package (called 'devex') which you can find linked [here, on GitHub](https://github.com/amspector100/packageguidelines/tree/master/devex). If you haven't used GitHub yet, don't worry - we'll go over how to use GitHub before discussing package structure. 
 

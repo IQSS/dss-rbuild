@@ -25,6 +25,7 @@
 <meta name="author" content="Asher Spector">
 
 
+<meta name="date" content="2018-08-31">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -179,7 +180,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.3.3" data-path="testing.html"><a href="testing.html#setting-up-integrated-tests"><i class="fa fa-check"></i><b>5.3.3</b> Setting up Integrated Tests</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="testing.html"><a href="testing.html#tips-and-tricks-2"><i class="fa fa-check"></i><b>5.4</b> Tips and Tricks</a></li>
-<li class="chapter" data-level="5.5" data-path="testing.html"><a href="testing.html#sources-cited."><i class="fa fa-check"></i><b>5.5</b> Sources cited.</a></li>
+<li class="chapter" data-level="5.5" data-path="testing.html"><a href="testing.html#sources-cited-2"><i class="fa fa-check"></i><b>5.5</b> Sources cited</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>6</b> Conclusion</a><ul>
+<li class="chapter" data-level="6.1" data-path="conclusion.html"><a href="conclusion.html#advanced-tools-for-r"><i class="fa fa-check"></i><b>6.1</b> Advanced tools for R</a></li>
+<li class="chapter" data-level="6.2" data-path="conclusion.html"><a href="conclusion.html#python-and-other-languages"><i class="fa fa-check"></i><b>6.2</b> Python and Other Languages</a></li>
 </ul></li>
 </ul>
 
@@ -201,10 +206,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="header">
 <h1 class="title">Package Development in R</h1>
 <h4 class="author"><em>Asher Spector</em></h4>
+<h4 class="date"><em>August 31, 2018</em></h4>
 </div>
 <div id="introduction" class="section level1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
-<p>If you want to skip the introduction, the next page in this guide is the guide to <a href="./rstudioguide.html">RStudio</a>. You might also want to look at the Table of Contents below. You can find the ‘devex’ example package linked <a href="https://github.com/amspector100/packageguidelines/tree/master/devex">here, on GitHub</a>.</p>
+<p>If you want to skip the introduction, the next page in this guide is the guide to <a href="./development-with-rstudio.html">RStudio</a>. You might also want to look at the Table of Contents below. You can find the ‘devex’ example package linked <a href="https://github.com/amspector100/packageguidelines/tree/master/devex">here, on GitHub</a>.</p>
 <div id="what-is-a-package" class="section level2">
 <h2><span class="header-section-number">1.1</span> What is a package?</h2>
 <p>Let’s say you wrote a script like this in R and wanted to make it easy for others to use.</p>
@@ -220,13 +226,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ol style="list-style-type: decimal">
 <li>In the first part of this guide, we’ll run through how to use two pieces of software which make developing packages a lot easier.
 <ol style="list-style-type: lower-alpha">
-<li>First, we’ll talk about <a href="./rstudioguide.html">RStudio</a>.</li>
-<li>Then we’ll talk about <a href="./githubguide.html">GitHub</a>.</li>
+<li>First, we’ll talk about <a href="./development-with-rstudio.html">RStudio</a>.</li>
+<li>Then we’ll talk about <a href="./github.html">GitHub</a>.</li>
 </ol></li>
 <li>In the second part of this guide, we’ll run through:
 <ol style="list-style-type: lower-alpha">
-<li><a href="./packagedev.html">The proper way to structure packages</a></li>
-<li>and then <a href="./testingguide.html">the proper way to test packages</a> during development.</li>
+<li><a href="./package-structure.html">The proper way to structure packages</a></li>
+<li>and then <a href="./testing.html">the proper way to test packages</a> during development.</li>
 </ol></li>
 </ol>
 <p>Lastly, we also wrote a small development example package (called ‘devex’) which you can find linked <a href="https://github.com/amspector100/packageguidelines/tree/master/devex">here, on GitHub</a>. If you haven’t used GitHub yet, don’t worry - we’ll go over how to use GitHub before discussing package structure.</p>
