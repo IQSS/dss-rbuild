@@ -1,19 +1,8 @@
----
-title: "rstudioguide"
-author: "Asher Spector"
-date: "February 24, 2018"
-output: 
-  html_document:
-    toc: true
-    toc_depth: 3
-    toc_float:
-      collapsed: true
-      smooth_scroll: false
----
+# Development with RStudio
 
 The previous page in the guide was the [Introduction](./index.html). The next page in the guide discusses [GitHub](./githubguide.html). This page will help you set up and install RStudio (we assume you are already somewhat familiar with R). If you already have RStudio installed and are comfortable using it, feel free to skip this section. Lastly, if you really don't want to use RStudio, we'll offer some alternatives in the first main section.
 
-## 1. Why use RStudio?
+## Why use RStudio?
 
 RStudio has two main advantages, which is why we recommend it for package development.
 
@@ -21,7 +10,7 @@ First, RStudio is generally built to make users' lives easier. It integrates doc
 
 Second, RStudio has a suite of tools which make it easy to build well-documented, structured packages. Since this guide discusses package development, RStudio is the natural development environment. 
 
-### 1.1 What if you don't want to use RStudio?
+### What if you don't want to use RStudio?
 
 (If you're planning to use RStudio, you can skip this section).
 
@@ -29,9 +18,9 @@ Some users might not want to use RStudio. That's not the end of the world - you 
 
 Here are the links to the current (as of 5.4.18) versions of the [devtools documentation](https://www.rdocumentation.org/packages/devtools/versions/1.13.3) and [source code](https://www.rdocumentation.org/packages/devtools/versions/1.13.3/source), and the [testthat documentation](https://www.rdocumentation.org/packages/testthat/versions/2.0.0) and [source code](https://www.rdocumentation.org/packages/testthat/versions/2.0.0/source). If you don't use RStudio, you'll probably want to look through these as you work through the guide. 
 
-## 2. Setting up RStudio
+## Setting up RStudio
 
-### 2.1 Setting up R
+### Setting up R
 
 Presumably you've already been working with R, but you should make sure you have a recent enough version of R intalled. To do so, type "R.Version()" into the editor you've been working with previously. It should return an output titled "$version.string$", for example:
 ```{r}
@@ -48,7 +37,7 @@ If the number after the R version string is anything lower than 3.0.1, you'll ha
 
 Lastly, updating R on Windows can be a bit tricky. If you use Windows, you can also use the installr package to quickly update R, as documented [here](https://www.r-statistics.com/2015/06/a-step-by-step-screenshots-tutorial-for-upgrading-r-on-windows/). However, if you are having trouble installing the installr package, you can always just follow the instructions above. 
 
-### 2.2 Downloading Development Tools
+### Downloading Development Tools
 
 You'll also want to download some packages and tools that are important for package development. If you are running Windows, you can do so by following the instructions below:
 
@@ -65,7 +54,7 @@ install.packages('devtools')
 install.packages('roxygen2')
 ```
 
-### 2.3 Setting up RStudio
+### Setting up RStudio
 
 To download and set up RStudio, follow the instructions below:
 
@@ -79,9 +68,9 @@ To download and set up RStudio, follow the instructions below:
 
 and now you're ready!
 
-## 3. Basic RStudio Use
+## Basic RStudio Use
 
-### 3.1 Screen Breakdown
+### Screen Breakdown
 
 RStudio will split your screen into four parts, as shown below. We'll refer to them as the *script*, the *environment*, the *shell* or *console*, and the *Viewer.*
 
@@ -100,7 +89,7 @@ On the upper right hand corner of the screen, you can see the *environment* you'
 
 On the bottom right hand side is the *Viewer.* Any plots you generate in R will automatically show up there. Additionally, as we'll discuss later, documentation of functions and packages will appear in the right hand corner. You can also use it to see the file structure of your working directory and the packages you're using by clicking "files" or "packages.""
 
-### 3.2 Basic Commands
+### Basic Commands
 
 Presumably you're already familiar with R, but you should know a couple of commands specific to RStudio:
 
@@ -140,7 +129,7 @@ install.packages('mosaic')
 
 A list of useful packages can be found [here](https://support.rstudio.com/hc/en-us/articles/201057987-Quick-list-of-useful-R-packages). 
 
-## 4. Further Reading/Sources Cited
+## Further Reading/Sources Cited
 
 To read more about using R, [take a look at the following website, built by Chapman and Hall](http://adv-r.had.co.nz/)
 

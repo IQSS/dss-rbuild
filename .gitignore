@@ -1,3 +1,6 @@
+# Build outputs from bookdown
+_book/*/
+
 
 # History files
 .Rhistory
