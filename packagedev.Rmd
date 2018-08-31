@@ -1,24 +1,12 @@
----
-title: "Package Development in R"
-author: "Asher Spector"
-date: "March 2, 2018"
-output: 
-  html_document:
-    toc: true
-    toc_depth: 3
-    toc_float:
-      collapsed: true
-      smooth_scroll: false
+# Package Structure
 
----
-
-The previous page in the guide discussed [GitHub](./githubguide.html). The next page in the guide will discuss [testing packages](./testingguide.html). This page will walk you through the structure, motivation, and process of building packages in R. We'd like to extend a huge thank you to Hadley Wickham's book [R packages](http://r-pkgs.had.co.nz/r.html#r); this part of the guide is basically a significantly condensed and simplified version of that book. A huge portion of the credit should go to him. 
+The previous page in the guide discussed [GitHub](./github.html). The next page in the guide will discuss [testing packages](./testing.html). This page will walk you through the structure, motivation, and process of building packages in R. We'd like to extend a huge thank you to Hadley Wickham's book [R packages](http://r-pkgs.had.co.nz/r.html#r); this part of the guide is basically a significantly condensed and simplified version of that book. A huge portion of the credit should go to him. 
 
 A quick reminder for readers who do not want to use RStudio: this part of the guide relies on the devtools package, so if you can't use RStudio, it's worth following along by looking at the [source code](https://www.rdocumentation.org/packages/devtools/versions/1.13.3/source) and [documentation](https://www.rdocumentation.org/packages/devtools/versions/1.13.3) for devtools.
 
 Lastly, you can find the 'devex' example package linked [here, on GitHub](https://github.com/amspector100/packageguidelines/tree/master/devex), if you'd like to look through it while reading the guide. 
 
-## 1. Motivation
+## Motivation
 
 Imagine Grace has built an architecture for aggregating polling data, and you would like to use it in your own research project. So you go to GitHub and you download Grace's repository, hoping to build on her research. One of the scripts you download looks like this. 
 
@@ -36,11 +24,11 @@ Lastly, and less obviously, you don't know what *version* of Grace's package thi
 
 Yet never fear - packages don't need to be this way! Most packages are extremely well-built and easy to use. In this section, we'll demonstrate how to make sure your packages are like those packages. 
 
-## 2. Solutions
+## Solutions
 
 In this section, we'll discuss the solutions to the problems outlined above. For each problem, we'll discuss the conceptual solution, and then we'll describe how the structure of R Packages allows users to integrate those solutions. Note that this section mostly just outlines package structure - we won't talk about actually creating things like documentation until the next couple sections. 
 
-### 2.1 Code Style
+### Code Style
 
 The first solution is to write code differently. The script above has a couple problems with style. Specifically, note the difference between the following two code samples:
 
@@ -76,7 +64,7 @@ general_sqrt <- function (x) {
 
 Clearly, the second example is a lot more readable and a lot easier to understand. Later, we'll talk about specific coding guidelines, but for now, just remember that the goal of programming style guides is to make your code *readable* and therefore *useable*. This will also make it a lot easier for others to fix and find bugs in your packaged code. 
 
-### 2.2 Documentation
+### Documentation
 
 Of course, nobody wants to read through packaged code in order to guess what a function does. Instead, packages also include documentation to tell users how to use different functions and objects developed in the package. For exampe, imagine you typed '?scalep' into the Console and got the following result:
 
@@ -84,11 +72,11 @@ Of course, nobody wants to read through packaged code in order to guess what a f
 
 This documentation tells you what the scalep function does, what kinds of inputs it needs, what kind of output it returns, and gives you examples of how to use it. Documentation makes packages usable, and is suprisingly easy to write using devtools and roxygen2, so it's a critical part of any package. 
 
-### 2.3 Description
+### Description
 
 The DESCRIPTION file of an R Package helps solve each one of the first three problems. It briefly outlines the purpose of the package, as well as the version of the pacakge and who maintains it. Perhaps most importantly for newer users, it also documents the dependencies of your package. For example, if you wrote a package which relies heavily on the boot package version 1.3-20, your description will document that, so your users don't have to spend hours searching for the exact package necessary to make your package work. 
 
-### 2.4 Namespace 
+### Namespace 
 
 The namespace is a bit more complicated than the other parts of the package structure. The purpose of the namespace is make sure your package works in combination with other packages. For example, if your package includes some data labelled 'lm', a good namespace will ensure that using that data in conjunction with the R stats package (which has a function called 'lm') will *not* throw an error. How exactly the namespace does this is a bit complicated and beyond the scope of this guide, so if you're dying for more specifics, you should [read through this wonderful page](http://r-pkgs.had.co.nz/namespace.html). Thankfully, Roxygen2 will automatically generate a namespace for you - we'll discuss how to do this a little later. 
 
@@ -96,7 +84,7 @@ Remember: the namespace will help your package play nice with others in the even
 
 Now that we've gone through the overall structure of packages, we'll walk you through what Grace *should* have done - the process of building an R package from start to finish. 
 
-### 2.5 The README
+### The README
 
 The README file is a bit different than the others, because your package will actually work fine even if you don't have one. However, if you want other people to ever use your package, it's best to have a README. The purpose of a README is basically to bridge the gap between the DESCRIPTION and the actual documentation in your package. In other words, someone using your package might know what it does in a general sense from your DESCRIPTION, but they won't necessarily know exactly how to set up the package or how to use specific functions. The README takes care of that. In general, READMEs should do at least two things, with a couple of optional ones:
 
@@ -113,9 +101,9 @@ The README file is a bit different than the others, because your package will ac
 
 This template linked [here](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) is pretty good. Again, because your package will technicaly function without your README, the actual structure and content of a README can be flexible. However, just remember that if you don't have a README which outlines why and how to use your package, other developers are unlikely to want to use it.
 
-## 3. The Walkthrough
+## The Walkthrough
 
-### Step 3.1: Initializing the Package
+### Initializing the Package
 
 RStudio makes it easy to create packages. To start, click File>New Project. Then, click "New Directory" when you see the screen below:
 
@@ -139,7 +127,7 @@ You should also go to "Tools > Project Options" and select the following options
 
 ![](Images/PackageSS/userox.PNG)
 
-### Step 3.2: Modifying the DESCRIPTION File
+### Modifying the DESCRIPTION File
 
 The DESCRIPTION file gives an extremely brief overview to the package. It includes critical information such as the author of the package, the title, a very short summary of its purpose, and the liscensing information. Double click on the "DESCRIPTION" file on in the files section to open and edit the DESCRIPTION tab. 
 
@@ -198,9 +186,9 @@ Once you know which packages to list in the 'suggests' section, you can list the
 
 In general, it's best to suggest functions instead of requiring them if you barely use them in your package. This will give users a bit more flexibility, because it won't force them to download packages they will probably never use. 
 
-### Step 3.3: Starting to Program
+### Starting to Program
 
-#### Step 3.3.1: General Coding Guidelines
+#### General Coding Guidelines
 
 All of your code should be in scripts in the 'R' file created in the RStudio package development environment, as shown below:
 
@@ -259,7 +247,7 @@ scalep <- function(d, x=1){
 
 You should also take care to organize your functions properly. It's probably a bad idea to stick them all into one script and title it "functions." Instead, you should organize functions by their purposes - for example, a variety of loss functions might go into a single script. Of course, some very complicated functions might deserve their own script. The file names of the script should be descriptive - for example, a script of loss functions might be named "loss_functions.R". 
 
-#### Step 3.3.2: Code Style
+#### Code Style
 
 Now let's talk about specific elements of code style. These are shortened and adapted from [Hadley Wickham's book on R package development](http://r-pkgs.had.co.nz/r.html), which in turn were adapted from Google's R style guide. For more advice on everything from naming variables to curly bracket placement, head to that aforementioned link.
 
@@ -388,7 +376,7 @@ Overall, different organizations and programmers have different styles and guide
 2. Whatever style guide you follow, follow it *consistently* to make your code readable
 3. You should generally adapt to follow the conventions of the organization you're working under/for
 
-### Step 3.3.3: Warnings and Simplicity
+### Warnings and Simplicity
 
 Consider the case of the scalep function, which currently takes a 2-column dataframe as an input, divides the second column by the first, and returns/graphs some scaled proportion of the quotient vector. One version of this function, which follows almost all of the guidelines above, might look like this:
 
@@ -473,7 +461,7 @@ scalep <- function(factors, divisors, constant = 1, graph = FALSE) {
 
 To summarize, this subsection thus contained three core ideas: (1) make your code simple, (2) make it easy to use by labeling arguments, and (3) always avoid silent errors. 
 
-### Step 3.4: Documenting your package
+### Documenting your package
 
 (Note: here, we describe how to document functions. For a more detailed description of how to document S3, S4, and reference classes, check out [this page](http://r-pkgs.had.co.nz/man.html).)
 
@@ -539,11 +527,11 @@ Once you've written all your documentation, it's fairly simple to check what it 
 
 After documenting your package, you can also click the '/man' folder to inspect the documentation html files Roxygen2 generates, but it will probably be less informative than simply typing ?[function name] into the console. 
 
-### Step 3.5 (Optional): Adding and Documenting Data
+### (Optional): Adding and Documenting Data
 
 Sometimes, you'll want to include data as part of your package, either to serve as an example for users or because your functions need it to work. Let's walk through how to include (and document) data in your package. Note that there are at least two kinds of data you should think about including, but for both kinds of data, you should generally save them as '.rdata' or '.rda' files (which are the same thing).
 
-#### Step 3.5.1: Including data which should be available to users
+#### Including data which should be available to users
 
 All of the data you want to be available to users should be saved in a folder called "data" inside your project. The way to do this is to write and run a script which loads your data into R and then uses the devtools function "use_data" to save it to a path inside 'data.' Even if you do not already have a folder called 'data' in your package, the use_data function will make it for you. Note that for this to work, your working directory must be set to the package you're writing, otherwise devtools won't know where to put your data. 
 
@@ -575,7 +563,7 @@ Data in your 'data' folder will effectively always be exported, so you always mu
 
 This should all look pretty similar to documenting functions. Note that '@format' is a tag which will allow you to describe the structure of a dataset, and it's good practice to list what each column measures in this section. The '@source' section describes where the data came from. Never write '@export' in this section, as data here is already automatically exported.
 
-#### Step 3.5.2: Including data for your functions: 
+#### Including data for your functions: 
 Some functions may rely on a predefined set of coefficients or other inputs which need to be included in the package. However, users shouldn't generally have access to such data because otherwise they might accidentally radically change the way your function works. It's best to put such data in 'R/sysdata.rda', because then users won't easily be able to access and accidentally modify it. As before, the way to include data in this way is to write a script which loads the data into R and then use the 'use_data' function to save it, but you should also include a parameter 'interior = TRUE' in the function call to let R know that this is interior, not exterior, data. For example, if one of Grace's functions functions depended on a matrix called "coefficients", he might run the following code:
 
 ```{r, eval=FALSE}
@@ -585,7 +573,7 @@ devtools::use_data(coefficients, interior = TRUE)
 
 Data in 'R/sysdata.rda' is never exported, so there's no need to document it. 
 
-### Step 3.6: Building Your Package
+### Building Your Package
 
 You're almost done at this point! You've written your functions, modified the description, documented your functions, and presumably exported some of them; you're now ready to *build* your package. Specifically, you should go to Build > Check Package. If you don't see any options under Build, you probably need to open your .Rproj file in the "file" section of RStudio (upon doing this, RStudio should restart briefly and then you will see more Build options).
 
@@ -593,7 +581,7 @@ Upon checking the package, RStudio will tell you if there are any warnings or er
 
 Lastly, you can go to Build > Install and Restart, and then RStudio will build your package, restart, and load your package into R (using the library command). Then, you can use your package!
 
-## 4. Tips and Tricks
+## Tips and Tricks
 
 First, there's a wonderful cheat sheet for package development linked [here](https://www.rstudio.com/wp-content/uploads/2015/06/devtools-cheatsheet.pdf).
 
@@ -601,7 +589,7 @@ Second, if you are looking for a quick (and very simple) example of a package, t
 
 Third, if you're having trouble, you can always just reference stackexchange. 
 
-## 5. Sources cited:
+## Sources cited:
 
 A huge thank you again to Hadley Wickham and his book R Packages, linked [here](http://r-pkgs.had.co.nz/intro.html). 
 

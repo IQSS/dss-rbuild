@@ -1,19 +1,8 @@
----
-title: "Using GitHub"
-author: "Asher Spector"
-date: "February 10, 2018"
-output: 
-  html_document:
-    toc: true
-    toc_depth: 3
-    toc_float:
-      collapsed: true
-      smooth_scroll: false
----
+# GitHub
 
-The previous page in the guide discussed [RStudio](./rstudioguide.html). The next page in the guide discusses [Package Structure in R](./packagedev.html). This page is an introduction to Git and GitHub for beginners. In it, we'll motivate Git/GitHub, and then discuss what precisely Git/GitHub do and how to use them.
+The previous page in the guide discussed [RStudio](./development-with-rstudio.html). The next page in the guide discusses [Package Structure in R](./package-structure.html). This page is an introduction to Git and GitHub for beginners. In it, we'll motivate Git/GitHub, and then discuss what precisely Git/GitHub do and how to use them.
 
-## 1. Why use Git/GitHub?
+## Why use Git/GitHub?
 
 Git and GitHub are actually two different things, and deserve their own sections. Before diving into specifics, however, we should talk about why Git/GitHub exist in the first place. Broadly, Git and GitHub are just tools that developers use to organize their code, which specifically solve three main organizational problems.
 
@@ -23,7 +12,7 @@ Second, imagine that farther along in the project, Grace decides that she needs 
 
 Third, suppose that once Grace and Carlos have finished their website, they want to publish all the statistical functions and tools they built so that other researchers can use those tools to reproduce Grace and Carlos's research. Putting all of their work on GitHub is probably the quickest and easiest way to make it accessible to other researchers.
 
-### 1.1 What is Git?
+### What is Git?
 
 ![](Images/gitgraphic.PNG)
 
@@ -36,17 +25,17 @@ Second, Git can create branches, or separate versions of code, on the computer i
 While she's working, Grace can use Git to move back and forth between the branches. Then, when she finishes designing and testing the new storage system, she can *merge* the two branches together, and Carlos's scripts will automatically start using the new storage system. 
 
 
-### 1.2 What is GitHub?
+### What is GitHub?
 
 Where Git creates *local* repositories on an individual computer, GitHub allows programmers to create *remote* repositories, stored online, for their code. This is pretty simple concept, but it's extroardinarily useful. It means that when Grace finishes updating a series of scripts, she can simply *push* (push means send) them to GitHub, and then Carlos can in one command *pull* (download) the modified versions onto his computer to work with them. GitHub provides other important tools, but we will not discuss those until later. 
 
-## 2. Setting up Git/GitHub
+## Setting up Git/GitHub
 
-### 2.1 Making a GitHub account
+### Making a GitHub account
 
 Signing up for a GitHub is fairly simple - just go to GitHub.com, click "sign up" in the upper right hand corner, and follow the instructions. We recommend, at least to begin with, getting a free version of GitHub.
 
-### 2.2 How to Install and Set Up Git
+### How to Install and Set Up Git
 
 Because Git is a form of *local* source control, it does require installation. To install Git onto your computer, go to one of the following sites:
 
@@ -71,9 +60,9 @@ You might not get explicit confirmation from the command line - for example, whe
 
 Now you're ready to start using Git/GitHub!
 
-## 3. Starting to use Git/GitHub
+## Starting to use Git/GitHub
 
-### 3.1 Creating Projects and Repositories
+### Creating Projects and Repositories
 
 The first step to using git is creating a project, or repository (repo for short). There are generally two ways to create a repo in Git. 
 
@@ -110,7 +99,7 @@ $ git init
 
 This sets up a local repository! We'll go over how to link a local repository set up this way to GitHub in the next section.
 
-### 3.2 Modifying Projects
+### Modifying Projects
 
 Say you have created some code in your project directory and want to add it to the repository. To do this, you need to use three commands: *git add*, *git commit*, and *git push.* Note that sending scripts to the local repository is (perhaps counterintuitively) known as *commiting* them, not adding them. 
 
@@ -147,7 +136,7 @@ $ git remote add origin https://GitHub.com/user_name/repository_name
 $ git push -u origin master
 ```
 
-### 3.3 Accessing older versions of code
+### Accessing older versions of code
 
 You should never be scared of Git/GitHub, because they only add information - they almost never delete it. In practice, this means that if you commit horrible changes to your code, you can easily revert to a previous version. For example, let's say Grace wrote some new functions for a script, deleted them and committed the deletes later on, but now wants the functions back. She can easily access the older script using Git. First, she should use the "git log" command to see what commits have been made recently.
 
@@ -186,7 +175,7 @@ $ git reset --soft b69a14b
 
 This will update the current version of the script to the b69a14b version, which Grace can then inspect and test until she's ready to commit it to Git/GitHub. Note that there is alos a "git reset --hard" option, which works the same way, but is a pretty serious action to take because it will effectively delete all the commits prior to the version being restored. The soft option is almost always a better choice. 
 
-### 3.4 The .gitignore file
+### The .gitignore file
 
 There's one more thing you should know about adding/modifying files that will make your life a lot easier. Sometimes, when modifying and commiting projects, you won't want to type out every individual file you've modified: you'll instead want to use the "git add ." command which will simply queue every modified file to be committed.
 
@@ -244,7 +233,7 @@ If you decide to create your own .gitignore file, you can follow very similar st
 
 .gitignore files aren't glamerous, but they really are important - nobody wants to work with cluttered repositories.
 
-### 3.4 Branching
+### Branching
 
 ![](Images/branchinggraphic.PNG)
 
@@ -283,7 +272,7 @@ $ git merge test_branch_name
 
 These two commands will merge the test branch into the master branch, meaning that the master branch at the end of the merging will look like the test branch. 
 
-### 3.5 Conflicts
+### Conflicts
 
 Sometimes, however, Git will be unable to push or pull branches because it is getting conflicting information from two users. For example, suppose Grace has written the following function, which calculates the squared error between two values:
 
@@ -334,7 +323,7 @@ The "<<<<" and ">>>>" lines are in the script to signal the beginning and end of
 
 Overall: merge conflicts are rather annoying and can be confusing, so the best way to avoid them is to clearly deliniate which programmers will be working on which sections of which scripts. This will prevent Git (and you) from getting confused.  
 
-### 3.6 Tips and Tricks
+### Tips and Tricks
 
 Git can be confusing, but there are three general rules of thumb you can follow to figure out any bugs that come up.
 
@@ -346,7 +335,7 @@ Git can be confusing, but there are three general rules of thumb you can follow 
 
 Try not to worry too much! Git almost exclusively *adds information*, meaning that you can always just go back and restore a previous version - you'll never lose your work.
 
-### 3.7 Cheat sheats
+### Cheat sheats
 
 Lastly, there are a couple of cheat sheets that you can use to make your life easier. 
 
@@ -354,7 +343,7 @@ Lastly, there are a couple of cheat sheets that you can use to make your life ea
 
 * [This official GitHub cheat sheet](https://services.GitHub.com/on-demand/downloads/GitHub-git-cheat-sheet.pdf) lists all of the general commands you'll need
 
-## 4. Further reading
+## Further reading
 
 If you're interested in learning more about Git and GitHub, you might want to take a look at the following resources:
 
@@ -362,7 +351,7 @@ If you're interested in learning more about Git and GitHub, you might want to ta
 
 * Atlassian has some wonderful advanced Git tutorials [here](https://www.atlassian.com/git/tutorials/advanced-overview)
 
-## 5. Sources cited
+##Sources cited
 
 We used [Karl Broma's Book](http://kbroman.org/GitHub_tutorial/pages/init.html), a [Git-Tower post](https://www.git-tower.com/learn/git/faq/restore-repo-to-previous-revision
 ), and the GitHub documentation [here](https://git-scm.com/book/en/v2/Getting-Started-Git-Basics) and  [here](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup) to help write this guide. 
