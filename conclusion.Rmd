@@ -1,16 +1,3 @@
----
-title: "Conclusion - What Now?"
-author: "Asher Spector"
-date: "May 5, 2018"
-output: 
-  html_document:
-    toc: true
-    toc_depth: 3
-    toc_float:
-      collapsed: true
-      smooth_scroll: false
----
-
 This guide has gone through a solid amount of material. We've covered:
 
 1. The motivation behind using RStudio and how to set up and use it

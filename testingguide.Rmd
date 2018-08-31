@@ -1,22 +1,10 @@
----
-title: "testingguide"
-author: "Asher Spector"
-date: "April 7, 2018"
-output: 
-  html_document:
-    toc: true
-    toc_depth: 3
-    toc_float:
-      collapsed: true
-      smooth_scroll: false
-
----
+# Testing
 
 The previous page in the guide discussed [package structure](./packagedev.html). The next page in the guide is the  [Conclusion](./conclusion.html). This page will walk you through the proper way to test packages using the testthat helper package. Another quick reminder: for those who do not want to use RStudio, it's worth following along by reading the [testthat documentation](https://www.rdocumentation.org/packages/testthat/versions/2.0.0) and [source code](https://www.rdocumentation.org/packages/testthat/versions/2.0.0/source). If you've installed and read through the RStudio guide, you're good to go!
 
 You can find the 'devex' example package linked [here, on GitHub](https://github.com/amspector100/packageguidelines/tree/master/devex), if you'd like to look through it while reading the guide. 
 
-## 1. Why should you test?
+## Why should you test?
 
 Suppose Grace has created a package and has been using it for a while, but she decides she'd like to modify one function to improve it. She modifies her function, tests it a bit, and then pushes her package to GitHub. Yet two weeks later, Carlos discovers that the changes she made created a bug in *another* function in the package! This situation is very annoying, especially if Carlos has no idea what has caused the bug or how to fix it. 
 
@@ -24,9 +12,9 @@ The solution to problems like this is to testing your package *systematically* a
 
 We'll split this page of the guide into two big parts. First, we'll talk creating automatic *unit tests*, which test individual blocks of code (usually individual functions or classes). Second, we'll talk about the process of *continuous integration* (CI), whch is a process designed to help you test your code continuously in collaboration with others without spending huge amounts of time waiting for testing to finish. Ideally, by the end of this guide, you should be aiming to make your packages *developer-proof* - i.e. if you have collaborators, or someone tries to fix your package, you can proactively prevent them from breaking anything important by developing high-quality tests and using a CI workflow.
 
-## 2. Unit Tests
+## Unit Tests
 
-### 2.1: What are unit tests?
+### What are unit tests?
 
 Tests compare the *expected* output of a block of code to its *actual* output. For example, the following test tests whether the "generalized square root" function actually returns $2$ as the square root of $4$.   
 
@@ -38,7 +26,7 @@ expect_equal(general_sqrt(4), complex(real = 2, imaginary = 0))
 
 We'll talk a little more about how exactly to create tests down below, but hopefully this makes the general concept clear (you've also probably been using the general concept as you program). 
 
-### 2.2: Setting up the testing environment
+### Setting up the testing environment
 
 Creating unit tests is actually quite easy, thanks to a package called 'testtthat' which works in combination with devtools. To begin, you should make sure 'testthat' is installed by running the following code:
 
@@ -56,7 +44,7 @@ This will do a couple of things. First, it will add 'testthat' to the Suggests p
 
 ![](Images/TestSS/devtoolstestthat.PNG)
 
-### 2.3: Expectations
+### Expectations
 
 Before discussing how to write unit tests, we need to properly describe an expectation. An expectation tests whether the actual output of a single function call is what the developer expected. The 'testthat' package has a number of functions which compare outputs to expected values. When calling one of these functions, one of two things can happen:
 
@@ -92,7 +80,7 @@ testthat::expect_is(sqrt(2), 'numeric')
 
 5. **expect_true** and **expect_false** respectively expect a statement to evaluate to true or false.
 
-### 2.4: Structure and Location of Unit Tests
+### Structure and Location of Unit Tests
 
 Each *unit test* (which is written in an R script) should use a couple of expectations to test a single core function. It should use the function "test_that" (from the "testthat" package). "test_that" takes two parameters: a string, which describes the test, and a couple of expectations, surrounded by curly braces. For example, the following code will test whether the general_sqrt function from the devex package returns a complex number. 
 
@@ -152,7 +140,7 @@ expect_warning(general_sqrt(c(2, 0)))
 
 To fix this, it might be worth adding in an extra line or two which ensures that the input to general_sqrt is as it should be (in order to prevent users from getting unexpected results).
 
-### 2.5: Tips for making good tests
+### Tips for making good tests
 
 Good tests have a couple of characteristics.
 
@@ -253,7 +241,7 @@ test_that('test sigmoid precision', {
 
 This test is a bit more interpretable and delivers a better error message.
 
-### 2.6: Automated Checks and Automated Testing
+### Automated Checks and Automated Testing
 
 Before you *build* your package, you should *check* it using the automated check feature in RStudio, which is really wonderful. Running an automated check will ensure your documentation is up to date, check a variety of other parts of your package, and most importantly, it will automatically run all of your unit tests. During and after the check, it will report which tests failed (and which lines of code caused those failures. Even your pakage passes all of its tests, you might still see additional warnings for other reasons, as exemplified below:
 
@@ -261,7 +249,7 @@ Before you *build* your package, you should *check* it using the automated check
 
 Although it's not necessary to understand every check that RStudio runs, it's worth noting that every check it performs is relatively important, and if RStudio signals any warnings or errors, it's definitely worth fixing them. It's also probably worth fixing any "notes" it issues. If you're curious, you can read more about what each type of check in the automated check does (here)[http://r-pkgs.had.co.nz/check.html#check].
 
-### 2.7: Bonus: The goodpractice Package
+### Bonus: The goodpractice Package
 
 The aforementioned automated checking system for R is pretty good, but there is a slightly more comprehensive version: the goodpractice package. The goodpractice package has an informative name - the entire purpose of the package is to check whether your package follows proper package development conventions and procedures (i.e. whether your package follows good practices). For example, running the goodpractice package on the devex package yielded the following helpful results:
 
@@ -291,9 +279,9 @@ And that's it! The goodpractice package is a bit picky, so it's okay to leave a 
 
 which signals that your package conforms to all goodpractices. Lastly, although it's beyond the scope of this guide, you ought to know that you can create custom checks using the goodpractice package, as documented [here](https://github.com/MangoTheCat/goodpractice/blob/master/vignettes/custom_checks.Rmd).
 
-## 3. Integrated Tests
+## Integrated Tests
 
-### 3.1 Motivation
+### Motivation
 
 Up to this point, you probably have not been pushing to GitHub too often. However, in large projects/packages where many programmers are working on the same package at once, it's important to ensure each programmer continuously commits changes to GitHub to make sure all the changes are compatible with each other. This process of rapid updating of packages is referred to as *continuous integration*, and it can be very difficult to manage properly (it is sometimes referred to as *integration hell*, specifically because developers often waste lots of hours trying to make code integrate properly). When you commit changes continuously, it does not guarentee that all the changes will be compatible. However, if there are compatibility problems in updates, it does ensure that you'll be able to find those problems more easily, because each individual change/commit is smaller. 
 
@@ -305,7 +293,7 @@ Maybe the principle of continuous integration makes sense, but why are continuou
 2. Sometimes there may be global environmental settings on your particular computer which change the way the package works and the way tests run. Building and testing the package in a "clean" environment online makes the testing more robust. 
 3. Lastly, CI services offer settings to automatically 'deploy' or publish successful builds, for example by publishing code for a website. These are a bit beyond the scope of this guide, but they are documented [here (Appveyor)](https://www.appveyor.com/docs/deployment/) and [here (Travis)](https://docs.travis-ci.com/user/deployment/). 
 
-### 3.2 The integrated testing workflow
+### The integrated testing workflow
 
 It's important to note that Travis/Appveyor do not prevent you from pushing bad code to a repo - if you break your package and all your tests fail on Travis/Appveyor, you can still push the broken version to the master branch on GitHub. As a result, most developer teams use the following workflow to keep the master branch working at all times.
 
@@ -316,7 +304,7 @@ It's important to note that Travis/Appveyor do not prevent you from pushing bad 
 
 This workflow allows each developer to make changes in their own repo and continuously build them using Travis/Appveyor without potentially breaking the master repo's copy. 
 
-### 3.3 Setting up Integrated Tests
+### Setting up Integrated Tests
 
 **Step 1**: To get started using continuous integration services, head to the Travis CI (Linux/Mac OS) or AppVeyor (Windows) website and "sign up"" by signing into GitHub. At some point, Travis/AppVeyor will ask you to authorize its connection to GitHub, which you should authorize.
 
@@ -363,7 +351,7 @@ and if your build succeeded, you'll see a green line at the bottom like this:
 
 otherwise you'll see an error. If your build takes a while, that's okay - you don't need to wait for it to build, because Travis/Appveyor will email you automatically if the test fails. And that's all there is to it! 
 
-## 4. Tips and Tricks
+## Tips and Tricks
 
 When testing, there are a couple of key principles to keep in mind:
 
@@ -375,7 +363,7 @@ The devtools cheatsheet, linked [here](https://www.rstudio.com/wp-content/upload
 
 Lastly, working with .yml files can occasionally be difficult, although devtools should make it pretty to set up in the broad majority of cases. As always, when you run into errors, make full use of stackexchange and online resources provided by AppVeyor/Travis. 
 
-## 5. Sources cited.
+## Sources cited.
 
 We used the Testing chapter of [R Packages by Hadley Wickham](http://r-pkgs.had.co.nz/tests.html), [Christopher Gandrud's 'Failing Faster' Presentation](
 http://slides.com/christophergandrud/failing-faster#/24), and [Christopher Gandrud's Broader Testing Guidelines](https://github.com/IQSS/social_science_software_toolkit/blob/master/testing/recommended_testing_tools_R.md#recommended-testing-tools-and-process-for-r-packages) to help write this particular page of the guide. 

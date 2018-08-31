@@ -1,20 +1,15 @@
 ---
-title: "Introduction"
+title: "Package Development in R"
 author: "Asher Spector"
-date: "May 1, 2018"
-output: 
-  html_document:
-    toc: true
-    toc_depth: 3
-    toc_float:
-      collapsed: true
-      smooth_scroll: false
-
+description: "This guide walks through the process of developing R package"
+github-repo: "amspector100/packageguidelines"
 ---
+
+# Introduction
 
 If you want to skip the introduction, the next page in this guide is the guide to [RStudio](./rstudioguide.html). You might also want to look at the Table of Contents below. You can find the 'devex' example package linked [here, on GitHub](https://github.com/amspector100/packageguidelines/tree/master/devex). 
 
-### 1. What is a package?
+## What is a package?
 
 Let's say you wrote a script like this in R and wanted to make it easy for others to use.
 
@@ -22,7 +17,7 @@ Let's say you wrote a script like this in R and wanted to make it easy for other
 
 As you can probably tell, other users may not understand exactly what this script is supposed to do and how to use it. Even if they take the time to read through the source code and eventually figure it out, it might have been faster for them to just write the functions themselves. Packages solve this problem. Loosely speaking, *packages* are structured collections of code which aim to make your code easily sharable and reproducible. For example, any good package includes *documentation* which describes its functionality and use. Developing packages can be painstaking, but thankfully there are lots of tools today which make it extremely simple to create robust packages. This guide aims to run through how to use those tools and develop packages in R.
 
-### 2. Table of Contents
+## Table of Contents
 
 This guide is organized into two big parts. 
 
@@ -37,11 +32,11 @@ Lastly, we also wrote a small development example package (called 'devex') which
 
 Also, this guide is still under development, and we take feedback! If you find anything confusing or think the guide misses important contant, please email amspector100@gmail.com.
 
-### 3. What do I need to know before reading this guide?
+## What do I need to know before reading this guide?
 
 Almost nothing! You don't need to know anything about Github, Rstudio, or package structure. However, this guide does assume you know how to do some programming in R. For example, if you want to develop a package which downloads and analyzes the content of politicians' tweets, this guide will help you structure your code, but it won't teach you how to scrape Twitter. 
 
-### 4. Major Acknowledgements
+## Major Acknowledgements
 
 It's worth acknowledging a couple of people who helped make this guide possible.
 
