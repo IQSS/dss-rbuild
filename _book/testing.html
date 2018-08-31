@@ -25,6 +25,7 @@
 <meta name="author" content="Asher Spector">
 
 
+<meta name="date" content="2018-08-31">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -32,7 +33,7 @@
   
   
 <link rel="prev" href="package-structure.html">
-
+<link rel="next" href="conclusion.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -179,7 +180,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.3.3" data-path="testing.html"><a href="testing.html#setting-up-integrated-tests"><i class="fa fa-check"></i><b>5.3.3</b> Setting up Integrated Tests</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="testing.html"><a href="testing.html#tips-and-tricks-2"><i class="fa fa-check"></i><b>5.4</b> Tips and Tricks</a></li>
-<li class="chapter" data-level="5.5" data-path="testing.html"><a href="testing.html#sources-cited."><i class="fa fa-check"></i><b>5.5</b> Sources cited.</a></li>
+<li class="chapter" data-level="5.5" data-path="testing.html"><a href="testing.html#sources-cited-2"><i class="fa fa-check"></i><b>5.5</b> Sources cited</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>6</b> Conclusion</a><ul>
+<li class="chapter" data-level="6.1" data-path="conclusion.html"><a href="conclusion.html#advanced-tools-for-r"><i class="fa fa-check"></i><b>6.1</b> Advanced tools for R</a></li>
+<li class="chapter" data-level="6.2" data-path="conclusion.html"><a href="conclusion.html#python-and-other-languages"><i class="fa fa-check"></i><b>6.2</b> Python and Other Languages</a></li>
 </ul></li>
 </ul>
 
@@ -200,7 +205,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="testing" class="section level1">
 <h1><span class="header-section-number">5</span> Testing</h1>
-<p>The previous page in the guide discussed <a href="./packagedev.html">package structure</a>. The next page in the guide is the <a href="./conclusion.html">Conclusion</a>. This page will walk you through the proper way to test packages using the testthat helper package. Another quick reminder: for those who do not want to use RStudio, it’s worth following along by reading the <a href="https://www.rdocumentation.org/packages/testthat/versions/2.0.0">testthat documentation</a> and <a href="https://www.rdocumentation.org/packages/testthat/versions/2.0.0/source">source code</a>. If you’ve installed and read through the RStudio guide, you’re good to go!</p>
+<p>The previous page in the guide discussed <a href="./package-structure.html">package structure</a>. The next page in the guide is the <a href="./conclusion.html">Conclusion</a>. This page will walk you through the proper way to test packages using the testthat helper package. Another quick reminder: for those who do not want to use RStudio, it’s worth following along by reading the <a href="https://www.rdocumentation.org/packages/testthat/versions/2.0.0">testthat documentation</a> and <a href="https://www.rdocumentation.org/packages/testthat/versions/2.0.0/source">source code</a>. If you’ve installed and read through the RStudio guide, you’re good to go!</p>
 <p>You can find the ‘devex’ example package linked <a href="https://github.com/amspector100/packageguidelines/tree/master/devex">here, on GitHub</a>, if you’d like to look through it while reading the guide.</p>
 <div id="why-should-you-test" class="section level2">
 <h2><span class="header-section-number">5.1</span> Why should you test?</h2>
@@ -476,8 +481,8 @@ package_path &lt;-<span class="st"> </span><span class="kw">system.file</span>(<
 <p>The devtools cheatsheet, linked <a href="https://www.rstudio.com/wp-content/uploads/2015/03/devtools-cheatsheet.pdf">here</a>, references a lot of the key components of the testthat package.</p>
 <p>Lastly, working with .yml files can occasionally be difficult, although devtools should make it pretty to set up in the broad majority of cases. As always, when you run into errors, make full use of stackexchange and online resources provided by AppVeyor/Travis.</p>
 </div>
-<div id="sources-cited." class="section level2">
-<h2><span class="header-section-number">5.5</span> Sources cited.</h2>
+<div id="sources-cited-2" class="section level2">
+<h2><span class="header-section-number">5.5</span> Sources cited</h2>
 <p>We used the Testing chapter of <a href="http://r-pkgs.had.co.nz/tests.html">R Packages by Hadley Wickham</a>, <a href="http://slides.com/christophergandrud/failing-faster#/24">Christopher Gandrud’s ‘Failing Faster’ Presentation</a>, and <a href="https://github.com/IQSS/social_science_software_toolkit/blob/master/testing/recommended_testing_tools_R.md#recommended-testing-tools-and-process-for-r-packages">Christopher Gandrud’s Broader Testing Guidelines</a> to help write this particular page of the guide.</p>
 
 </div>
@@ -487,8 +492,8 @@ package_path &lt;-<span class="st"> </span><span class="kw">system.file</span>(<
           </div>
         </div>
       </div>
-<a href="package-structure.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="package-structure.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conclusion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -1,6 +1,6 @@
 # GitHub
 
-The previous page in the guide discussed [RStudio](./rstudioguide.html). The next page in the guide discusses [Package Structure in R](./packagedev.html). This page is an introduction to Git and GitHub for beginners. In it, we'll motivate Git/GitHub, and then discuss what precisely Git/GitHub do and how to use them.
+The previous page in the guide discussed [RStudio](./development-with-rstudio.html). The next page in the guide discusses [Package Structure in R](./package-structure.html). This page is an introduction to Git and GitHub for beginners. In it, we'll motivate Git/GitHub, and then discuss what precisely Git/GitHub do and how to use them.
 
 ## Why use Git/GitHub?
 

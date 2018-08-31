@@ -1,6 +1,6 @@
 # Testing
 
-The previous page in the guide discussed [package structure](./packagedev.html). The next page in the guide is the  [Conclusion](./conclusion.html). This page will walk you through the proper way to test packages using the testthat helper package. Another quick reminder: for those who do not want to use RStudio, it's worth following along by reading the [testthat documentation](https://www.rdocumentation.org/packages/testthat/versions/2.0.0) and [source code](https://www.rdocumentation.org/packages/testthat/versions/2.0.0/source). If you've installed and read through the RStudio guide, you're good to go!
+The previous page in the guide discussed [package structure](./package-structure.html). The next page in the guide is the  [Conclusion](./conclusion.html). This page will walk you through the proper way to test packages using the testthat helper package. Another quick reminder: for those who do not want to use RStudio, it's worth following along by reading the [testthat documentation](https://www.rdocumentation.org/packages/testthat/versions/2.0.0) and [source code](https://www.rdocumentation.org/packages/testthat/versions/2.0.0/source). If you've installed and read through the RStudio guide, you're good to go!
 
 You can find the 'devex' example package linked [here, on GitHub](https://github.com/amspector100/packageguidelines/tree/master/devex), if you'd like to look through it while reading the guide. 
 
@@ -363,7 +363,7 @@ The devtools cheatsheet, linked [here](https://www.rstudio.com/wp-content/upload
 
 Lastly, working with .yml files can occasionally be difficult, although devtools should make it pretty to set up in the broad majority of cases. As always, when you run into errors, make full use of stackexchange and online resources provided by AppVeyor/Travis. 
 
-## Sources cited.
+## Sources cited
 
 We used the Testing chapter of [R Packages by Hadley Wickham](http://r-pkgs.had.co.nz/tests.html), [Christopher Gandrud's 'Failing Faster' Presentation](
 http://slides.com/christophergandrud/failing-faster#/24), and [Christopher Gandrud's Broader Testing Guidelines](https://github.com/IQSS/social_science_software_toolkit/blob/master/testing/recommended_testing_tools_R.md#recommended-testing-tools-and-process-for-r-packages) to help write this particular page of the guide. 
