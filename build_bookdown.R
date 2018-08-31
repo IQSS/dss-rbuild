@@ -1,0 +1,1 @@
+bookdown::render_book('rmd_files', 'bookdown::gitbook')
