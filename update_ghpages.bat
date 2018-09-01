@@ -1,13 +1,13 @@
 REM Make sure we're on master branch
 git checkout master
 
+REM Update pages
+Rscript build_bookdown.R
+
 REM commit and push
 git add .
 git commit
 git push origin master
-
-REM Update pages
-Rscript build_bookdown.R
 
 REM switch branches and pull the data we want
 git checkout gh-pages
