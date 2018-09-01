@@ -1,5 +1,3 @@
-REM I am hoping to transition to linux in the future... until then, .sh files it is!
-
 REM Make sure we're on master branch
 git checkout master
 
@@ -17,9 +15,9 @@ git rm -rf *
 git checkout master .gitignore 
 
 REM Move it to the root and remove the docs directory
-git checkout master docs/build/html
-call xcopy .\docs\build\html .\ /E
-git rm docs -rf
+git checkout master _book
+call xcopy .\_book .\ /E
+touch .nojekyll
 
 REM Add and push
 git add .
