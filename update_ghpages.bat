@@ -11,11 +11,12 @@ Rscript build_bookdown.R
 
 REM switch branches and pull the data we want
 git checkout gh-pages
-git rm -rf *.html
-git rm -rf *.json
+git rm *.html -rf
+git rm *.json -rf
 git rm template.gitignore
-git rm -rf .\Images
-git rm -rf .\libs
+git rm .\Images\* -rf 
+git rm .\libs\* -rf 
+git rm .\_book\* -rf
 
 git checkout master .gitignore 
 
