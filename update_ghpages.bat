@@ -11,7 +11,12 @@ Rscript build_bookdown.R
 
 REM switch branches and pull the data we want
 git checkout gh-pages
-git rm -rf *
+git rm -rf *.html
+git rm -rf *.json
+git rm template.gitignore
+git rm -rf .\Images
+git rm -rf .\libs
+
 git checkout master .gitignore 
 
 REM Move it to the root and remove the docs directory
