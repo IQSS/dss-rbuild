@@ -343,6 +343,20 @@ Lastly, there are a couple of cheat sheets that you can use to make your life ea
 
 * [This official GitHub cheat sheet](https://services.GitHub.com/on-demand/downloads/GitHub-git-cheat-sheet.pdf) lists all of the general commands you'll need
 
+### Optional: Suggested Workflow
+
+There are many ways to use Git, but [this article by Vincent Driessen](https://nvie.com/posts/a-successful-git-branching-model/) describes a pretty intuitive and productive model for Git branching. It's worth reading or skimming the article (it includes some great graphics), but it basically involves a couple of core kinds of branches:
+
+- The **master** branch is only used for new releases of a package/software.
+- There are **hotfixes** branches which are used to fix relatively important bugs on releases.
+- The **development** branch is the central branch on which most of the development happens; i.e. fixing minor bugs and adding new features between releases. 
+- There are **feature branches** which are used to develop new features between releases, which are periodically updated with the development branch.
+- Finally, there are **release branches** which are used exclusively to fix bugs pre-release.  
+
+Here's an illustration of the core model which Driessen made: 
+
+![](Images/gitflow-model.png)
+
 ## Further reading
 
 If you're interested in learning more about Git and GitHub, you might want to take a look at the following resources:
@@ -351,7 +365,7 @@ If you're interested in learning more about Git and GitHub, you might want to ta
 
 * Atlassian has some wonderful advanced Git tutorials [here](https://www.atlassian.com/git/tutorials/advanced-overview)
 
-##Sources cited
+## Sources cited
 
 We used [Karl Broma's Book](http://kbroman.org/GitHub_tutorial/pages/init.html), a [Git-Tower post](https://www.git-tower.com/learn/git/faq/restore-repo-to-previous-revision
 ), and the GitHub documentation [here](https://git-scm.com/book/en/v2/Getting-Started-Git-Basics) and  [here](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup) to help write this guide. 
