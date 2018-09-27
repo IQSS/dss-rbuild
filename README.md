@@ -30,3 +30,15 @@ For more information about the guide, see the [Introduction](./index.Rmd). For m
 0. Add a floating link to the example package
 1. Some information may still be platform  dependent
 2. Eventually maybe add some kind of workflow for publishing packages
+
+Update: 95% of the content is there, but it's going to need a fair bit of rearranging. Refocus things by rearranging some of the stuff that's already there. There will be a small amount of stuff that drops and out and stuff that goes in. 
+
+Strip down the core (the walkthrough of the package structure), and rearrange things around that. 
+
+Main refocus:
+
+(0) Do graphical overview at the start 
+(1) Have the RStudio bit be separate, focus on Devtools. 
+(2) Have sections on Vignettes 
+(3)Tool-agnostic - a lot of the ideas should be sufficiently abstract that it's easy to see how you might
+solve the same problems with a different tools. 
