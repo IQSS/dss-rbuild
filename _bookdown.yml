@@ -2,8 +2,8 @@ book_filename: 'packageguidelines'
 
 rmd_files: 
   - "index.Rmd"
-  - "rstudioguide.Rmd"
-  - "githubguide.Rmd"
   - "packagedev.Rmd"
-  - "testingguide.Rmd"
-  - "Conclusion.rmd"
+#  includes "testingguide.Rmd"
+  - "githubguide.Rmd"
+  - "IDEs.Rmd" # formerly rstudioguide.rmd
+  - "resources.rmd"

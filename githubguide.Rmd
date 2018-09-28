@@ -364,8 +364,3 @@ If you're interested in learning more about Git and GitHub, you might want to ta
 * The Software Carpentry Foundation has a great mid level Git tutorial [here](https://swcarpentry.GitHub.io/git-novice/)
 
 * Atlassian has some wonderful advanced Git tutorials [here](https://www.atlassian.com/git/tutorials/advanced-overview)
-
-## Sources cited
-
-We used [Karl Broma's Book](http://kbroman.org/GitHub_tutorial/pages/init.html), a [Git-Tower post](https://www.git-tower.com/learn/git/faq/restore-repo-to-previous-revision
-), and the GitHub documentation [here](https://git-scm.com/book/en/v2/Getting-Started-Git-Basics) and  [here](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup) to help write this guide. 
