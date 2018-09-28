@@ -42,14 +42,28 @@ Also, this guide is still under development, and we take feedback! If you find a
 
 Almost nothing! You don't need to know anything about Github, Rstudio, or package structure. However, this guide does assume you know how to do some programming in R. For example, if you want to develop a package which downloads and analyzes the content of politicians' tweets, this guide will help you structure your code, but it won't teach you how to scrape Twitter. 
 
-## Major Acknowledgements
+## Sources
 
 It's worth acknowledging a couple of people who helped make this guide possible.
 
 1. A huge thanks to Simo Goshev at the IQSS, who helped design the structure of the guide and edited the content. 
-2. This guide was written for a different audience, but a lot of its structure and content is based on Hadley Wickham's book [R Packages](http://r-pkgs.had.co.nz/). A huge thanks to him as well.
+2. Steve Worthington, Mercer, etc, people who gave comments.
+3. This guide was written for a different audience, but a lot of its structure and content is based on Hadley Wickham's book [R Packages](http://r-pkgs.had.co.nz/). A huge thanks to him as well.
 
-We'll also be citing specific sources on each page in the guide.
+### Github Sources:
+
+We used [Karl Broma's Book](http://kbroman.org/GitHub_tutorial/pages/init.html), a [Git-Tower post](https://www.git-tower.com/learn/git/faq/restore-repo-to-previous-revision
+), and the GitHub documentation [here](https://git-scm.com/book/en/v2/Getting-Started-Git-Basics) and  [here](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup) to help write this guide. 
+
+### Packagedev sources:
+
+A huge thank you again to Hadley Wickham and his book R Packages, linked [here](http://r-pkgs.had.co.nz/intro.html). 
+
+### Testing sources:
+
+We used the Testing chapter of [R Packages by Hadley Wickham](http://r-pkgs.had.co.nz/tests.html), [Christopher Gandrud's 'Failing Faster' Presentation](
+http://slides.com/christophergandrud/failing-faster#/24), and [Christopher Gandrud's Broader Testing Guidelines](https://github.com/IQSS/social_science_software_toolkit/blob/master/testing/recommended_testing_tools_R.md#recommended-testing-tools-and-process-for-r-packages) to help write this particular page of the guide. 
+
 
 
 

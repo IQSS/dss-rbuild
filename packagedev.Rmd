@@ -1,12 +1,23 @@
-# Package Structure
+# Package Development
+
+To do: 
+1. Make motivation shorter, possibly move README section out
+2. Add in motivation for testing. 
+
+<!---
+This can probably all be cut
+
 
 The previous page in the guide discussed [GitHub](./github.html). The next page in the guide will discuss [testing packages](./testing.html). This page will walk you through the structure, motivation, and process of building packages in R. We'd like to extend a huge thank you to Hadley Wickham's book [R packages](http://r-pkgs.had.co.nz/r.html#r); this part of the guide is basically a significantly condensed and simplified version of that book. A huge portion of the credit should go to him. 
 
 A quick reminder for readers who do not want to use RStudio: this part of the guide relies on the devtools package, so if you can't use RStudio, it's worth following along by looking at the [source code](https://www.rdocumentation.org/packages/devtools/versions/1.13.3/source) and [documentation](https://www.rdocumentation.org/packages/devtools/versions/1.13.3) for devtools.
+-->
 
-Lastly, you can find the 'devex' example package linked [here, on GitHub](https://github.com/amspector100/packageguidelines/tree/master/devex), if you'd like to look through it while reading the guide. 
+As a quick reminder, you can find the 'devex' example package linked [here, on GitHub](https://github.com/amspector100/packageguidelines/tree/master/devex), if you'd like to look through it while reading the guide. 
 
 ## Motivation
+
+### A Bad Example
 
 Imagine Grace has built an architecture for aggregating polling data, and you would like to use it in your own research project. So you go to GitHub and you download Grace's repository, hoping to build on her research. One of the scripts you download looks like this. 
 
@@ -24,11 +35,11 @@ Lastly, and less obviously, you don't know what *version* of Grace's package thi
 
 Yet never fear - packages don't need to be this way! Most packages are extremely well-built and easy to use. In this section, we'll demonstrate how to make sure your packages are like those packages. 
 
-## Solutions
+### Solutions
 
 In this section, we'll discuss the solutions to the problems outlined above. For each problem, we'll discuss the conceptual solution, and then we'll describe how the structure of R Packages allows users to integrate those solutions. Note that this section mostly just outlines package structure - we won't talk about actually creating things like documentation until the next couple sections. 
 
-### Code Style
+#### Code Style
 
 The first solution is to write code differently. The script above has a couple problems with style. Specifically, note the difference between the following two code samples:
 
@@ -64,7 +75,7 @@ general_sqrt <- function (x) {
 
 Clearly, the second example is a lot more readable and a lot easier to understand. Later, we'll talk about specific coding guidelines, but for now, just remember that the goal of programming style guides is to make your code *readable* and therefore *useable*. This will also make it a lot easier for others to fix and find bugs in your packaged code. 
 
-### Documentation
+#### Documentation
 
 Of course, nobody wants to read through packaged code in order to guess what a function does. Instead, packages also include documentation to tell users how to use different functions and objects developed in the package. For exampe, imagine you typed '?scalep' into the Console and got the following result:
 
@@ -72,11 +83,11 @@ Of course, nobody wants to read through packaged code in order to guess what a f
 
 This documentation tells you what the scalep function does, what kinds of inputs it needs, what kind of output it returns, and gives you examples of how to use it. Documentation makes packages usable, and is suprisingly easy to write using devtools and roxygen2, so it's a critical part of any package. 
 
-### Description
+#### Description
 
 The DESCRIPTION file of an R Package helps solve each one of the first three problems. It briefly outlines the purpose of the package, as well as the version of the pacakge and who maintains it. Perhaps most importantly for newer users, it also documents the dependencies of your package. For example, if you wrote a package which relies heavily on the boot package version 1.3-20, your description will document that, so your users don't have to spend hours searching for the exact package necessary to make your package work. 
 
-### Namespace 
+#### Namespace 
 
 The namespace is a bit more complicated than the other parts of the package structure. The purpose of the namespace is make sure your package works in combination with other packages. For example, if your package includes some data labelled 'lm', a good namespace will ensure that using that data in conjunction with the R stats package (which has a function called 'lm') will *not* throw an error. How exactly the namespace does this is a bit complicated and beyond the scope of this guide, so if you're dying for more specifics, you should [read through this wonderful page](http://r-pkgs.had.co.nz/namespace.html). Thankfully, Roxygen2 will automatically generate a namespace for you - we'll discuss how to do this a little later. 
 
@@ -84,7 +95,7 @@ Remember: the namespace will help your package play nice with others in the even
 
 Now that we've gone through the overall structure of packages, we'll walk you through what Grace *should* have done - the process of building an R package from start to finish. 
 
-### The README
+#### The README
 
 The README file is a bit different than the others, because your package will actually work fine even if you don't have one. However, if you want other people to ever use your package, it's best to have a README. The purpose of a README is basically to bridge the gap between the DESCRIPTION and the actual documentation in your package. In other words, someone using your package might know what it does in a general sense from your DESCRIPTION, but they won't necessarily know exactly how to set up the package or how to use specific functions. The README takes care of that. In general, READMEs should do at least two things, with a couple of optional ones:
 
@@ -101,35 +112,47 @@ The README file is a bit different than the others, because your package will ac
 
 This template linked [here](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) is pretty good. Again, because your package will technicaly function without your README, the actual structure and content of a README can be flexible. However, just remember that if you don't have a README which outlines why and how to use your package, other developers are unlikely to want to use it.
 
-## The Walkthrough
+## Downloading Development Tools
 
-### Initializing the Package
+Before we get started, you'll want to download three packages that are extremely useful for package development. If you are running Windows, you can do so by following the instructions below:
 
-RStudio makes it easy to create packages. To start, click File>New Project. Then, click "New Directory" when you see the screen below:
+1. Go to https://cran.rstudio.com/ and select "Download R for Windows."
 
-![](Images/PackageSS/createproj1.PNG)
+2. Click "RTools" and download the latest version of the tools (or the tools that are compatible with your version of R).
 
-Then click "R Package" when you see the screen below:
+3. Let the installer run itself (the defaults are fine).
 
-![](Images/PackageSS/createproj2.PNG)
+For Mac/Linux users, head to the R Gui (or your favorite IDE) and run the following code to download the two primary development packages you'll need:
 
-Lastly, name your package. Your name should be something short and descriptive. Since we'll be walking through a development example, we'll title our new package "devex."
+```{r, eval=FALSE}
+install.packages('devtools')
+install.packages('roxygen2')
+install.packages('testthat')
+```
 
-![](Images/PackageSS/createproj3.PNG)
+If you are prompted to choose a CRAN mirror for your session, simply pick the mirror closest to your location.
 
-Once you've created your package, your RStudio should look something like this. It should come preloaded with a "Hello World" script which includes a handy function that prints "Hello world."
+## Initializing the Package Structure
 
-![](Images/PackageSS/projectinit.PNG)
+Now we can begin to walk through the process of creating an R package. The first thing you'll always want to do is run the following function:
 
-Everything should look mostly the same as normal except for the "Files" tab on the bottom right, which should include an ".Rproj" file, a "DESCRIPTION" file, a "NAMESPACE" file, and a folder titled "R." You should start by checking the little boxes next to the "NAMESPACE" file and the "Hello.R" R script inside the R file and clicking "delete" above them, just because we will have Roxygen2 automatically generate the namespace, and because presumably your package doesn't need a "Hello World" function. 
 
-You should also go to "Tools > Project Options" and select the following options, which will help you generate documentation using roxygen2: 
+```{r, eval = FALSE}
+devtools::create('path/to/desired/location/packagename')
+```
 
-![](Images/PackageSS/userox.PNG)
+Note that the path specified by devtools::create must currently be empty, otherwise it devtools will throw an error. Successfully running this function will create a couple of important files which constitute a skeletal outline of the package. In particular, it will create:
 
-### Modifying the DESCRIPTION File
+1. A 'packagename.Rproj' file in the root of your specified directory. This file lets R know that a package resides in the directory of interest.
+2. A 'R' subdirectory in the root of your specified directory, which is where all of core the R code of your package will live.
+3. A NAMESPACE file, which we've already discussed the importance of;
+4. And finally, a DESCRIPTION file, which will come with a couple of preset fields.
 
-The DESCRIPTION file gives an extremely brief overview to the package. It includes critical information such as the author of the package, the title, a very short summary of its purpose, and the liscensing information. Double click on the "DESCRIPTION" file on in the files section to open and edit the DESCRIPTION tab. 
+Once you've set up the basic structure of your package, you can start modifying files and writing it in earnest!
+
+## Modifying the DESCRIPTION File
+
+The DESCRIPTION file gives an extremely brief overview to the package. It includes critical information such as the author of the package, the title, a very short summary of its purpose, and the liscensing information. Open the "DESCRIPTION" file using your file explorer in order to inspect and edit its contents. 
 
 DESCRIPTION is a DCF file. This file format may be unfamiliar to you, but it's quite simple. Each line contains a a fieldname and value, separated by a colon. Sometimes, values are long enough to require multiple lines, in which case they are indented by four spaces. For example, the DESCRIPTION file for the devex package might look something like this:
 
@@ -186,9 +209,9 @@ Once you know which packages to list in the 'suggests' section, you can list the
 
 In general, it's best to suggest functions instead of requiring them if you barely use them in your package. This will give users a bit more flexibility, because it won't force them to download packages they will probably never use. 
 
-### Starting to Program
+## Starting to Program
 
-#### General Coding Guidelines
+### General Coding Guidelines
 
 All of your code should be in scripts in the 'R' file created in the RStudio package development environment, as shown below:
 
@@ -247,7 +270,7 @@ scalep <- function(d, x=1){
 
 You should also take care to organize your functions properly. It's probably a bad idea to stick them all into one script and title it "functions." Instead, you should organize functions by their purposes - for example, a variety of loss functions might go into a single script. Of course, some very complicated functions might deserve their own script. The file names of the script should be descriptive - for example, a script of loss functions might be named "loss_functions.R". 
 
-#### Code Style
+### Code Style
 
 Now let's talk about specific elements of code style. These are shortened and adapted from [Hadley Wickham's book on R package development](http://r-pkgs.had.co.nz/r.html), which in turn were adapted from Google's R style guide. For more advice on everything from naming variables to curly bracket placement, head to that aforementioned link.
 
@@ -461,7 +484,352 @@ scalep <- function(factors, divisors, constant = 1, graph = FALSE) {
 
 To summarize, this subsection thus contained three core ideas: (1) make your code simple, (2) make it easy to use by labeling arguments, and (3) always avoid silent errors. 
 
-### Documenting your package
+## Unit Tests
+
+### What are unit tests?
+
+Tests compare the *expected* output of a block of code to its *actual* output. For example, the following test tests whether the "generalized square root" function actually returns $2$ as the square root of $4$.   
+
+```{r, eval=FALSE}
+expect_equal(general_sqrt(4), complex(real = 2, imaginary = 0))
+```
+
+*Unit tests* usually run on the computer of the developer who is modifying a package - for example, if Grace is updating her package, unit tests on her updates will run on her computer. Unit tests also should run automatically upon building a package. 
+
+We'll talk a little more about how exactly to create tests down below, but hopefully this makes the general concept clear (you've also probably been using the general concept as you program). 
+
+### Setting up the testing environment
+
+Creating unit tests is actually quite easy, thanks to a package called 'testtthat' which works in combination with devtools. To begin, you should run the following command in your favorite IDE, or even in the R Gui:
+
+```{r, eval=FALSE}
+devtools::use_testthat("path/to/your/package")
+```
+
+This will do a couple of things. First, it will add 'testthat' to the Suggests part of the DESCRIPTION, which will help other collaborators know to use testthat when modifying/working on the package. It will also create a 'tests/testthat' directory in your project, as well a file called 'test/testthat.R', as shown below.
+
+![](Images/TestSS/devtoolstestthat.PNG)
+
+### Expectations
+
+Before discussing how to write unit tests, we need to properly describe an expectation. An expectation tests whether the actual output of a single function call is what the developer expected. The 'testthat' package has a number of functions which compare outputs to expected values. When calling one of these functions, one of two things can happen:
+
+1. If the actual output matches the expectation, nothing will happen!
+2. If the actual output does not match the expectation, it will throw an error. 
+
+For example, 'expect_equal()' uses the base R function 'all.equal()' to check whether an output is (approximately) equal to an expectation. In the following code, the first function call will do nothing - the second function call will throw an error, displayed below. 
+
+```{r, eval = FALSE, error = TRUE}
+library(testthat)
+testthat::expect_equal(2, 2)
+testthat::expect_equal(2, 4)
+```
+![](Images/TestSS/expectationerror.PNG)
+
+Here's an (abbreviated) list of the expectation functions:
+
+1. **expect_equal**, as aforementioned, checks equality using the "all.equal()" base function.
+2. **expect_identical** checks equality using the "identical()" base function. Generally, it's better to use "expect_equal" because lots of R functions use numerical approximations which will cause expect_identical to fail when you don't want it to. 
+3. **expect_match**, **expect_output**, **expect_message**, **expect_warning**, and **expect_error** all respectively test whether a string, output, warning, or error match a regular expression. For example, the following two expectations functions will not throw errors:
+
+```{r}
+testthat::expect_match('hello1234', 'hello')
+testthat::expect_warning(sqrt(-2), 'NaNs produced')
+```
+The tests do not fail because (i) 'hello1234' contains 'hello' and (ii) the error message produced by sqrt(-2) contains the phrase 'NaNs produced'.
+
+4. **expect_is** tests whether an object inherets from a class, specified in quotes. For example, the following test passes:
+
+```{r}
+testthat::expect_is(sqrt(2), 'numeric')
+```
+
+5. **expect_true** and **expect_false** respectively expect a statement to evaluate to true or false.
+
+### Structure and Location of Unit Tests
+
+Each *unit test* (which is written in an R script) should use a couple of expectations to test a single core function. It should use the function "test_that" (from the "testthat" package). "test_that" takes two parameters: a string, which describes the test, and a couple of expectations, surrounded by curly braces. For example, the following code will test whether the general_sqrt function from the devex package returns a complex number. 
+
+```{r, eval=FALSE}
+test_that("Returns complex number", {
+  expect_is(general_sqrt(-2), 'complex')
+  expect_is(general_sqrt(2), 'complex')
+  expect_is(general_sqrt(0), 'complex')
+})
+```
+
+Multiple tests with similar functions should be put in the same file, and those test files must be put in the tests/testthat/ directory. Moreover, their name must start with the word 'test' - this will help RStudio automatically run your tests for you.  For example, in the devex package, there are two very simple helper functions ('general_sqrt' and 'loss') and one moderately complex function ('scalep'). As a result, the devex package has exactly two testing files: one called 'testhelpers,' which tests the helper functions, and another called 'testscalep', which tests the scalep function. The testhelpers file looks like this:
+
+```{r, eval=FALSE}
+library(devex)
+context("generalized sqrt and loss")
+
+# Generalized sqrt ---------------------------------------
+
+test_that("Returns complex number", {
+  expect_is(general_sqrt(-2), 'complex')
+  expect_is(general_sqrt(2), 'complex')
+  expect_is(general_sqrt(0), 'complex')
+})
+
+test_that("Returns correct sqrt", {
+  expect_equal(general_sqrt(-1.53), complex(real = 0, imaginary = sqrt(1.53)))
+  expect_equal(general_sqrt(-2), complex(real = 0, imaginary = sqrt(2)))
+})
+
+test_that("Warnings for vectors of length > 1", {
+  expect_warning(general_sqrt(c(2, 0)))
+  expect_warning(general_sqrt(c(-2, 0, 2)), 'NaNs produced')
+})
+
+# Loss ---------------------------------------------------
+
+test_that("Returns correct loss", {
+  expect_equal(loss(0, 3, 9)
+  expect_equal(loss(c(1, 1, 1), c(1, 2, 3)), c(0, 1, 4))
+  expect_equal(loss(c(-1, -5, -2), c(0, 0, 0)), c(1, 25, 4))
+})
+
+```
+
+Each test file, as demonstrated above, needs to load the package of interest (using 'library' is fine) and also should supply a string which succinctly describes the general purpose of all of the tests in the test file to the 'context' function. 
+
+You can run all of the tests in the test/testthat directory by clicking Build>Check Package or Control Shift E. If any test throws an error, RStudio will report two things. First, it will report the string given in the test which was given to the 'test_that' function call. Second, it will report the filename of the test file as well as the line of code that threw an error. For example, running the above tests yields the following result:
+
+![](Images/TestSS/testthaterror1.PNG)
+
+This indicates that line 18 of testhelpers.R failed in the test "Warnings for vectors of length > 1." Looking at the test code reveals that the general_sqrt function does not return a warning for positive vectors of length greater than one.
+
+```{r, eval = FALSE}
+expect_warning(general_sqrt(c(2, 0)))
+```
+
+To fix this, it might be worth adding in an extra line or two which ensures that the input to general_sqrt is as it should be (in order to prevent users from getting unexpected results).
+
+### Tips for making good tests
+
+Good tests have a couple of characteristics.
+
+**First**, good tests have high *coverage,* meaning that they test a large percentage of the lines of code of the package. For example, the code for the general_sqrt function is as follows:
+
+```{r, eval = FALSE}
+# This function takes the complex square root of real numbers
+
+general_sqrt <- function (x){
+  
+  # Issue warning for longer vectors
+  if (length(x) > 1) {
+    warning('Argument of general_sqrt has length greater than 1')
+  }
+
+  # Return the normal square root if x > 0
+  if (x > 0 || x == 0){
+    return(complex(real = sqrt(x), imaginary = 0))
+  }
+
+  # Else return the complex square root
+
+  else {
+    return(complex(real = 0, imaginary = sqrt(-x)))
+  }
+
+}
+
+```
+
+The following test has low coverage for the general_sqrt function:
+
+```{r, eval = FALSE}
+test_that("Returns correct sqrt", {
+  expect_equal(general_sqrt(-1.53), complex(real = 0, imaginary = sqrt(1.53)))
+  expect_equal(general_sqrt(-2), complex(real = 0, imaginary = sqrt(2)))
+})
+
+```
+
+because it only tests whether general_sqrt returns the correct square root for negative numbers. This test thus only covers half of the code in general_sqrt, because the mechanism for dealing with nonnegative numbers is entirely separate. The following test is a better example, because it tests both positive and negative numbers.
+
+```{r, eval = FALSE}
+
+test_that("Returns correct sqrt", {
+  expect_equal(general_sqrt(1.53), complex(real = sqrt(1.53), imaginary = 0))
+  expect_equal(general_sqrt(-2), complex(real = 0, imaginary = sqrt(2)))
+})
+
+```
+
+**Second**, it's important to remember that coverage is only important because tests with high coverage tend to test all the different functionalities of a package. It's possible to have tests which have very high coverage but aren't great tests. Consider the following example.
+
+```{r}
+
+print_it <- function(text){
+  print('hello')
+}
+
+testthat::expect_warning(print_it('hi'), NA)
+
+```
+
+This expectation has 100% coverage because it will run every line of code (the expectation will also pass because no warning will be thrown). However, it's not sufficient alone because it doesn't actually test whether print_it returns the desired output: in this case, print_it will always print 'hello'. In other words, the expectation does not test all of the functionality of the function.
+
+**Third**, tests should run relatively quickly, if possible. Sometimes, it's okay to maximize coverage even if you don't test every single functionality to save time, because *usually* high coverage ensures you test most of the functionality of the package. This is particularly true because lots of integrated testing software (which we'll discuss in integrated tests) will not be able to easily run tests which take too long. More on that later. 
+
+**Fourth**, tests should be clear to the reader, because sometimes there are bugs in tests too. If others eventually help develop or maintain your packages, they'll want to know what it means when a test fails. Moreover, for large packages, you yourself may have trouble remembering the exact details of every test you've written. Thus, your tests should return clear error messages and be readable. For example, the following test is a bad example, for two reasons:
+
+```{r, eval = FALSE}
+
+sigmoid <- function(x, a, b){
+  return(exp(a*x)/(exp(a*x) + b))
+}
+
+test_that('sigmoid output', {
+  expect_equal(sigmoid(0.3068528, 1, 1.3591409), 0.5, 10^-7)
+})
+
+```
+
+The string 'sigmoid output' does not describe the purpose of the test, which is to test the precision of the sigmoid output. This means that if the test fails, it will be hard to tell what's wrong. Additionally, the purpose of the test is not clear to begin with - what do the seemingly random decimals mean? At the very least, it's probably worth putting comments in explaining the point of the test, as shown below.
+
+```{r, eval = FALSE}
+
+sigmoid <- function(x, a, b){
+  return(exp(a*x)/(exp(a*x) + b))
+}
+
+test_that('test sigmoid precision', {
+  
+  # Check sigmoid(ln(e/2), ln(e/2), e/2) is very close to 1/2.
+
+  expect_equal(sigmoid(0.3068528, 1, 1.3591409), 0.5, 10^-7)
+})
+
+```
+
+This test is a bit more interpretable and delivers a better error message.
+
+### Automated Checks and Automated Testing
+
+Before you *build* your package, you should *check* it using the automated check feature in RStudio, which is really wonderful. Running an automated check will ensure your documentation is up to date, check a variety of other parts of your package, and most importantly, it will automatically run all of your unit tests. During and after the check, it will report which tests failed (and which lines of code caused those failures. Even your pakage passes all of its tests, you might still see additional warnings for other reasons, as exemplified below:
+
+![](Images/TestSS/autobuildresults.PNG)
+
+Although it's not necessary to understand every check that RStudio runs, it's worth noting that every check it performs is relatively important, and if RStudio signals any warnings or errors, it's definitely worth fixing them. It's also probably worth fixing any "notes" it issues. If you're curious, you can read more about what each type of check in the automated check does (here)[http://r-pkgs.had.co.nz/check.html#check].
+
+### Bonus: The goodpractice Package
+
+The aforementioned automated checking system for R is pretty good, but there is a slightly more comprehensive version: the goodpractice package. The goodpractice package has an informative name - the entire purpose of the package is to check whether your package follows proper package development conventions and procedures (i.e. whether your package follows good practices). For example, running the goodpractice package on the devex package yielded the following helpful results:
+
+![](Images/TestSS/goodpractice1.PNG)
+
+Using the goodpractice package to get a result like that is very simple. If you don't have RStudio, using goodpractice is well documented in [vignettes on Github](https://github.com/MangoTheCat/goodpractice/blob/master/vignettes/goodpractice.Rmd), and of course all of the source code is available on GitHub and [here](https://www.rdocumentation.org/packages/goodpractice/versions/1.0.2/source). For RStudio users, we'll through the key points of using goodpractice below.
+
+To install the goodpractice package, just run the following command in the RStudio console:
+```{r, eval=FALSE}
+install.packages('goodpractice')
+```
+
+Once you've installed the goodpractice package, you basically only need to know a single function from it: the 'gp()' or 'goodpractice()' functions (which do exactly the same thing). These functions will run comprehensive automated checks on your package, and take exactly one input, the path of your built package. However, it's important to note that the path of your *built* package is not identical to the path of the repo containing it. For example, I work on the 'devex' package in "C:/Users/amspe/Documents/R/packageguidelines/devex", but the built package lives at "C:/Users/amspe/Documents/R/win-library/3.5/devex". For goodpractice to work, you need to use the paths of the *second* form, i.e. where the built package lives. If you don't know this path immediately, you can use the "system.file" function to retrieve it for you, as demonstrated below.
+
+```{r, eval = FALSE}
+# Retrieve path
+package_path <- system.file(package = 'devex')
+
+# Check package
+library(goodpractice)
+gp(package_path)
+```
+
+And that's it! The goodpractice package is a bit picky, so it's okay to leave a few concerns unresolved, but in general it gives good advice. If you're very diligent, you might eventually see a result like this:
+
+![](Images/TestSS/goodpractice2.PNG)
+
+which signals that your package conforms to all goodpractices. Lastly, although it's beyond the scope of this guide, you ought to know that you can create custom checks using the goodpractice package, as documented [here](https://github.com/MangoTheCat/goodpractice/blob/master/vignettes/custom_checks.Rmd).
+
+## Integrated Tests
+
+### Why use Integrated Tests?
+
+Up to this point, you probably have not been pushing to GitHub too often. However, in large projects/packages where many programmers are working on the same package at once, it's important to ensure each programmer continuously commits changes to GitHub to make sure all the changes are compatible with each other. This process of rapid updating of packages is referred to as *continuous integration*, and it can be very difficult to manage properly (it is sometimes referred to as *integration hell*, specifically because developers often waste lots of hours trying to make code integrate properly). When you commit changes continuously, it does not guarentee that all the changes will be compatible. However, if there are compatibility problems in updates, it does ensure that you'll be able to find those problems more easily, because each individual change/commit is smaller. 
+
+For reasons we'll discuss in a second, continuous integration is a bit easier said than done. Thankfully, there are two wonderful free continuous integration services that will make your life a lot easier. If you're using windows, you'll want to use the service called *Appveyor* - if you're using Mac or Linux, you'll want to use the service called *Travis CI*. These services will make continuous integration easy, specifically because both Appveyor and Travis CI link to GitHub and will run your build and tests for you on what are called virtual machines in the cloud. 
+
+Maybe the principle of continuous integration makes sense, but why are continuous integration services useful? Why can't each developer build packages,  run the tests locally, and then only push changes to GitHub if the tests are successful?  There are three answers to this question. 
+
+1. For large projects, it often takes a long time to build them. Being able to build them on the cloud (using Appveyor/Travis) saves an enormous amount of time. (This is especially true for programming languages besides R, but it's true for R too!)
+2. Sometimes there may be global environmental settings on your particular computer which change the way the package works and the way tests run. Building and testing the package in a "clean" environment online makes the testing more robust. 
+3. Lastly, CI services offer settings to automatically 'deploy' or publish successful builds, for example by publishing code for a website. These are a bit beyond the scope of this guide, but they are documented [here (Appveyor)](https://www.appveyor.com/docs/deployment/) and [here (Travis)](https://docs.travis-ci.com/user/deployment/). 
+
+### The integrated testing workflow
+
+It's important to note that Travis/Appveyor do not prevent you from pushing bad code to a repo - if you break your package and all your tests fail on Travis/Appveyor, you can still push the broken version to the master branch on GitHub. As a result, most developer teams use the following workflow to keep the master branch working at all times.
+
+1. Someone sets up a "master repo" with a master branch on GitHub. 
+2. Each developer on the team creates a copy (also called a *fork*) of the master repo. Thus, each developer has their own repository.
+3. Each developer makes changes to the project and then pushes those changes to their personal fork. After each push, Appveyor or Travis builds the package and test it. 
+4. If the Appveyor/Travis builds are successful, the developper will likely send a pull request to the master branch of the master repo, which will probably be accepted. 
+
+This workflow allows each developer to make changes in their own repo and continuously build them using Travis/Appveyor without potentially breaking the master repo's copy. 
+
+### Setting up Integrated Tests
+
+**Step 1**: To get started using continuous integration services, head to the Travis CI (Linux/Mac OS) or AppVeyor (Windows) website and "sign up"" by signing into GitHub. At some point, Travis/AppVeyor will ask you to authorize its connection to GitHub, which you should authorize.
+
+**Step 2**: Once you authorize the connection, you need to specifically select which repos you'd like to use Travis/AppVeyor with. For example (in AppVeyor), upon signing up, you'll see something like this screen:
+
+![](Images/TestSS/appveyor1.PNG)
+
+You should click "new project" and then select the specific repo you'd like to use in combination with Travis/Appveyor. This means that you should at least initialize your project and push it to GitHub before you start using Travis/Appveyor. 
+
+**Step 3**: Depending on whether you're using Appveyor or Travis, you should run devtools::use_appveyor() or devtools::use_travis() in the console with your package open. This will create a file named 'appveyor.yml' or 'travis.yml' in the root directory of your package. These '.yml' files will tell AppVeyor/Travis what to do. It's actually not too important to understand everything they do, just because the devtools template generally works pretty well. However, you occasionally will have to modify it to suit specific needs. AppVeyor and Travis CI both have great documentation, linked [here for Appveyor](https://www.appveyor.com/docs/build-configuration/) and [here for Travis](https://docs.travis-ci.com/user/languages/r/).
+
+(Note - devtools also adds 'appveyor.yml' and 'travis.yml' to the .Rbuildignore to reduce clutter in your package.)
+
+**Step 3.5: Dependency Issues**: If you're using Travis, it's important to talk quickly about dependencies in packages. Travis was not originally designed for R projects, so occasionally it's a bit shaky, specifically with regard to dependencies in packages (i.e. Travis will build your package online, but if your package depends on ggplot2, then Travis have to install ggplot2 before building your package). By default, Travis/Appveyor automatically install anything listed in the dependencies listed in the DESCRIPTION file for your project. However, occasionally something goes wrong. If you get error messages that look like Travis did not install of the dependencies, it's worth specifying them in the .yml file. You can by adding a line like the following:
+
+```{r, eval = FALSE}
+
+r_packages: package_name
+
+```
+ in the .yml file (this will install the package the same way that RStudio installs it when you run 'install.packages'). If you'd like to install a package using a different method (i.e. from a GitHub version of the package), there are lots of options listed in the [R-specific Travis documentation](https://docs.travis-ci.com/user/languages/r/). However, it's important to remember that this is generally NOT necessary - Travis/Appveyor do a pretty good job of automatically detecting/installing dependencies as long as your DESCRIPTION file specifies them.
+
+**Step 4**: If you are working with many other developers on a single package, you should also add a '.gitattributes' file into the root of your directory. This is because different operating systems handle different characters, for example line terminators, slightly differently. Modern Mac and Unix/Linux systems use '$\n$' to terminate the end of each line, in what is called the "line feed" or "LF" system, whereas Windows uses '$\r\n$' in the 'Carriage Return Line Feed' or CRLF system. The point is that the '.gitattributes' file will ensure that each developer uses exactly the same line endings, because you can set the 'text' setting which controls the method of writing lineterminators.
+
+The way it works is that the '.gitattribute' file should be a line of path-patterns followed by specific attributes. These path-patterns (for a refresher, see the Atlanian guide [here](https://www.atlassian.com/git/tutorials/saving-changes/gitignore)) are exactly the same path-patterns used in the .gitignore file, just for a different purpose. For example, one line might be
+```{r, eval=FALSE}
+* text=auto
+```
+where the "*" refers to all files in the root directory, and the 'text=auto' sets the 'text' attribute to auto. Alternatively, you could write
+```{r, eval=FALSE}
+R/* text=lf
+```
+which forces all the scripts directly in the R subdirectory to use the 'lf' line terminator. You can personalize the gitattributes file if you like, but you can also just use the sample .gitattributes linked [here](https://GitHub.com/krlmlr/r-appveyor/blob/master/.gitattributes). You can download this file and move it to the root directory of your package (it must be in the root directory). 
+
+The git attributes file actually is useful for setting a variety of other attributes besides line endings, although some of them are a bit technical. If you're curious to find out more about what the .gitattributes file can do, the full documentation is linked [here](https://git-scm.com/docs/gitattributes). 
+
+Once you do all of this, you're set to go! When you push changes to GitHub, Travis/AppVeyor will automatically build and test the package for you. For example on Appveyor, if you sign in, you should see something like this:
+
+![](Images/TestSS/appveyor2.PNG)
+
+and if your build succeeded, you'll see a green line at the bottom like this:
+
+![](Images/TestSS/appveyor3.PNG)
+
+otherwise you'll see an error. If your build takes a while, that's okay - you don't need to wait for it to build, because Travis/Appveyor will email you automatically if the test fails. And that's all there is to it! 
+
+### Tips and Tricks
+
+When testing, there are a couple of key principles to keep in mind:
+
+1. You want to expose bugs as quickly as possible so they don't create even larger headaches down the road! As Christopher Gandrud puts it, testing is all about 'failing faster.' To this end, you should continuously test your packages. 
+2. Make sure your tests *cover* the package code and also test all of the key functionality of the package. In an ideal world, a package should pass all of its tests only if all of its core functionality is bug-free. 
+3. Test names, organization, and error messages must be descriptive and easy to understand. One of the main purposes of tests is to inform you *where* your code is failing, and to understand that, you need informative error messages. Otherwise, you will find yourself spending hours traversing your code to find bugs.  
+
+The devtools cheatsheet, linked [here](https://www.rstudio.com/wp-content/uploads/2015/03/devtools-cheatsheet.pdf), references a lot of the key components of the testthat package. 
+
+Lastly, working with .yml files can occasionally be difficult, although devtools should make it pretty to set up in the broad majority of cases. As always, when you run into errors, make full use of stackexchange and online resources provided by AppVeyor/Travis. 
+
+## Documenting your package
 
 (Note: here, we describe how to document functions. For a more detailed description of how to document S3, S4, and reference classes, check out [this page](http://r-pkgs.had.co.nz/man.html).)
 
@@ -527,11 +895,11 @@ Once you've written all your documentation, it's fairly simple to check what it 
 
 After documenting your package, you can also click the '/man' folder to inspect the documentation html files Roxygen2 generates, but it will probably be less informative than simply typing ?[function name] into the console. 
 
-### (Optional): Adding and Documenting Data
+## Adding and Documenting Data
 
-Sometimes, you'll want to include data as part of your package, either to serve as an example for users or because your functions need it to work. Let's walk through how to include (and document) data in your package. Note that there are at least two kinds of data you should think about including, but for both kinds of data, you should generally save them as '.rdata' or '.rda' files (which are the same thing).
+Sometimes, you'll want to include data as part of your package, either to serve as an example for users or because your functions need it to work. This is totally optional - not all packages need to include data - but can be useful, so let's walk through how to include (and document) data in your package. Note that there are at least two kinds of data you should think about including, but for both kinds of data, you should generally save them as '.rdata' or '.rda' files (which are the same thing).
 
-#### Including data which should be available to users
+### Including data which should be available to users
 
 All of the data you want to be available to users should be saved in a folder called "data" inside your project. The way to do this is to write and run a script which loads your data into R and then uses the devtools function "use_data" to save it to a path inside 'data.' Even if you do not already have a folder called 'data' in your package, the use_data function will make it for you. Note that for this to work, your working directory must be set to the package you're writing, otherwise devtools won't know where to put your data. 
 
@@ -563,7 +931,7 @@ Data in your 'data' folder will effectively always be exported, so you always mu
 
 This should all look pretty similar to documenting functions. Note that '@format' is a tag which will allow you to describe the structure of a dataset, and it's good practice to list what each column measures in this section. The '@source' section describes where the data came from. Never write '@export' in this section, as data here is already automatically exported.
 
-#### Including data for your functions: 
+### Including data for your functions: 
 Some functions may rely on a predefined set of coefficients or other inputs which need to be included in the package. However, users shouldn't generally have access to such data because otherwise they might accidentally radically change the way your function works. It's best to put such data in 'R/sysdata.rda', because then users won't easily be able to access and accidentally modify it. As before, the way to include data in this way is to write a script which loads the data into R and then use the 'use_data' function to save it, but you should also include a parameter 'interior = TRUE' in the function call to let R know that this is interior, not exterior, data. For example, if one of Grace's functions functions depended on a matrix called "coefficients", he might run the following code:
 
 ```{r, eval=FALSE}
@@ -573,7 +941,7 @@ devtools::use_data(coefficients, interior = TRUE)
 
 Data in 'R/sysdata.rda' is never exported, so there's no need to document it. 
 
-### Building Your Package
+## Building Your Package
 
 You're almost done at this point! You've written your functions, modified the description, documented your functions, and presumably exported some of them; you're now ready to *build* your package. Specifically, you should go to Build > Check Package. If you don't see any options under Build, you probably need to open your .Rproj file in the "file" section of RStudio (upon doing this, RStudio should restart briefly and then you will see more Build options).
 
@@ -588,8 +956,3 @@ First, there's a wonderful cheat sheet for package development linked [here](htt
 Second, if you are looking for a quick (and very simple) example of a package, the devex package can be found here. If you're having trouble understanding the workflow for package development, it's worth looking through the devex package and making sure you understand all its components. Better yet, you can practice using roxygen2 and devtools by creating a very small/useless package (2-3 simple functions).
 
 Third, if you're having trouble, you can always just reference stackexchange. 
-
-## Sources cited:
-
-A huge thank you again to Hadley Wickham and his book R Packages, linked [here](http://r-pkgs.had.co.nz/intro.html). 
-
