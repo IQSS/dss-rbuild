@@ -19,7 +19,7 @@ As a quick reminder, you can find the 'devex' example package linked [here, on G
 
 ### A Bad Example
 
-Imagine Grace has built an architecture for aggregating polling data, and you would like to use it in your own research project. So you go to GitHub and you download Grace's repository, hoping to build on her research. One of the scripts you download looks like this. 
+Imagine Grace has built an architecture for aggregating polling data, and you would like to use it in your own research project. So you install Grace's package, hoping to build on her research. One of the scripts you download looks like this. 
 
 ![*This is not what packages should look like*](Images/badexample.PNG)
 
@@ -37,7 +37,7 @@ Yet never fear - packages don't need to be this way! Most packages are extremely
 
 ### Solutions
 
-In this section, we'll discuss the solutions to the problems outlined above. For each problem, we'll discuss the conceptual solution, and then we'll describe how the structure of R Packages allows users to integrate those solutions. Note that this section mostly just outlines package structure - we won't talk about actually creating things like documentation until the next couple sections. 
+To begin with, let's run through the conceptual solutions to the aforementioend problems.  
 
 #### Code Style
 
@@ -64,11 +64,9 @@ general_sqrt <- function (x) {
   } 
   
   # Else return the complex square root
-
   else {
     return(complex(real = 0, imaginary = sqrt(-x)))
-  } 
-  
+  }
 }
 
 ```
@@ -77,11 +75,11 @@ Clearly, the second example is a lot more readable and a lot easier to understan
 
 #### Documentation
 
-Of course, nobody wants to read through packaged code in order to guess what a function does. Instead, packages also include documentation to tell users how to use different functions and objects developed in the package. For exampe, imagine you typed '?scalep' into the Console and got the following result:
+Of course, nobody wants to read through packaged code in order to guess what a function does. Instead, packages include documentation to tell users how to use different functions and objects developed in the package. For exampe, imagine you typed '?scalep' into the Console and got the following result:
 
 ![*Documentation for scalep function*](Images/PackageSS/scalepdoc.PNG)
 
-This documentation tells you what the scalep function does, what kinds of inputs it needs, what kind of output it returns, and gives you examples of how to use it. Documentation makes packages usable, and is suprisingly easy to write using devtools and roxygen2, so it's a critical part of any package. 
+This documentation tells you what the scalep function does, what kinds of inputs it needs, what kind of output it returns, and gives you examples of how to use it. Documentation makes packages usable, and is suprisingly easy to write, so it's a critical part of any package. 
 
 #### Description
 
@@ -93,24 +91,7 @@ The namespace is a bit more complicated than the other parts of the package stru
 
 Remember: the namespace will help your package play nice with others in the event of name conflicts, but it's still better to name your functions so that the they don't overlap with names of other commonly used functions if possible. 
 
-Now that we've gone through the overall structure of packages, we'll walk you through what Grace *should* have done - the process of building an R package from start to finish. 
-
-#### The README
-
-The README file is a bit different than the others, because your package will actually work fine even if you don't have one. However, if you want other people to ever use your package, it's best to have a README. The purpose of a README is basically to bridge the gap between the DESCRIPTION and the actual documentation in your package. In other words, someone using your package might know what it does in a general sense from your DESCRIPTION, but they won't necessarily know exactly how to set up the package or how to use specific functions. The README takes care of that. In general, READMEs should do at least two things, with a couple of optional ones:
-
-(Important):
-
-1. Offer a longer (one to three paragraph) description of the package
-2. Help users install and set up the package
-
-(Optional from here on):
-
-3. Tell developers what to do if they want to contribute to your package
-4. Help contributers figure out how to run the packages' unit tests (we'll talk more about unit tests in the next section)
-5. Offer some acknowledgements
-
-This template linked [here](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) is pretty good. Again, because your package will technicaly function without your README, the actual structure and content of a README can be flexible. However, just remember that if you don't have a README which outlines why and how to use your package, other developers are unlikely to want to use it.
+Now that we've gone through the overall structure of packages, we'll walk through what Grace *should* have done - the process of building an R package from start to finish. 
 
 ## Downloading Development Tools
 
@@ -132,7 +113,7 @@ install.packages('testthat')
 
 If you are prompted to choose a CRAN mirror for your session, simply pick the mirror closest to your location.
 
-## Initializing the Package Structure
+## Initializing the Package
 
 Now we can begin to walk through the process of creating an R package. The first thing you'll always want to do is run the following function:
 
@@ -150,7 +131,7 @@ Note that the path specified by devtools::create must currently be empty, otherw
 
 Once you've set up the basic structure of your package, you can start modifying files and writing it in earnest!
 
-## Modifying the DESCRIPTION File
+## The DESCRIPTION
 
 The DESCRIPTION file gives an extremely brief overview to the package. It includes critical information such as the author of the package, the title, a very short summary of its purpose, and the liscensing information. Open the "DESCRIPTION" file using your favorite text editor in order to inspect and edit its contents. 
 
@@ -486,6 +467,13 @@ To summarize, this subsection thus contained three core ideas: (1) make your cod
 
 ## Testing
 
+### Why should you test? 
+
+Suppose Grace has created a package and has been using it for a while, but she decides she'd like to modify one function to improve it. She modifies her function, tests it a bit, and then publishes a new version of the package. Yet two weeks later, Carlos discovers that the changes she made created a bug in *another* function in the package! This situation is very annoying, especially if Carlos has no idea what has caused the bug or how to fix it. 
+
+The solution to problems like this is to testing your package *systematically* and *automatically*. If Grace had rigorously tested the entire package before publushing it, Carlos would never have had to deal with the new bug- Grace would have found out immediately. In other words, a good principle in package devleopment is to make sure your code *fails as fast as possible,* so you can find out and fix it. Of course, all programmers test their code, but not everyone tests systematically and automatically. 
+
+
 ### What are unit tests?
 
 Tests compare the *expected* output of a block of code to its *actual* output. For example, the following test tests whether the "generalized square root" function actually returns $2$ as the square root of $4$.   
@@ -770,7 +758,7 @@ The devtools cheatsheet, linked [here](https://www.rstudio.com/wp-content/upload
 
 Lastly, working with .yml files can occasionally be difficult, although devtools should make it pretty to set up in the broad majority of cases. As always, when you run into errors, make full use of stackexchange and online resources provided by AppVeyor/Travis. 
 
-## Documenting your package
+## Documentation
 
 (Note: here, we describe how to document functions. For a more detailed description of how to document S3, S4, and reference classes, check out [this page](http://r-pkgs.had.co.nz/man.html).)
 
@@ -907,6 +895,24 @@ Another way to build your package is as a precompiled binary file. Precompiled b
 ```{r, eval = FALSE}
 devtools::build(binary = TRUE)
 ```
+
+## Adding a README
+
+The README file is a bit different than the others, because your package will actually work fine even if you don't have one. However, if you want other people to ever use your package, it's best to have a README. The purpose of a README is basically to bridge the gap between the DESCRIPTION and the actual documentation in your package. In other words, someone using your package might know what it does in a general sense from your DESCRIPTION, but they won't necessarily know exactly how to set up the package or how to use specific functions. The README takes care of that. In general, READMEs should do at least two things, with a couple of optional ones:
+
+(Important):
+
+1. Offer a longer (one to three paragraph) description of the package, including core functions and bits and pieces of syntax
+2. Help users install and set up the package
+
+(Optional from here on):
+
+3. Tell developers what to do if they want to contribute to your package
+4. Help contributers figure out how to run the packages' unit tests (we'll talk more about unit tests in the next section)
+5. Offer some acknowledgements
+
+This template linked [here](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) is pretty good. Again, because your package will technicaly function without your README, the actual structure and content of a README can be flexible. However, just remember that if you don't have a README which outlines why and how to use your package, other developers are unlikely to want to use it.
+
 
 ## Tips and Tricks
 

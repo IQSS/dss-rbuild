@@ -1,4 +1,4 @@
-# IDEs
+# A Note on IDEs
 
 ## RStudio
 
