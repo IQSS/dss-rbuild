@@ -1,13 +1,15 @@
 # A Note on IDEs
 
+## General Suggestions
+
 An IDE is simply a piece of software which aims to make it easier to write and work with packages (IDE stands for integrated development environment). If you're reading this guide, you'll probably spend  a decent amount of time writing packages, so we thought it'd be helpful to review a couple of different IDEs.
 
 Broadly, there are two kinds of IDEs. 
 
 1. Some IDEs are **language agnostic**, meaning that they support any programming language you care to program in. Language-agnostic IDEs are nice because (a) if you use one, you won't have to switch IDEs every time you use a different programming language, and (b) because you can write packages in multiple languages in them. 
-2. On the other hand, some IDEs are **language specific** in that they are built for certain languages. Unsurprisingly, RStudio is a language-specifi IDE built for R. Language specific IDEs can be useful because they have a host of speciailized features for their specific language - as we'll see, RStudio makes it exceptionally easy to build and test R Packages. 
+2. On the other hand, some IDEs are **language specific** in that they are built for certain languages. Language specific IDEs can be useful because they have a host of speciailized features for their specific language.
 
-Let's run through a couple of examples.
+There are lots of different IDEs available for R users. Common language agnostic choices include [JupyterLab](https://github.com/jupyterlab),  [emacs](https://www.gnu.org/software/emacs/) and [aquamacs](http://aquamacs.org/), and even [Sublime Text 3](http://www.kevjohnson.org/using-r-in-sublime-text-3/). However, RStudio is probably the most common and beginner-friendly IDE for R Users, so we'll focus on RStudio.
 
 ## RStudio
 
