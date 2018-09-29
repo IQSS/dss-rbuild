@@ -324,27 +324,6 @@ Again, Git is letting Grace know that it sees there's a conflict and that Git ne
 The "<<<<" and ">>>>" lines are in the script to signal the beginning and end of a merge conflict, whereas the "===" line separates the two different versions. On the top is Grace's version and on the bottom is Carlos's. To resolve the merge conflict, Grace should manually select the two lines she prefers and then delete all of the "<, =, >" symbols to let Git know that the conflict has been resolved. Then, she can commit and push the file to Git, and she'll be good to go!
 
 Overall: merge conflicts are rather annoying and can be confusing, so the best way to avoid them is to clearly deliniate which programmers will be working on which sections of which scripts. This will prevent Git (and you) from getting confused.  
-
-### Tips and Tricks
-
-Git can be confusing, but there are three general rules of thumb you can follow to figure out any bugs that come up.
-
-1. Git is super smart. If there's a bug and Git is recommending a particular way of fixing it, there's a very high chance that Git is right. 
-
-2. Use the git status command. After entering git status, Git will give you a rundown of the status of the entire repository.  
-
-3. If that doesn't work (or you don't understand what is going on), you can always copy and paste the error from the command line into Google and reference stackexchange. There is a wealth of online help!
-
-Try not to worry too much! Git almost exclusively *adds information*, meaning that you can always just go back and restore a previous version - you'll never lose your work.
-
-### Cheat sheats
-
-Lastly, there are a couple of cheat sheets that you can use to make your life easier. 
-
-* [Karl Broman's tutorial](http://kbroman.org/GitHub_tutorial/pages/init.html) runs you through initializing a repository 
-
-* [This official GitHub cheat sheet](https://services.GitHub.com/on-demand/downloads/GitHub-git-cheat-sheet.pdf) lists all of the general commands you'll need
-
 ### Suggested Workflow
 
 There are many ways to use Git, but [this article by Vincent Driessen](https://nvie.com/posts/a-successful-git-branching-model/) describes a pretty intuitive and productive model for Git branching. It's worth reading or skimming the article (it includes some great graphics), but it basically involves a couple of core kinds of branches:
@@ -359,12 +338,30 @@ Here's an illustration of the core model which Driessen made:
 
 ![](Images/gitflow-model.png)
 
+
+### Tips and Tricks
+
+Git can be confusing, but there are three general rules of thumb you can follow to figure out any bugs that come up.
+
+1. Git is super smart. If there's a bug and Git is recommending a particular way of fixing it, there's a very high chance that Git is right. 
+
+2. Use the git status command. After entering git status, Git will give you a rundown of the status of the entire repository.  
+
+3. If that doesn't work (or you don't understand what is going on), you can always copy and paste the error from the command line into Google and reference stackexchange. There is a wealth of online help!
+
+Remember that Git almost exclusively *adds information*, meaning that you can always just go back and restore a previous version - you'll never lose your work.
+
+Lastly, there are a couple of cheat sheets that you can use to make your life easier. 
+
+* [Karl Broman's tutorial](http://kbroman.org/GitHub_tutorial/pages/init.html) runs you through initializing a repository 
+
+* [This official GitHub cheat sheet](https://services.GitHub.com/on-demand/downloads/GitHub-git-cheat-sheet.pdf) lists all of the general commands you'll need
+
 ## Optional: Integrated Testing
 
 ### Why use Integrated Tests?
 
 When working on packages alone, you may not push to GitHub too often. However, in large projects/packages where many programmers are working on the same package at once, it's important to ensure each programmer continuously commits changes to GitHub to make sure all the changes are compatible with each other. This process of rapid updating of packages is referred to as *continuous integration*, and it can be very difficult to manage properly (it is sometimes referred to as *integration hell*, specifically because developers often waste lots of hours trying to make code integrate properly). When you commit changes continuously, it does not guarentee that all the changes will be compatible. However, if there are compatibility problems in updates, it does ensure that you'll be able to find those problems more easily, because each individual change/commit is smaller. 
-
 For reasons we'll discuss in a second, continuous integration is a bit easier said than done. Thankfully, there are two wonderful free continuous integration services that will make your life a lot easier. If you're using windows, you'll want to use the service called *Appveyor* - if you're using Mac or Linux, you'll want to use the service called *Travis CI*. These services will make continuous integration easy, specifically because both Appveyor and Travis CI link to GitHub and will run your build and tests for you on what are called virtual machines in the cloud. 
 
 Maybe the principle of continuous integration makes sense, but why are continuous integration services useful? Why can't each developer build packages,  run the tests locally, and then only push changes to GitHub if the tests are successful?  There are three answers to this question. 

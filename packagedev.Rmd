@@ -1,17 +1,8 @@
 # Package Development
 
-To do: 
-1. Make motivation shorter, possibly move README section out
-2. Add in motivation for testing. 
+The following graphic outlines this entire chapter:
 
-<!---
-This can probably all be cut
-
-
-The previous page in the guide discussed [GitHub](./github.html). The next page in the guide will discuss [testing packages](./testing.html). This page will walk you through the structure, motivation, and process of building packages in R. We'd like to extend a huge thank you to Hadley Wickham's book [R packages](http://r-pkgs.had.co.nz/r.html#r); this part of the guide is basically a significantly condensed and simplified version of that book. A huge portion of the credit should go to him. 
-
-A quick reminder for readers who do not want to use RStudio: this part of the guide relies on the devtools package, so if you can't use RStudio, it's worth following along by looking at the [source code](https://www.rdocumentation.org/packages/devtools/versions/1.13.3/source) and [documentation](https://www.rdocumentation.org/packages/devtools/versions/1.13.3) for devtools.
--->
+![](Images/package-workflow.PNG)
 
 As a quick reminder, you can find the 'devex' example package linked [here, on GitHub](https://github.com/amspector100/packageguidelines/tree/master/devex), if you'd like to look through it while reading the guide. 
 
@@ -135,7 +126,7 @@ Once you've set up the basic structure of your package, you can start modifying 
 
 The DESCRIPTION file gives an extremely brief overview to the package. It includes critical information such as the author of the package, the title, a very short summary of its purpose, and the liscensing information. Open the "DESCRIPTION" file using your favorite text editor in order to inspect and edit its contents. 
 
-DESCRIPTION is a DCF file. This file format may be unfamiliar to you, but it's quite simple. Each line contains a a fieldname and value, separated by a colon. Sometimes, values are long enough to require multiple lines, in which case they are indented by four spaces. For example, the DESCRIPTION file for the devex package might look something like this:
+DESCRIPTION is a DCF file. This file format may be unfamiliar, but it's quite simple. Each line contains a a fieldname and value, separated by a colon. Sometimes, values are long enough to require multiple lines, in which case they are indented by four spaces. For example, the DESCRIPTION file for the devex package might look something like this:
 
 ![](Images/PackageSS/description.PNG)
 
@@ -170,17 +161,13 @@ Let's go through the fields and discuss what they mean. The first seven fields l
 
 scalep <- function(d, x=1){
   ...
-  
   # If ggplot2 is available, use its qplot function - else, use the default hist function
-  
   if (requireNamespace("ggplot2", quietly = TRUE)) {
     ggplot2::qplot(r, geom='histogram')
   } else { 
     hist(r)
   }
-  
   ...
-  
 }
 ```
 
@@ -190,7 +177,7 @@ Once you know which packages to list in the 'suggests' section, you can list the
 
 In general, it's best to suggest functions instead of requiring them if you barely use them in your package. This will give users a bit more flexibility, because it won't force them to download packages they will probably never use. 
 
-## Starting to Program
+## Writing Code
 
 ### General Coding Guidelines
 
@@ -206,25 +193,19 @@ The coding you will do in package development is slightly different than the cod
 
 ```{r, eval=FALSE}
 # Functions for later use
-
 require(ggplot2)
-
  ...
-
 scalep <- function(d, x=1){
  ...
   qplot(r, geom='histogram')
  ...
 }
-
 ```
 
 This is a bad example, because it uses "require." Instead, you should be listing your packages' necessary dependencies in the DESCRIPTION file, and then R will make sure anyone who loads your package also loads the other packages you used to write your package (also, when users install your package, R will also make sure that the other packages necessary are installed for other users too). The one catch is that you'll now have to append 'packagename::' in front of the imported functions you want to use, otherwise R won't recognize them. Thus, in the previous example, the code should look something like:
 
 ```{r, eval=FALSE}
-
  ...
-
 scalep <- function(d, x=1){
  ...
   ggplot2::qplot(r, geom='histogram')
@@ -236,9 +217,7 @@ scalep <- function(d, x=1){
 The last thing you should know is that if you want your package to plot things, you will have to surround the "plot" commands with a print statement, like this:
 
 ```{r, eval=FALSE}
-
  ...
-
 scalep <- function(d, x=1){
  ...
   print(ggplot2::qplot(r, geom='histogram'))
@@ -259,32 +238,23 @@ Now let's talk about specific elements of code style. These are shortened and ad
 
 ```{r}
 
-# This function returns the squared difference element-wise between two vectors
-
+# Returns the squared element-wise difference between two vectors
 loss <- function(x,y) {
-
   error <- (x-y)**2
-
   return(error)
 }
-
 #---------------------------------------------------------------------------
 
 # Takes the square root of any real number, returning a complex number
-
 general_sqrt <- function (x) {
-
   # Return the normal square root if x > 0
   if (x > 0 || x == 0) {
     return(complex(real=sqrt(x), imaginary=0))
   }
-
   # Else return the complex square root
-
   else {
     return(complex(real = 0, imaginary = sqrt(-x)))
   }
-
 }
 ```
 
@@ -464,6 +434,16 @@ scalep <- function(factors, divisors, constant = 1, graph = FALSE) {
 
 
 To summarize, this subsection thus contained three core ideas: (1) make your code simple, (2) make it easy to use by labeling arguments, and (3) always avoid silent errors. 
+
+### Loading Your Code
+
+If you've finished writing your code and want to play with it a little bit, you can use the following function:
+
+```{r, eval = FALSE}
+devtools::load_all()
+```
+
+which (according to its documentation) "roughly simulates what happens when a package is installed and loaded with library." As we'll see in the [build](#building-your-package), [testing](#testing), and [RStudio](a-note-on-ides.html#ex-building-packages) sections, there are better ways to simulate the user experience and test your code, but load_all is often a useful intermediate step.
 
 ## Testing
 
@@ -758,7 +738,7 @@ The devtools cheatsheet, linked [here](https://www.rstudio.com/wp-content/upload
 
 Lastly, working with .yml files can occasionally be difficult, although devtools should make it pretty to set up in the broad majority of cases. As always, when you run into errors, make full use of stackexchange and online resources provided by AppVeyor/Travis. 
 
-## Documenting Code
+## Documentation
 
 (Note: here, we describe how to document functions. For a more detailed description of how to document S3, S4, and reference classes, check out [this page](http://r-pkgs.had.co.nz/man.html).)
 
@@ -918,6 +898,4 @@ This template linked [here](https://gist.github.com/PurpleBooth/109311bb0361f32d
 
 First, there's a wonderful cheat sheet for package development linked [here](https://www.rstudio.com/wp-content/uploads/2015/06/devtools-cheatsheet.pdf).
 
-Second, if you are looking for a quick (and very simple) example of a package, the devex package can be found here. If you're having trouble understanding the workflow for package development, it's worth looking through the devex package and making sure you understand all its components. Better yet, you can practice using roxygen2 and devtools by creating a very small/useless package (2-3 simple functions).
-
-Third, if you're having trouble, you can always just reference stackexchange. 
+Second, if you're having trouble, you can always just reference stackexchange. 
