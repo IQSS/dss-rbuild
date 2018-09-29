@@ -28,9 +28,9 @@ We also wrote a small development example package (called 'devex') which you can
 
 Also, this guide is still under development, and we take feedback! If you find anything confusing or think the guide misses important contant, please email amspector100@gmail.com.
 
-## What do I need to know before reading this guide?
+## Are There Prerequesites?
 
-Almost nothing! You don't need to know anything about Github, Rstudio, or package structure. However, this guide does assume you know how to do some programming in R. For example, if you want to develop a package which downloads and analyzes the content of politicians' tweets, this guide will help you structure your code, but it won't teach you how to scrape Twitter. 
+Almost none! You don't need to know anything about package structure or GitHub. However, this guide does assume you know how to do some programming in R. For example, if you want to develop a package which downloads and analyzes the content of politicians' tweets, this guide will help you structure your code, but it won't teach you how to scrape Twitter. 
 
 ## Sources
 

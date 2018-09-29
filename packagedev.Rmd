@@ -740,6 +740,8 @@ Lastly, working with .yml files can occasionally be difficult, although devtools
 
 ## Documentation
 
+### Documenting Functions
+
 (Note: here, we describe how to document functions. For a more detailed description of how to document S3, S4, and reference classes, check out [this page](http://r-pkgs.had.co.nz/man.html).)
 
 Creating documentation for your package is incredibly easy with Roxygen2. To understand how to use Roxygen2, it's best to start with an example. Consider the following code, which generates the documentation for the "general_sqrt" function above. 
@@ -805,6 +807,23 @@ which will automatically generate your documentation. Then, if you've documented
 
 After documenting your package, you can also click the '/man' folder to inspect the documentation html files Roxygen2 generates, but it probably won't be more informative than simply typing ?[function name] into the console. 
 
+### Adding a README
+
+The README file is a bit different than the others, because your package will actually work fine even if you don't have one. However, if you want other people to ever use your package, it's best to have a README. The purpose of a README is basically to bridge the gap between the DESCRIPTION and the actual documentation in your package. In other words, someone using your package might know what it does in a general sense from your DESCRIPTION, but they won't necessarily know exactly how to set up the package or how to use specific functions. The README takes care of that. In general, READMEs should do at least two things, with a couple of optional ones:
+
+(Important):
+
+1. Offer a longer (one to three paragraph) description of the package, including core functions and bits and pieces of syntax
+2. Help users install and set up the package
+
+(Optional from here on):
+
+3. Tell developers what to do if they want to contribute to your package
+4. Help contributers figure out how to run the packages' unit tests (we'll talk more about unit tests in the next section)
+5. Offer some acknowledgements
+
+This template linked [here](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) is pretty good. Again, because your package will technicaly function without your README, the actual structure and content of a README can be flexible. However, just remember that if you don't have a README which outlines why and how to use your package, other developers are unlikely to want to use it.
+
 ## Adding and Documenting Data
 
 Sometimes, you'll want to include data as part of your package, either to serve as an example for users or because your functions need it to work. This is totally optional - not all packages need to include data - but can be useful, so let's walk through how to include (and document) data in your package. Note that there are at least two kinds of data you should think about including, but for both kinds of data, you should generally save them as '.rdata' or '.rda' files (which are the same thing).
@@ -852,13 +871,15 @@ devtools::use_data(coefficients, interior = TRUE)
 
 Data in 'R/sysdata.rda' is never exported, so there's no need to document it. 
 
-## Building Your Package
+## Releasing Your Package
 
-You're almost done at this point! You've written your functions, modified the description, documented your functions, presumably exported some of them, and hopefully tested all of them; you're now ready to *build* your package. 
+You're almost done at this point! You've written your functions, modified the description, documented your functions, presumably exported some of them, and hopefully tested all of them; you're now ready to *build*, *release*, and *publicize* your package. 
+
+### Building
 
 Building your package means bundling it into a format that is easy to distribute and easy for users to install; there are a two main ways to do this.
 
-### Building .tar.gz files
+#### Building .tar.gz files
 
 One of the most common ways to build your package is to zip it package as either .tar.gz file. Devtools will do this for you if you run the following command:
 
@@ -868,7 +889,7 @@ devtools::build(binary = FALSE)
 
 Tar.gz files are useful because anyone who has a working R development environment can install and unzip your package, regardless of their operating system.
 
-### Building precompiled binaries
+#### Building precompiled binaries
 
 Another way to build your package is as a precompiled binary file. Precompiled binaries are useful because unlike Tar.gz files, they do not require a development environment to install. However, they are platform specific: a precompiled binary built by a Windows machine can't be installed on Mac machine. There are advantages to precompiled binaries, but most likely, you'll want to use a Tar.gz file instead. if you do want to build a binary, you can just change an argument of devtools::build:
 
@@ -876,23 +897,30 @@ Another way to build your package is as a precompiled binary file. Precompiled b
 devtools::build(binary = TRUE)
 ```
 
-## Adding a README
+### Releasing
 
-The README file is a bit different than the others, because your package will actually work fine even if you don't have one. However, if you want other people to ever use your package, it's best to have a README. The purpose of a README is basically to bridge the gap between the DESCRIPTION and the actual documentation in your package. In other words, someone using your package might know what it does in a general sense from your DESCRIPTION, but they won't necessarily know exactly how to set up the package or how to use specific functions. The README takes care of that. In general, READMEs should do at least two things, with a couple of optional ones:
+Once you've built your package, there's a couple of ways to release it to the broader R community.
 
-(Important):
+#### Pushing to GitHub
 
-1. Offer a longer (one to three paragraph) description of the package, including core functions and bits and pieces of syntax
-2. Help users install and set up the package
+The easiest way to publish your package is to simply [push it to GitHub](.\version-control), (we'll discuss how to do this later). The pros of this approach are that it makes it very easy for users to download your package - they can literally do it in one line. Additionally, Github offers free services [to host a website for your package and its documentation](https://pages.github.com/), and most importantly, it's very easy for **you** to publish your package this way. Thus, pushing to Github is sort of the "default" way to publish a smaller package.  
 
-(Optional from here on):
+#### CRAN
 
-3. Tell developers what to do if they want to contribute to your package
-4. Help contributers figure out how to run the packages' unit tests (we'll talk more about unit tests in the next section)
-5. Offer some acknowledgements
+On the other hand, if you've written a larger package which you would like to distribute to the entire R community, you might consider submitting it to [CRAN](https://cran.r-project.org/), the Comprehensive R Archive Network. CRAN is basically the official package authority designated by the R community, and successfully adding your package to CRAN will make it more legitimate as well as easier for R users to find and install. 
 
-This template linked [here](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) is pretty good. Again, because your package will technicaly function without your README, the actual structure and content of a README can be flexible. However, just remember that if you don't have a README which outlines why and how to use your package, other developers are unlikely to want to use it.
+The actual act of submitting to CRAN seems rather simple: you need to simply build your package into a .tar.gz file and submit the bundled file to CRAN [here](https://cran.r-project.org/submit.html), along with a couple of comments. However, in actuality, CRAN has very high standards for packages, so it can be rather tricky to get a package accepted. CRAN's specific standards are a bit beyond the scope of the current iteration of this guide, but if you decide you want to publish a package on CRAN, you should read [Hadley Wickham's advice on the subject](http://r-pkgs.had.co.nz/release.html) **very carefully.**
 
+http://r-pkgs.had.co.nz/release.html
+
+### Publicizing
+
+Once you've released your package either on Github or perhaps on CRAN, you should publicize it! You can of course publicize it any way you choose, but there are at least two things you should consider doing. 
+
+1. Tweet about your package using the #rstats hashtag, which reaches a substantial portion of the R community.
+2. You may also want to send an email out to the [R-Packages email list](https://stat.ethz.ch/mailman/listinfo/r-packages). 
+
+And that's it! 
 
 ## Tips and Tricks
 
