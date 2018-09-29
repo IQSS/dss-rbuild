@@ -159,7 +159,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.6.8" data-path="package-development.html"><a href="package-development.html#bonus-the-goodpractice-package"><i class="fa fa-check"></i><b>2.6.8</b> Bonus: The goodpractice Package</a></li>
 <li class="chapter" data-level="2.6.9" data-path="package-development.html"><a href="package-development.html#tips-and-tricks"><i class="fa fa-check"></i><b>2.6.9</b> Tips and Tricks</a></li>
 </ul></li>
-<li class="chapter" data-level="2.7" data-path="package-development.html"><a href="package-development.html#documentation-1"><i class="fa fa-check"></i><b>2.7</b> Documentation</a></li>
+<li class="chapter" data-level="2.7" data-path="package-development.html"><a href="package-development.html#documenting-code"><i class="fa fa-check"></i><b>2.7</b> Documenting Code</a></li>
 <li class="chapter" data-level="2.8" data-path="package-development.html"><a href="package-development.html#adding-and-documenting-data"><i class="fa fa-check"></i><b>2.8</b> Adding and Documenting Data</a><ul>
 <li class="chapter" data-level="2.8.1" data-path="package-development.html"><a href="package-development.html#including-data-which-should-be-available-to-users"><i class="fa fa-check"></i><b>2.8.1</b> Including data which should be available to users</a></li>
 <li class="chapter" data-level="2.8.2" data-path="package-development.html"><a href="package-development.html#including-data-for-your-functions"><i class="fa fa-check"></i><b>2.8.2</b> Including data for your functions</a></li>
@@ -246,7 +246,7 @@ A quick reminder for readers who do not want to use RStudio: this part of the gu
 <h2><span class="header-section-number">2.1</span> Motivation</h2>
 <div id="a-bad-example" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> A Bad Example</h3>
-<p>Imagine Grace has built an architecture for aggregating polling data, and you would like to use it in your own research project. So you install Grace’s package, hoping to build on her research. One of the scripts you download looks like this.</p>
+<p>Imagine an imaginary programmer named Grace has built a a couple of beautiful pieces of code, and you would like to use them in your own projects. So you download Grace’s scripts, hoping to build on her work. One of the scripts you download looks like this.</p>
 <div class="figure">
 <img src="Images/badexample.PNG" alt="This is not what packages should look like" />
 <p class="caption"><em>This is not what packages should look like</em></p>
@@ -602,7 +602,7 @@ A quick reminder for readers who do not want to use RStudio: this part of the gu
 <h2><span class="header-section-number">2.6</span> Testing</h2>
 <div id="why-should-you-test" class="section level3">
 <h3><span class="header-section-number">2.6.1</span> Why should you test?</h3>
-<p>Suppose Grace has created a package and has been using it for a while, but she decides she’d like to modify one function to improve it. She modifies her function, tests it a bit, and then publishes a new version of the package. Yet two weeks later, Carlos discovers that the changes she made created a bug in <em>another</em> function in the package! This situation is very annoying, especially if Carlos has no idea what has caused the bug or how to fix it.</p>
+<p>Suppose Grace has created a package and has been using it for a while, but she decides she’d like to modify one function to improve it. She modifies her function, tests it a bit, and then publishes a new version of the package. Yet two weeks later, another imaginary programmer named Carlos discovers that the changes she made created a bug in <em>another</em> function in the package! This situation is very annoying, especially if Carlos has no idea what has caused the bug or how to fix it.</p>
 <p>The solution to problems like this is to testing your package <em>systematically</em> and <em>automatically</em>. If Grace had rigorously tested the entire package before publushing it, Carlos would never have had to deal with the new bug- Grace would have found out immediately. In other words, a good principle in package devleopment is to make sure your code <em>fails as fast as possible,</em> so you can find out and fix it. Of course, all programmers test their code, but not everyone tests systematically and automatically.</p>
 </div>
 <div id="what-are-unit-tests" class="section level3">
@@ -797,8 +797,8 @@ A quick reminder for readers who do not want to use RStudio: this part of the gu
 <p>Lastly, working with .yml files can occasionally be difficult, although devtools should make it pretty to set up in the broad majority of cases. As always, when you run into errors, make full use of stackexchange and online resources provided by AppVeyor/Travis.</p>
 </div>
 </div>
-<div id="documentation-1" class="section level2">
-<h2><span class="header-section-number">2.7</span> Documentation</h2>
+<div id="documenting-code" class="section level2">
+<h2><span class="header-section-number">2.7</span> Documenting Code</h2>
 <p>(Note: here, we describe how to document functions. For a more detailed description of how to document S3, S4, and reference classes, check out <a href="http://r-pkgs.had.co.nz/man.html">this page</a>.)</p>
 <p>Creating documentation for your package is incredibly easy with Roxygen2. To understand how to use Roxygen2, it’s best to start with an example. Consider the following code, which generates the documentation for the “general_sqrt” function above.</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="co">#&#39; Generalized Square Roots</span></a>
