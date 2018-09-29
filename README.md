@@ -35,10 +35,16 @@ Update: 95% of the content is there, but it's going to need a fair bit of rearra
 
 Strip down the core (the walkthrough of the package structure), and rearrange things around that. 
 
-Main refocus:
+### Main refocus:
 
 (0) Do graphical overview at the start 
 (1) Have the RStudio bit be separate, focus on Devtools. 
-(2) Have sections on Vignettes 
+(2) Have sections on Vignettes ? 
 (3)Tool-agnostic - a lot of the ideas should be sufficiently abstract that it's easy to see how you might
-solve the same problems with a different tools. 
+solve the same problems with a different tools.
+
+### Questions
+
+1. Build section okay?
+2. No vignette section for now
+3. 

@@ -774,9 +774,7 @@ Lastly, working with .yml files can occasionally be difficult, although devtools
 
 (Note: here, we describe how to document functions. For a more detailed description of how to document S3, S4, and reference classes, check out [this page](http://r-pkgs.had.co.nz/man.html).)
 
-Creating documentation for your package is incredibly easy with Roxygen2. The first thing to do, if you haven't already done it, is to install and load roxygen2 (as documented in the RStudio guidelines page), and then to check the options demonstrated at the end of Step 3.1 in this file.
-
-To understand how to use Roxygen2, it's best to start with an example. Consider the following code, which generates the documentation for the "general_sqrt" function above. 
+Creating documentation for your package is incredibly easy with Roxygen2. To understand how to use Roxygen2, it's best to start with an example. Consider the following code, which generates the documentation for the "general_sqrt" function above. 
 
 ```{r, eval=FALSE}
 
@@ -816,7 +814,7 @@ general_sqrt <- function (x) {
 
 Inside the R script, the documentation appears right above the definition of the function - this is helpful because it will help you remember to keep your documentations/functions up to date with each other. Let's work through how this documentation was generated.
 
-1. Note that everything you write in Roxygen2 should be preceded by a #' character combo. This signals to the RStudio environment that you're writing documentation, not code. 
+1. Note that everything you write in Roxygen2 should be preceded by a #' character combo. This signals to the R environment that you're writing documentation, not code. 
 
 2. You should start your documentation with a very short (2-4 word) title of the function. In the example given above, the "general_sqrt" function is titled "Generalized Square Roots." 
 
@@ -888,11 +886,27 @@ Data in 'R/sysdata.rda' is never exported, so there's no need to document it.
 
 ## Building Your Package
 
-You're almost done at this point! You've written your functions, modified the description, documented your functions, and presumably exported some of them; you're now ready to *build* your package. Specifically, you should go to Build > Check Package. If you don't see any options under Build, you probably need to open your .Rproj file in the "file" section of RStudio (upon doing this, RStudio should restart briefly and then you will see more Build options).
+You're almost done at this point! You've written your functions, modified the description, documented your functions, presumably exported some of them, and hopefully tested all of them; you're now ready to *build* your package. 
 
-Upon checking the package, RStudio will tell you if there are any warnings or errors raised by its automatic checking process. For example, it might tell you that a piece of documentation mismatches its complimentary function, or that the package needs an extra dependence. It's best to fix all of the problems RStudio points out, whether they are warnings or errors. 
+Building your package means bundling it into a format that is easy to distribute and easy for users to install; there are a two main ways to do this.
 
-Lastly, you can go to Build > Install and Restart, and then RStudio will build your package, restart, and load your package into R (using the library command). Then, you can use your package!
+### Building .tar.gz files
+
+One of the most common ways to build your package is to zip it package as either .tar.gz file. Devtools will do this for you if you run the following command:
+
+```{r, eval = FALSE}
+devtools::build(binary = FALSE)
+```
+
+Tar.gz files are useful because anyone who has a working R development environment can install and unzip your package, regardless of their operating system.
+
+### Building precompiled binaries
+
+Another way to build your package is as a precompiled binary file. Precompiled binaries are useful because unlike Tar.gz files, they do not require a development environment to install. However, they are platform specific: a precompiled binary built by a Windows machine can't be installed on Mac machine. There are advantages to precompiled binaries, but most likely, you'll want to use a Tar.gz file instead. if you do want to build a binary, you can just change an argument of devtools::build:
+
+```{r, eval = FALSE}
+devtools::build(binary = TRUE)
+```
 
 ## Tips and Tricks
 

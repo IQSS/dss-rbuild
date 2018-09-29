@@ -133,6 +133,15 @@ You should also go to "Tools > Project Options" and select the following options
 
 ![](Images/PackageSS/userox.PNG)
 
+### Example: Building Packages
+
+Specifically, you should go to Build > Check Package. If you don't see any options under Build, you probably need to open your .Rproj file in the "file" section of RStudio (upon doing this, RStudio should restart briefly and then you will see more Build options).
+
+Upon checking the package, RStudio will tell you if there are any warnings or errors raised by its automatic checking process. For example, it might tell you that a piece of documentation mismatches its complimentary function, or that the package needs an extra dependence. It's best to fix all of the problems RStudio points out, whether they are warnings or errors. 
+
+Lastly, you can go to Build > Install and Restart, and then RStudio will build your package, restart, and load your package into R (using the library command). Then, you can use your package!
+
+
 ### Further Reading
 
 To read more about using R, [take a look at the following website, built by Chapman and Hall](http://adv-r.had.co.nz/)
