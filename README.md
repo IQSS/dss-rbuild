@@ -17,7 +17,7 @@ This aims to create guidelines to help individuals develop packages using R. It 
 
 [IDEs](amspector100.github.io/packageguidelines/a-note-on-ides.html)
 
-[resources](amspector100.github.io/packageguidelines/resources.html)
+[Resources](amspector100.github.io/packageguidelines/resources.html)
 
 This repo also includes the *devex* package in a subdirectory, which serves as a very simple example of a package in R. You can find it [at this link](https://github.com/amspector100/packageguidelines/tree/master/devex). 
 
@@ -31,5 +31,5 @@ For more information about the guide, see the [Introduction](./index.Rmd). For m
 
 ### Questions
 
-1. Build/publicize sections okay?
-2. No vignette section for now
+0. Build/publicize sections okay?
+1. No vignette section for now
