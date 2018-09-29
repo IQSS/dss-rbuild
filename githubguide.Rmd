@@ -1,6 +1,8 @@
-# GitHub
+# Version Control
 
-The previous page in the guide discussed [RStudio](./development-with-rstudio.html). The next page in the guide discusses [Package Structure in R](./package-structure.html). This page is an introduction to Git and GitHub for beginners. In it, we'll motivate Git/GitHub, and then discuss what precisely Git/GitHub do and how to use them.
+**Version Control** is the process of organizing and sharing different versions of your code, and it's surprisingly important. This chapter is a beginner-friendly introduction to Version Control with Git and GitHub. In it, we'll motivate Git/GitHub, and then discuss what precisely Git/GitHub do and how to use them.
+
+It's a quick note that there are other tools for Version Control out there, but Git/GitHub are by far the most common, so we've chosen to focus on them. As you might expect, much (but not all) of the logic behind GitHub applies to other version control systems too.
 
 ## Why use Git/GitHub?
 
@@ -60,9 +62,9 @@ You might not get explicit confirmation from the command line - for example, whe
 
 Now you're ready to start using Git/GitHub!
 
-## Starting to use Git/GitHub
+## Using Git/GitHub
 
-### Creating Projects and Repositories
+### Initializing Projects and Repositories
 
 The first step to using git is creating a project, or repository (repo for short). There are generally two ways to create a repo in Git. 
 
@@ -343,7 +345,7 @@ Lastly, there are a couple of cheat sheets that you can use to make your life ea
 
 * [This official GitHub cheat sheet](https://services.GitHub.com/on-demand/downloads/GitHub-git-cheat-sheet.pdf) lists all of the general commands you'll need
 
-### Optional: Suggested Workflow
+### Suggested Workflow
 
 There are many ways to use Git, but [this article by Vincent Driessen](https://nvie.com/posts/a-successful-git-branching-model/) describes a pretty intuitive and productive model for Git branching. It's worth reading or skimming the article (it includes some great graphics), but it basically involves a couple of core kinds of branches:
 
@@ -356,6 +358,79 @@ There are many ways to use Git, but [this article by Vincent Driessen](https://n
 Here's an illustration of the core model which Driessen made: 
 
 ![](Images/gitflow-model.png)
+
+## Optional: Integrated Testing
+
+### Why use Integrated Tests?
+
+When working on packages alone, you may not push to GitHub too often. However, in large projects/packages where many programmers are working on the same package at once, it's important to ensure each programmer continuously commits changes to GitHub to make sure all the changes are compatible with each other. This process of rapid updating of packages is referred to as *continuous integration*, and it can be very difficult to manage properly (it is sometimes referred to as *integration hell*, specifically because developers often waste lots of hours trying to make code integrate properly). When you commit changes continuously, it does not guarentee that all the changes will be compatible. However, if there are compatibility problems in updates, it does ensure that you'll be able to find those problems more easily, because each individual change/commit is smaller. 
+
+For reasons we'll discuss in a second, continuous integration is a bit easier said than done. Thankfully, there are two wonderful free continuous integration services that will make your life a lot easier. If you're using windows, you'll want to use the service called *Appveyor* - if you're using Mac or Linux, you'll want to use the service called *Travis CI*. These services will make continuous integration easy, specifically because both Appveyor and Travis CI link to GitHub and will run your build and tests for you on what are called virtual machines in the cloud. 
+
+Maybe the principle of continuous integration makes sense, but why are continuous integration services useful? Why can't each developer build packages,  run the tests locally, and then only push changes to GitHub if the tests are successful?  There are three answers to this question. 
+
+1. For large projects, it often takes a long time to build them. Being able to build them on the cloud (using Appveyor/Travis) saves an enormous amount of time. (This is especially true for programming languages besides R, but it's true for R too!)
+2. Sometimes there may be global environmental settings on your particular computer which change the way the package works and the way tests run. Building and testing the package in a "clean" environment online makes the testing more robust. 
+3. Lastly, CI services offer settings to automatically 'deploy' or publish successful builds, for example by publishing code for a website. These are a bit beyond the scope of this guide, but they are documented [here (Appveyor)](https://www.appveyor.com/docs/deployment/) and [here (Travis)](https://docs.travis-ci.com/user/deployment/). 
+
+### The integrated testing workflow
+
+It's important to note that Travis/Appveyor do not prevent you from pushing bad code to a repo - if you break your package and all your tests fail on Travis/Appveyor, you can still push the broken version to the master branch on GitHub. As a result, most developer teams use the following workflow to keep the master branch working at all times.
+
+1. Someone sets up a "master repo" with a master branch on GitHub. 
+2. Each developer on the team creates a copy (also called a *fork*) of the master repo. Thus, each developer has their own repository.
+3. Each developer makes changes to the project and then pushes those changes to their personal fork. After each push, Appveyor or Travis builds the package and test it. 
+4. If the Appveyor/Travis builds are successful, the developper will likely send a pull request to the master branch of the master repo, which will probably be accepted. 
+
+This workflow allows each developer to make changes in their own repo and continuously build them using Travis/Appveyor without potentially breaking the master repo's copy. 
+
+### Setting up Integrated Tests
+
+**Step 1**: To get started using continuous integration services, head to the Travis CI (Linux/Mac OS) or AppVeyor (Windows) website and "sign up"" by signing into GitHub. At some point, Travis/AppVeyor will ask you to authorize its connection to GitHub, which you should authorize.
+
+**Step 2**: Once you authorize the connection, you need to specifically select which repos you'd like to use Travis/AppVeyor with. For example (in AppVeyor), upon signing up, you'll see something like this screen:
+
+![](Images/TestSS/appveyor1.PNG)
+
+You should click "new project" and then select the specific repo you'd like to use in combination with Travis/Appveyor. This means that you should at least initialize your project and push it to GitHub before you start using Travis/Appveyor. 
+
+**Step 3**: Depending on whether you're using Appveyor or Travis, you should run devtools::use_appveyor() or devtools::use_travis() in the console with your package open. This will create a file named 'appveyor.yml' or 'travis.yml' in the root directory of your package. These '.yml' files will tell AppVeyor/Travis what to do. It's actually not too important to understand everything they do, just because the devtools template generally works pretty well. However, you occasionally will have to modify it to suit specific needs. AppVeyor and Travis CI both have great documentation, linked [here for Appveyor](https://www.appveyor.com/docs/build-configuration/) and [here for Travis](https://docs.travis-ci.com/user/languages/r/).
+
+(Note - devtools also adds 'appveyor.yml' and 'travis.yml' to the .Rbuildignore to reduce clutter in your package.)
+
+**Step 3.5: Dependency Issues**: If you're using Travis, it's important to talk quickly about dependencies in packages. Travis was not originally designed for R projects, so occasionally it's a bit shaky, specifically with regard to dependencies in packages (i.e. Travis will build your package online, but if your package depends on ggplot2, then Travis have to install ggplot2 before building your package). By default, Travis/Appveyor automatically install anything listed in the dependencies listed in the DESCRIPTION file for your project. However, occasionally something goes wrong. If you get error messages that look like Travis did not install of the dependencies, it's worth specifying them in the .yml file. You can by adding a line like the following:
+
+```{r, eval = FALSE}
+
+r_packages: package_name
+
+```
+ in the .yml file (this will install the package the same way that R installs it when you run 'install.packages'). If you'd like to install a package using a different method (i.e. from a GitHub version of the package), there are lots of options listed in the [R-specific Travis documentation](https://docs.travis-ci.com/user/languages/r/). However, it's important to remember that this is generally NOT necessary - Travis/Appveyor do a pretty good job of automatically detecting/installing dependencies as long as your DESCRIPTION file specifies them.
+
+**Step 4**: If you are working with many other developers on a single package, you should also add a '.gitattributes' file into the root of your directory. This is because different operating systems handle different characters, for example line terminators, slightly differently. Modern Mac and Unix/Linux systems use '$\n$' to terminate the end of each line, in what is called the "line feed" or "LF" system, whereas Windows uses '$\r\n$' in the 'Carriage Return Line Feed' or CRLF system. The point is that the '.gitattributes' file will ensure that each developer uses exactly the same line endings, because you can set the 'text' setting which controls the method of writing lineterminators.
+
+The way it works is that the '.gitattribute' file should be a line of path-patterns followed by specific attributes. These path-patterns (for a refresher, see the Atlanian guide [here](https://www.atlassian.com/git/tutorials/saving-changes/gitignore)) are exactly the same path-patterns used in the .gitignore file, just for a different purpose. For example, one line might be
+```{r, eval=FALSE}
+* text=auto
+```
+where the "*" refers to all files in the root directory, and the 'text=auto' sets the 'text' attribute to auto. Alternatively, you could write
+```{r, eval=FALSE}
+R/* text=lf
+```
+which forces all the scripts directly in the R subdirectory to use the 'lf' line terminator. You can personalize the gitattributes file if you like, but you can also just use the sample .gitattributes linked [here](https://GitHub.com/krlmlr/r-appveyor/blob/master/.gitattributes). You can download this file and move it to the root directory of your package (it must be in the root directory). 
+
+The git attributes file actually is useful for setting a variety of other attributes besides line endings, although some of them are a bit technical. If you're curious to find out more about what the .gitattributes file can do, the full documentation is linked [here](https://git-scm.com/docs/gitattributes). 
+
+Once you do all of this, you're set to go! When you push changes to GitHub, Travis/AppVeyor will automatically build and test the package for you. For example on Appveyor, if you sign in, you should see something like this:
+
+![](Images/TestSS/appveyor2.PNG)
+
+and if your build succeeded, you'll see a green line at the bottom like this:
+
+![](Images/TestSS/appveyor3.PNG)
+
+otherwise you'll see an error. If your build takes a while, that's okay - you don't need to wait for it to build, because Travis/Appveyor will email you automatically if the test fails. And that's all there is to it! 
+
 
 ## Further reading
 
