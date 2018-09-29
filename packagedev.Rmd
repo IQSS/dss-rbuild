@@ -19,7 +19,7 @@ As a quick reminder, you can find the 'devex' example package linked [here, on G
 
 ### A Bad Example
 
-Imagine Grace has built an architecture for aggregating polling data, and you would like to use it in your own research project. So you install Grace's package, hoping to build on her research. One of the scripts you download looks like this. 
+Imagine an imaginary programmer named Grace has built a a couple of beautiful pieces of code, and you would like to use them in your own projects. So you download Grace's scripts, hoping to build on her work. One of the scripts you download looks like this. 
 
 ![*This is not what packages should look like*](Images/badexample.PNG)
 
@@ -469,7 +469,7 @@ To summarize, this subsection thus contained three core ideas: (1) make your cod
 
 ### Why should you test? 
 
-Suppose Grace has created a package and has been using it for a while, but she decides she'd like to modify one function to improve it. She modifies her function, tests it a bit, and then publishes a new version of the package. Yet two weeks later, Carlos discovers that the changes she made created a bug in *another* function in the package! This situation is very annoying, especially if Carlos has no idea what has caused the bug or how to fix it. 
+Suppose Grace has created a package and has been using it for a while, but she decides she'd like to modify one function to improve it. She modifies her function, tests it a bit, and then publishes a new version of the package. Yet two weeks later, another imaginary programmer named Carlos discovers that the changes she made created a bug in *another* function in the package! This situation is very annoying, especially if Carlos has no idea what has caused the bug or how to fix it. 
 
 The solution to problems like this is to testing your package *systematically* and *automatically*. If Grace had rigorously tested the entire package before publushing it, Carlos would never have had to deal with the new bug- Grace would have found out immediately. In other words, a good principle in package devleopment is to make sure your code *fails as fast as possible,* so you can find out and fix it. Of course, all programmers test their code, but not everyone tests systematically and automatically. 
 
@@ -758,7 +758,7 @@ The devtools cheatsheet, linked [here](https://www.rstudio.com/wp-content/upload
 
 Lastly, working with .yml files can occasionally be difficult, although devtools should make it pretty to set up in the broad majority of cases. As always, when you run into errors, make full use of stackexchange and online resources provided by AppVeyor/Travis. 
 
-## Documentation
+## Documenting Code
 
 (Note: here, we describe how to document functions. For a more detailed description of how to document S3, S4, and reference classes, check out [this page](http://r-pkgs.had.co.nz/man.html).)
 

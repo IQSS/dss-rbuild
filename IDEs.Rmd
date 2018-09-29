@@ -1,5 +1,14 @@
 # A Note on IDEs
 
+An IDE is simply a piece of software which aims to make it easier to write and work with packages (IDE stands for integrated development environment). It's usually more convenient to work with an IDE than it is to work with the base R GUI. If you're reading this guide, you'll probably be spending a decent proportion of your time writing packages, so we thought it'd be helpful to review a couple of different IDEs to make your life easier.
+
+Broadly, there are two kinds of IDEs. 
+
+1. Some IDEs are **language agnostic**, meaning that they support any programming language you care to program in. Language-agnostic IDEs are nice because (a) if you use one, you won't have to switch IDEs every time you use a different programming language, and (b) because you can write packages in multiple languages in them. 
+2. On the other hand, some IDEs are **language specific** in that they are built for certain languages. Unsurprisingly, RStudio is a language-specifi IDE built for R. Language specific IDEs can be useful because they have a host of speciailized features for their specific language - as we'll see, RStudio makes it exceptionally easy to build and test R Packages. 
+
+Many IDEs fall somewhere in-between, in that they primarily support one language but support a host of other ones too. For example, the PyCharm IDE supports tons of different languages, but (as its name suggests) was initially built for Python programming.
+
 ## RStudio
 
 
