@@ -6,84 +6,6 @@ The following graphic outlines this entire chapter:
 
 As a quick reminder, you can find the 'devex' example package linked [here, on GitHub](https://github.com/amspector100/packageguidelines/tree/master/devex), if you'd like to look through it while reading the guide. 
 
-## Motivation
-
-### A Bad Example
-
-Imagine an imaginary programmer named Grace has built a a couple of beautiful pieces of code, and you would like to use them in your own projects. So you download Grace's scripts, hoping to build on her work. One of the scripts you download looks like this. 
-
-![*This is not what packages should look like*](Images/badexample.PNG)
-
-When you read this script, you should notice at least a couple of problems.
-
-First, upon reading this code, most programmers would have absolutely no idea what it's supposed to do. Because this is a simple example, you might be able to guess that the lm function returns the squared difference of its inputs, and the sqt function takes the square root of negative numbers. But the "scalep" function is almost totally incomprehensible - what's it supposed to do? 
-
-Second, even if you could tell what the "scalep" function does, you'd have no idea how to use it, because you don't know how the "d" input should be structured. 
-
-Third, it's very difficult to use this script in combination with other packages. The "lm" function has the same name as the "lm" function from the R Stats package, which is incredibly useful, and very commonly used. Giving a new function the same name as a base or commonly used function will create extremely weird bugs or just cause a fatal error and end your entire session. 
-
-Lastly, and less obviously, you don't know what *version* of Grace's package this script is. Grace will probably update and modify her scripts over time, and unless you are aware of the contents of those changes, the script may behave differently than you expect.
-
-Yet never fear - packages don't need to be this way! Most packages are extremely well-built and easy to use. In this section, we'll demonstrate how to make sure your packages are like those packages. 
-
-### Solutions
-
-To begin with, let's run through the conceptual solutions to the aforementioend problems.  
-
-#### Code Style
-
-The first solution is to write code differently. The script above has a couple problems with style. Specifically, note the difference between the following two code samples:
-
-```{r}
-sqt <- function(x){
-  if(x==0){return(x)}
-  else if(x>0){return(sqrt(x))}
-  else if(x<0){return(complex(real = 0, imaginary = sqrt(-x)))}
-}
-```
-
-
-```{r, eval=FALSE}
-
-# This function takes the complex square root of real numbers
-
-general_sqrt <- function (x) {
-  
-  # Return the normal square root if x > 0
-  if (x > 0 || x == 0) {
-    return(sqrt(x))
-  } 
-  
-  # Else return the complex square root
-  else {
-    return(complex(real = 0, imaginary = sqrt(-x)))
-  }
-}
-
-```
-
-Clearly, the second example is a lot more readable and a lot easier to understand. Later, we'll talk about specific coding guidelines, but for now, just remember that the goal of programming style guides is to make your code *readable* and therefore *useable*. This will also make it a lot easier for others to fix and find bugs in your packaged code. 
-
-#### Documentation
-
-Of course, nobody wants to read through packaged code in order to guess what a function does. Instead, packages include documentation to tell users how to use different functions and objects developed in the package. For exampe, imagine you typed '?scalep' into the Console and got the following result:
-
-![*Documentation for scalep function*](Images/PackageSS/scalepdoc.PNG)
-
-This documentation tells you what the scalep function does, what kinds of inputs it needs, what kind of output it returns, and gives you examples of how to use it. Documentation makes packages usable, and is suprisingly easy to write, so it's a critical part of any package. 
-
-#### Description
-
-The DESCRIPTION file of an R Package helps solve each one of the first three problems. It briefly outlines the purpose of the package, as well as the version of the pacakge and who maintains it. Perhaps most importantly for newer users, it also documents the dependencies of your package. For example, if you wrote a package which relies heavily on the boot package version 1.3-20, your description will document that, so your users don't have to spend hours searching for the exact package necessary to make your package work. 
-
-#### Namespace 
-
-The namespace is a bit more complicated than the other parts of the package structure. The purpose of the namespace is make sure your package works in combination with other packages. For example, if your package includes some data labelled 'lm', a good namespace will ensure that using that data in conjunction with the R stats package (which has a function called 'lm') will *not* throw an error. How exactly the namespace does this is a bit complicated and beyond the scope of this guide, so if you're dying for more specifics, you should [read through this wonderful page](http://r-pkgs.had.co.nz/namespace.html). Thankfully, Roxygen2 will automatically generate a namespace for you - we'll discuss how to do this a little later. 
-
-Remember: the namespace will help your package play nice with others in the event of name conflicts, but it's still better to name your functions so that the they don't overlap with names of other commonly used functions if possible. 
-
-Now that we've gone through the overall structure of packages, we'll walk through what Grace *should* have done - the process of building an R package from start to finish. 
-
 ## Downloading Development Tools
 
 Before we get started, you'll want to download three packages that are extremely useful for package development. If you are running Windows, you can do so by following the instructions below:
@@ -154,7 +76,7 @@ Let's go through the fields and discuss what they mean. The first seven fields l
 
 ![](Images/PackageSS/imports.PNG)
 
-14. **Suggests**: Sometimes, your package will not really *require* the use of other packages, but it might offer a couple of extra wrappers/functions with those other packages. When those extra functions aren't strictly necessary, it's a good idea to have your package *suggest* imports. For example, if Grace modified the scalep function to look like the following code, she might put ggplot2 in the 'suggests' part of the description. 
+14. **Suggests**: Sometimes, your package will not really *require* the use of other packages, but it might offer a couple of extra wrappers/functions with those other packages. When those extra functions aren't strictly necessary, it's a good idea to have your package *suggest* imports. For example, a package which includes the following function should include ggplot2 in the 'suggests' part of the description. 
 
 ```{r, eval=FALSE}
 
@@ -443,15 +365,15 @@ If you've finished writing your code and want to play with it a little bit, you 
 devtools::load_all()
 ```
 
-which (according to its documentation) "roughly simulates what happens when a package is installed and loaded with library." As we'll see in the [build](#building-your-package), [testing](#testing), and [RStudio](a-note-on-ides.html#ex-building-packages) sections, there are better ways to simulate the user experience and test your code, but load_all is often a useful intermediate step.
+which (according to its documentation) "roughly simulates what happens when a package is installed and loaded with library." As we'll see in the [build](#building-your-package), [testing](#testing), and [RStudio](./integrated-development-environments.html#ex-building-packages) sections, there are better ways to simulate the user experience and test your code, but load_all is often a useful intermediate step.
 
 ## Testing
 
 ### Why should you test? 
 
-Suppose Grace has created a package and has been using it for a while, but she decides she'd like to modify one function to improve it. She modifies her function, tests it a bit, and then publishes a new version of the package. Yet two weeks later, another imaginary programmer named Carlos discovers that the changes she made created a bug in *another* function in the package! This situation is very annoying, especially if Carlos has no idea what has caused the bug or how to fix it. 
+Suppose an imaginary programmer named Grace has created a package and has been using it for a while, but she decides she'd like to modify one function to improve it. She modifies her function, tests it a bit, and then publishes a new version of the package. Yet two weeks later, another imaginary programmer named Carlos discovers that the changes she made created a bug in *another* function in the package! This situation is very annoying, especially if Carlos has no idea what has caused the bug or how to fix it. Unfortunately, it's also an extremely common problem.
 
-The solution to problems like this is to testing your package *systematically* and *automatically*. If Grace had rigorously tested the entire package before publushing it, Carlos would never have had to deal with the new bug- Grace would have found out immediately. In other words, a good principle in package devleopment is to make sure your code *fails as fast as possible,* so you can find out and fix it. Of course, all programmers test their code, but not everyone tests systematically and automatically. 
+The solution to problems like this is to test your package *systematically* and *automatically*. If Grace had rigorously tested the entire package before publushing it, Carlos would never have had to deal with the new bug- Grace would have found out immediately. In other words, a good principle in package devleopment is to make sure your code *fails as fast as possible,* so you can find out and fix it. Of course, all programmers test their code, but not everyone tests systematically and automatically. 
 
 
 ### What are unit tests?
@@ -740,11 +662,13 @@ Lastly, working with .yml files can occasionally be difficult, although devtools
 
 ## Documentation
 
+Documentation is an absolutely essential part of any package - most people won't be willing to read your source code to figure out how your functions work. Thankfully, creating documentation for your package is incredibly easy with Roxygen2. 
+
 ### Documenting Functions
 
 (Note: here, we describe how to document functions. For a more detailed description of how to document S3, S4, and reference classes, check out [this page](http://r-pkgs.had.co.nz/man.html).)
 
-Creating documentation for your package is incredibly easy with Roxygen2. To understand how to use Roxygen2, it's best to start with an example. Consider the following code, which generates the documentation for the "general_sqrt" function above. 
+To understand how to use Roxygen2, it's best to start with an example. Consider the following code, which generates the documentation for the "general_sqrt" function above. 
 
 ```{r, eval=FALSE}
 
@@ -869,7 +793,13 @@ coefficients <- read.csv('C:/Users/Grace/Documents/R/coefs.csv', header=TRUE, se
 devtools::use_data(coefficients, interior = TRUE)
 ```
 
-Data in 'R/sysdata.rda' is never exported, so there's no need to document it. 
+Data in 'R/sysdata.rda' is never exported, so there's no need to document it.
+
+## Namespace 
+
+The namespace is a bit more complicated than the other parts of the package structure. The purpose of the namespace is make sure your package works in combination with other packages. For example, if your package includes some data labelled 'lm', a good namespace will ensure that using that data in conjunction with the R stats package (which has a function called 'lm') will *not* throw an error. How exactly the namespace does this is a bit complicated and beyond the scope of this guide, so if you're dying for more specifics, you should [read through this wonderful page](http://r-pkgs.had.co.nz/namespace.html). Thankfully, Roxygen2 will automatically generate a namespace for you when you create documentation with "@import" and "@export" tags, so you don't need to worry about this too much.
+
+Remember: the namespace will help your package play nice with others in the event of name conflicts, but it's still better to name your functions so that the they don't overlap with names of other commonly used functions if possible. 
 
 ## Releasing Your Package
 
