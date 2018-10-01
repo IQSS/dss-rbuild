@@ -1,7 +1,7 @@
 ---
 title: "Package Development in R"
 author: "Asher Spector"
-date: "August 31, 2018"
+date: "September 30, 2018"
 description: "This guide walks through the process of developing R package"
 github-repo: "amspector100/packageguidelines"
 ---
