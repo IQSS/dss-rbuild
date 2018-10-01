@@ -8,29 +8,17 @@ github-repo: "amspector100/packageguidelines"
 
 # Introduction
 
-## What is a package?
-
-Let's say you wrote a script like this in R and wanted to make it easy for others to use.
-
-![*This is not what packages should look like*](Images/badexample.PNG)
-
-As you can probably tell, other users may not understand exactly what this script is supposed to do and how to use it. Even if they take the time to read through the source code and eventually figure it out, it might have been faster for them to just write the functions themselves. Packages solve this problem. Loosely speaking, *packages* are structured collections of code which aim to make your code easily sharable and reproducible. For example, any good package includes *documentation* which describes its functionality and use. Developing packages can be painstaking, but thankfully there are lots of tools today which make it extremely simple to create robust packages. This guide aims to run through how to use those tools and develop packages in R.
-
 ## Table of Contents
 
 This guide is organized into three parts. 
 
 1. First, we'll run through [The proper way to structure and test packages](./package-development.html).
 2. Second, we'll discuss [Version Control with Git and Github](./version-control.html)
-3. Lastly, we'll [briefly look at a couple of IDEs](./a-note-on-ides.html), which are just pieces of software that make it easier to write packages. 
+3. Lastly, we'll [briefly look at a couple of IDEs](./integrated-development-environments.html), which are just pieces of software that make it easier to write packages. 
     
 We also wrote a small development example package (called 'devex') which you can find linked [here, on GitHub](https://github.com/amspector100/packageguidelines/tree/master/devex). If you haven't used GitHub yet, don't worry - we'll go over how to use GitHub later. 
 
 Also, this guide is still under development, and we take feedback! If you find anything confusing or think the guide misses important contant, please email amspector100@gmail.com.
-
-## Are There Prerequesites?
-
-Almost none! You don't need to know anything about package structure or GitHub. However, this guide does assume you know how to do some programming in R. For example, if you want to develop a package which downloads and analyzes the content of politicians' tweets, this guide will help you structure your code, but it won't teach you how to scrape Twitter. 
 
 ## Sources
 
