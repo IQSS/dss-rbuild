@@ -384,7 +384,7 @@ Tests compare the *expected* output of a block of code to its *actual* output. F
 expect_equal(general_sqrt(4), complex(real = 2, imaginary = 0))
 ```
 
-*Unit tests* usually run on the computer of the developer who is modifying a package - for example, if Grace is updating her package, unit tests on her updates will run on her computer. Unit tests also should run automatically upon building a package. 
+*Unit tests* usually run on the computer of the developer who is modifying a package and also should run automatically upon building a package. 
 
 We'll talk a little more about how exactly to create tests down below, but hopefully this makes the general concept clear (you've also probably been using the general concept as you program). 
 
@@ -756,14 +756,14 @@ Sometimes, you'll want to include data as part of your package, either to serve 
 
 All of the data you want to be available to users should be saved in a folder called "data" inside your project. The way to do this is to write and run a script which loads your data into R and then uses the devtools function "use_data" to save it to a path inside 'data.' Even if you do not already have a folder called 'data' in your package, the use_data function will make it for you. Note that for this to work, your working directory must be set to the package you're writing, otherwise devtools won't know where to put your data. 
 
-For example, when documenting the scalep function, Grace might want to include data as an example of a way to use scalep. To this end, she's generated a (totally fake) csv file which lists 100 people's income and luxury spending, and has saved it to the   
+For example, when documenting the scalep function, one might want to include data as an example of a way to use scalep. To this end, I've generated a (totally fake) csv file which lists 100 people's income and luxury spending, and has saved it to the   
 
 ```{r, eval=FALSE}
-luxspending <- read.csv('C:/Users/Grace/Documents/R/datapath.csv', header=TRUE, sep=',')
+luxspending <- read.csv('C:/Users/name/Documents/R/datapath.csv', header=TRUE, sep=',')
 devtools::use_data(luxspending)
 ```
 
-Data in your 'data' folder will effectively always be exported, so you always must document it. To document data, you should create an R Script in your 'R' directory called ['data.R'] and use Roxygen2 to document the data similarly to the way you'd document a function. For example, Grace might document the aforementioned data in the following way:
+Data in your 'data' folder will effectively always be exported, so you always must document it. To document data, you should create an R Script in your 'R' directory called ['data.R'] and use Roxygen2 to document the data similarly to the way you'd document a function. For example, one might document the aforementioned data in the following way:
 
 ```{r, eval=FALSE}
 #' Luxury spending of 100 individuals
@@ -786,10 +786,10 @@ This should all look pretty similar to documenting functions. Note that '@format
 
 ### Including data for your functions
 
-Some functions may rely on a large, predefined set of coefficients or other inputs which need to be included in the package. However, users shouldn't generally have access to such data because otherwise they might accidentally radically change the way your function works. It's best to put such data in 'R/sysdata.rda', because then users won't easily be able to access and accidentally modify it. As before, the way to include data in this way is to write a script which loads the data into R and then use the 'use_data' function to save it, but you should also include a parameter 'interior = TRUE' in the function call to let R know that this is interior, not exterior, data. For example, if one of Grace's functions functions depended on a matrix called "coefficients", he might run the following code:
+Some functions may rely on a large, predefined set of coefficients or other inputs which need to be included in the package. However, users shouldn't generally have access to such data because otherwise they might accidentally radically change the way your function works. It's best to put such data in 'R/sysdata.rda', because then users won't easily be able to access and accidentally modify it. As before, the way to include data in this way is to write a script which loads the data into R and then use the 'use_data' function to save it, but you should also include a parameter 'interior = TRUE' in the function call to let R know that this is interior, not exterior, data. For example, if a function depends on a matrix called "coefficients", one might run the following code:
 
 ```{r, eval=FALSE}
-coefficients <- read.csv('C:/Users/Grace/Documents/R/coefs.csv', header=TRUE, sep=',')
+coefficients <- read.csv('C:/Users/name/Documents/R/coefs.csv', header=TRUE, sep=',')
 devtools::use_data(coefficients, interior = TRUE)
 ```
 
