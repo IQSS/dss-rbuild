@@ -13,6 +13,9 @@ RoxygenNote: 6.1.0
 Depends: R (>= 2.10)
 Imports:
   ggplot2
-Suggests: 
-  testthat,
+Suggests:
+  testthat,,
+    knitr,
+    rmarkdown
 URL: amspector100.github.io
+VignetteBuilder: knitr
