@@ -25,7 +25,7 @@
 <meta name="author" content="Asher Spector">
 
 
-<meta name="date" content="2018-08-31">
+<meta name="date" content="2018-09-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -154,17 +154,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.6.1" data-path="package-development.html"><a href="package-development.html#documenting-functions"><i class="fa fa-check"></i><b>2.6.1</b> Documenting Functions</a></li>
 <li class="chapter" data-level="2.6.2" data-path="package-development.html"><a href="package-development.html#adding-a-readme"><i class="fa fa-check"></i><b>2.6.2</b> Adding a README</a></li>
 </ul></li>
-<li class="chapter" data-level="2.7" data-path="package-development.html"><a href="package-development.html#adding-and-documenting-data"><i class="fa fa-check"></i><b>2.7</b> Adding and Documenting Data</a><ul>
-<li class="chapter" data-level="2.7.1" data-path="package-development.html"><a href="package-development.html#including-data-which-should-be-available-to-users"><i class="fa fa-check"></i><b>2.7.1</b> Including data which should be available to users</a></li>
-<li class="chapter" data-level="2.7.2" data-path="package-development.html"><a href="package-development.html#including-data-for-your-functions"><i class="fa fa-check"></i><b>2.7.2</b> Including data for your functions</a></li>
+<li class="chapter" data-level="2.7" data-path="package-development.html"><a href="package-development.html#vignettes"><i class="fa fa-check"></i><b>2.7</b> Vignettes</a></li>
+<li class="chapter" data-level="2.8" data-path="package-development.html"><a href="package-development.html#adding-and-documenting-data"><i class="fa fa-check"></i><b>2.8</b> Adding and Documenting Data</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="package-development.html"><a href="package-development.html#including-data-which-should-be-available-to-users"><i class="fa fa-check"></i><b>2.8.1</b> Including data which should be available to users</a></li>
+<li class="chapter" data-level="2.8.2" data-path="package-development.html"><a href="package-development.html#including-data-for-your-functions"><i class="fa fa-check"></i><b>2.8.2</b> Including data for your functions</a></li>
 </ul></li>
-<li class="chapter" data-level="2.8" data-path="package-development.html"><a href="package-development.html#namespace"><i class="fa fa-check"></i><b>2.8</b> Namespace</a></li>
-<li class="chapter" data-level="2.9" data-path="package-development.html"><a href="package-development.html#releasing-your-package"><i class="fa fa-check"></i><b>2.9</b> Releasing Your Package</a><ul>
-<li class="chapter" data-level="2.9.1" data-path="package-development.html"><a href="package-development.html#building"><i class="fa fa-check"></i><b>2.9.1</b> Building</a></li>
-<li class="chapter" data-level="2.9.2" data-path="package-development.html"><a href="package-development.html#releasing"><i class="fa fa-check"></i><b>2.9.2</b> Releasing</a></li>
-<li class="chapter" data-level="2.9.3" data-path="package-development.html"><a href="package-development.html#publicizing"><i class="fa fa-check"></i><b>2.9.3</b> Publicizing</a></li>
+<li class="chapter" data-level="2.9" data-path="package-development.html"><a href="package-development.html#namespace"><i class="fa fa-check"></i><b>2.9</b> Namespace</a></li>
+<li class="chapter" data-level="2.10" data-path="package-development.html"><a href="package-development.html#releasing-your-package"><i class="fa fa-check"></i><b>2.10</b> Releasing Your Package</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="package-development.html"><a href="package-development.html#building"><i class="fa fa-check"></i><b>2.10.1</b> Building</a></li>
+<li class="chapter" data-level="2.10.2" data-path="package-development.html"><a href="package-development.html#releasing"><i class="fa fa-check"></i><b>2.10.2</b> Releasing</a></li>
+<li class="chapter" data-level="2.10.3" data-path="package-development.html"><a href="package-development.html#publicizing"><i class="fa fa-check"></i><b>2.10.3</b> Publicizing</a></li>
 </ul></li>
-<li class="chapter" data-level="2.10" data-path="package-development.html"><a href="package-development.html#tips-and-tricks-1"><i class="fa fa-check"></i><b>2.10</b> Tips and Tricks</a></li>
+<li class="chapter" data-level="2.11" data-path="package-development.html"><a href="package-development.html#tips-and-tricks-1"><i class="fa fa-check"></i><b>2.11</b> Tips and Tricks</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>3</b> Version Control</a><ul>
 <li class="chapter" data-level="3.1" data-path="version-control.html"><a href="version-control.html#why-use-gitgithub"><i class="fa fa-check"></i><b>3.1</b> Why use Git/GitHub?</a><ul>
@@ -519,7 +520,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">2.5.2</span> What are unit tests?</h3>
 <p>Tests compare the <em>expected</em> output of a block of code to its <em>actual</em> output. For example, the following test tests whether the “generalized square root” function actually returns <span class="math inline">\(2\)</span> as the square root of <span class="math inline">\(4\)</span>.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">expect_equal</span>(<span class="kw">general_sqrt</span>(<span class="dv">4</span>), <span class="kw">complex</span>(<span class="dt">real =</span> <span class="dv">2</span>, <span class="dt">imaginary =</span> <span class="dv">0</span>))</a></code></pre></div>
-<p><em>Unit tests</em> usually run on the computer of the developer who is modifying a package - for example, if Grace is updating her package, unit tests on her updates will run on her computer. Unit tests also should run automatically upon building a package.</p>
+<p><em>Unit tests</em> usually run on the computer of the developer who is modifying a package and also should run automatically upon building a package.</p>
 <p>We’ll talk a little more about how exactly to create tests down below, but hopefully this makes the general concept clear (you’ve also probably been using the general concept as you program).</p>
 </div>
 <div id="setting-up-the-testing-environment" class="section level3">
@@ -776,79 +777,106 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This template linked <a href="https://gist.github.com/PurpleBooth/109311bb0361f32d87a2">here</a> is pretty good. Again, because your package will technicaly function without your README, the actual structure and content of a README can be flexible. However, just remember that if you don’t have a README which outlines why and how to use your package, other developers are unlikely to want to use it.</p>
 </div>
 </div>
+<div id="vignettes" class="section level2">
+<h2><span class="header-section-number">2.7</span> Vignettes</h2>
+<p>Vignettes are basically articles which motivate and describe your packages: documentation is useful but not necessarily a comprehensive guide. You may want to include details about your implementation, extra examples, and more organization than your documentation provides, which is exactly what vignettes are for.</p>
+<p>Vignettes are generally written in RMarkdown, which allows you to mix code, mathematical equations, and formatted text with ease. If you are using RStudio, then writing vignettes will be very easy, because RMarkdown works automatically with RStudio. On the other hand, if you don’t have RStudio, you will need to run the ‘install.packages(“rmarkdown”)’ command, and also install <a href="http://pandoc.org/installing.html">pandoc</a>.</p>
+<p>To write a vignette, start by running the devtools function:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">use_vignette</span>(<span class="st">&#39;vignete-name&#39;</span>)</a></code></pre></div>
+<p>This funciton will create a ‘vignettes’ subdirectory and populate it with a file based on the name you specified. The file should look something like this:</p>
+<p><img src="Images/PackageSS/vignette1.PNG" /></p>
+<p>The top of the file, between the two lines of dashes, is written in the YAML language. It’s simply a convenient way to specify metadata about a vignette, and you should fill in the title and author fields.</p>
+<p>The rest of the vignette should be written in RMarkdown, which is basically a mix of Markdown, Latex, or code. The vignette template generated by devtools <em>is itself a guide to using RMarkdown</em>, so we won’t dive too deep into using RMarkdown. However, there are a couple of core things you should know:</p>
+<ol style="list-style-type: decimal">
+<li>By default, text in RMarkdown files is assumed to be written in <a href="http://pandoc.org/MANUAL.html">pandoc’s flavor of Markdown</a>.</li>
+<li>If you would like to include inline equations, you can do so by surrounding math symbols with a single dollar sign on each end. If you’d like to give an equation its own line, you can use two dollar signs on each end of the equations.</li>
+</ol>
+<div class="figure">
+<img src="Images/PackageSS/vignettemath.PNG" alt="Including math is easy in RMarkdown" />
+<p class="caption"><em>Including math is easy in RMarkdown</em></p>
+</div>
+<ol start="3" style="list-style-type: decimal">
+<li>You can add chunks of R code (and even other languages!) to your Vignette file by wrapping R code in “```” symbols, as demonstrated below:</li>
+</ol>
+<p><img src="Images/PackageSS/vignettecode.PNG" /></p>
+<p>Once you’ve modified your vignette, you can <em>knit</em> it into a beautiful HTML by running the following function in the console:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">rmarkdown<span class="op">::</span><span class="kw">render</span>(<span class="st">&#39;path/to/rmarkdown/file.Rmd&#39;</span>)</a></code></pre></div>
+<p>Alternatively, you can simply click the Knit button if you’re working in RStudio.</p>
+<p>If you do choose to write vignettes, remember that it’s critical to motivative <em>why</em> you wrote your package in the first place. Additionally, you should structure the vignette so that it gives users an impression of the overarching structure of the package itself (i.e. group and organize your functions!).</p>
+</div>
 <div id="adding-and-documenting-data" class="section level2">
-<h2><span class="header-section-number">2.7</span> Adding and Documenting Data</h2>
+<h2><span class="header-section-number">2.8</span> Adding and Documenting Data</h2>
 <p>Sometimes, you’ll want to include data as part of your package, either to serve as an example for users or because your functions need it to work. This is totally optional - not all packages need to include data - but can be useful, so let’s walk through how to include (and document) data in your package. Note that there are at least two kinds of data you should think about including, but for both kinds of data, you should generally save them as ‘.rdata’ or ‘.rda’ files (which are the same thing).</p>
 <div id="including-data-which-should-be-available-to-users" class="section level3">
-<h3><span class="header-section-number">2.7.1</span> Including data which should be available to users</h3>
+<h3><span class="header-section-number">2.8.1</span> Including data which should be available to users</h3>
 <p>All of the data you want to be available to users should be saved in a folder called “data” inside your project. The way to do this is to write and run a script which loads your data into R and then uses the devtools function “use_data” to save it to a path inside ‘data.’ Even if you do not already have a folder called ‘data’ in your package, the use_data function will make it for you. Note that for this to work, your working directory must be set to the package you’re writing, otherwise devtools won’t know where to put your data.</p>
-<p>For example, when documenting the scalep function, Grace might want to include data as an example of a way to use scalep. To this end, she’s generated a (totally fake) csv file which lists 100 people’s income and luxury spending, and has saved it to the</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">luxspending &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;C:/Users/Grace/Documents/R/datapath.csv&#39;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>, <span class="dt">sep=</span><span class="st">&#39;,&#39;</span>)</a>
-<a class="sourceLine" id="cb38-2" data-line-number="2">devtools<span class="op">::</span><span class="kw">use_data</span>(luxspending)</a></code></pre></div>
-<p>Data in your ‘data’ folder will effectively always be exported, so you always must document it. To document data, you should create an R Script in your ‘R’ directory called [‘data.R’] and use Roxygen2 to document the data similarly to the way you’d document a function. For example, Grace might document the aforementioned data in the following way:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="co">#&#39; Luxury spending of 100 individuals</span></a>
-<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="co">#&#39;</span></a>
-<a class="sourceLine" id="cb39-3" data-line-number="3"><span class="co">#&#39; This dataset lists the net incomes and the luxury spending</span></a>
-<a class="sourceLine" id="cb39-4" data-line-number="4"><span class="co">#&#39; of 100 individuals.</span></a>
-<a class="sourceLine" id="cb39-5" data-line-number="5"><span class="co">#&#39;</span></a>
-<a class="sourceLine" id="cb39-6" data-line-number="6"><span class="co">#&#39; @format A data frame with 100 rows and 2 columns.</span></a>
-<a class="sourceLine" id="cb39-7" data-line-number="7"><span class="co">#&#39; \describe{</span></a>
-<a class="sourceLine" id="cb39-8" data-line-number="8"><span class="co">#&#39;   \item{Income}{Total Income, in USD}</span></a>
-<a class="sourceLine" id="cb39-9" data-line-number="9"><span class="co">#&#39;   \item{Luxury_goods}{Spending on luxury goods, in USD}</span></a>
-<a class="sourceLine" id="cb39-10" data-line-number="10"><span class="co">#&#39;}</span></a>
-<a class="sourceLine" id="cb39-11" data-line-number="11"><span class="co">#&#39; @source This dataset was randomly generated</span></a>
-<a class="sourceLine" id="cb39-12" data-line-number="12"><span class="co">#&#39; and is intended only to be used as an example for package</span></a>
-<a class="sourceLine" id="cb39-13" data-line-number="13"><span class="co">#&#39; development and the scalep function.</span></a>
-<a class="sourceLine" id="cb39-14" data-line-number="14"><span class="st">&quot;luxspending&quot;</span></a></code></pre></div>
+<p>For example, when documenting the scalep function, one might want to include data as an example of a way to use scalep. To this end, I’ve generated a (totally fake) csv file which lists 100 people’s income and luxury spending, and has saved it to the</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">luxspending &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;C:/Users/name/Documents/R/datapath.csv&#39;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>, <span class="dt">sep=</span><span class="st">&#39;,&#39;</span>)</a>
+<a class="sourceLine" id="cb40-2" data-line-number="2">devtools<span class="op">::</span><span class="kw">use_data</span>(luxspending)</a></code></pre></div>
+<p>Data in your ‘data’ folder will effectively always be exported, so you always must document it. To document data, you should create an R Script in your ‘R’ directory called [‘data.R’] and use Roxygen2 to document the data similarly to the way you’d document a function. For example, one might document the aforementioned data in the following way:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="co">#&#39; Luxury spending of 100 individuals</span></a>
+<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="co">#&#39;</span></a>
+<a class="sourceLine" id="cb41-3" data-line-number="3"><span class="co">#&#39; This dataset lists the net incomes and the luxury spending</span></a>
+<a class="sourceLine" id="cb41-4" data-line-number="4"><span class="co">#&#39; of 100 individuals.</span></a>
+<a class="sourceLine" id="cb41-5" data-line-number="5"><span class="co">#&#39;</span></a>
+<a class="sourceLine" id="cb41-6" data-line-number="6"><span class="co">#&#39; @format A data frame with 100 rows and 2 columns.</span></a>
+<a class="sourceLine" id="cb41-7" data-line-number="7"><span class="co">#&#39; \describe{</span></a>
+<a class="sourceLine" id="cb41-8" data-line-number="8"><span class="co">#&#39;   \item{Income}{Total Income, in USD}</span></a>
+<a class="sourceLine" id="cb41-9" data-line-number="9"><span class="co">#&#39;   \item{Luxury_goods}{Spending on luxury goods, in USD}</span></a>
+<a class="sourceLine" id="cb41-10" data-line-number="10"><span class="co">#&#39;}</span></a>
+<a class="sourceLine" id="cb41-11" data-line-number="11"><span class="co">#&#39; @source This dataset was randomly generated</span></a>
+<a class="sourceLine" id="cb41-12" data-line-number="12"><span class="co">#&#39; and is intended only to be used as an example for package</span></a>
+<a class="sourceLine" id="cb41-13" data-line-number="13"><span class="co">#&#39; development and the scalep function.</span></a>
+<a class="sourceLine" id="cb41-14" data-line-number="14"><span class="st">&quot;luxspending&quot;</span></a></code></pre></div>
 <p>This should all look pretty similar to documenting functions. Note that ‘<span class="citation">@format</span>’ is a tag which will allow you to describe the structure of a dataset, and it’s good practice to list what each column measures in this section. The ‘<span class="citation">@source</span>’ section describes where the data came from. Never write ‘<span class="citation">@export</span>’ in this section, as data here is already automatically exported.</p>
 </div>
 <div id="including-data-for-your-functions" class="section level3">
-<h3><span class="header-section-number">2.7.2</span> Including data for your functions</h3>
-<p>Some functions may rely on a large, predefined set of coefficients or other inputs which need to be included in the package. However, users shouldn’t generally have access to such data because otherwise they might accidentally radically change the way your function works. It’s best to put such data in ‘R/sysdata.rda’, because then users won’t easily be able to access and accidentally modify it. As before, the way to include data in this way is to write a script which loads the data into R and then use the ‘use_data’ function to save it, but you should also include a parameter ‘interior = TRUE’ in the function call to let R know that this is interior, not exterior, data. For example, if one of Grace’s functions functions depended on a matrix called “coefficients”, he might run the following code:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">coefficients &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;C:/Users/Grace/Documents/R/coefs.csv&#39;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>, <span class="dt">sep=</span><span class="st">&#39;,&#39;</span>)</a>
-<a class="sourceLine" id="cb40-2" data-line-number="2">devtools<span class="op">::</span><span class="kw">use_data</span>(coefficients, <span class="dt">interior =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<h3><span class="header-section-number">2.8.2</span> Including data for your functions</h3>
+<p>Some functions may rely on a large, predefined set of coefficients or other inputs which need to be included in the package. However, users shouldn’t generally have access to such data because otherwise they might accidentally radically change the way your function works. It’s best to put such data in ‘R/sysdata.rda’, because then users won’t easily be able to access and accidentally modify it. As before, the way to include data in this way is to write a script which loads the data into R and then use the ‘use_data’ function to save it, but you should also include a parameter ‘interior = TRUE’ in the function call to let R know that this is interior, not exterior, data. For example, if a function depends on a matrix called “coefficients”, one might run the following code:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">coefficients &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;C:/Users/name/Documents/R/coefs.csv&#39;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>, <span class="dt">sep=</span><span class="st">&#39;,&#39;</span>)</a>
+<a class="sourceLine" id="cb42-2" data-line-number="2">devtools<span class="op">::</span><span class="kw">use_data</span>(coefficients, <span class="dt">interior =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>Data in ‘R/sysdata.rda’ is never exported, so there’s no need to document it.</p>
 </div>
 </div>
 <div id="namespace" class="section level2">
-<h2><span class="header-section-number">2.8</span> Namespace</h2>
+<h2><span class="header-section-number">2.9</span> Namespace</h2>
 <p>The namespace is a bit more complicated than the other parts of the package structure. The purpose of the namespace is make sure your package works in combination with other packages. For example, if your package includes some data labelled ‘lm’, a good namespace will ensure that using that data in conjunction with the R stats package (which has a function called ‘lm’) will <em>not</em> throw an error. How exactly the namespace does this is a bit complicated and beyond the scope of this guide, so if you’re dying for more specifics, you should <a href="http://r-pkgs.had.co.nz/namespace.html">read through this wonderful page</a>. Thankfully, Roxygen2 will automatically generate a namespace for you when you create documentation with “<span class="citation">@import</span>” and “<span class="citation">@export</span>” tags, so you don’t need to worry about this too much.</p>
 <p>Remember: the namespace will help your package play nice with others in the event of name conflicts, but it’s still better to name your functions so that the they don’t overlap with names of other commonly used functions if possible.</p>
 </div>
 <div id="releasing-your-package" class="section level2">
-<h2><span class="header-section-number">2.9</span> Releasing Your Package</h2>
+<h2><span class="header-section-number">2.10</span> Releasing Your Package</h2>
 <p>You’re almost done at this point! You’ve written your functions, modified the description, documented your functions, presumably exported some of them, and hopefully tested all of them; you’re now ready to <em>build</em>, <em>release</em>, and <em>publicize</em> your package.</p>
 <div id="building" class="section level3">
-<h3><span class="header-section-number">2.9.1</span> Building</h3>
+<h3><span class="header-section-number">2.10.1</span> Building</h3>
 <p>Building your package means bundling it into a format that is easy to distribute and easy for users to install; there are a two main ways to do this.</p>
 <div id="building-.tar.gz-files" class="section level4">
-<h4><span class="header-section-number">2.9.1.1</span> Building .tar.gz files</h4>
+<h4><span class="header-section-number">2.10.1.1</span> Building .tar.gz files</h4>
 <p>One of the most common ways to build your package is to zip it package as either .tar.gz file. Devtools will do this for you if you run the following command:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">build</span>(<span class="dt">binary =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">build</span>(<span class="dt">binary =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p>Tar.gz files are useful because anyone who has a working R development environment can install and unzip your package, regardless of their operating system.</p>
 </div>
 <div id="building-precompiled-binaries" class="section level4">
-<h4><span class="header-section-number">2.9.1.2</span> Building precompiled binaries</h4>
+<h4><span class="header-section-number">2.10.1.2</span> Building precompiled binaries</h4>
 <p>Another way to build your package is as a precompiled binary file. Precompiled binaries are useful because unlike Tar.gz files, they do not require a development environment to install. However, they are platform specific: a precompiled binary built by a Windows machine can’t be installed on Mac machine. There are advantages to precompiled binaries, but most likely, you’ll want to use a Tar.gz file instead. if you do want to build a binary, you can just change an argument of devtools::build:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">build</span>(<span class="dt">binary =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">build</span>(<span class="dt">binary =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>
 </div>
 <div id="releasing" class="section level3">
-<h3><span class="header-section-number">2.9.2</span> Releasing</h3>
+<h3><span class="header-section-number">2.10.2</span> Releasing</h3>
 <p>Once you’ve built your package, there’s a couple of ways to release it to the broader R community.</p>
 <div id="pushing-to-github" class="section level4">
-<h4><span class="header-section-number">2.9.2.1</span> Pushing to GitHub</h4>
+<h4><span class="header-section-number">2.10.2.1</span> Pushing to GitHub</h4>
 <p>The easiest way to publish your package is to simply <a href=".\version-control">push it to GitHub</a>, (we’ll discuss how to do this later). The pros of this approach are that it makes it very easy for users to download your package - they can literally do it in one line. Additionally, Github offers free services <a href="https://pages.github.com/">to host a website for your package and its documentation</a>, and most importantly, it’s very easy for <strong>you</strong> to publish your package this way. Thus, pushing to Github is sort of the “default” way to publish a smaller package.</p>
 </div>
 <div id="cran" class="section level4">
-<h4><span class="header-section-number">2.9.2.2</span> CRAN</h4>
+<h4><span class="header-section-number">2.10.2.2</span> CRAN</h4>
 <p>On the other hand, if you’ve written a larger package which you would like to distribute to the entire R community, you might consider submitting it to <a href="https://cran.r-project.org/">CRAN</a>, the Comprehensive R Archive Network. CRAN is basically the official package authority designated by the R community, and successfully adding your package to CRAN will make it more legitimate as well as easier for R users to find and install.</p>
 <p>The actual act of submitting to CRAN seems rather simple: you need to simply build your package into a .tar.gz file and submit the bundled file to CRAN <a href="https://cran.r-project.org/submit.html">here</a>, along with a couple of comments. However, in actuality, CRAN has very high standards for packages, so it can be rather tricky to get a package accepted. CRAN’s specific standards are a bit beyond the scope of the current iteration of this guide, but if you decide you want to publish a package on CRAN, you should read <a href="http://r-pkgs.had.co.nz/release.html">Hadley Wickham’s advice on the subject</a> <strong>very carefully.</strong></p>
 <p><a href="http://r-pkgs.had.co.nz/release.html" class="uri">http://r-pkgs.had.co.nz/release.html</a></p>
 </div>
 </div>
 <div id="publicizing" class="section level3">
-<h3><span class="header-section-number">2.9.3</span> Publicizing</h3>
+<h3><span class="header-section-number">2.10.3</span> Publicizing</h3>
 <p>Once you’ve released your package either on Github or perhaps on CRAN, you should publicize it! You can of course publicize it any way you choose, but there are at least two things you should consider doing.</p>
 <ol style="list-style-type: decimal">
 <li>Tweet about your package using the #rstats hashtag, which reaches a substantial portion of the R community.</li>
@@ -858,7 +886,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div id="tips-and-tricks-1" class="section level2">
-<h2><span class="header-section-number">2.10</span> Tips and Tricks</h2>
+<h2><span class="header-section-number">2.11</span> Tips and Tricks</h2>
 <p>First, there’s a wonderful cheat sheet for package development linked <a href="https://www.rstudio.com/wp-content/uploads/2015/06/devtools-cheatsheet.pdf">here</a>.</p>
 <p>Second, if you’re having trouble, you can always just reference stackexchange.</p>
 

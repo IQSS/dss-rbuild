@@ -750,9 +750,9 @@ This template linked [here](https://gist.github.com/PurpleBooth/109311bb0361f32d
 
 ## Vignettes
 
-Vignettes are basically articles which motivate and describe your packages: documentation is useful but not necessarily a comprehensive guide. You may want to include details about your implementation, extra examples, and more organization than your documentation provides, which is exactly what vignettes are for.
+Documentation is useful, but not necessarily a comprehensive guide to your package. You may want to include details about your implementation, extra examples, and more organization than your documentation provides, which is exactly what vignettes are for.
 
-Vignettes are generally written in RMarkdown, which allows you to mix code, mathematical equations, and formatted text with ease. If you are using RStudio, then writing vignettes will be very easy, because RMarkdown works automatically with RStudio. On the other hand, if you don't have RStudio, you will need to run the 'install.packages("rmarkdown")' command, and also install [pandoc](http://pandoc.org/installing.html). 
+**Vignettes** are basically articles which motivate and describe your packages. They are generally written in RMarkdown, which allows you to mix code, mathematical equations, and formatted text with ease. If you are using RStudio, then writing vignettes will be very easy, because RMarkdown works automatically with RStudio. On the other hand, if you don't have RStudio, you will need to (i) run the 'install.packages("rmarkdown")' command, and (ii)  install [pandoc](http://pandoc.org/installing.html). 
 
 To write a vignette, start by running the devtools function:
 
@@ -760,7 +760,7 @@ To write a vignette, start by running the devtools function:
 devtools::use_vignette('vignete-name')
 ```
 
-This funciton will create a 'vignettes' subdirectory and populate it with a file based on the name you specified. The file should look something like this:
+This function will create a 'vignettes' subdirectory and populate it with a file based on the name you specified. The file should look something like this:
 
 ![](Images/PackageSS/vignette1.PNG)
 
