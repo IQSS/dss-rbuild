@@ -2,7 +2,7 @@
 
 The following graphic outlines this entire chapter:
 
-![](Images/package-workflow.SVG)
+![](Images/package-workflow.PNG)
 
 As a quick reminder, you can find the 'devex' example package linked [here, on GitHub](https://github.com/amspector100/packageguidelines/tree/master/devex), if you'd like to look through it while reading the guide. 
 
