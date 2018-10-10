@@ -794,45 +794,37 @@ Data in 'R/sysdata.rda' is never exported, so there's no need to document it.
 
 ## Releasing Your Package
 
-You're almost done at this point! You've written your functions, modified the description, documented your functions, presumably exported some of them, and hopefully tested all of them; you're now ready to *build*, *release*, and *publicize* your package. 
+You're almost done at this point! You've written your functions, modified the description, documented your functions, presumably exported some of them, and hopefully tested all of them; you're now ready to *release* and *publicize* your package. There are basically two main ways to do this.
 
-### Building
+### Pushing to GitHub
 
-Building your package means bundling it into a format that is easy to distribute and easy for users to install; there are a two main ways to do this.
+The easiest way to publish your package is to simply [push it to GitHub](.\version-control), (we'll discuss how to do this later). The pros of this approach are that it makes it very easy for users to download your package - they can literally do it in one line. Additionally, Github offers free services [to host a website for your package and its documentation](https://pages.github.com/), and most importantly, it's very easy for **you** to publish your package this way. Thus, pushing to Github is sort of the "default" way to publish a smaller package.  
 
-#### Building .tar.gz files
+### CRAN
 
-One of the most common ways to build your package is to zip it package as either .tar.gz file. Devtools will do this for you if you run the following command:
+On the other hand, if you've written a larger package which you would like to distribute to the entire R community, you might consider submitting it to [CRAN](https://cran.r-project.org/), the Comprehensive R Archive Network. CRAN is basically the official package authority designated by the R community, and successfully adding your package to CRAN will make it more legitimate as well as easier for R users to find and install. 
+
+Logistically, submitting your package to CRAN is pretty simple. The first step is to **build** your package, which means bundling it into a format that is easy to distribute and easy for users to install.
+
+The best way to build your package is to zip it as a .tar.gz file. Devtools will do this for you if you run the following command:
 
 ```{r, eval = FALSE}
 devtools::build(binary = FALSE)
 ```
 
-Tar.gz files are useful because anyone who has a working R development environment can install and unzip your package, regardless of their operating system.
+and then you should see a tar.gz file pop up just outside your working diretory. 
 
-#### Building precompiled binaries
+The next step is to submit the bundled file to CRAN [at the link here](https://cran.r-project.org/submit.html), along with a couple of comments. Although this seems pretty simple, in actuality, CRAN has very high standards for packages, so it can be rather tricky to get a package accepted. CRAN's specific standards are   beyond the scope of the current iteration of this guide, but if you decide you want to publish a package on CRAN, you should read [Hadley Wickham's advice on the subject](http://r-pkgs.had.co.nz/release.html) **very carefully.**
 
-Another way to build your package is as a precompiled binary file. Precompiled binaries are useful because unlike Tar.gz files, they do not require a development environment to install. However, they are platform specific: a precompiled binary built by a Windows machine can't be installed on Mac machine. There are advantages to precompiled binaries, but most likely, you'll want to use a Tar.gz file instead. if you do want to build a binary, you can just change an argument of devtools::build:
+#### Optional: Building precompiled binaries
+
+Tar.gz files are useful because anyone who has a working R development environment can install and unzip your package, regardless of their operating system. However, you do need a development environment to install packages built as Tar.gz files, and some users (in particular on Windows) may not have development environments set up yet. To address this potential issue, another way to build your package is as a **precompiled binary file**. Precompiled binaries are useful because unlike Tar.gz files, they do not require a development environment to install. However, they are platform specific: a precompiled binary built by a Windows machine can't be installed on Mac machine. Although Tar.gz files are much more common, if you do want to build a binary, you can just change an argument of devtools::build:
 
 ```{r, eval = FALSE}
 devtools::build(binary = TRUE)
 ```
 
-### Releasing
-
-Once you've built your package, there's a couple of ways to release it to the broader R community.
-
-#### Pushing to GitHub
-
-The easiest way to publish your package is to simply [push it to GitHub](.\version-control), (we'll discuss how to do this later). The pros of this approach are that it makes it very easy for users to download your package - they can literally do it in one line. Additionally, Github offers free services [to host a website for your package and its documentation](https://pages.github.com/), and most importantly, it's very easy for **you** to publish your package this way. Thus, pushing to Github is sort of the "default" way to publish a smaller package.  
-
-#### CRAN
-
-On the other hand, if you've written a larger package which you would like to distribute to the entire R community, you might consider submitting it to [CRAN](https://cran.r-project.org/), the Comprehensive R Archive Network. CRAN is basically the official package authority designated by the R community, and successfully adding your package to CRAN will make it more legitimate as well as easier for R users to find and install. 
-
-The actual act of submitting to CRAN seems rather simple: you need to simply build your package into a .tar.gz file and submit the bundled file to CRAN [here](https://cran.r-project.org/submit.html), along with a couple of comments. However, in actuality, CRAN has very high standards for packages, so it can be rather tricky to get a package accepted. CRAN's specific standards are a bit beyond the scope of the current iteration of this guide, but if you decide you want to publish a package on CRAN, you should read [Hadley Wickham's advice on the subject](http://r-pkgs.had.co.nz/release.html) **very carefully.**
-
-http://r-pkgs.had.co.nz/release.html
+and your precompiled binary will be built.
 
 ### Publicizing
 
