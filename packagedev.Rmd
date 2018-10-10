@@ -154,9 +154,9 @@ You should also take care to organize your functions properly. It's probably a b
 
 ### Code Style
 
-Now let's talk about specific elements of code style. These are shortened and adapted from [Hadley Wickham's book on R package development](http://r-pkgs.had.co.nz/r.html), which in turn were adapted from Google's R style guide. For more advice on everything from naming variables to curly bracket placement, head to that aforementioned link.
+Now let's talk about code style. These recommendations are shortened and adapted from [Hadley Wickham's book](http://r-pkgs.had.co.nz/r.html), which in turn were adapted from Google's style guide.
 
-1. **Comments**: Comments are the best (and easiest) way to make your code readable. In general, you should err on the side of commenting too much rather than too little, and your comments should explain the *motivation* of your code as opposed to what your code actually does (although admittedly the line between those two things is a bit blurry). Moreover, you can use lines of '# ---------------------------' or '# ==================' to separate distinct sections of your code. Here's a good, if simple, example of commenting:
+1. **Comments**: Comments are the best way to make your code readable. In general, you should err on the side of commenting too much rather than too little, and your comments should explain the *motivation* of your code as opposed to what your code actually does (although admittedly the line between those two things is a bit blurry). Moreover, you can use lines of '# ---------------------------' or '# ==================' to separate sections of your code. Here are some examples:
 
 ```{r}
 
@@ -180,7 +180,7 @@ general_sqrt <- function (x) {
 }
 ```
 
-2. **Names**: Naming variables and functions is tricky - names should be descriptive but concise, and variable names should generally be nouns whereas function names tend to be verbs. Moreover, most R developers keep their function/variable names all lowercase and separate multiple words with underscores. There are no strict rules on this, but at the very least it's nice to be consistent with *some* rules because it makes your code more readable.
+2. **Names**: Variable and function names should be descriptive but concise, and variable names should generally be nouns whereas function names tend to be verbs. Most R developers keep their function/variable names all lowercase and separate multiple words with underscores. There are no strict rules on this, but it's nice to be consistent with *some* rules because it makes your code readable.
 
 ```{r, eval = FALSE}
 # Bad example - function name
@@ -201,55 +201,21 @@ car_data <- read.table(path)
 
 ```
 
-3. **Spacing**: In general, you should use a lot of spaces, because they make your code a lot more readable! Specifically, you should always surround parenthesis with spaces; the exception is when you're making a function call. Note that this means you should surround the parenthesis themselves with spaces, but not the objects within the parenthesis, which should *not* be surrounded with spaces. You should also surround operators (like +, -, <-, =, /, **, others, etc) with spaces; see the examples below.
-
-```{r, eval = FALSE}
-# Bad examples of parenthesis spacing
-
-if(a == 7)do(something) # Needs spaces before/after the parenthesis
-if ( a == 7 ) # Shouldn't be spaces around 'a == 7'
-function_call (parameter) # Shouldn't be a space between function_call and (parameter)
-
-# Good example of parenthesis spacing
-
-if (a == 7) do(something)
-function_call(parameter)
-
-# Bad example of operator spacing
-
-a<-a+3 # Needs spaces 
-
-# Good example of operator spacing
-
-a <- a + 3
-
-
-```
-
-4. **Curly Braces**: You should start a new line after you write an opening curly brace, and ending curly braces should get their own lines, unless you have an else clause. 
+3. **Curly Braces**: You should start a new line after you write an opening curly brace, and ending curly braces should get their own lines, unless you have an else clause or the line is exceptionally simple. 
 
 ```{r, eval = FALSE}
 # Bad examples
 
 if (condition) {
-  do (x)} # Ending curly brace should get a new line
-
-if (condition) { do(x) }
-
-if (condition) {
-  do(x)
-}         # The else should be on this line
-else {
-do(y)   # This line should be indented with two spaces
-}
-
+  complicated_function(x)} # Ending curly brace should get a new line
 
 # Good examples
+if (condition) {do(x)} else {do(y)}
 
 if (condition) {
-  do(x)
+  complicated_function_call(arg1, arg2, arg3)
 } else {
-  do(y)
+  other_complex_function_call(arg7, arg3, arg5)
 }
 
 ```
@@ -266,11 +232,11 @@ my_function = function(argument_1 = 'this string is extremely long',
 ```
 
 
-Overall, different organizations and programmers have different styles and guidelines for specific coding style. Some programming guides might require you to avoid [camelCase](http://wiki.c2.com/?CamelCase); others might mandate its use. We've tried to document some pretty broadly accepted norms, but in general, you should remember:
+Different organizations and programmers may have different styles, but in general, you should remember:
 
 1. Your goal should always be to make your code readable!
-2. Whatever style guide you follow, follow it *consistently* to make your code readable
-3. You should generally adapt to follow the conventions of the organization you're working under/for
+2. Whatever style guide you follow, follow it *consistently* 
+3. When in doubt, follow the conventions of the organization you're working for
 
 ### Warnings and Simplicity
 
@@ -731,6 +697,13 @@ which will automatically generate your documentation. Then, if you've documented
 
 After documenting your package, you can also click the '/man' folder to inspect the documentation html files Roxygen2 generates, but it probably won't be more informative than simply typing ?[function name] into the console. 
 
+### A Note on The Namespace 
+
+As mentioned previously, the purpose of the namespace is make sure your package works in combination with other packages. For example, if your package includes some data labelled 'lm', the namespace will ensure that using that data in conjunction with the R stats package (which has a function called 'lm') will *not* throw an error. How exactly the namespace does this is slightly beyond the scope of this guide, so if you're dying for specifics, you should [read through this page](http://r-pkgs.had.co.nz/namespace.html). Thankfully, as we just discussed, Roxygen2 will automatically generate a namespace for you when you create documentation with "@export" tags, so you don't need to worry about this too much.
+
+Remember: the namespace will help your package play nice with others in the event of name conflicts, but it's still better to name your functions so that the they don't overlap with names of other commonly used functions if possible. 
+
+
 ### Adding a README
 
 The README file is a bit different than the others, because your package will actually work fine even if you don't have one. However, if you want other people to ever use your package, it's best to have a README. The purpose of a README is basically to bridge the gap between the DESCRIPTION and the actual documentation in your package. In other words, someone using your package might know what it does in a general sense from your DESCRIPTION, but they won't necessarily know exactly how to set up the package or how to use specific functions. The README takes care of that. In general, READMEs should do at least two things, with a couple of optional ones:
@@ -833,12 +806,6 @@ devtools::use_data(coefficients, interior = TRUE)
 ```
 
 Data in 'R/sysdata.rda' is never exported, so there's no need to document it.
-
-## Namespace 
-
-The namespace is a bit more complicated than the other parts of the package structure. The purpose of the namespace is make sure your package works in combination with other packages. For example, if your package includes some data labelled 'lm', a good namespace will ensure that using that data in conjunction with the R stats package (which has a function called 'lm') will *not* throw an error. How exactly the namespace does this is a bit complicated and beyond the scope of this guide, so if you're dying for more specifics, you should [read through this wonderful page](http://r-pkgs.had.co.nz/namespace.html). Thankfully, Roxygen2 will automatically generate a namespace for you when you create documentation with "@import" and "@export" tags, so you don't need to worry about this too much.
-
-Remember: the namespace will help your package play nice with others in the event of name conflicts, but it's still better to name your functions so that the they don't overlap with names of other commonly used functions if possible. 
 
 ## Releasing Your Package
 
