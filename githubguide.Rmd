@@ -103,9 +103,9 @@ This sets up a local repository! We'll go over how to link a local repository se
 
 ### Modifying Projects
 
-Say you have created some code in your project directory and want to add it to the repository. To do this, you need to use three commands: *git add*, *git commit*, and *git push.* Note that sending scripts to the local repository is (perhaps counterintuitively) known as *commiting* them, not adding them. 
+Say you have created some code in your project directory and want to add it to the repository and change it later on. To do this, you need to first move the files in your project directory to the repository. Then you need to use three commands: *git add*, *git commit*, and *git push.* Note that sending scripts to the local repository is (perhaps counterintuitively) known as *commiting* them, not adding them. 
 
-First, you need to *add*  scripts to Git (adding scripts doesn't  add them to the repository - rather, it just lets Git know that you will eventually *commit* or send them to the repository). To do this, navigate to the correct working directory and type 'git add [your script's filepath]' to the directory. You can add multiple files in a row with no problem. 
+First, suppose you make changes to your scripts. You need to *add*  the modified scripts to Git (adding scripts doesn't  add them to the repository - rather, it just lets Git know that you will eventually *commit* or send them to the repository). The scripts must already exist in the repository before they can be added. Then navigate to the correct working directory and type 'git add [your script's filepath]' to the directory. You can add multiple files in a row with no problem. 
 
 Second, you need to *commit* scripts, which means actually sending them to the local repository. To do this, simply type *git commit* to the command line after you've added all the scripts you want to send to the repository. Git will open a text editor and prompt you to add a message to explain what the commit is for - type in your desired message, then hit "escape" to leave the text editor, and type ":wq" to save and exit the message interface. Once you've committed files, all of the files you've previously added will be saved on your local repository. 
 
@@ -130,7 +130,7 @@ $ git commit -m "Fixed small bug"
 ```
 
 
-Lastly, you need to *push* the files, which means sending them to GitHub online. Before you do this, if you created the repository locally and have not already done so, you'll need to specify to Git the url to send the commits to. To do this, type 'git remote add origin [your url]' into your command line. Then, you can *push* the file by writing 'git push -u origin master,' which will send the file to the GitHub repo. 
+Lastly, you need to *push* the files, which means sending them to GitHub online. Before you do this, if you created the repository locally and have also created a GitHub repo without adding the README file, you'll need to specify to Git the url to send the commits to. To do this, type 'git remote add origin [your url]' into your command line. Then, you can *push* the file by writing 'git push -u origin master,' which will send the file to the GitHub repo. If you created the repository locally and have also created a GitHub repo adding the README file, then you have to resolve commitment consolidation when you push your file to the GitHub repo. This is why we recommend that you do not initialize the GitHub repo with the README file. If you did not create the repository locally, then you can simply push it to the GitHub repo after you clone the GitHub repo to your local repository. So, it is easier to start a repo on GitHub and then clone it than initializing a repository locally. 
 
 
 ```{R, eval=FALSE}
@@ -175,7 +175,7 @@ Clearly, Grace should restore the second commit listed, named 'b69a14b,' in orde
 $ git reset --soft b69a14b
 ```
 
-This will update the current version of the script to the b69a14b version, which Grace can then inspect and test until she's ready to commit it to Git/GitHub. Note that there is alos a "git reset --hard" option, which works the same way, but is a pretty serious action to take because it will effectively delete all the commits prior to the version being restored. The soft option is almost always a better choice. 
+This will update the current version of the script to the b69a14b version, which Grace can then inspect and test until she's ready to commit it to Git/GitHub. Note that there is also a "git reset --hard" option, which works the same way, but is a pretty serious action to take because it will effectively delete all the commits prior to the version being restored. The soft option is almost always a better choice. 
 
 ### The .gitignore file
 
@@ -193,7 +193,7 @@ To solve this problem, you can use a *.gitignore file.* A .gitignore file tells 
 
 Let's discuss how *.gitignore* files actually work. A .gitignore file is really just a glorified text file. However, its filename should be just '.gitignore', because that's how Git recognizes it - then, if you put a file titled '.gitignore' in a directory you're working on, Git will use the .gitignore file to decide what to ignore in that specific directory. For example, if Grace is working on a project in 'C:/Users/gracesmith/Documents/R/repo_name', she should create a '.gitignore' file inside that folder. 
 
-This still leaves an important question - how does Git use the .gitignore file to which files to ignore? Essentially, .gitignore files are just a bunch of independent lines of text, and each line tells git another specific pattern of filepath to ignore. For example, consider the following example of a .gitignore file:
+This still leaves an important question - how does Git use the .gitignore file to determine which files to ignore? Essentially, .gitignore files are just a bunch of independent lines of text, and each line tells git another specific pattern of filepath to ignore. For example, consider the following example of a .gitignore file:
 
 ![](Images\gitignore3.PNG)
 
@@ -219,7 +219,7 @@ Step 1: Download the file "template.gitignore" from [here](.\template.gitignore)
 
 Step 2: Manually move the template file from your downloads folder to the directory of interest. For example, if Grace is working on a project in 'C:/Users/gracesmith/Documents/R/repo_name', she should copy the template into that folder. 
 
-Step 3: Right click on the 'template.gitignore' file in the folder and delete the 'template' part of the name, so that the file name is just '.gitignore'. This will help git recognize that your .gitignore file is in fact a .gitignore file. Your operating system might protest at this - Windows in particular freaks out at '.gitignore' files, which is why we initially named the template 'templates.gitignore' instead of just '.gitignore'. However, once the .gitignore file is in the correct directory, it's safe to change the path. Your end result should look something like this:
+Step 3: Open the 'template.gitignore' file in the folder and save it just as '.gitignore'. This will help git recognize that your .gitignore file is in fact a .gitignore file. Your operating system might protest at this - Windows in particular freaks out at '.gitignore' files, which is why we initially named the template 'templates.gitignore' instead of just '.gitignore'. However, once the .gitignore file is in the correct directory, it's safe to change the path. Your end result should look something like this:
 
 ![A .gitignore file](Images\gitignore2.PNG)
 
@@ -229,17 +229,17 @@ If you decide to create your own .gitignore file, you can follow very similar st
 
 1. Go into the directory you want and create a blank text file called 'template.gitignore'. It's necessary at first to keep the 'template' part because otherwise some operating systems will not let you create the file.
 
-2. Right click on the file, rename it and delete the 'template' part so the filename is just '.gitignore.'
+2. Start writing your gitignore file.
 
-3. Start writing your gitignore file!
+3. Save the file as '.gitignore.'
 
-.gitignore files aren't glamerous, but they really are important - nobody wants to work with cluttered repositories.
+.gitignore files aren't glamorous, but they really are important - nobody wants to work with cluttered repositories.
 
 ### Branching
 
 ![](Images/branchinggraphic.PNG)
 
-As we discussed earlier, branches allow you to modify scripts while simaltaneous keeping the old versions easily accessible. In practice, the way this works is that the branch you select in git changes the way that scripts you open using explorer/finder appear. For example, if Carlos has the following script as the master (default) branch in Git, the script might look something like this when he opens it on his computer: 
+As we discussed earlier, branches allow you to modify scripts while simultaneous keeping the old versions easily accessible. In practice, the way this works is that the branch you select in git changes the way that scripts you open using explorer/finder appear. For example, if Carlos has the following script as the master (default) branch in Git, the script might look something like this when he opens it on his computer: 
 
 ![*Master Branch of the Hello World Script*](Images/hello1.PNG)
 
@@ -302,7 +302,7 @@ hint: (e.g., 'git pull ...') before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 ```
 
-Effectively, Git recognizes that Carlos has made modifications to the script which were pushed to GitHub that Grace doesn't have. This usually happens *when two programmers modify exactly the same line in the single script*, such as line 6 in the above examples. To solve this problem, Grace should follow Git's advice, and try the "git pull" command. This will lead to the following message from git:
+Effectively, Git recognizes that Carlos has made modifications to the script which were pushed to GitHub that Grace doesn't have. This usually happens *when two programmers modify exactly the same line in a single script*, such as line 6 in the above examples. To solve this problem, Grace should follow Git's advice, and try the "git pull" command. This will lead to the following message from git:
 
 ```{r, eval=FALSE}
 C:\Users\gracesmith\Documents\R\repo_name>git pull
@@ -323,7 +323,7 @@ Again, Git is letting Grace know that it sees there's a conflict and that Git ne
 
 The "<<<<" and ">>>>" lines are in the script to signal the beginning and end of a merge conflict, whereas the "===" line separates the two different versions. On the top is Grace's version and on the bottom is Carlos's. To resolve the merge conflict, Grace should manually select the two lines she prefers and then delete all of the "<, =, >" symbols to let Git know that the conflict has been resolved. Then, she can commit and push the file to Git, and she'll be good to go!
 
-Overall: merge conflicts are rather annoying and can be confusing, so the best way to avoid them is to clearly deliniate which programmers will be working on which sections of which scripts. This will prevent Git (and you) from getting confused.  
+Overall: merge conflicts are rather annoying and can be confusing, so the best way to avoid them is to clearly delineate which programmers will be working on which sections of which scripts. This will prevent Git (and you) from getting confused.  
 ### Suggested Workflow
 
 There are many ways to use Git, but [this article by Vincent Driessen](https://nvie.com/posts/a-successful-git-branching-model/) describes a pretty intuitive and productive model for Git branching. It's worth reading or skimming the article (it includes some great graphics), but it basically involves a couple of core kinds of branches:
@@ -353,7 +353,7 @@ Remember that Git almost exclusively *adds information*, meaning that you can al
 
 Lastly, there are a couple of cheat sheets that you can use to make your life easier. 
 
-* [Karl Broman's tutorial](http://kbroman.org/GitHub_tutorial/pages/init.html) runs you through initializing a repository 
+* [Karl Broman's tutorial](http://kbroman.org/github_tutorial/pages/init.html) runs you through initializing a repository 
 
 * [This official GitHub cheat sheet](https://services.GitHub.com/on-demand/downloads/GitHub-git-cheat-sheet.pdf) lists all of the general commands you'll need
 
@@ -361,7 +361,7 @@ Lastly, there are a couple of cheat sheets that you can use to make your life ea
 
 ### Why use Integrated Tests?
 
-When working on packages alone, you may not push to GitHub too often. However, in large projects/packages where many programmers are working on the same package at once, it's important to ensure each programmer continuously commits changes to GitHub to make sure all the changes are compatible with each other. This process of rapid updating of packages is referred to as *continuous integration*, and it can be very difficult to manage properly (it is sometimes referred to as *integration hell*, specifically because developers often waste lots of hours trying to make code integrate properly). When you commit changes continuously, it does not guarentee that all the changes will be compatible. However, if there are compatibility problems in updates, it does ensure that you'll be able to find those problems more easily, because each individual change/commit is smaller. 
+When working on packages alone, you may not push to GitHub too often. However, in large projects/packages where many programmers are working on the same package at once, it's important to ensure each programmer continuously commits changes to GitHub to make sure all the changes are compatible with each other. This process of rapid updating of packages is referred to as *continuous integration*, and it can be very difficult to manage properly (it is sometimes referred to as *integration hell*, specifically because developers often waste lots of hours trying to make code integrate properly). When you commit changes continuously, it does not guarantee that all the changes will be compatible. However, if there are compatibility problems in updates, it does ensure that you'll be able to find those problems more easily, because each individual change/commit is smaller. 
 For reasons we'll discuss in a second, continuous integration is a bit easier said than done. Thankfully, there are two wonderful free continuous integration services that will make your life a lot easier. If you're using windows, you'll want to use the service called *Appveyor* - if you're using Mac or Linux, you'll want to use the service called *Travis CI*. These services will make continuous integration easy, specifically because both Appveyor and Travis CI link to GitHub and will run your build and tests for you on what are called virtual machines in the cloud. 
 
 Maybe the principle of continuous integration makes sense, but why are continuous integration services useful? Why can't each developer build packages,  run the tests locally, and then only push changes to GitHub if the tests are successful?  There are three answers to this question. 
@@ -395,7 +395,7 @@ You should click "new project" and then select the specific repo you'd like to u
 
 (Note - devtools also adds 'appveyor.yml' and 'travis.yml' to the .Rbuildignore to reduce clutter in your package.)
 
-**Step 3.5: Dependency Issues**: If you're using Travis, it's important to talk quickly about dependencies in packages. Travis was not originally designed for R projects, so occasionally it's a bit shaky, specifically with regard to dependencies in packages (i.e. Travis will build your package online, but if your package depends on ggplot2, then Travis have to install ggplot2 before building your package). By default, Travis/Appveyor automatically install anything listed in the dependencies listed in the DESCRIPTION file for your project. However, occasionally something goes wrong. If you get error messages that look like Travis did not install of the dependencies, it's worth specifying them in the .yml file. You can by adding a line like the following:
+**Step 3.5: Dependency Issues**: If you're using Travis, it's important to talk quickly about dependencies in packages. Travis was not originally designed for R projects, so occasionally it's a bit shaky, specifically with regard to dependencies in packages (i.e. Travis will build your package online, but if your package depends on ggplot2, then Travis will have to install ggplot2 before building your package). By default, Travis/Appveyor automatically install anything listed in the dependencies listed in the DESCRIPTION file for your project. However, occasionally something goes wrong. If you get error messages that look like Travis did not install all of the dependencies, it's worth specifying them in the .yml file. You can by adding a line like the following:
 
 ```{r, eval = FALSE}
 
@@ -418,7 +418,7 @@ which forces all the scripts directly in the R subdirectory to use the 'lf' line
 
 The git attributes file actually is useful for setting a variety of other attributes besides line endings, although some of them are a bit technical. If you're curious to find out more about what the .gitattributes file can do, the full documentation is linked [here](https://git-scm.com/docs/gitattributes). 
 
-Once you do all of this, you're set to go! When you push changes to GitHub, Travis/AppVeyor will automatically build and test the package for you. For example on Appveyor, if you sign in, you should see something like this:
+Once you do all of this, you're set to go! When you push changes to GitHub, all the new files (.yml, .gitignore, .gitattributes) you created will be pushed to the remote. Travis/AppVeyor will automatically build and test the package for you. For example on Appveyor, if you sign in, you should see something like this:
 
 ![](Images/TestSS/appveyor2.PNG)
 
