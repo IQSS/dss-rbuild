@@ -353,6 +353,8 @@ Remember that Git almost exclusively *adds information*, meaning that you can al
 
 Lastly, there are a couple of cheat sheets that you can use to make your life easier. 
 
+* [Stackoverflow](https://stackoverflow.com/questions/tagged/r) provides online help for programming in R
+
 * [Karl Broman's tutorial](http://kbroman.org/github_tutorial/pages/init.html) runs you through initializing a repository 
 
 * [This official GitHub cheat sheet](https://services.GitHub.com/on-demand/downloads/GitHub-git-cheat-sheet.pdf) lists all of the general commands you'll need
