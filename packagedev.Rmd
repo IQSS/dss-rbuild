@@ -604,7 +604,6 @@ When testing, there are a couple of key principles to keep in mind:
 
 The `devtools` cheatsheet, linked [here](https://www.rstudio.com/wp-content/uploads/2015/03/devtools-cheatsheet.pdf), references a lot of the key components of the `testthat` package.
 
-Lastly, working with .yml files can occasionally be difficult, although `devtools` should make it pretty to set up in the broad majority of cases. As always, when you run into errors, make full use of [stackoverflow](https://stackoverflow.com/questions/tagged/r) and online resources provided by AppVeyor/Travis.
 
 ## Documentation
 
@@ -694,7 +693,8 @@ The README file is a bit different than the others, because your package will ac
 4. Help contributors figure out how to run the packages' unit tests (we'll talk more about unit tests in the next section)
 5. Offer some acknowledgements
 
-This template linked [here](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) is pretty good. Again, because your package will technically function without your README, the actual structure and content of a README can be flexible. However, just remember that if you don't have a README which outlines why and how to use your package, other developers are unlikely to want to use it.
+This [template](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) README is a good starting point. You could copy this file into your package directory and modify it to reflect the content of your project. Again, because your package will technically function without your README, the actual structure and content of a README can be flexible. However, just remember that if you don't have a README which outlines why and how to use your package, other developers are unlikely to want to use it.
+
 
 ## Vignettes
 
@@ -739,32 +739,38 @@ Sometimes, you'll want to include data as part of your package, either to serve 
 
 ### Including data which should be available to users
 
-All of the data you want to be available to users should be saved in a folder called 'data' inside your project. The way to do this is to write and run a script which loads your data into R and then uses the `usethis` function `use_data()` to save it to a path inside 'data.' Even if you do not already have a folder called 'data' in your package, the `use_data()` function will make it for you. Note that for this to work, your working directory must be set to the package you're writing, otherwise `usethis` won't know where to put your data.
+All of the data you want to be available to users should be saved in a folder called 'data' inside your project. The way to do this is to write and run a script which loads your data into R and then uses the `usethis` function `use_data()` to save it to a path inside 'data'. Even if you do not already have a folder called 'data' in your package, the `use_data()` function will make it for you. Note that for this to work, your working directory must be set to the package you're writing, otherwise `usethis` won't know where to put your data.
 
-For example, when documenting the `scalep()` function, one might want to include data as an example of a way to use `scalep()`. To this end, I've generated a (totally fake) .csv file which lists 100 people's income and luxury spending, and has saved it to the   
+For example, when documenting the `scalep()` function, one might want to include data as an example of a way to use `scalep()`. To this end, we can use the built-in R dataset `mtcars` and include it in the package.   
 
 ```{r, eval=FALSE}
-luxspending <- read.csv('C:/Users/name/Documents/R/datapath.csv', header=TRUE, sep=',')
-usethis::use_data(luxspending)
+usethis::use_data(mtcars)
 ```
 
-Data in your 'data' folder will effectively always be exported, so you always must document it. To document data, you should create an R Script in your 'R' directory called ['data.R'] and use `Roxygen2` to document the data similarly to the way you'd document a function. For example, one might document the aforementioned data in the following way:
+In this way, you can include in your package any data you want, providing it has been stored in an R object. Data in your 'data' folder will effectively always be exported, so you always must document it. To document data, you should create an R Script in your 'R' directory called ['data.R'] and use `Roxygen2` to document the data similarly to the way you'd document a function. For example, one might document the aforementioned data in the following way:
 
 ```{r, eval=FALSE}
-#' Luxury spending of 100 individuals
+#' Motor trend car road tests dataset
 #'
-#' This dataset lists the net incomes and the luxury spending
-#' of 100 individuals.
+#' This dataset lists the properties of 32 motorcars
 #'
-#' @format A dataframe with 100 rows and 2 columns.
+#' @format A dataframe with 32 rows and 11 columns.
 #' \describe{
-#'   \item{Income}{Total Income, in USD}
-#'   \item{Luxury_goods}{Spending on luxury goods, in USD}
+#'   \item{mpg}{Mile per gallon}
+#'   \item{cyl}{Number of cylinders}
+#'   \item{disp}{Displacement (cu.in)}
+#'   \item{hp}{Gross horsepower}
+#'   \item{drat}{Rear axle ratio}
+#'   \item{wt}{Weight (1000 lbs)}
+#'   \item{qsec}{1/4 mile time}
+#'   \item{vs}{Engine: (0 = V-shaped, 1 = straight)}
+#'   \item{am}{Transmission: (0 = automatic, 1 = manual)}
+#'   \item{gear}{Number of forward gears}
+#'   \item{carb}{Number of carburetors}
 #'}
-#' @source This dataset was randomly generated
-#' and is intended only to be used as an example for package
-#' development and the scalep function.
-"luxspending"
+#' @source This dataset is a built-in R dataset and is
+#' intended only to be used as an example for package development.
+"mtcars"
 ```
 
 This should all look pretty similar to documenting functions. Note that '@format' is a tag which will allow you to describe the structure of a dataset, and it's good practice to list what each column measures in this section. The '@source' section describes where the data came from. Never write '@export' in this section, as data here is already automatically exported.
