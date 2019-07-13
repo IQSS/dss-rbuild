@@ -17,11 +17,11 @@ RStudio is a language-specific IDE built for R, although it does support plenty 
 
 ### Why use RStudio?
 
-RStudio integrates documentation, makes graphics more accessible, and also combines beautifully with devtools to make it easy to write packages. We'll look at two concrete examples: initializing and Setting up RStudio
+RStudio integrates documentation, makes graphics more accessible, and also combines beautifully with devtools to make it easy to write packages. We'll look at two concrete examples: initializing and setting up RStudio
 
 #### Setting up R
 
-Presumably you've already been working with R, but you should make sure you have a recent enough version of R intalled. To do so, type "R.Version()" into the editor you've been working with previously. It should return an output titled "$version.string$", for example:
+Presumably you've already been working with R, but you should make sure you have a recent enough version of R intalled. To do so, type `R.Version()` into the editor you've been working with previously. It should return an output titled "$version.string$", for example:
 ```{r}
 R.Version()
 ```
@@ -98,7 +98,7 @@ You should also go to "Tools > Project Options" and select the following options
 
 ### Ex: Building Packages
 
-RStudio will build your package a little bit more conveniently than the devtools::build() function will. Whereas the devtools::build() function, without extra arguments, will simply bundle your package into one file, building your package from RStudio will actually install it into your R library, allowing you to easily use the finished version.
+RStudio will build your package a little bit more conveniently than the `devtools::build()` function will. Whereas the `devtools::build()` function, without extra arguments, will simply bundle your package into one file, building your package from RStudio will actually install it into your R library, allowing you to easily use the finished version.
 
 The way to do this is to go to Build > Install and Restart, and then RStudio will build your package, restart, and load your package into R (using the library command). Then, you can use and/or play with your package! 
 
