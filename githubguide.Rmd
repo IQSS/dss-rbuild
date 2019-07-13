@@ -10,7 +10,7 @@ Git and GitHub are actually two different things, and deserve their own sections
 
 First, imagine that two imaginary programmers named Carlos and Grace are working together to build a website that automatically displays polling results from US elections, and suppose Grace modifies a script to change the method for aggregating polling data. It would be tedious for Carlos and Grace to email the script back and forth each time they updated it. Instead, they need a *repository* where they can update and sync their code to make sure they're on the same page. GitHub allows programmers to create such repositories. 
 
-Second, imagine that farther along in the project, Grace decides that she needs to totally rewrite the code which stores and organizes polling data. Unfortunately, while Grace modifies the system which stores the data, it will be offline, which is unfortunate because Carlos needs to use the data for his work on the project. To avoid this dilemma, Git and GitHub allow programmers to create different versions, called branches, of their code. By branching, Grace can modify the storage system, and in the meantime, Carlos can continue to use the old storage system for his work. 
+Second, imagine that farther along in the project, Grace decides that she needs to totally rewrite the code which stores and organizes polling data. Unfortunately, while Grace modifies the system which stores the data, it will be offline, which is unfortunate because Carlos needs to use the data for his work on the project. To avoid this dilemma, Git and GitHub allow programmers to create different versions, called *branches*, of their code. By branching, Grace can modify the storage system, and in the meantime, Carlos can continue to use the old storage system for his work. 
 
 Third, suppose that once Grace and Carlos have finished their website, they want to publish all the statistical functions and tools they built so that other researchers can use those tools to reproduce Grace and Carlos's research. Putting all of their work on GitHub is probably the quickest and easiest way to make it accessible to other researchers.
 
@@ -78,13 +78,13 @@ GitHub will prompt you to choose a repository name and description of the repo, 
 
 Once you've created the repository on GitHub, the next step is to link it with a local Git repository. To do this, open the *command prompt* on your computer. You'll need to enter a couple of commands to get the repo set up on your computer. 
 
-First, you'll need to set the *working directory* in the command prompt. The working directory is the location where Git and command prompt will execute all of your commands - ie. if you tell Git to create a new file, the new file will be located your working directory. Thus, before you download your repository, you'll want to navigate to the folder in which you want the repository to be located. For example, Carlos might want to put a repo in his "R" folder inside the "Documents" folder on his computer. To do this, he'd use the 'cd' command, which stands for "change directory," and then copy and paste the path of the folder he'd like to place the repository in. An example is given below:
+First, you'll need to set the *working directory* in the command prompt. The working directory is the location where Git and command prompt will execute all of your commands - ie. if you tell Git to create a new file, the new file will be located your working directory. Thus, before you download your repository, you'll want to navigate to the folder in which you want the repository to be located. For example, Carlos might want to put a repo in his "R" folder inside the "Documents" folder on his computer. To do this, he'd use the `cd` command, which stands for "change directory," and then copy and paste the path of the folder he'd like to place the repository in. An example is given below:
 
 ```{R, eval=FALSE}
 $ cd C:/Users/Carlos/Documents/R
 ```
 
-Next, you will need to tell git to download, or *clone*, the repo. You can do this using the "git clone" command, which allows you to download and sync a repository *for the first time.* This will download the repo, with all its contents, onto your computer and automatically set up a local version of the repo. See an example of the command below:
+Next, you will need to tell git to download, or *clone*, the repo. You can do this using the `git clone` command, which allows you to download and sync a repository *for the first time.* This will download the repo, with all its contents, onto your computer and automatically set up a local version of the repo. See an example of the command below:
 
 ```{R, eval=FALSE}
 $ git clone https://GitHub.com/Carlos_Account/repository_name/
@@ -92,7 +92,7 @@ $ git clone https://GitHub.com/Carlos_Account/repository_name/
 
 ##### Method 2: Git init
 
-You can also initialize repos through Git and then upload them to GitHub. To do this, first create a folder where you'd like the repo to be located. Then, open the command line, and like before, navigate to the folder using the 'cd' command. Once you've navigated there, you can initialize the repo locally by typing "git init""
+You can also initialize repos through Git and then upload them to GitHub. To do this, first create a folder where you'd like the repo to be located. Then, open the command line, and like before, navigate to the folder using the `cd` command. Once you've navigated there, you can initialize the repo locally by typing `git init`
 
 ```{R, eval=FALSE}
 $ cd C:/Users/Carlos/Documents/R/repository_name
@@ -103,11 +103,11 @@ This sets up a local repository! We'll go over how to link a local repository se
 
 ### Modifying Projects
 
-Say you have created some code in your project directory and want to add it to the repository and change it later on. To do this, you need to first move the files in your project directory to the repository. Then you need to use three commands: *git add*, *git commit*, and *git push.* Note that sending scripts to the local repository is (perhaps counterintuitively) known as *commiting* them, not adding them. 
+Say you have created some code in your project directory and want to add it to the repository and change it later on. To do this, you need to first move the files in your project directory to the repository. Then you need to use three commands: `git add`, `git commit`, and `git push`. Note that sending scripts to the local repository is (perhaps counterintuitively) known as *commiting* them, not adding them. 
 
-First, suppose you make changes to your scripts. You need to *add*  the modified scripts to Git (adding scripts doesn't  add them to the repository - rather, it just lets Git know that you will eventually *commit* or send them to the repository). The scripts must already exist in the repository before they can be added. Then navigate to the correct working directory and type 'git add [your script's filepath]' to the directory. You can add multiple files in a row with no problem. 
+First, suppose you make changes to your scripts. You need to *add*  the modified scripts to Git (adding scripts doesn't  add them to the repository - rather, it just lets Git know that you will eventually *commit* or send them to the repository). The scripts must already exist in the repository before they can be added. Then navigate to the correct working directory and type `git add [your script's filepath]` to the directory. You can add multiple files in a row with no problem. 
 
-Second, you need to *commit* scripts, which means actually sending them to the local repository. To do this, simply type *git commit* to the command line after you've added all the scripts you want to send to the repository. Git will open a text editor and prompt you to add a message to explain what the commit is for - type in your desired message, then hit "escape" to leave the text editor, and type ":wq" to save and exit the message interface. Once you've committed files, all of the files you've previously added will be saved on your local repository. 
+Second, you need to *commit* scripts, which means actually sending them to the local repository. To do this, simply type `git commit` to the command line after you've added all the scripts you want to send to the repository. Git will open a text editor and prompt you to add a message to explain what the commit is for - type in your desired message, then hit "escape" to leave the text editor, and type ":wq" to save and exit the message interface. Once you've committed files, all of the files you've previously added will be saved on your local repository. 
 
 ```{R, eval=FALSE}
 $ cd C:/Users/Carlos/Documents/R/repository_name
@@ -120,7 +120,7 @@ The following command line code produces something like this:
 
 ![](Images/committing1.PNG)
 
-Depending on the OS you're running (and perhaps the IDE), you might also be able to add your comment directly into the command line, which is a bit easier. You can do this by typing "commit -m" followed by your message in quotes.
+Depending on the OS you're running (and perhaps the IDE), you might also be able to add your comment directly into the command line, which is a bit easier. You can do this by typing `commit -m` followed by your message in quotes.
 
 ```{r, eval=FALSE}
 $ cd C:/Users/Carlos/Documents/R/repository_name
@@ -130,7 +130,7 @@ $ git commit -m "Fixed small bug"
 ```
 
 
-Lastly, you need to *push* the files, which means sending them to GitHub online. Before you do this, if you created the repository locally and have also created a GitHub repo without adding the README file, you'll need to specify to Git the url to send the commits to. To do this, type 'git remote add origin [your url]' into your command line. Then, you can *push* the file by writing 'git push -u origin master,' which will send the file to the GitHub repo. If you created the repository locally and have also created a GitHub repo adding the README file, then you have to resolve commitment consolidation when you push your file to the GitHub repo. This is why we recommend that you do not initialize the GitHub repo with the README file. If you did not create the repository locally, then you can simply push it to the GitHub repo after you clone the GitHub repo to your local repository. So, it is easier to start a repo on GitHub and then clone it than initializing a repository locally. 
+Lastly, you need to *push* the files, which means sending them to GitHub online. Before you do this, if you created the repository locally and have also created a GitHub repo without adding the README file, you'll need to specify to Git the url to send the commits to. To do this, type `git remote add origin [your url]` into your command line. Then, you can *push* the file by writing `git push -u origin master`, which will send the file to the GitHub repo. If you created the repository locally and have also created a GitHub repo adding the README file, then you have to resolve commitment consolidation when you push your file to the GitHub repo. This is why we recommend that you do not initialize the GitHub repo with the README file. If you did not create the repository locally, then you can simply push it to the GitHub repo after you clone the GitHub repo to your local repository. So, it is easier to start a repo on GitHub and then clone it than initializing a repository locally. 
 
 
 ```{R, eval=FALSE}
@@ -140,7 +140,7 @@ $ git push -u origin master
 
 ### Accessing older versions of code
 
-You should never be scared of Git/GitHub, because they only add information - they almost never delete it. In practice, this means that if you commit horrible changes to your code, you can easily revert to a previous version. For example, let's say Grace wrote some new functions for a script, deleted them and committed the deletes later on, but now wants the functions back. She can easily access the older script using Git. First, she should use the "git log" command to see what commits have been made recently.
+You should never be scared of Git/GitHub, because they only add information - they almost never delete it. In practice, this means that if you commit horrible changes to your code, you can easily revert to a previous version. For example, let's say Grace wrote some new functions for a script, deleted them and committed the deletes later on, but now wants the functions back. She can easily access the older script using Git. First, she should use the `git log` command to see what commits have been made recently.
 
 ```{R, eval=FALSE}
 $ git log
@@ -169,17 +169,17 @@ Date:   Fri Feb 16 21:28:46 2018 -0500
 
 ```
 
-Clearly, Grace should restore the second commit listed, named 'b69a14b,' in order to access the functions she deleted. To do so, Grace can use the "git reset" command.
+Clearly, Grace should restore the second commit listed, named 'b69a14b,' in order to access the functions she deleted. To do so, Grace can use the `git reset` command.
 
 ```{r, eval=FALSE}
 $ git reset --soft b69a14b
 ```
 
-This will update the current version of the script to the b69a14b version, which Grace can then inspect and test until she's ready to commit it to Git/GitHub. Note that there is also a "git reset --hard" option, which works the same way, but is a pretty serious action to take because it will effectively delete all the commits prior to the version being restored. The soft option is almost always a better choice. 
+This will update the current version of the script to the b69a14b version, which Grace can then inspect and test until she's ready to commit it to Git/GitHub. Note that there is also a `git reset --hard` option, which works the same way, but is a pretty serious action to take because it will effectively delete all the commits prior to the version being restored. The soft option is almost always a better choice. 
 
 ### The .gitignore file
 
-There's one more thing you should know about adding/modifying files that will make your life a lot easier. Sometimes, when modifying and commiting projects, you won't want to type out every individual file you've modified: you'll instead want to use the "git add ." command which will simply queue every modified file to be committed.
+There's one more thing you should know about adding/modifying files that will make your life a lot easier. Sometimes, when modifying and commiting projects, you won't want to type out every individual file you've modified: you'll instead want to use the `git add .` command which will simply queue every modified file to be committed.
 
 ```{r, eval=FALSE}
 $ git add .
@@ -189,7 +189,7 @@ $ git push
 
 However, often, you'll have files in your directory which you do not want to commit or push to GitHub because they'll clutter up the directory. For example, R directories create ".RHistory" and ".RData" files which will save your history and working environment. These are useful perhaps when writing code, but you don't want them taking up space in your final packaged product. 
 
-To solve this problem, you can use a *.gitignore file.* A .gitignore file tells Git to ignore certain kinds of files when you write 'git add .'. For example, gitignore files are frequently configured to tell git to ignore csv files, .RData files, installer logs, and more. 
+To solve this problem, you can use a *.gitignore file.* A .gitignore file tells Git to ignore certain kinds of files when you write `git add .`. For example, gitignore files are frequently configured to tell git to ignore csv files, .RData files, installer logs, and more. 
 
 Let's discuss how *.gitignore* files actually work. A .gitignore file is really just a glorified text file. However, its filename should be just '.gitignore', because that's how Git recognizes it - then, if you put a file titled '.gitignore' in a directory you're working on, Git will use the .gitignore file to decide what to ignore in that specific directory. For example, if Grace is working on a project in 'C:/Users/gracesmith/Documents/R/repo_name', she should create a '.gitignore' file inside that folder. 
 
@@ -251,13 +251,13 @@ Let's discuss how to actually use git to branch.
 
 ##### Creating and Switching Branches
 
-To create a branch, use the "git checkout" command followed with a "-b" and the name of the branch:
+To create a branch, use the `git checkout` command followed with a "-b" and the name of the branch:
 
 ```{r, eval=FALSE}
 $ git checkout -b branch_name
 ```
 
-This will create a new branch which is identical to the initial (master) branch. You can modify it as you like, and you will still be able to easily access the initial (master) branch. To do this, simply use the "git checkout" command without the "-b" and type the name of the branch you want to switch to:
+This will create a new branch which is identical to the initial (master) branch. You can modify it as you like, and you will still be able to easily access the initial (master) branch. To do this, simply use the `git checkout` command without the "-b" and type the name of the branch you want to switch to:
 ```{r, eval=FALSE}
 $ git checkout switch_to_this_branch
 ```
@@ -266,7 +266,7 @@ Remember, switching to a branch will change the way the file shows up once you o
 
 ##### Merging Branches
 
-Suppose you have created a test branch, tested it to make sure it works, and now want to combine it with the original master branch. To do this, use the "git checkout" command in combination with the "git merge" command as follows:
+Suppose you have created a test branch, tested it to make sure it works, and now want to combine it with the original master branch. To do this, use the `git checkout` command in combination with the `git merge` command as follows:
 ```{r, eval=FALSE}
 $ git checkout master
 $ git merge test_branch_name
@@ -302,7 +302,7 @@ hint: (e.g., 'git pull ...') before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 ```
 
-Effectively, Git recognizes that Carlos has made modifications to the script which were pushed to GitHub that Grace doesn't have. This usually happens *when two programmers modify exactly the same line in a single script*, such as line 6 in the above examples. To solve this problem, Grace should follow Git's advice, and try the "git pull" command. This will lead to the following message from git:
+Effectively, Git recognizes that Carlos has made modifications to the script which were pushed to GitHub that Grace doesn't have. This usually happens *when two programmers modify exactly the same line in a single script*, such as line 6 in the above examples. To solve this problem, Grace should follow Git's advice, and try the `git pull` command. This will lead to the following message from git:
 
 ```{r, eval=FALSE}
 C:\Users\gracesmith\Documents\R\repo_name>git pull
@@ -324,7 +324,8 @@ Again, Git is letting Grace know that it sees there's a conflict and that Git ne
 The "<<<<" and ">>>>" lines are in the script to signal the beginning and end of a merge conflict, whereas the "===" line separates the two different versions. On the top is Grace's version and on the bottom is Carlos's. To resolve the merge conflict, Grace should manually select the two lines she prefers and then delete all of the "<, =, >" symbols to let Git know that the conflict has been resolved. Then, she can commit and push the file to Git, and she'll be good to go!
 
 Overall: merge conflicts are rather annoying and can be confusing, so the best way to avoid them is to clearly delineate which programmers will be working on which sections of which scripts. This will prevent Git (and you) from getting confused.  
-### Suggested Workflow
+
+##### Suggested Workflow
 
 There are many ways to use Git, but [this article by Vincent Driessen](https://nvie.com/posts/a-successful-git-branching-model/) describes a pretty intuitive and productive model for Git branching. It's worth reading or skimming the article (it includes some great graphics), but it basically involves a couple of core kinds of branches:
 
@@ -357,7 +358,7 @@ Lastly, there are a couple of cheat sheets that you can use to make your life ea
 
 * [Karl Broman's tutorial](http://kbroman.org/github_tutorial/pages/init.html) runs you through initializing a repository 
 
-* [This official GitHub cheat sheet](https://services.GitHub.com/on-demand/downloads/GitHub-git-cheat-sheet.pdf) lists all of the general commands you'll need
+* [This official GitHub cheat sheet](https://github.github.com/training-kit/downloads/github-git-cheat-sheet.pdf) lists all of the general commands you'll need
 
 ## Optional: Integrated Testing
 
@@ -379,7 +380,7 @@ It's important to note that Travis/Appveyor do not prevent you from pushing bad 
 1. Someone sets up a "master repo" with a master branch on GitHub. 
 2. Each developer on the team creates a copy (also called a *fork*) of the master repo. Thus, each developer has their own repository.
 3. Each developer makes changes to the project and then pushes those changes to their personal fork. After each push, Appveyor or Travis builds the package and test it. 
-4. If the Appveyor/Travis builds are successful, the developper will likely send a pull request to the master branch of the master repo, which will probably be accepted. 
+4. If the Appveyor/Travis builds are successful, the developer will likely send a pull request to the master branch of the master repo, which will probably be accepted. 
 
 This workflow allows each developer to make changes in their own repo and continuously build them using Travis/Appveyor without potentially breaking the master repo's copy. 
 
@@ -393,7 +394,7 @@ This workflow allows each developer to make changes in their own repo and contin
 
 You should click "new project" and then select the specific repo you'd like to use in combination with Travis/Appveyor. This means that you should at least initialize your project and push it to GitHub before you start using Travis/Appveyor. 
 
-**Step 3**: Depending on whether you're using Appveyor or Travis, you should run devtools::use_appveyor() or devtools::use_travis() in the console with your package open. This will create a file named 'appveyor.yml' or 'travis.yml' in the root directory of your package. These '.yml' files will tell AppVeyor/Travis what to do. It's actually not too important to understand everything they do, just because the devtools template generally works pretty well. However, you occasionally will have to modify it to suit specific needs. AppVeyor and Travis CI both have great documentation, linked [here for Appveyor](https://www.appveyor.com/docs/build-configuration/) and [here for Travis](https://docs.travis-ci.com/user/languages/r/).
+**Step 3**: Depending on whether you're using Appveyor or Travis, you should run `devtools::use_appveyor()` or `devtools::use_travis()` in the console with your package open. This will create a file named 'appveyor.yml' or 'travis.yml' in the root directory of your package. These '.yml' files will tell AppVeyor/Travis what to do. It's actually not too important to understand everything they do, just because the devtools template generally works pretty well. However, you occasionally will have to modify it to suit specific needs. AppVeyor and Travis CI both have great documentation, linked [here for Appveyor](https://www.appveyor.com/docs/build-configuration/) and [here for Travis](https://docs.travis-ci.com/user/languages/r/).
 
 (Note - devtools also adds 'appveyor.yml' and 'travis.yml' to the .Rbuildignore to reduce clutter in your package.)
 
@@ -404,7 +405,7 @@ You should click "new project" and then select the specific repo you'd like to u
 r_packages: package_name
 
 ```
- in the .yml file (this will install the package the same way that R installs it when you run 'install.packages'). If you'd like to install a package using a different method (i.e. from a GitHub version of the package), there are lots of options listed in the [R-specific Travis documentation](https://docs.travis-ci.com/user/languages/r/). However, it's important to remember that this is generally NOT necessary - Travis/Appveyor do a pretty good job of automatically detecting/installing dependencies as long as your DESCRIPTION file specifies them.
+ in the .yml file (this will install the package the same way that R installs it when you run `install.packages`). If you'd like to install a package using a different method (i.e. from a GitHub version of the package), there are lots of options listed in the [R-specific Travis documentation](https://docs.travis-ci.com/user/languages/r/). However, it's important to remember that this is generally NOT necessary - Travis/Appveyor do a pretty good job of automatically detecting/installing dependencies as long as your DESCRIPTION file specifies them.
 
 **Step 4**: If you are working with many other developers on a single package, you should also add a '.gitattributes' file into the root of your directory. This is because different operating systems handle different characters, for example line terminators, slightly differently. Modern Mac and Unix/Linux systems use '$\n$' to terminate the end of each line, in what is called the "line feed" or "LF" system, whereas Windows uses '$\r\n$' in the 'Carriage Return Line Feed' or CRLF system. The point is that the '.gitattributes' file will ensure that each developer uses exactly the same line endings, because you can set the 'text' setting which controls the method of writing lineterminators.
 
