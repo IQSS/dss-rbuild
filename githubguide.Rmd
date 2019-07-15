@@ -68,8 +68,6 @@ Now you're ready to start using Git/GitHub!
 
 The first step to using git is creating a project, or repository (repo for short). There are generally two ways to create a repo in Git. 
 
-##### Method 1: Start your project on GitHub
-
 The first way to start a repo is by creating it on GitHub. To do so, log into your GitHub account. Look near the top-right for your profile icon, click it, and click "Your Profile." Then you should see "Repositories" in the top tab, and click on "Repositories". Then click the green "New" button on the right. 
 
 ![](Images/gitdashboard.PNG)
@@ -81,7 +79,7 @@ Once you've created the repository on GitHub, the next step is to link it with a
 First, you'll need to set the *working directory* in the command prompt. The working directory is the location where Git and command prompt will execute all of your commands - ie. if you tell Git to create a new file, the new file will be located your working directory. Thus, before you download your repository, you'll want to navigate to the folder in which you want the repository to be located. For example, Carlos might want to put a repo in his "R" folder inside the "Documents" folder on his computer. To do this, he'd use the `cd` command, which stands for "change directory," and then copy and paste the path of the folder he'd like to place the repository in. An example is given below:
 
 ```{R, eval=FALSE}
-$ cd C:/Users/Carlos/Documents/R
+$ cd ~/Documents/R
 ```
 
 Next, you will need to tell git to download, or *clone*, the repo. You can do this using the `git clone` command, which allows you to download and sync a repository *for the first time.* This will download the repo, with all its contents, onto your computer and automatically set up a local version of the repo. See an example of the command below:
@@ -90,45 +88,15 @@ Next, you will need to tell git to download, or *clone*, the repo. You can do th
 $ git clone https://GitHub.com/Carlos_Account/repository_name/
 ```
 
-##### Method 2: Git init
-
-You can also initialize repos through Git and then upload them to GitHub. To do this, first create a folder where you'd like the repo to be located. Then, open the command line, and like before, navigate to the folder using the `cd` command. Once you've navigated there, you can initialize the repo locally by typing `git init`
-
-```{R, eval=FALSE}
-$ cd C:/Users/Carlos/Documents/R/repository_name
-$ git init
-```
-
-This sets up a local repository! We'll go over how to link a local repository set up this way to GitHub in the next section.
 
 ### Modifying Projects
 
-Say you have created some code in your project directory and want to add it to the repository and change it later on. To do this, you need to first move the files in your project directory to the repository. Then you need to use three commands: `git add`, `git commit`, and `git push`. Note that sending scripts to the local repository is (perhaps counterintuitively) known as *commiting* them, not adding them. 
-
-First, suppose you make changes to your scripts. You need to *add*  the modified scripts to Git (adding scripts doesn't  add them to the repository - rather, it just lets Git know that you will eventually *commit* or send them to the repository). The scripts must already exist in the repository before they can be added. Then navigate to the correct working directory and type `git add [your script's filepath]` to the directory. You can add multiple files in a row with no problem. 
-
-Second, you need to *commit* scripts, which means actually sending them to the local repository. To do this, simply type `git commit` to the command line after you've added all the scripts you want to send to the repository. Git will open a text editor and prompt you to add a message to explain what the commit is for - type in your desired message, then hit "escape" to leave the text editor, and type ":wq" to save and exit the message interface. Once you've committed files, all of the files you've previously added will be saved on your local repository. 
-
-```{R, eval=FALSE}
-$ cd C:/Users/Carlos/Documents/R/repository_name
-$ git add 'scriptname.R'
-$ git add 'scriptname2.R'
-$ git commit
-```
-
-The following command line code produces something like this:
-
-![](Images/committing1.PNG)
-
-Depending on the OS you're running (and perhaps the IDE), you might also be able to add your comment directly into the command line, which is a bit easier. You can do this by typing `commit -m` followed by your message in quotes.
+It's best practice to create new R code files in your local project repository. When you save your code files, initially they will not be under version control, but we can change this by *commiting* them to the local repository using the command: `git commit`. You can add a message to indicate the changes you've made by typing `commit -am` followed by your message in quotes. Once you've committed files, all of the files you've previously added will be saved on your local repository. 
 
 ```{r, eval=FALSE}
-$ cd C:/Users/Carlos/Documents/R/repository_name
-$ git add 'scriptname.R'
-$ git add 'scriptname2.R'
-$ git commit -m "Fixed small bug"
+$ cd ~/Documents/R/repository_name
+$ git commit -am "Fixed small bug"
 ```
-
 
 Lastly, you need to *push* the files, which means sending them to GitHub online. Before you do this, if you created the repository locally and have also created a GitHub repo without adding the README file, you'll need to specify to Git the url to send the commits to. To do this, type `git remote add origin [your url]` into your command line. Then, you can *push* the file by writing `git push -u origin master`, which will send the file to the GitHub repo. If you created the repository locally and have also created a GitHub repo adding the README file, then you have to resolve commitment consolidation when you push your file to the GitHub repo. This is why we recommend that you do not initialize the GitHub repo with the README file. If you did not create the repository locally, then you can simply push it to the GitHub repo after you clone the GitHub repo to your local repository. So, it is easier to start a repo on GitHub and then clone it than initializing a repository locally. 
 
@@ -191,7 +159,7 @@ However, often, you'll have files in your directory which you do not want to com
 
 To solve this problem, you can use a *.gitignore file.* A .gitignore file tells Git to ignore certain kinds of files when you write `git add .`. For example, gitignore files are frequently configured to tell git to ignore csv files, .RData files, installer logs, and more. 
 
-Let's discuss how *.gitignore* files actually work. A .gitignore file is really just a glorified text file. However, its filename should be just '.gitignore', because that's how Git recognizes it - then, if you put a file titled '.gitignore' in a directory you're working on, Git will use the .gitignore file to decide what to ignore in that specific directory. For example, if Grace is working on a project in 'C:/Users/gracesmith/Documents/R/repo_name', she should create a '.gitignore' file inside that folder. 
+Let's discuss how *.gitignore* files actually work. A .gitignore file is really just a glorified text file. However, its filename should be just '.gitignore', because that's how Git recognizes it - then, if you put a file titled '.gitignore' in a directory you're working on, Git will use the .gitignore file to decide what to ignore in that specific directory. For example, if Grace is working on a project in '~/Documents/R/repo_name', she should create a '.gitignore' file inside that folder. 
 
 This still leaves an important question - how does Git use the .gitignore file to determine which files to ignore? Essentially, .gitignore files are just a bunch of independent lines of text, and each line tells git another specific pattern of filepath to ignore. For example, consider the following example of a .gitignore file:
 
