@@ -2,7 +2,7 @@
 
 The following graphic outlines this entire chapter:
 
-![](Images/package-workflow.PNG)
+![](Images/package_workflow2.png)
 
 As a quick reminder, you can find the `devex` example package linked [here, on GitHub](https://github.com/amspector100/packageguidelines/tree/master/devex), if you'd like to look through it while reading the guide.
 
@@ -449,7 +449,7 @@ Each test file, as demonstrated above, needs to load the package of interest (us
 You can run all of the tests in the test/testthat directory by running the following `devtools` function:
 
 ```{r, eval = FALSE}
-usethis::test()
+devtools::test()
 ```
 
 If any test throws an error, R will report two things. First, it will report the string given in the test which was given to the `test_that()` function call. Second, it will report the filename of the test file as well as the line of code that threw an error. For example, running the above tests yields the following result:
