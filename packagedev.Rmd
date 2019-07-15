@@ -6,6 +6,21 @@ The following graphic outlines this entire chapter:
 
 As a quick reminder, you can find the `devex` example package linked [here, on GitHub](https://github.com/amspector100/packageguidelines/tree/master/devex), if you'd like to look through it while reading the guide.
 
+## File Paths
+
+The paths used to locate files differ between UNIX (e.g., MacOS, Linux) and Windows based operating systems. Windows systems used a single backslash `\`, while UNIX systems use a single forward slash `/` to delimit files or directories in the path. R follows the UNIX convention of using forward slashes, but forces this on Window's users too. So, file paths should look like this:
+
+1) MacOS and Linux
+
+`~/Documents/myproject/myRfile.R`
+
+2) Windows
+
+`C:/Documents/myproject/myRfile.R`
+
+In the examples provided in this guide, we will show MacOS file paths. If you're using Windows, you will need to modify these paths slightly to show the drive letter at the beginning, followed by a colon.
+
+
 ## Downloading Development Tools
 
 Before we get started, you'll want to download four packages that are extremely useful for package development. For Mac/Linux users, head to the R Gui (or your favorite IDE) and run the code below to download the packages. If you are prompted to choose a CRAN mirror for your session, simply pick the mirror closest to your location.
@@ -577,7 +592,7 @@ To install the goodpractice package, just run the following command in the R con
 install.packages('goodpractice')
 ```
 
-Once you've installed the `goodpractice` package, you basically only need to use a single function from it: the `gp()` or `goodpractice()` function (which call the same code). This function will run comprehensive automated checks on your package, and it takes exactly one input, the path of your built package. However, it's important to note that the path of your *built* package is not identical to the path of the repo containing it. For example, I work on the `devex` package in "C:/Users/amspe/Documents/R/packageguidelines/devex", but the built package lives at "C:/Users/amspe/Documents/R/win-library/3.5/devex". For `goodpractice` to work, you need to use the paths of the *second* form, i.e. where the built package lives. If you don't know this path immediately, you can use the "system.file" function to retrieve it for you, as demonstrated below.
+Once you've installed the `goodpractice` package, you basically only need to use a single function from it: the `gp()` or `goodpractice()` function (which call the same code). This function will run comprehensive automated checks on your package, and it takes exactly one input, the path of your built package. However, it's important to note that the path of your *built* package is not identical to the path of the repo containing it. For example, I work on the `devex` package in "/Users/name/Documents/R/packageguidelines/devex", but the built package lives at another location. For `goodpractice` to work, you need to use this latter path. If you don't know what the path is, you can use the "system.file" function to retrieve it for you, as demonstrated below.
 
 ```{r, eval = FALSE}
 # Retrieve path
@@ -780,7 +795,7 @@ This should all look pretty similar to documenting functions. Note that '@format
 Some functions may rely on a large, predefined set of coefficients or other inputs which need to be included in the package. However, users shouldn't generally have access to such data because otherwise they might accidentally radically change the way your function works. It's best to put such data in 'R/sysdata.rda', because then users won't easily be able to access and accidentally modify it. As before, the way to include data in this way is to write a script which loads the data into R and then use the `use_data()` function to save it, but you should also include a parameter `internal = TRUE` in the function call to let R know that this is interior, not exterior, data. For example, if a function depends on a matrix called "coefficients", one might run the following code:
 
 ```{r, eval=FALSE}
-coefficients <- read.csv('C:/Users/name/Documents/R/coefs.csv')
+coefficients <- read.csv('Users/name/Documents/R/coefs.csv')
 usethis::use_data(coefficients, internal = TRUE)
 ```
 
@@ -806,7 +821,7 @@ The best way to build your package is to zip it as a .tar.gz file. `devtools` wi
 devtools::build(binary = FALSE)
 ```
 
-and then you should see a tar.gz file pop up just outside your working diretory.
+and then you should see a tar.gz file pop up just outside your working directory.
 
 The next step is to submit the bundled file to CRAN [at the link here](https://cran.r-project.org/submit.html), along with a couple of comments. Although this seems pretty simple, in actuality, CRAN has very high standards for packages, so it can be rather tricky to get a package accepted. CRAN's specific standards are   beyond the scope of the current iteration of this guide, but if you decide you want to publish a package on CRAN, you should read [Hadley Wickham's advice on the subject](http://r-pkgs.had.co.nz/release.html) **very carefully.**
 
