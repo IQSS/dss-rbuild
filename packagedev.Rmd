@@ -47,10 +47,10 @@ If you are using Windows, prior to running the above code, you will need to inst
 Now we can begin to walk through the process of creating an R package. The first thing you'll always want to do is run the following function to initialize the package:
 
 ```{r, eval = FALSE}
-usethis::create('path/to/desired/location/packagename')
+usethis::create_package('path/to/desired/location/packagename')
 ```
 
-Note that the path specified by `usethis::create` must currently be empty, otherwise `usethis` will throw an error. Successfully running this function will create a couple of important files which constitute a skeletal outline of the package. In particular, it will create:
+Note that the path specified by `usethis::create_package` must currently be empty, otherwise `usethis` will throw an error. Successfully running this function will create a couple of important files which constitute a skeletal outline of the package. In particular, it will create:
 
 1. An 'R' subdirectory in the root of your specified directory, which is where all of core the R code of your package will live.
 2. A DESCRIPTION file, which will come with a couple of preset fields.
@@ -68,35 +68,34 @@ Once you've set up the basic structure of your package, you can start modifying 
 
 The DESCRIPTION file gives an extremely brief overview to the package. It includes critical information such as the author of the package, the title, a very short summary of its purpose, and the licensing information. Open the "DESCRIPTION" file using your favorite text editor in order to inspect and edit its contents.
 
-DESCRIPTION is a DCF file. This file format may be unfamiliar, but it's quite simple. Each line contains a field name and value, separated by a colon. Sometimes, values are long enough to require multiple lines, in which case they are indented by four spaces. For example, the DESCRIPTION file for the `devex` package might look something like this:
+DESCRIPTION is a DCF file (Debian control format). This file format may be unfamiliar, but it's quite simple. Each line contains a field name and value, separated by a colon. Sometimes, values are long enough to require multiple lines, in which case they are indented by four spaces. For example, the DESCRIPTION file for a newly created package will look like this:
 
-![](Images/PackageSS/description.PNG)
+![](Images/PackageSS/description_blank.png)
 
 Let's go through the fields and discuss what they mean. The first seven fields listed are mandatory, meaning that if you do not include them, the development environment will throw an error later on when you're trying to build your package.
 
 1. **Package**: This is the name of the package. It should match the package name you chose earlier, and you should probably just leave this as is.
 2. **Title**: A short but more descriptive title of your package than its name.
 3. **Version**: The version of your package. Since you're creating this package for the first time, presumably it's version 0.1.0.
-4. **Author**: Here, you should add in your name.
-5. **Maintainer**: Here, you should add in your name as well as a valid email enclosed in <> brackets. Note that if you do not enter a valid email, the development environment may throw errors later.
-6. **Description**: This should be a one-paragraph *comprehensive* description of the package. It is necessarily a high level-description, but it should be a complete one.
-7. **License**: You should add in a License, which describes how others can legally use the package. Most of the time (especially in the US), you should write 'CC0' in the License field, which implies that the package is open for all use, and you have relinquished all your rights to it. For more information on various licensing options, click [this link](https://cran.r-project.org/doc/manuals/r-release/R-exts.html#The-DESCRIPTION-file).
+4. **Authors**: Here, you should add in your given and family names, role, email, and (optionally) your ORCID.
+5. **Description**: This should be a one-paragraph *comprehensive* description of the package. It is necessarily a high level-description, but it should be a complete one.
+6. **License**: You should add in a License, which describes how others can legally use the package. Most of the time (especially in the US), you should write 'CC0' in the License field, which implies that the package is open for all use, and you have relinquished all your rights to it. For more information on various licensing options, click [this link](https://cran.r-project.org/doc/manuals/r-release/R-exts.html#The-DESCRIPTION-file).
+7. **Encoding**: Just leave this as "UTF-8"; discussing what encodings are isn't super important for this guide. If you're dying to learn about encodings, visit [this webpage](https://www.w3.org/International/questions/qa-what-is-encoding).
+8. **LazyData**: Just leave this as "true", which ensures that if you include any data with your package (which you frequently will), when another user loads your package, they won't automatically load up the data, but will only load it if it becomes necessary during their use. This option reduces the amount of RAM users have to expend when loading packages, especially if you are planning to include a lot of data with your package.
 
 (Note all of the fields from this point on are optional, but encouraged!)
 
-8. **Type**: This describes what type of project you're creating - in this case, because you're creating a package, you should write "Package."
-9. **Date**: The date, in YYYY-MM-DD fashion.
-10. **LazyData**: Write "true" after LazyData and the colon. Writing 'true' ensures that if you include any data with your package (which you frequently will), when another user loads your package, they won't automatically load up the data, but will only load it if it becomes necessary during their use. This option reduces the amount of RAM users have to expend when loading packages, especially if you are planning to include a lot of data with your package.
-11. **Encoding**: Just leave this as "UTF-8"; discussing what encodings are isn't super important for this guide. If you're dying to learn about encodings, visit [this webpage](https://www.w3.org/International/questions/qa-what-is-encoding).
-12. **RoxygenNote**: Roxygen will automatically fill in the version of `Roxygen2` used to build the package in this field.
+9. **Type**: This describes what type of project you're creating - in this case, because you're creating a package, you should write "Package."
+10. **Date**: The date, in YYYY-MM-DD fashion.
+11. **RoxygenNote**: Roxygen will automatically fill in the version of `Roxygen2` used to build the package in this field.
 
 (These fields are exceptionally important if you are building a package using tools from other packages)
 
-13. **Imports**: In this field, you should list the packages which your package needs to function. Each package should be indented by two spaces, separated by a comma, and given its own line. For example, a pacakge which requires `ggplot2`, `nlme`, and `rpart` might have an 'imports' field which looks like this:
+12. **Imports**: In this field, you should list the packages which your package needs to function. Each package should be indented by two spaces, separated by a comma, and given its own line. For example, a pacakge which requires `ggplot2`, `nlme`, and `rpart` might have an 'imports' field which looks like this:
 
 ![](Images/PackageSS/imports.PNG)
 
-14. **Suggests**: Sometimes, your package will not really *require* the use of other packages, but it might offer a couple of extra wrappers/functions with those other packages. When those extra functions aren't strictly necessary, it's a good idea to have your package *suggest* imports. For example, a package which includes the following function should include `ggplot2` in the 'suggests' part of the description.
+13. **Suggests**: Sometimes, your package will not really *require* the use of other packages, but it might offer a couple of extra wrappers/functions with those other packages. When those extra functions aren't strictly necessary, it's a good idea to have your package *suggest* imports. For example, a package which includes the following function should include `ggplot2` in the 'suggests' part of the description.
 
 ```{r, eval=FALSE}
 
@@ -340,7 +339,7 @@ The solution to problems like this is to test your package *systematically* and 
 
 ### What are unit tests?
 
-Tests compare the *expected* output of a block of code to its *actual* output. For example, the following test tests whether the "generalized square root" function actually returns $2$ as the square root of $4$.   
+Tests compare the *expected* output of a block of code to its *actual* output. For example, the following test tests whether the "generalized square root" function actually returns $2$ as the square root of $4$.
 
 ```{r, eval=FALSE}
 expect_equal(general_sqrt(4), complex(real = 2, imaginary = 0))
@@ -615,7 +614,7 @@ When testing, there are a couple of key principles to keep in mind:
 
 1. You want to expose bugs as quickly as possible so they don't create even larger headaches down the road! As Christopher Gandrud puts it, testing is all about 'failing faster.' To this end, you should continuously test your packages.
 2. Make sure your tests *cover* the package code and also test all of the key functionality of the package. In an ideal world, a package should pass all of its tests only if all of its core functionality is bug-free.
-3. Test names, organization, and error messages must be descriptive and easy to understand. One of the main purposes of tests is to inform you *where* your code is failing, and to understand that, you need informative error messages. Otherwise, you will find yourself spending hours traversing your code to find bugs.  
+3. Test names, organization, and error messages must be descriptive and easy to understand. One of the main purposes of tests is to inform you *where* your code is failing, and to understand that, you need informative error messages. Otherwise, you will find yourself spending hours traversing your code to find bugs.
 
 The `devtools` cheatsheet, linked [here](https://www.rstudio.com/wp-content/uploads/2015/03/devtools-cheatsheet.pdf), references a lot of the key components of the `testthat` package.
 
@@ -756,7 +755,7 @@ Sometimes, you'll want to include data as part of your package, either to serve 
 
 All of the data you want to be available to users should be saved in a folder called 'data' inside your project. The way to do this is to write and run a script which loads your data into R and then uses the `usethis` function `use_data()` to save it to a path inside 'data'. Even if you do not already have a folder called 'data' in your package, the `use_data()` function will make it for you. Note that for this to work, your working directory must be set to the package you're writing, otherwise `usethis` won't know where to put your data.
 
-For example, when documenting the `scalep()` function, one might want to include data as an example of a way to use `scalep()`. To this end, we can use the built-in R dataset `mtcars` and include it in the package.   
+For example, when documenting the `scalep()` function, one might want to include data as an example of a way to use `scalep()`. To this end, we can use the built-in R dataset `mtcars` and include it in the package.
 
 ```{r, eval=FALSE}
 usethis::use_data(mtcars)
@@ -807,7 +806,7 @@ You're almost done at this point! You've written your functions, modified the de
 
 ### Pushing to GitHub
 
-The easiest way to publish your package is to simply [push it to GitHub](.\version-control), (we'll discuss how to do this later). The pros of this approach are that it makes it very easy for users to download your package - they can literally do it in one line. Additionally, Github offers free services [to host a website for your package and its documentation](https://pages.github.com/), and most importantly, it's very easy for **you** to publish your package this way. Thus, pushing to Github is sort of the "default" way to publish a smaller package.  
+The easiest way to publish your package is to simply [push it to GitHub](.\version-control), (we'll discuss how to do this later). The pros of this approach are that it makes it very easy for users to download your package - they can literally do it in one line. Additionally, Github offers free services [to host a website for your package and its documentation](https://pages.github.com/), and most importantly, it's very easy for **you** to publish your package this way. Thus, pushing to Github is sort of the "default" way to publish a smaller package.
 
 ### CRAN
 
