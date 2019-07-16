@@ -91,18 +91,24 @@ $ git clone https://GitHub.com/Carlos_Account/repository_name/
 
 ### Modifying Projects
 
-It's best practice to create new R code files in your local project repository. When you save your code files, initially they will not be under version control, but we can change this by *commiting* them to the local repository using the command: `git commit`. You can add a message to indicate the changes you've made by typing `commit -am` followed by your message in quotes. Once you've committed files, all of the files you've previously added will be saved on your local repository. 
+It's best practice to create new R code files in your local project repository. When you save your code files, initially git will not be aware of them - that is, they will not be *tracked*, but we can change this by *adding* them to the local repository using the command `git add`. Here, the period following `git add` tells git that we want to start tracking all the files in the directory.
+
+```{r, eval=FALSE}
+$ cd ~/Documents/R/repository_name
+$ git add .
+```
+
+Once new files are being tracked, we can put them under version control by *commiting* them, using the command `git commit`. You can add a message to indicate the changes you've made by typing `commit -am` followed by your message in quotes.  
 
 ```{r, eval=FALSE}
 $ cd ~/Documents/R/repository_name
 $ git commit -am "Fixed small bug"
 ```
 
-Lastly, you need to *push* the files, which means sending them to GitHub online. Before you do this, if you created the repository locally and have also created a GitHub repo without adding the README file, you'll need to specify to Git the url to send the commits to. To do this, type `git remote add origin [your url]` into your command line. Then, you can *push* the file by writing `git push -u origin master`, which will send the file to the GitHub repo. If you created the repository locally and have also created a GitHub repo adding the README file, then you have to resolve commitment consolidation when you push your file to the GitHub repo. This is why we recommend that you do not initialize the GitHub repo with the README file. If you did not create the repository locally, then you can simply push it to the GitHub repo after you clone the GitHub repo to your local repository. So, it is easier to start a repo on GitHub and then clone it than initializing a repository locally. 
+Lastly, you need to *push* the files, which means sending them to GitHub online. You can do this by writing `git push -u origin master`, which will send the file to the remote GitHub repo. 
 
 
 ```{R, eval=FALSE}
-$ git remote add origin https://GitHub.com/user_name/repository_name
 $ git push -u origin master
 ```
 
