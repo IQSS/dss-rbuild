@@ -1,41 +1,41 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Package Development in R</title>
-  <meta name="description" content="This guide walks through the process of developing R package">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="description" content="This guide walks through the process of developing an R package" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Package Development in R" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This guide walks through the process of developing R package" />
-  <meta name="github-repo" content="amspector100/packageguidelines" />
+  <meta property="og:description" content="This guide walks through the process of developing an R package" />
+  <meta name="github-repo" content="IQSS/Rbuild" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Package Development in R" />
   
-  <meta name="twitter:description" content="This guide walks through the process of developing R package" />
+  <meta name="twitter:description" content="This guide walks through the process of developing an R package" />
   
 
-<meta name="author" content="Asher Spector">
+<meta name="author" content="Steve Worthington and Jinjie Liu" />
 
 
-<meta name="date" content="2018-09-30">
+<meta name="date" content="2019-07-12" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 
 <link rel="next" href="package-development.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -50,26 +50,27 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -78,9 +79,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -130,41 +131,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#sources"><i class="fa fa-check"></i><b>1.2</b> Sources</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="package-development.html"><a href="package-development.html"><i class="fa fa-check"></i><b>2</b> Package Development</a><ul>
-<li class="chapter" data-level="2.1" data-path="package-development.html"><a href="package-development.html#downloading-development-tools"><i class="fa fa-check"></i><b>2.1</b> Downloading Development Tools</a></li>
-<li class="chapter" data-level="2.2" data-path="package-development.html"><a href="package-development.html#initializing-the-package"><i class="fa fa-check"></i><b>2.2</b> Initializing the Package</a></li>
-<li class="chapter" data-level="2.3" data-path="package-development.html"><a href="package-development.html#the-description"><i class="fa fa-check"></i><b>2.3</b> The DESCRIPTION</a></li>
-<li class="chapter" data-level="2.4" data-path="package-development.html"><a href="package-development.html#writing-code"><i class="fa fa-check"></i><b>2.4</b> Writing Code</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="package-development.html"><a href="package-development.html#general-coding-guidelines"><i class="fa fa-check"></i><b>2.4.1</b> General Coding Guidelines</a></li>
-<li class="chapter" data-level="2.4.2" data-path="package-development.html"><a href="package-development.html#code-style"><i class="fa fa-check"></i><b>2.4.2</b> Code Style</a></li>
-<li class="chapter" data-level="2.4.3" data-path="package-development.html"><a href="package-development.html#warnings-and-simplicity"><i class="fa fa-check"></i><b>2.4.3</b> Warnings and Simplicity</a></li>
-<li class="chapter" data-level="2.4.4" data-path="package-development.html"><a href="package-development.html#loading-your-code"><i class="fa fa-check"></i><b>2.4.4</b> Loading Your Code</a></li>
+<li class="chapter" data-level="2.1" data-path="package-development.html"><a href="package-development.html#file-paths"><i class="fa fa-check"></i><b>2.1</b> File Paths</a></li>
+<li class="chapter" data-level="2.2" data-path="package-development.html"><a href="package-development.html#downloading-development-tools"><i class="fa fa-check"></i><b>2.2</b> Downloading Development Tools</a></li>
+<li class="chapter" data-level="2.3" data-path="package-development.html"><a href="package-development.html#initializing-the-package"><i class="fa fa-check"></i><b>2.3</b> Initializing the Package</a></li>
+<li class="chapter" data-level="2.4" data-path="package-development.html"><a href="package-development.html#the-description"><i class="fa fa-check"></i><b>2.4</b> The DESCRIPTION</a></li>
+<li class="chapter" data-level="2.5" data-path="package-development.html"><a href="package-development.html#writing-code"><i class="fa fa-check"></i><b>2.5</b> Writing Code</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="package-development.html"><a href="package-development.html#general-coding-guidelines"><i class="fa fa-check"></i><b>2.5.1</b> General Coding Guidelines</a></li>
+<li class="chapter" data-level="2.5.2" data-path="package-development.html"><a href="package-development.html#code-style"><i class="fa fa-check"></i><b>2.5.2</b> Code Style</a></li>
+<li class="chapter" data-level="2.5.3" data-path="package-development.html"><a href="package-development.html#warnings-and-simplicity"><i class="fa fa-check"></i><b>2.5.3</b> Warnings and Simplicity</a></li>
+<li class="chapter" data-level="2.5.4" data-path="package-development.html"><a href="package-development.html#loading-your-code"><i class="fa fa-check"></i><b>2.5.4</b> Loading Your Code</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="package-development.html"><a href="package-development.html#testing"><i class="fa fa-check"></i><b>2.5</b> Testing</a><ul>
-<li class="chapter" data-level="2.5.1" data-path="package-development.html"><a href="package-development.html#why-should-you-test"><i class="fa fa-check"></i><b>2.5.1</b> Why should you test?</a></li>
-<li class="chapter" data-level="2.5.2" data-path="package-development.html"><a href="package-development.html#what-are-unit-tests"><i class="fa fa-check"></i><b>2.5.2</b> What are unit tests?</a></li>
-<li class="chapter" data-level="2.5.3" data-path="package-development.html"><a href="package-development.html#setting-up-the-testing-environment"><i class="fa fa-check"></i><b>2.5.3</b> Setting up the testing environment</a></li>
-<li class="chapter" data-level="2.5.4" data-path="package-development.html"><a href="package-development.html#expectations"><i class="fa fa-check"></i><b>2.5.4</b> Expectations</a></li>
-<li class="chapter" data-level="2.5.5" data-path="package-development.html"><a href="package-development.html#structure-and-location-of-unit-tests"><i class="fa fa-check"></i><b>2.5.5</b> Structure and Location of Unit Tests</a></li>
-<li class="chapter" data-level="2.5.6" data-path="package-development.html"><a href="package-development.html#writing-good-tests"><i class="fa fa-check"></i><b>2.5.6</b> Writing Good Tests</a></li>
-<li class="chapter" data-level="2.5.7" data-path="package-development.html"><a href="package-development.html#automated-checking"><i class="fa fa-check"></i><b>2.5.7</b> Automated Checking</a></li>
-<li class="chapter" data-level="2.5.8" data-path="package-development.html"><a href="package-development.html#bonus-the-goodpractice-package"><i class="fa fa-check"></i><b>2.5.8</b> Bonus: The goodpractice Package</a></li>
-<li class="chapter" data-level="2.5.9" data-path="package-development.html"><a href="package-development.html#tips-and-tricks"><i class="fa fa-check"></i><b>2.5.9</b> Tips and Tricks</a></li>
+<li class="chapter" data-level="2.6" data-path="package-development.html"><a href="package-development.html#testing"><i class="fa fa-check"></i><b>2.6</b> Testing</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="package-development.html"><a href="package-development.html#why-should-you-test"><i class="fa fa-check"></i><b>2.6.1</b> Why should you test?</a></li>
+<li class="chapter" data-level="2.6.2" data-path="package-development.html"><a href="package-development.html#what-are-unit-tests"><i class="fa fa-check"></i><b>2.6.2</b> What are unit tests?</a></li>
+<li class="chapter" data-level="2.6.3" data-path="package-development.html"><a href="package-development.html#setting-up-the-testing-environment"><i class="fa fa-check"></i><b>2.6.3</b> Setting up the testing environment</a></li>
+<li class="chapter" data-level="2.6.4" data-path="package-development.html"><a href="package-development.html#expectations"><i class="fa fa-check"></i><b>2.6.4</b> Expectations</a></li>
+<li class="chapter" data-level="2.6.5" data-path="package-development.html"><a href="package-development.html#structure-and-location-of-unit-tests"><i class="fa fa-check"></i><b>2.6.5</b> Structure and Location of Unit Tests</a></li>
+<li class="chapter" data-level="2.6.6" data-path="package-development.html"><a href="package-development.html#writing-good-tests"><i class="fa fa-check"></i><b>2.6.6</b> Writing Good Tests</a></li>
+<li class="chapter" data-level="2.6.7" data-path="package-development.html"><a href="package-development.html#automated-checking"><i class="fa fa-check"></i><b>2.6.7</b> Automated Checking</a></li>
+<li class="chapter" data-level="2.6.8" data-path="package-development.html"><a href="package-development.html#bonus-the-goodpractice-package"><i class="fa fa-check"></i><b>2.6.8</b> Bonus: The goodpractice Package</a></li>
+<li class="chapter" data-level="2.6.9" data-path="package-development.html"><a href="package-development.html#tips-and-tricks"><i class="fa fa-check"></i><b>2.6.9</b> Tips and Tricks</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="package-development.html"><a href="package-development.html#documentation"><i class="fa fa-check"></i><b>2.6</b> Documentation</a><ul>
-<li class="chapter" data-level="2.6.1" data-path="package-development.html"><a href="package-development.html#documenting-functions"><i class="fa fa-check"></i><b>2.6.1</b> Documenting Functions</a></li>
-<li class="chapter" data-level="2.6.2" data-path="package-development.html"><a href="package-development.html#adding-a-readme"><i class="fa fa-check"></i><b>2.6.2</b> Adding a README</a></li>
+<li class="chapter" data-level="2.7" data-path="package-development.html"><a href="package-development.html#documentation"><i class="fa fa-check"></i><b>2.7</b> Documentation</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="package-development.html"><a href="package-development.html#documenting-functions"><i class="fa fa-check"></i><b>2.7.1</b> Documenting Functions</a></li>
+<li class="chapter" data-level="2.7.2" data-path="package-development.html"><a href="package-development.html#adding-a-readme"><i class="fa fa-check"></i><b>2.7.2</b> Adding a README</a></li>
 </ul></li>
-<li class="chapter" data-level="2.7" data-path="package-development.html"><a href="package-development.html#vignettes"><i class="fa fa-check"></i><b>2.7</b> Vignettes</a></li>
-<li class="chapter" data-level="2.8" data-path="package-development.html"><a href="package-development.html#adding-and-documenting-data"><i class="fa fa-check"></i><b>2.8</b> Adding and Documenting Data</a><ul>
-<li class="chapter" data-level="2.8.1" data-path="package-development.html"><a href="package-development.html#including-data-which-should-be-available-to-users"><i class="fa fa-check"></i><b>2.8.1</b> Including data which should be available to users</a></li>
-<li class="chapter" data-level="2.8.2" data-path="package-development.html"><a href="package-development.html#including-data-for-your-functions"><i class="fa fa-check"></i><b>2.8.2</b> Including data for your functions</a></li>
+<li class="chapter" data-level="2.8" data-path="package-development.html"><a href="package-development.html#vignettes"><i class="fa fa-check"></i><b>2.8</b> Vignettes</a></li>
+<li class="chapter" data-level="2.9" data-path="package-development.html"><a href="package-development.html#adding-and-documenting-data"><i class="fa fa-check"></i><b>2.9</b> Adding and Documenting Data</a><ul>
+<li class="chapter" data-level="2.9.1" data-path="package-development.html"><a href="package-development.html#including-data-which-should-be-available-to-users"><i class="fa fa-check"></i><b>2.9.1</b> Including data which should be available to users</a></li>
+<li class="chapter" data-level="2.9.2" data-path="package-development.html"><a href="package-development.html#including-data-for-your-functions"><i class="fa fa-check"></i><b>2.9.2</b> Including data for your functions</a></li>
 </ul></li>
-<li class="chapter" data-level="2.9" data-path="package-development.html"><a href="package-development.html#releasing-your-package"><i class="fa fa-check"></i><b>2.9</b> Releasing Your Package</a><ul>
-<li class="chapter" data-level="2.9.1" data-path="package-development.html"><a href="package-development.html#pushing-to-github"><i class="fa fa-check"></i><b>2.9.1</b> Pushing to GitHub</a></li>
-<li class="chapter" data-level="2.9.2" data-path="package-development.html"><a href="package-development.html#cran"><i class="fa fa-check"></i><b>2.9.2</b> CRAN</a></li>
-<li class="chapter" data-level="2.9.3" data-path="package-development.html"><a href="package-development.html#publicizing"><i class="fa fa-check"></i><b>2.9.3</b> Publicizing</a></li>
+<li class="chapter" data-level="2.10" data-path="package-development.html"><a href="package-development.html#releasing-your-package"><i class="fa fa-check"></i><b>2.10</b> Releasing Your Package</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="package-development.html"><a href="package-development.html#pushing-to-github"><i class="fa fa-check"></i><b>2.10.1</b> Pushing to GitHub</a></li>
+<li class="chapter" data-level="2.10.2" data-path="package-development.html"><a href="package-development.html#cran"><i class="fa fa-check"></i><b>2.10.2</b> CRAN</a></li>
+<li class="chapter" data-level="2.10.3" data-path="package-development.html"><a href="package-development.html#publicizing"><i class="fa fa-check"></i><b>2.10.3</b> Publicizing</a></li>
 </ul></li>
-<li class="chapter" data-level="2.10" data-path="package-development.html"><a href="package-development.html#tips-and-tricks-1"><i class="fa fa-check"></i><b>2.10</b> Tips and Tricks</a></li>
+<li class="chapter" data-level="2.11" data-path="package-development.html"><a href="package-development.html#tips-and-tricks-1"><i class="fa fa-check"></i><b>2.11</b> Tips and Tricks</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>3</b> Version Control</a><ul>
 <li class="chapter" data-level="3.1" data-path="version-control.html"><a href="version-control.html#why-use-gitgithub"><i class="fa fa-check"></i><b>3.1</b> Why use Git/GitHub?</a><ul>
@@ -225,8 +227,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="header">
 <h1 class="title">Package Development in R</h1>
-<h4 class="author"><em>Asher Spector</em></h4>
-<h4 class="date"><em>September 30, 2018</em></h4>
+<p class="author"><em>Steve Worthington and Jinjie Liu</em></p>
+<p class="date"><em>July 12, 2019</em></p>
 </div>
 <div id="introduction" class="section level1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
@@ -240,11 +242,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p><a href="https://www.rstudio.com/wp-content/uploads/2015/03/devtools-cheatsheet.pdf">Here’s a link to a great devtools cheatsheet</a> which puts most of the useful commands in this guide in one place.</p>
 <p>We also wrote a small development example package (called ‘devex’) which you can find linked <a href="https://github.com/amspector100/packageguidelines/tree/master/devex">here, on GitHub</a>. If you haven’t used GitHub yet, don’t worry - we’ll go over how to use GitHub later.</p>
-<p>Also, this guide is still under development, and we take feedback! If you find anything confusing or think the guide misses important contant, please email <a href="mailto:amspector100@gmail.com">amspector100@gmail.com</a>.</p>
+<p>Also, this guide is still under development, and we take feedback! If you find anything confusing or think the guide misses important contant, please email <a href="mailto:help@iq.harvard.edu" class="email">help@iq.harvard.edu</a></p>
 </div>
 <div id="sources" class="section level2">
 <h2><span class="header-section-number">1.2</span> Sources</h2>
-<p>It’s worth acknowledging a couple of people who helped make this guide possible. First of all, Simo Goshev and Steve Worthington at the IQSS helped design the structure of the guide and edited the content. Second, this guide was written for a different audience, but a lot of its structure and content is based on Hadley Wickham’s book <a href="http://r-pkgs.had.co.nz/">R Packages</a>. To help write the sections on testing, we also referenced <a href="http://slides.com/christophergandrud/failing-faster#/24">Christopher Gandrud’s ‘Failing Faster’ Presentation</a>, and <a href="https://github.com/IQSS/social_science_software_toolkit/blob/master/testing/recommended_testing_tools_R.md#recommended-testing-tools-and-process-for-r-packages">Christopher Gandrud’s Broader Testing Guidelines</a>. For the section on on Version Control, we referenced <a href="http://kbroman.org/GitHub_tutorial/pages/init.html">Karl Broma’s Book</a>, a <a href="https://www.git-tower.com/learn/git/faq/restore-repo-to-previous-revision">Git-Tower post</a>, and the GitHub documentation <a href="https://git-scm.com/book/en/v2/Getting-Started-Git-Basics">here</a> and <a href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup">here</a> to help write this guide.</p>
+<p>It’s worth acknowledging a few people who helped make this guide possible. First of all, Simo Goshev and Steve Worthington at Harvard’s IQSS helped design the structure of the guide and edited the content. Second, Asher Spector at Harvard College did the hard work of actually writing the tutorial. Third, Jinjie Liu at IQSS helped to polish the content. Fourth, this guide was written for a different audience, but a lot of its structure and content is based on Hadley Wickham’s book <a href="http://r-pkgs.had.co.nz/">R Packages</a>. To help write the sections on testing, we also referenced <a href="http://slides.com/christophergandrud/failing-faster#/24">Christopher Gandrud’s ‘Failing Faster’ Presentation</a>, and <a href="https://github.com/IQSS/social_science_software_toolkit/blob/master/testing/recommended_testing_tools_R.md#recommended-testing-tools-and-process-for-r-packages">Christopher Gandrud’s Broader Testing Guidelines</a>. For the section on on Version Control, we referenced <a href="https://kbroman.org/github_tutorial/">Karl Broman’s Book</a>, a <a href="https://www.git-tower.com/learn/git/faq/restore-repo-to-previous-revision">Git-Tower post</a>, and the GitHub documentation <a href="https://git-scm.com/book/en/v2/Getting-Started-Git-Basics">here</a> and <a href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup">here</a> to help write this guide.</p>
 
 </div>
 </div>
@@ -274,7 +276,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -284,6 +286,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -301,7 +307,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

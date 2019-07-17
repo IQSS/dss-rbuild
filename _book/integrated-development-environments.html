@@ -1,41 +1,41 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Package Development in R</title>
-  <meta name="description" content="This guide walks through the process of developing R package">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Integrated Development Environments | Package Development in R</title>
+  <meta name="description" content="This guide walks through the process of developing an R package" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Package Development in R" />
+  <meta property="og:title" content="4 Integrated Development Environments | Package Development in R" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This guide walks through the process of developing R package" />
-  <meta name="github-repo" content="amspector100/packageguidelines" />
+  <meta property="og:description" content="This guide walks through the process of developing an R package" />
+  <meta name="github-repo" content="IQSS/Rbuild" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Package Development in R" />
+  <meta name="twitter:title" content="4 Integrated Development Environments | Package Development in R" />
   
-  <meta name="twitter:description" content="This guide walks through the process of developing R package" />
+  <meta name="twitter:description" content="This guide walks through the process of developing an R package" />
   
 
-<meta name="author" content="Asher Spector">
+<meta name="author" content="Steve Worthington and Jinjie Liu" />
 
 
-<meta name="date" content="2018-09-30">
+<meta name="date" content="2019-07-12" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="version-control.html">
 <link rel="next" href="resources.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -50,26 +50,27 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -78,9 +79,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -130,41 +131,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#sources"><i class="fa fa-check"></i><b>1.2</b> Sources</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="package-development.html"><a href="package-development.html"><i class="fa fa-check"></i><b>2</b> Package Development</a><ul>
-<li class="chapter" data-level="2.1" data-path="package-development.html"><a href="package-development.html#downloading-development-tools"><i class="fa fa-check"></i><b>2.1</b> Downloading Development Tools</a></li>
-<li class="chapter" data-level="2.2" data-path="package-development.html"><a href="package-development.html#initializing-the-package"><i class="fa fa-check"></i><b>2.2</b> Initializing the Package</a></li>
-<li class="chapter" data-level="2.3" data-path="package-development.html"><a href="package-development.html#the-description"><i class="fa fa-check"></i><b>2.3</b> The DESCRIPTION</a></li>
-<li class="chapter" data-level="2.4" data-path="package-development.html"><a href="package-development.html#writing-code"><i class="fa fa-check"></i><b>2.4</b> Writing Code</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="package-development.html"><a href="package-development.html#general-coding-guidelines"><i class="fa fa-check"></i><b>2.4.1</b> General Coding Guidelines</a></li>
-<li class="chapter" data-level="2.4.2" data-path="package-development.html"><a href="package-development.html#code-style"><i class="fa fa-check"></i><b>2.4.2</b> Code Style</a></li>
-<li class="chapter" data-level="2.4.3" data-path="package-development.html"><a href="package-development.html#warnings-and-simplicity"><i class="fa fa-check"></i><b>2.4.3</b> Warnings and Simplicity</a></li>
-<li class="chapter" data-level="2.4.4" data-path="package-development.html"><a href="package-development.html#loading-your-code"><i class="fa fa-check"></i><b>2.4.4</b> Loading Your Code</a></li>
+<li class="chapter" data-level="2.1" data-path="package-development.html"><a href="package-development.html#file-paths"><i class="fa fa-check"></i><b>2.1</b> File Paths</a></li>
+<li class="chapter" data-level="2.2" data-path="package-development.html"><a href="package-development.html#downloading-development-tools"><i class="fa fa-check"></i><b>2.2</b> Downloading Development Tools</a></li>
+<li class="chapter" data-level="2.3" data-path="package-development.html"><a href="package-development.html#initializing-the-package"><i class="fa fa-check"></i><b>2.3</b> Initializing the Package</a></li>
+<li class="chapter" data-level="2.4" data-path="package-development.html"><a href="package-development.html#the-description"><i class="fa fa-check"></i><b>2.4</b> The DESCRIPTION</a></li>
+<li class="chapter" data-level="2.5" data-path="package-development.html"><a href="package-development.html#writing-code"><i class="fa fa-check"></i><b>2.5</b> Writing Code</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="package-development.html"><a href="package-development.html#general-coding-guidelines"><i class="fa fa-check"></i><b>2.5.1</b> General Coding Guidelines</a></li>
+<li class="chapter" data-level="2.5.2" data-path="package-development.html"><a href="package-development.html#code-style"><i class="fa fa-check"></i><b>2.5.2</b> Code Style</a></li>
+<li class="chapter" data-level="2.5.3" data-path="package-development.html"><a href="package-development.html#warnings-and-simplicity"><i class="fa fa-check"></i><b>2.5.3</b> Warnings and Simplicity</a></li>
+<li class="chapter" data-level="2.5.4" data-path="package-development.html"><a href="package-development.html#loading-your-code"><i class="fa fa-check"></i><b>2.5.4</b> Loading Your Code</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="package-development.html"><a href="package-development.html#testing"><i class="fa fa-check"></i><b>2.5</b> Testing</a><ul>
-<li class="chapter" data-level="2.5.1" data-path="package-development.html"><a href="package-development.html#why-should-you-test"><i class="fa fa-check"></i><b>2.5.1</b> Why should you test?</a></li>
-<li class="chapter" data-level="2.5.2" data-path="package-development.html"><a href="package-development.html#what-are-unit-tests"><i class="fa fa-check"></i><b>2.5.2</b> What are unit tests?</a></li>
-<li class="chapter" data-level="2.5.3" data-path="package-development.html"><a href="package-development.html#setting-up-the-testing-environment"><i class="fa fa-check"></i><b>2.5.3</b> Setting up the testing environment</a></li>
-<li class="chapter" data-level="2.5.4" data-path="package-development.html"><a href="package-development.html#expectations"><i class="fa fa-check"></i><b>2.5.4</b> Expectations</a></li>
-<li class="chapter" data-level="2.5.5" data-path="package-development.html"><a href="package-development.html#structure-and-location-of-unit-tests"><i class="fa fa-check"></i><b>2.5.5</b> Structure and Location of Unit Tests</a></li>
-<li class="chapter" data-level="2.5.6" data-path="package-development.html"><a href="package-development.html#writing-good-tests"><i class="fa fa-check"></i><b>2.5.6</b> Writing Good Tests</a></li>
-<li class="chapter" data-level="2.5.7" data-path="package-development.html"><a href="package-development.html#automated-checking"><i class="fa fa-check"></i><b>2.5.7</b> Automated Checking</a></li>
-<li class="chapter" data-level="2.5.8" data-path="package-development.html"><a href="package-development.html#bonus-the-goodpractice-package"><i class="fa fa-check"></i><b>2.5.8</b> Bonus: The goodpractice Package</a></li>
-<li class="chapter" data-level="2.5.9" data-path="package-development.html"><a href="package-development.html#tips-and-tricks"><i class="fa fa-check"></i><b>2.5.9</b> Tips and Tricks</a></li>
+<li class="chapter" data-level="2.6" data-path="package-development.html"><a href="package-development.html#testing"><i class="fa fa-check"></i><b>2.6</b> Testing</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="package-development.html"><a href="package-development.html#why-should-you-test"><i class="fa fa-check"></i><b>2.6.1</b> Why should you test?</a></li>
+<li class="chapter" data-level="2.6.2" data-path="package-development.html"><a href="package-development.html#what-are-unit-tests"><i class="fa fa-check"></i><b>2.6.2</b> What are unit tests?</a></li>
+<li class="chapter" data-level="2.6.3" data-path="package-development.html"><a href="package-development.html#setting-up-the-testing-environment"><i class="fa fa-check"></i><b>2.6.3</b> Setting up the testing environment</a></li>
+<li class="chapter" data-level="2.6.4" data-path="package-development.html"><a href="package-development.html#expectations"><i class="fa fa-check"></i><b>2.6.4</b> Expectations</a></li>
+<li class="chapter" data-level="2.6.5" data-path="package-development.html"><a href="package-development.html#structure-and-location-of-unit-tests"><i class="fa fa-check"></i><b>2.6.5</b> Structure and Location of Unit Tests</a></li>
+<li class="chapter" data-level="2.6.6" data-path="package-development.html"><a href="package-development.html#writing-good-tests"><i class="fa fa-check"></i><b>2.6.6</b> Writing Good Tests</a></li>
+<li class="chapter" data-level="2.6.7" data-path="package-development.html"><a href="package-development.html#automated-checking"><i class="fa fa-check"></i><b>2.6.7</b> Automated Checking</a></li>
+<li class="chapter" data-level="2.6.8" data-path="package-development.html"><a href="package-development.html#bonus-the-goodpractice-package"><i class="fa fa-check"></i><b>2.6.8</b> Bonus: The goodpractice Package</a></li>
+<li class="chapter" data-level="2.6.9" data-path="package-development.html"><a href="package-development.html#tips-and-tricks"><i class="fa fa-check"></i><b>2.6.9</b> Tips and Tricks</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="package-development.html"><a href="package-development.html#documentation"><i class="fa fa-check"></i><b>2.6</b> Documentation</a><ul>
-<li class="chapter" data-level="2.6.1" data-path="package-development.html"><a href="package-development.html#documenting-functions"><i class="fa fa-check"></i><b>2.6.1</b> Documenting Functions</a></li>
-<li class="chapter" data-level="2.6.2" data-path="package-development.html"><a href="package-development.html#adding-a-readme"><i class="fa fa-check"></i><b>2.6.2</b> Adding a README</a></li>
+<li class="chapter" data-level="2.7" data-path="package-development.html"><a href="package-development.html#documentation"><i class="fa fa-check"></i><b>2.7</b> Documentation</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="package-development.html"><a href="package-development.html#documenting-functions"><i class="fa fa-check"></i><b>2.7.1</b> Documenting Functions</a></li>
+<li class="chapter" data-level="2.7.2" data-path="package-development.html"><a href="package-development.html#adding-a-readme"><i class="fa fa-check"></i><b>2.7.2</b> Adding a README</a></li>
 </ul></li>
-<li class="chapter" data-level="2.7" data-path="package-development.html"><a href="package-development.html#vignettes"><i class="fa fa-check"></i><b>2.7</b> Vignettes</a></li>
-<li class="chapter" data-level="2.8" data-path="package-development.html"><a href="package-development.html#adding-and-documenting-data"><i class="fa fa-check"></i><b>2.8</b> Adding and Documenting Data</a><ul>
-<li class="chapter" data-level="2.8.1" data-path="package-development.html"><a href="package-development.html#including-data-which-should-be-available-to-users"><i class="fa fa-check"></i><b>2.8.1</b> Including data which should be available to users</a></li>
-<li class="chapter" data-level="2.8.2" data-path="package-development.html"><a href="package-development.html#including-data-for-your-functions"><i class="fa fa-check"></i><b>2.8.2</b> Including data for your functions</a></li>
+<li class="chapter" data-level="2.8" data-path="package-development.html"><a href="package-development.html#vignettes"><i class="fa fa-check"></i><b>2.8</b> Vignettes</a></li>
+<li class="chapter" data-level="2.9" data-path="package-development.html"><a href="package-development.html#adding-and-documenting-data"><i class="fa fa-check"></i><b>2.9</b> Adding and Documenting Data</a><ul>
+<li class="chapter" data-level="2.9.1" data-path="package-development.html"><a href="package-development.html#including-data-which-should-be-available-to-users"><i class="fa fa-check"></i><b>2.9.1</b> Including data which should be available to users</a></li>
+<li class="chapter" data-level="2.9.2" data-path="package-development.html"><a href="package-development.html#including-data-for-your-functions"><i class="fa fa-check"></i><b>2.9.2</b> Including data for your functions</a></li>
 </ul></li>
-<li class="chapter" data-level="2.9" data-path="package-development.html"><a href="package-development.html#releasing-your-package"><i class="fa fa-check"></i><b>2.9</b> Releasing Your Package</a><ul>
-<li class="chapter" data-level="2.9.1" data-path="package-development.html"><a href="package-development.html#pushing-to-github"><i class="fa fa-check"></i><b>2.9.1</b> Pushing to GitHub</a></li>
-<li class="chapter" data-level="2.9.2" data-path="package-development.html"><a href="package-development.html#cran"><i class="fa fa-check"></i><b>2.9.2</b> CRAN</a></li>
-<li class="chapter" data-level="2.9.3" data-path="package-development.html"><a href="package-development.html#publicizing"><i class="fa fa-check"></i><b>2.9.3</b> Publicizing</a></li>
+<li class="chapter" data-level="2.10" data-path="package-development.html"><a href="package-development.html#releasing-your-package"><i class="fa fa-check"></i><b>2.10</b> Releasing Your Package</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="package-development.html"><a href="package-development.html#pushing-to-github"><i class="fa fa-check"></i><b>2.10.1</b> Pushing to GitHub</a></li>
+<li class="chapter" data-level="2.10.2" data-path="package-development.html"><a href="package-development.html#cran"><i class="fa fa-check"></i><b>2.10.2</b> CRAN</a></li>
+<li class="chapter" data-level="2.10.3" data-path="package-development.html"><a href="package-development.html#publicizing"><i class="fa fa-check"></i><b>2.10.3</b> Publicizing</a></li>
 </ul></li>
-<li class="chapter" data-level="2.10" data-path="package-development.html"><a href="package-development.html#tips-and-tricks-1"><i class="fa fa-check"></i><b>2.10</b> Tips and Tricks</a></li>
+<li class="chapter" data-level="2.11" data-path="package-development.html"><a href="package-development.html#tips-and-tricks-1"><i class="fa fa-check"></i><b>2.11</b> Tips and Tricks</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>3</b> Version Control</a><ul>
 <li class="chapter" data-level="3.1" data-path="version-control.html"><a href="version-control.html#why-use-gitgithub"><i class="fa fa-check"></i><b>3.1</b> Why use Git/GitHub?</a><ul>
@@ -233,30 +235,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Some IDEs are <strong>language agnostic</strong>, meaning that they support any programming language you care to program in. Language-agnostic IDEs are nice because (a) if you use one, you won’t have to switch IDEs every time you use a different programming language, and (b) because you can write packages in multiple languages in them.</li>
 <li>On the other hand, some IDEs are <strong>language specific</strong> in that they are built for certain languages. Language specific IDEs can be useful because they have a host of speciailized features for their specific language.</li>
 </ol>
-<p>There are lots of different IDEs available for R users. Common language agnostic choices include <a href="https://github.com/jupyterlab">JupyterLab</a>, <a href="https://www.gnu.org/software/emacs/">emacs</a> and <a href="http://aquamacs.org/">aquamacs</a>, and even <a href="http://www.kevjohnson.org/using-r-in-sublime-text-3/">Sublime Text 3</a>. However, RStudio is probably the most common and beginner-friendly IDE for R Users, so we’ll focus on RStudio.</p>
+<p>There are lots of different IDEs available for R users. Common language agnostic choices include <a href="https://github.com/jupyterlab">JupyterLab</a>, <a href="https://www.gnu.org/software/emacs/">emacs</a> and <a href="http://aquamacs.org/">aquamacs</a>, and even <a href="https://www.sublimetext.com/3/">Sublime Text 3</a>. However, RStudio is probably the most common and beginner-friendly IDE for R Users, so we’ll focus on RStudio.</p>
 </div>
 <div id="rstudio" class="section level2">
 <h2><span class="header-section-number">4.2</span> RStudio</h2>
 <p>RStudio is a language-specific IDE built for R, although it does support plenty of other languages.</p>
 <div id="why-use-rstudio" class="section level3">
 <h3><span class="header-section-number">4.2.1</span> Why use RStudio?</h3>
-<p>RStudio integrates documentation, makes graphics more accessible, and also combines beautifully with devtools to make it easy to write packages. We’ll look at two concrete examples: initializing
-### Setting up RStudio</p>
+<p>RStudio integrates documentation, makes graphics more accessible, and also combines beautifully with devtools to make it easy to write packages. We’ll look at two concrete examples: initializing and setting up RStudio</p>
 <div id="setting-up-r" class="section level4">
 <h4><span class="header-section-number">4.2.1.1</span> Setting up R</h4>
-<p>Presumably you’ve already been working with R, but you should make sure you have a recent enough version of R intalled. To do so, type “R.Version()” into the editor you’ve been working with previously. It should return an output titled “<span class="math inline">\(version.string\)</span>”, for example:</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="kw">R.Version</span>()</a></code></pre></div>
+<p>Presumably you’ve already been working with R, but you should make sure you have a recent enough version of R intalled. To do so, type <code>R.Version()</code> into the editor you’ve been working with previously. It should return an output titled “<span class="math inline">\(version.string\)</span>”, for example:</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="integrated-development-environments.html#cb60-1"></a><span class="kw">R.Version</span>()</span></code></pre></div>
 <pre><code>## $platform
-## [1] &quot;x86_64-w64-mingw32&quot;
+## [1] &quot;x86_64-apple-darwin15.6.0&quot;
 ## 
 ## $arch
 ## [1] &quot;x86_64&quot;
 ## 
 ## $os
-## [1] &quot;mingw32&quot;
+## [1] &quot;darwin15.6.0&quot;
 ## 
 ## $system
-## [1] &quot;x86_64, mingw32&quot;
+## [1] &quot;x86_64, darwin15.6.0&quot;
 ## 
 ## $status
 ## [1] &quot;&quot;
@@ -265,28 +266,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [1] &quot;3&quot;
 ## 
 ## $minor
-## [1] &quot;5.0&quot;
+## [1] &quot;6.1&quot;
 ## 
 ## $year
-## [1] &quot;2018&quot;
+## [1] &quot;2019&quot;
 ## 
 ## $month
-## [1] &quot;04&quot;
+## [1] &quot;07&quot;
 ## 
 ## $day
-## [1] &quot;23&quot;
+## [1] &quot;05&quot;
 ## 
 ## $`svn rev`
-## [1] &quot;74626&quot;
+## [1] &quot;76782&quot;
 ## 
 ## $language
 ## [1] &quot;R&quot;
 ## 
 ## $version.string
-## [1] &quot;R version 3.5.0 (2018-04-23)&quot;
+## [1] &quot;R version 3.6.1 (2019-07-05)&quot;
 ## 
 ## $nickname
-## [1] &quot;Joy in Playing&quot;</code></pre>
+## [1] &quot;Action of the Toes&quot;</code></pre>
 <p>If the number after the R version string is anything lower than 3.0.1, you’ll have to install a new version of R in order to use R Studio. To do so, follow the steps below:</p>
 <ol style="list-style-type: decimal">
 <li><p>Go to <a href="https://cran.rstudio.com/" class="uri">https://cran.rstudio.com/</a> and select “Download R for [Your Operating System].”</p></li>
@@ -303,7 +304,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Download the <em>installer</em> for your operating system, not the <em>zip/tarball.</em> The picture below illustrates what the webpage should look like.</p></li>
 </ol>
 <div class="figure">
-<img src="Images/rstudio.PNG" alt="RStudio Webpage" />
+<img src="Images/rstudio.PNG" alt="" />
 <p class="caption"><em>RStudio Webpage</em></p>
 </div>
 <ol start="3" style="list-style-type: decimal">
@@ -318,15 +319,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4><span class="header-section-number">4.2.2.1</span> Screen Breakdown</h4>
 <p>RStudio will split your screen into four parts, as shown below. We’ll refer to them as the <em>script</em>, the <em>environment</em>, the <em>shell</em> or <em>console</em>, and the <em>Viewer.</em></p>
 <div class="figure">
-<img src="Images/rstudio2.PNG" alt="The RStudio Interface" />
+<img src="Images/rstudio2.PNG" alt="" />
 <p class="caption">The RStudio Interface</p>
 </div>
-<p>The <em>script</em> is in the upper left hand corner of the screen, and it’s where you will do the bulk of your programming. To write an R script, click File&gt;New File&gt;R Script in the top left hand corner. You can execute multiple lines of a script (or the entire thing) at a time by selecting the lines you want to run and clicking the green “Run” button on the right hand side of the script box.</p>
-<p>The <em>console</em> or <em>shell</em> is in the lower left hand corner of the screen. Unlike scripts, which presumably you’ve worked with before, shells only run one line of code at a time. However, shells also remember what you did before. For example, if you define download some data into the shell, you can manipulate it repeatedly without having to download it again before each manipulation - it will stay in the shell’s memory until you manually remove it.</p>
+<p>The <em>script</em> is in the upper left hand corner of the screen, and it’s where you will do the bulk of your programming. To write an R script, click File&gt;New File&gt;R Script in the top left hand corner. You can execute multiple lines of a script (or the entire thing) at a time by selecting the lines you want to run and clicking the green “Run” button on the right hand side of the script box or by holding down the command key (MacOS) or control key (Windows) and pressing return/enter.</p>
+<p>The <em>console</em> or <em>shell</em> is in the lower left hand corner of the screen. Unlike scripts, which presumably you’ve worked with before, shells only run one line of code at a time. However, shells also remember what you did before. For example, if you download some data into the shell, you can manipulate it repeatedly without having to download it again before each manipulation - it will stay in the shell’s memory until you manually remove it.</p>
 <p>All scripts that you run will be run through the shell. This means that you can run a script and manipulate the results directly from the bottom of the shell, without having to rerun the script each time you want to manipulate the results. You can also directly access the command prompt for your computer through the shell by clicking the “terminal” option.</p>
 <p>Note that any errors thrown by your code will show up in the shell. To clear the console, hit Ctrl+L.</p>
 <p>On the upper right hand corner of the screen, you can see the <em>environment</em> you’re working in, which lists all the objects in the shell’s “memory” or <em>namespace.</em> For example, if you download some data in a script and then run the script, the data will show up in the right hand corner of the screen.</p>
-<p>On the bottom right hand side is the <em>Viewer.</em> Any plots you generate in R will automatically show up there. Additionally, as we’ll discuss later, documentation of functions and packages will appear in the right hand corner. You can also use it to see the file structure of your working directory and the packages you’re using by clicking “files” or “packages.”&quot;</p>
+<p>On the bottom right hand side is the <em>Viewer.</em> Any plots you generate in R will automatically show up there. Additionally, as we’ll discuss later, documentation of functions and packages will appear in the right hand corner. You can also use it to see the file structure of your working directory and the packages you’re using by clicking “files” or “packages.”"</p>
 </div>
 </div>
 <div id="ex-initializing-packages" class="section level3">
@@ -340,19 +341,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Once you’ve created your package, your RStudio should look something like this. It should come preloaded with a “Hello World” script which includes a handy function that prints “Hello world.”</p>
 <p><img src="Images/PackageSS/projectinit.PNG" /></p>
 <p>Everything should look mostly the same as normal except for the “Files” tab on the bottom right, which should include an “.Rproj” file, a “DESCRIPTION” file, a “NAMESPACE” file, and a folder titled “R.” You should start by checking the little boxes next to the “NAMESPACE” file and the “Hello.R” R script inside the R file and clicking “delete” above them, just because we will have Roxygen2 automatically generate the namespace, and because presumably your package doesn’t need a “Hello World” function.</p>
-<p>You should also go to “Tools &gt; Project Options” and select the following options, which will help you generate documentation using roxygen2:</p>
+<p>You should also go to “Tools &gt; Project Options” and select the following options, which will help you generate documentation using roxygen2. This requires “roxygen2” package to be loaded into the search path first to have the “Generate documentation with Roxygen” option displayed.</p>
 <p><img src="Images/PackageSS/userox.PNG" /></p>
 </div>
 <div id="ex-building-packages" class="section level3">
 <h3><span class="header-section-number">4.2.4</span> Ex: Building Packages</h3>
-<p>RStudio will build your package a little bit more conveniently than the devtools::build() function will. Whereas the devtools::build() function, without extra arguments, will simply bundle your package into one file, building your package from RStudio will actually install it into your R library, allowing you to easily use the finished version.</p>
+<p>RStudio will build your package a little bit more conveniently than the <code>devtools::build()</code> function will. Whereas the <code>devtools::build()</code> function, without extra arguments, will simply bundle your package into one file, building your package from RStudio will actually install it into your R library, allowing you to easily use the finished version.</p>
 <p>The way to do this is to go to Build &gt; Install and Restart, and then RStudio will build your package, restart, and load your package into R (using the library command). Then, you can use and/or play with your package!</p>
 <!-- 
 Specifically, you should go to Build > Check Package.
 
 Upon checking the package, RStudio will tell you if there are any warnings or errors raised by its automatic checking process. For example, it might tell you that a piece of documentation mismatches its complimentary function, or that the package needs an extra dependence. It's best to fix all of the problems RStudio points out, whether they are warnings or errors. 
 -->
-<p>(If you don’t see any options under Build, you probably need to open your .Rproj file in the “file” section of RStudio. Upon doing this, RStudio should restart briefly and then you will see more Build options).</p>
+<p>(If you don’t see any options under Build, you probably need to open your .Rproj file in the “file” section of RStudio. Upon doing this, RStudio should restart briefly and then you will see more Build options. .Rproj file may not exist if RStudio uses ‘usethis’ and does not create an .Rproj file).</p>
 
 </div>
 </div>
@@ -383,7 +384,7 @@ gitbook.start({
 "google": false,
 "linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
 "all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
@@ -393,6 +394,10 @@ gitbook.start({
 "size": 2
 },
 "edit": {
+"link": null,
+"text": null
+},
+"history": {
 "link": null,
 "text": null
 },
@@ -410,7 +415,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;
