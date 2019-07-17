@@ -145,9 +145,9 @@ Date:   Fri Feb 16 21:28:46 2018 -0500
 
 Clearly, Grace should restore the second commit listed, named 'b69a14b,' in order to access the functions she deleted. There are generally two situations: 
 
-1 If the changes have not been pushed onto the remote repository, to access the deleted functions, Grace can use the `git reset` command with the `--hard` option and the commit number: `git reset --hard b69a14b`. This will update the current version of the script to the b69a14b version, which Grace can then inspect and test until she's ready to commit it to Git/GitHub. Note that this is a pretty serious action to take because it will effectively delete all the commits prior to the version being restored.
+1. If the changes have not been pushed onto the remote repository, to access the deleted functions, Grace can use the `git reset` command with the `--hard` option and the commit number: `git reset --hard b69a14b`. This will update the current version of the script to the b69a14b version, which Grace can then inspect and test until she's ready to commit it to Git/GitHub. Note that this is a pretty serious action to take because it will effectively delete all the commits prior to the version being restored.
 
-2 If the changes have been pushed onto the remote repository, then in order to access the deleted functions, Grace can use the `git revert head` command. Git will open a text editor and prompt you to add a message to explain what the commit is for - type in your desired message, then hit “escape” to leave the text editor, and type “:wq” to save and exit the message interface. This will update the current version of the script to the b69a14b version in Grace's local repository. Then Grace can push it onto the remote repository using `git push -u origin master` command.   
+2. If the changes have been pushed onto the remote repository, then in order to access the deleted functions, Grace can use the `git revert head` command. Git will open a text editor and prompt you to add a message to explain what the commit is for - type in your desired message, then hit “escape” to leave the text editor, and type “:wq” to save and exit the message interface. This will update the current version of the script to the b69a14b version in Grace's local repository. Then Grace can push it onto the remote repository using `git push -u origin master` command.   
 
 ### The .gitignore file
 
@@ -358,15 +358,15 @@ This workflow allows each developer to make changes in their own repo and contin
 
 ### Setting up Integrated Tests
 
-**Step 1**: To get started using continuous integration services, head to the Travis CI (Linux/Mac OS) or AppVeyor (Windows) website and "sign up"" by signing into GitHub. At some point, Travis/AppVeyor will ask you to authorize its connection to GitHub, which you should authorize.
+**Step 1**: To get started using continuous integration services, head to the Travis CI (Linux/Mac OS) or AppVeyor (Windows) website. Once you are on AppVeyor website, click "SIGNUP FOR HOSTED SERVICE". We recommend that you create a new AppVeyor account to sign up by signing into GitHub. At some point, Travis/AppVeyor will ask you to authorize its connection to GitHub, which you should authorize.
 
 **Step 2**: Once you authorize the connection, you need to specifically select which repos you'd like to use Travis/AppVeyor with. For example (in AppVeyor), upon signing up, you'll see something like this screen:
 
 ![](Images/TestSS/appveyor1.PNG)
 
-You should click "new project" and then select the specific repo you'd like to use in combination with Travis/Appveyor. This means that you should at least initialize your project and push it to GitHub before you start using Travis/Appveyor. 
+You should click "new project" and then select the specific repo you'd like to use in combination with Travis/Appveyor by clicking on "ADD". This means that you should at least initialize your project and push it to GitHub before you start using Travis/Appveyor. 
 
-**Step 3**: Depending on whether you're using Appveyor or Travis, you should run `usethis::use_appveyor()` or `usethis::use_travis()` in the console with your package open. This will create a file named 'appveyor.yml' or 'travis.yml' in the root directory of your package. These '.yml' files will tell AppVeyor/Travis what to do. It's actually not too important to understand everything they do, just because the devtools template generally works pretty well. However, you occasionally will have to modify it to suit specific needs. AppVeyor and Travis CI both have great documentation, linked [here for Appveyor](https://www.appveyor.com/docs/build-configuration/) and [here for Travis](https://docs.travis-ci.com/user/languages/r/).
+**Step 3**: Depending on whether you're using Appveyor or Travis, you should run `usethis::use_appveyor()` or `usethis::use_travis()` in the console with your local repository open. This will create a file named 'appveyor.yml' or 'travis.yml' in the root directory of your local repository. These '.yml' files will tell AppVeyor/Travis what to do. It's actually not too important to understand everything they do, just because the devtools template generally works pretty well. However, you occasionally will have to modify it to suit specific needs. AppVeyor and Travis CI both have great documentation, linked [here for Appveyor](https://www.appveyor.com/docs/build-configuration/) and [here for Travis](https://docs.travis-ci.com/user/languages/r/).
 
 (Note - `usethis` also adds 'appveyor.yml' and 'travis.yml' to the .Rbuildignore to reduce clutter in your package.)
 
@@ -374,10 +374,11 @@ You should click "new project" and then select the specific repo you'd like to u
 
 ```{r, eval = FALSE}
 
-r_packages: package_name
+build_script:
+  - r_packages: package_name
 
 ```
- in the .yml file (this will install the package the same way that R installs it when you run `install.packages`). If you'd like to install a package using a different method (i.e. from a GitHub version of the package), there are lots of options listed in the [R-specific Travis documentation](https://docs.travis-ci.com/user/languages/r/). However, it's important to remember that this is generally NOT necessary - Travis/Appveyor do a pretty good job of automatically detecting/installing dependencies as long as your DESCRIPTION file specifies them.
+ under *build_script* section in the .yml file (this will install the package the same way that R installs it when you run `install.packages`). If you'd like to install a package using a different method (i.e. from a GitHub version of the package), there are lots of options listed in the [R-specific Travis documentation](https://docs.travis-ci.com/user/languages/r/). However, it's important to remember that this is generally NOT necessary - Travis/Appveyor do a pretty good job of automatically detecting/installing dependencies as long as your DESCRIPTION file specifies them.
 
 **Step 5**: If you are working with many other developers on a single package, you should also add a '.gitattributes' file into the root of your directory. This is because different operating systems handle different characters, for example line terminators, slightly differently. Modern Mac and Unix/Linux systems use '$\n$' to terminate the end of each line, in what is called the "line feed" or "LF" system, whereas Windows uses '$\r\n$' in the 'Carriage Return Line Feed' or CRLF system. The point is that the '.gitattributes' file will ensure that each developer uses exactly the same line endings, because you can set the 'text' setting which controls the method of writing lineterminators.
 
@@ -393,7 +394,7 @@ which forces all the scripts directly in the R subdirectory to use the 'lf' line
 
 The git attributes file actually is useful for setting a variety of other attributes besides line endings, although some of them are a bit technical. If you're curious to find out more about what the .gitattributes file can do, the full documentation is linked [here](https://git-scm.com/docs/gitattributes). 
 
-Once you do all of this, you're set to go! When you push changes to GitHub, all the new files (.yml, .gitignore, .gitattributes) you created will be pushed to the remote. Travis/AppVeyor will automatically build and test the package for you. For example on Appveyor, if you sign in, you should see something like this:
+Once you do all of this, you're set to go! When you push changes to GitHub, all the new files (.yml, .gitignore, .gitattributes) you created will be pushed to the remote. By clicking "NEW BUILD", Travis/AppVeyor will automatically build and test the package for you. For example on Appveyor, if you sign in, you should see something like this:
 
 ![](Images/TestSS/appveyor2.PNG)
 
