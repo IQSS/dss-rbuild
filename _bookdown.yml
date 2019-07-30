@@ -1,8 +1,16 @@
 book_filename: 'packageguidelines'
 
-rmd_files: 
+output_dir: docs
+
+repo: https://github.com/stevenworthington/Rbuild-fork
+
+rmd_files:
   - "index.Rmd"
   - "packagedev.Rmd"
   - "githubguide.Rmd"
-  - "IDEs.Rmd" 
+  - "IDEs.Rmd"
   - "resources.rmd"
+
+clean: [packages.bib, bookdown.bbl]
+
+new_session: yes
