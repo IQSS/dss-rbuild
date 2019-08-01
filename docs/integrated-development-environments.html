@@ -242,7 +242,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Some IDEs are <strong>language agnostic</strong>, meaning that they support any programming language you care to program in. Language-agnostic IDEs are nice because (a) if you use one, you won’t have to switch IDEs every time you use a different programming language, and (b) because you can write packages in multiple languages in them.</li>
 <li>On the other hand, some IDEs are <strong>language specific</strong> in that they are built for certain languages. Language specific IDEs can be useful because they have a host of speciailized features for their specific language.</li>
 </ol>
-<p>There are lots of different IDEs available for R users. Common language agnostic choices include <a href="https://github.com/jupyterlab">JupyterLab</a>, <a href="https://www.gnu.org/software/emacs/">emacs</a> and <a href="http://aquamacs.org/">aquamacs</a>, and even <a href="https://www.sublimetext.com/3/">Sublime Text 3</a>. However, RStudio is probably the most common and beginner-friendly IDE for R Users, so we’ll focus on RStudio.</p>
+<p>There are lots of different IDEs available for R users. Common language agnostic choices include <a href="https://atom.io/">Atom</a>, <a href="https://code.visualstudio.com/">Visual Studio Code</a>, <a href="https://github.com/jupyterlab">JupyterLab</a>, <a href="https://www.gnu.org/software/emacs/">emacs</a> and <a href="http://aquamacs.org/">aquamacs</a>, and even <a href="https://www.sublimetext.com/">Sublime Text 3</a>. However, RStudio is probably the most common and beginner-friendly IDE for R Users, so we’ll focus on RStudio.</p>
 </div>
 <div id="rstudio" class="section level2">
 <h2><span class="header-section-number">4.2</span> RStudio</h2>
@@ -253,7 +253,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="setting-up-r" class="section level4">
 <h4><span class="header-section-number">4.2.1.1</span> Setting up R</h4>
 <p>Presumably you’ve already been working with R, but you should make sure you have a recent enough version of R intalled. To do so, type <code>R.Version()</code> into the editor you’ve been working with previously. It should return an output titled “<span class="math inline">\(version.string\)</span>”, for example:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="integrated-development-environments.html#cb60-1"></a><span class="kw">R.Version</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="integrated-development-environments.html#cb61-1"></a><span class="kw">R.Version</span>()</span></code></pre></div>
 <pre><code>## $platform
 ## [1] &quot;x86_64-apple-darwin15.6.0&quot;
 ## 
@@ -301,7 +301,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Click “base” and click “Download R [latest version] for [Your Operating System]” at the top of the page.</p></li>
 <li><p>You can then let the installer run itself - the default settings should be fine for our purposes.</p></li>
 </ol>
-<p>Lastly, updating R on Windows can be a bit tricky. If you use Windows, you can also use the installr package to quickly update R, as documented <a href="https://www.r-statistics.com/2015/06/a-step-by-step-screenshots-tutorial-for-upgrading-r-on-windows/">here</a>. However, if you are having trouble installing the installr package, you can always just follow the instructions above.</p>
+<p>Lastly, updating R on Windows can be a bit tricky. If you use Windows, you can also use the installr package to quickly update R, as documented <a href="https://www.r-statistics.com/2015/06/a-step-by-step-screenshots-tutorial-for-upgrading-r-on-windows/">here</a>. However, if you are having trouble installing the <code>installr</code> package, you can always just follow the instructions above.</p>
 </div>
 <div id="setting-up-rstudio" class="section level4">
 <h4><span class="header-section-number">4.2.1.2</span> Setting up RStudio</h4>
@@ -343,7 +343,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="Images/PackageSS/createproj1.PNG" /></p>
 <p>Then click “R Package” when you see the screen below:</p>
 <p><img src="Images/PackageSS/createproj2.PNG" /></p>
-<p>Lastly, name your package. Your name should be something short and descriptive. Since we’ll be walking through a development example, we’ll title our new package “devex.”</p>
+<p>Lastly, name your package. Your name should be something short and descriptive. Since we’ll be walking through a development example, we’ll title our new package <code>devex</code>.</p>
 <p><img src="Images/PackageSS/createproj3.PNG" /></p>
 <p>Once you’ve created your package, your RStudio should look something like this. It should come preloaded with a “Hello World” script which includes a handy function that prints “Hello world.”</p>
 <p><img src="Images/PackageSS/projectinit.PNG" /></p>
@@ -354,13 +354,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="ex-building-packages" class="section level3">
 <h3><span class="header-section-number">4.2.4</span> Ex: Building Packages</h3>
 <p>RStudio will build your package a little bit more conveniently than the <code>devtools::build()</code> function will. Whereas the <code>devtools::build()</code> function, without extra arguments, will simply bundle your package into one file, building your package from RStudio will actually install it into your R library, allowing you to easily use the finished version.</p>
-<p>The way to do this is to go to Build &gt; Install and Restart, and then RStudio will build your package, restart, and load your package into R (using the library command). Then, you can use and/or play with your package!</p>
-<!-- 
+<p>The way to do this is to go to Build &gt; Install and Restart, and then RStudio will build your package, restart, and load your package into R (using the <code>library()</code> command). Then, you can use and/or play with your package!</p>
+<!--
 Specifically, you should go to Build > Check Package.
 
-Upon checking the package, RStudio will tell you if there are any warnings or errors raised by its automatic checking process. For example, it might tell you that a piece of documentation mismatches its complimentary function, or that the package needs an extra dependence. It's best to fix all of the problems RStudio points out, whether they are warnings or errors. 
+Upon checking the package, RStudio will tell you if there are any warnings or errors raised by its automatic checking process. For example, it might tell you that a piece of documentation mismatches its complimentary function, or that the package needs an extra dependence. It's best to fix all of the problems RStudio points out, whether they are warnings or errors.
 -->
-<p>(If you don’t see any options under Build, you probably need to open your .Rproj file in the “file” section of RStudio. Upon doing this, RStudio should restart briefly and then you will see more Build options. .Rproj file may not exist if RStudio uses ‘usethis’ and does not create an .Rproj file).</p>
+<p>(If you don’t see any options under Build, you probably need to open your .Rproj file in the “file” section of RStudio. Upon doing this, RStudio should restart briefly and then you will see more Build options. Note, the .Rproj file may not exist if you created the package with <code>usethis</code> outside of RStudio).</p>
 
 </div>
 </div>
