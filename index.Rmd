@@ -13,14 +13,14 @@ github-repo: "IQSS/Rbuild"
 This guide is organized into three parts.
 
 1. First, we'll run through [The proper way to structure and test packages](./package-development.html).
-2. Second, we'll discuss [Version Control with Git and Github](./version-control.html)
+2. Second, we'll discuss [Version Control with Git and GitHub](./version-control.html)
 3. Lastly, we'll [briefly look at a couple of IDEs](./integrated-development-environments.html), which are just pieces of software that make it easier to write packages.
 
 [Here's a link to a great devtools cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/devtools-cheatsheet.pdf) which puts most of the useful commands in this guide in one place.
 
 We also wrote a small development example package (called `devex`) which you can find linked [here, on GitHub](https://github.com/IQSS/Rbuild/tree/master/devex). If you haven't used GitHub yet, don't worry - we'll go over how to use GitHub later.
 
-Also, this guide is still under development, and we take feedback! If you find anything confusing or think the guide misses important contant, please email help@iq.harvard.edu
+Also, this guide is still under development, and we take feedback! If you find anything confusing or think the guide misses important content, please email help@iq.harvard.edu
 
 ## Sources
 
