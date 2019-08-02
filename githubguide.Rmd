@@ -175,7 +175,7 @@ Let's discuss how *.gitignore* files actually work. A .gitignore file is really 
 
 This still leaves an important question - how does Git use the .gitignore file to determine which files to ignore? Essentially, .gitignore files are just a bunch of independent lines of text, and each line tells git another specific pattern of filepath to ignore. For example, consider the following example of a .gitignore file:
 
-![](Images\hello1.PNG)
+![](Images/gitignore3.PNG)
 
 Each line beginning with a '#' is just a comment explaining the function of that part of the .gitignore file. However, there are a couple basic syntactical rules you need to understand.
 
@@ -201,7 +201,7 @@ Step 2: Manually move the template file from your downloads folder to the direct
 
 Step 3: Open the 'template.gitignore' file in the folder and save it just as '.gitignore'. This will help git recognize that your .gitignore file is in fact a .gitignore file. Your operating system might protest at this - Windows in particular freaks out at '.gitignore' files, which is why we initially named the template 'templates.gitignore' instead of just '.gitignore'. However, once the .gitignore file is in the correct directory, it's safe to change the path. Your end result should look something like this:
 
-![A .gitignore file](Images\hello2.PNG)
+![A .gitignore file](Images/gitignore2.PNG)
 
 It has no name, but it will serve its intended purpose.
 
