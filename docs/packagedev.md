@@ -8,7 +8,7 @@ As a quick reminder, you can find the `devex` example package linked [here, on G
 
 ## File Paths
 
-The paths used to locate files differ between UNIX (e.g., MacOS, Linux) and Windows based operating systems. Windows systems used a single backslash '\', while UNIX systems use a single forward slash '/' to delimit files or directories in the path. R follows the UNIX convention of using forward slashes, but forces this on Window's users too. So, file paths should look like this:
+The paths used to locate files differ between UNIX (e.g., MacOS, Linux) and Windows based operating systems. Windows systems used a single backslash `\`, while UNIX systems use a single forward slash `/` to delimit files or directories in the path. R follows the UNIX convention of using forward slashes, but forces this on Window's users too. So, file paths should look like this:
 
 1) MacOS and Linux
 
@@ -232,8 +232,8 @@ As always, you can break the rules if you have a good reason to.
 Different organizations and programmers may have different styles, but in general, you should remember:
 
 1. Your goal should always be to make your code readable!
-2. Whatever style guide you follow, follow it *consistently*
-3. When in doubt, follow the conventions of the organization you're working for
+2. Whatever style guide you follow, follow it *consistently*.
+3. When in doubt, follow the conventions of the organization you're working for.
 
 ### Warnings and Simplicity
 
@@ -267,7 +267,7 @@ scalep <- function(d, x=1){
 }
 ```
 
-However, this function still has a couple of problems. It's not super easy to use because (a) it's understandably hard for other programmers to remember which column is divided by which and (b) there's a simpler way to accomplish the code above which will make it more readable. Specifically, it might be easier to just have arguments called 'factors' and 'divisors' and then divide them, like this
+However, this function still has a couple of problems. It's not super easy to use because (a) it's understandably hard for other programmers to remember which column is divided by which and (b) there's a simpler way to accomplish the code above which will make it more readable. Specifically, it might be easier to just have arguments called 'factors' and 'divisors' and then divide them, like this:
 
 
 ```r

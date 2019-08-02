@@ -67,13 +67,11 @@ Now you're ready to start using Git/GitHub!
 
 ### Initializing Projects and Repositories
 
-The first step to using Git is creating a project, or repository (repo for short). There are generally two ways to create a repo in Git.
-
-The first way to start a repo is by creating it on GitHub. To do so, log into your GitHub account. Look near the top-right for your profile icon, click it, and click "Your Profile." Then you should see "Repositories" in the top tab, and click on "Repositories". Then click the green "New" button on the right.
+The first step to using Git is creating a project, or repository (repo for short). To do so, log into your GitHub account. Look near the top-right for your profile icon, click it, and click "Your Profile." Then you should see "Repositories" in the top tab, and click on "Repositories". Then click the green "New" button on the right.
 
 ![](Images/gitdashboard.PNG)
 
-GitHub will prompt you to choose a repository name and description of the repo, which you should enter, and will also ask you whether you'd like to initialize the repository with a README. You should not add README and .gitignore files, although we'll discuss their functions and importance later. For now, just initialize the repo without the README file.
+GitHub will prompt you to choose a repository name and description of the repo, which you should enter, and will also ask you whether you'd like to initialize the repository with a README, a .gitignore file, and a license. For now, just initialize the repo with the README file.
 
 Once you've created the repository on GitHub, the next step is to link it with a local Git repository. To do this, open the *command prompt* on your computer. You'll need to enter a couple of commands to get the repo set up on your computer.
 
@@ -102,7 +100,7 @@ $ cd ~/Documents/R/repository_name
 $ git add .
 ```
 
-Once new files are being tracked, we can put them under version control by *commiting* them, using the command `git commit`. You can add a message to indicate the changes you've made by typing `commit -m "<message-here>"` followed by your message in quotes.
+Once new files are being tracked, we can put them under version control by *commiting* them, using the command `git commit`. You can add a message to indicate the changes you've made by typing `git commit -m "<message-here>"` followed by your message in quotes.
 
 
 ```r
@@ -118,7 +116,7 @@ Lastly, you need to *push* the files, which means sending them to GitHub online.
 $ git push origin master
 ```
 
-If you move new files into your local repository, they will need to be tracked using `git add .` and then committed using `commit -m "<message-here>"` before they are under version control.
+If you move new files into your local repository, they will need to be tracked using `git add .` and then committed using `git commit -m "<message-here>"` before they are under version control.
 
 
 ### Accessing older versions of code
@@ -155,7 +153,7 @@ Date:   Fri Feb 16 21:28:46 2018 -0500
 
 Clearly, Grace should restore the second commit listed, named 'b69a14b,' in order to access the functions she deleted. There are generally two situations:
 
-1. If the changes have not been pushed onto the remote repository, to access the deleted functions, Grace can use the `git reset` command with the `--hard` option and the commit number: `git reset --hard b69a14b`. This will update the current version of the script to the b69a14b version, which Grace can then inspect and test until she's ready to commit it to Git/GitHub. Note that this is a pretty serious action to take because it will effectively delete all the commits after the version being restored.
+1. If the changes have not been pushed onto the remote repository, to access the deleted functions, Grace can use the `git reset` command with the `--hard` option and the commit number: `git reset --hard b69a14b`. This will update the current version of the script to the `b69a14b` version, which Grace can then inspect and test until she's ready to commit it to Git/GitHub. Note that this is a pretty serious action to take because it will effectively delete all the commits after the version being restored.
 
 2. If the changes have been pushed onto the remote repository, Grace can access the deleted functions using the following commands:
 
@@ -165,7 +163,7 @@ $ git revert --no-commit head
 $ git commit -m "<message-here>"
 ```
 
-This will update the current version of the script to the b69a14b version in Grace's local repository. Then Grace can push it onto the remote repository using `git push origin master` command.
+This will update the current version of the script to the `b69a14b` version in Grace's local repository. Then Grace can push it onto the remote repository using `git push origin master` command.
 
 ### The .gitignore file
 
@@ -190,13 +188,13 @@ This still leaves an important question - how does Git use the .gitignore file t
 
 Each line beginning with a '#' is just a comment explaining the function of that part of the .gitignore file. However, there are a couple basic syntactical rules you need to understand.
 
-1. If you write '.filetype', then all files which end with '.filetype' will be ignored by git. For example, the third line in the above example reads .RHistory," so all files with a '.RHistory' in the file name (even if the files are in subdirectories) will be ignored.
+1. If you write '.filetype', then all files which end with '.filetype' will be ignored by git. For example, the third line in the above example reads '.RHistory', so all files with a '.RHistory' in the file name (even if the files are in subdirectories) will be ignored.
 
-2. If you write 'string,' then everything in the directory which contains that 'string' in it will be ignored. For example, if Grace wrote 'dog' in her .gitignore, then git would ignore both a file called 'dog.csv' and every file in a subdirectory called "dog".
+2. If you write 'string', then everything in the directory which contains that 'string' in it will be ignored. For example, if Grace wrote 'dog' in her .gitignore, then git would ignore both a file called 'dog.csv' and every file in a subdirectory called 'dog'.
 
-3. If you prepend a pattern with an asterisk \*, then the asterisk \* serves as a wildcard which can match 0 or more characters. For example, if I write "*car", then git will ignore the file "mycar.R".
+3. If you prepend a pattern with an asterisk \*, then the asterisk \* serves as a wildcard which can match 0 or more characters. For example, if I write "*car", then git will ignore the file 'mycar.R'.
 
-4. If you prepend a pattern with a forward slash '/', then git will only ignore files which match that pattern in the parent (root) directory. For example, I might write '/.csv' in my gitignore file. This would cause git to ignore a file with the path "dog.csv", but it would not ignore a file called "data/dog.csv."
+4. If you prepend a pattern with a forward slash '/', then git will only ignore files which match that pattern in the parent (root) directory. For example, I might write '/.csv' in my gitignore file. This would cause git to ignore a file with the path 'dog.csv', but it would not ignore a file called 'data/dog.csv'.
 
 5. If you prepend a pattern with an exclamation mark, git will *not* ignore that pattern. For example, if Grace really wanted to make sure her pictures of her dog were pushed to Git, she might write '!dog.PNG' to ensure git did not ignore that picture.
 
@@ -212,7 +210,7 @@ Step 2: Manually move the template file from your downloads folder to the direct
 
 Step 3: Open the 'template.gitignore' file in the folder and save it just as '.gitignore'. This will help git recognize that your .gitignore file is in fact a .gitignore file. Your operating system might protest at this - Windows in particular freaks out at '.gitignore' files, which is why we initially named the template 'templates.gitignore' instead of just '.gitignore'. However, once the .gitignore file is in the correct directory, it's safe to change the path. Your end result should look something like this:
 
-![](Images\gitignore2.PNG)
+![A .gitignore file](Images\gitignore2.PNG)
 
 It has no name, but it will serve its intended purpose.
 
@@ -230,7 +228,7 @@ If you decide to create your own .gitignore file, you can follow very similar st
 
 ![](Images/branchinggraphic.PNG)
 
-As we discussed earlier, branches allow you to modify scripts while simultaneous keeping the old versions easily accessible. In practice, the way this works is that the branch you select in git changes the way that scripts you open using explorer/finder appear. For example, if Carlos has the following script as the master (default) branch in Git, the script might look something like this when he opens it on his computer:
+As we discussed earlier, branches allow you to modify scripts while simultaneous keeping the old versions easily accessible. In practice, the way this works is that the branch you select in git changes the appearance of the directory structure and files therein, when viewed in explorer/finder. For example, if Carlos has the following script as the master (default) branch in Git, the script might look something like this when he opens it on his computer:
 
 ![*Master Branch of the Hello World Script*](Images/hello1.PNG)
 
@@ -270,7 +268,7 @@ These two commands will merge the test branch into the master branch, meaning th
 
 ### Conflicts
 
-Sometimes, however, Git will be unable to push or pull branches because it is getting conflicting information from two users. For example, suppose Grace has written the following function, which calculates the squared error between two values:
+Sometimes Git will be unable to push or pull branches because it is getting conflicting information from two users. For example, suppose Grace has written the following function, which calculates the squared error between two values:
 
 ![*Original Version of Loss Script*](Images/loss0.PNG)
 
