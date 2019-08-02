@@ -17,11 +17,11 @@ RStudio is a language-specific IDE built for R, although it does support plenty 
 
 ### Why use RStudio?
 
-RStudio integrates documentation, makes graphics more accessible, and also combines beautifully with devtools to make it easy to write packages. We'll look at two concrete examples: initializing and setting up RStudio
+RStudio integrates documentation, makes graphics more accessible, and also combines beautifully with `devtools` and `usethis` to make it easy to write packages. We'll walk through how to set up RStudio, and then look at two concrete examples: initializing and building R packages.
 
 #### Setting up R
 
-Presumably you've already been working with R, but you should make sure you have a recent enough version of R intalled. To do so, type `R.Version()` into the editor you've been working with previously. It should return an output titled "$version.string$", for example:
+Presumably you've already been working with R, but you should make sure you have a recent enough version of R intalled. To do so, type `R.Version()` into the editor you've been working with previously. It should return an output titled `version.string`, for example:
 
 ```r
 R.Version()
@@ -79,7 +79,7 @@ If the number after the R version string is anything lower than 3.0.1, you'll ha
 
 3. You can then let the installer run itself - the default settings should be fine for our purposes.
 
-Lastly, updating R on Windows can be a bit tricky. If you use Windows, you can also use the installr package to quickly update R, as documented [here](https://www.r-statistics.com/2015/06/a-step-by-step-screenshots-tutorial-for-upgrading-r-on-windows/). However, if you are having trouble installing the `installr` package, you can always just follow the instructions above.
+Lastly, updating R on Windows can be a bit tricky. If you use Windows, you can also use the `installr` package to quickly update R, as documented [here](https://www.r-statistics.com/2015/06/a-step-by-step-screenshots-tutorial-for-upgrading-r-on-windows/). However, if you are having trouble installing the `installr` package, you can always just follow the instructions above.
 
 
 #### Setting up RStudio
@@ -115,7 +115,7 @@ Note that any errors thrown by your code will show up in the shell. To clear the
 
 On the upper right hand corner of the screen, you can see the *environment* you're working in, which lists all the objects in the shell's "memory" or *namespace.* For example, if you download some data in a script and then run the script, the data will show up in the right hand corner of the screen.
 
-On the bottom right hand side is the *Viewer.* Any plots you generate in R will automatically show up there. Additionally, as we'll discuss later, documentation of functions and packages will appear in the right hand corner. You can also use it to see the file structure of your working directory and the packages you're using by clicking "files" or "packages.""
+On the bottom right hand side is the *Viewer.* Any plots you generate in R will automatically show up there. Additionally, as we'll discuss later, documentation of functions and packages will appear in the right hand corner. You can also use it to see the file structure of your working directory and the packages you're using by clicking "files" or "packages."
 
 ### Ex: Initializing Packages
 
