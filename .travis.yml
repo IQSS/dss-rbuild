@@ -1,9 +1,11 @@
-language: r 
-pandoc_version: 1.19.2.1 
+language: r
 
-before_script: 
-  - chmod +x ./_build_bookdown.sh 
+cache: packages
 
-script: 
+pandoc_version: 1.19.2.1
+
+before_script:
+  - chmod +x ./_build_bookdown.sh
+
+script:
   - ./_build_bookdown.sh
-
