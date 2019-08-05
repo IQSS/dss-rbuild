@@ -1,35 +1,15 @@
-# packageguidelines
-For IQSS
+# Rbuild --- R package development tutorial
+![](https://travis-ci.org/IQSS/Rbuild.svg?branch=master) [![Github All Releases](https://img.shields.io/github/downloads/IQSS/Rbuild/total.svg)]()
 
-This is still under development, but the second draft is finished!
+_(view this tutorial on a [browser](https://iqss.github.io/Rbuild/) or in a [PDF](https://github.com/IQSS/Rbuild/releases))_
 
-## Aims
-
-This aims to create guidelines to help individuals develop packages using R. It runs through the following:
+## Aim
+To outline best practices for developing packages using R.
 
 ## Contents
+This repo also includes the *devex* package in a subdirectory, which serves as a very simple example of a package in R. You can find it [at this link](https://github.com/IQSS/Rbuild/devex).
 
-[Introduction](amspector100.github.io/packageguidelines/)
+## Contributing
+This material is maintained under a GPL License, and other individuals are welcome to fork, clone, or make copies of the material. Comments and suggestions are also always welcome.
 
-[Package Development](amspector100.github.io/packageguidelines/package-development.html)
-
-[Version Control](amspector100.github.io/packageguidelines/version-control.html)
-
-[IDEs](amspector100.github.io/packageguidelines/a-note-on-ides.html)
-
-[Resources](amspector100.github.io/packageguidelines/resources.html)
-
-This repo also includes the *devex* package in a subdirectory, which serves as a very simple example of a package in R. You can find it [at this link](https://github.com/amspector100/packageguidelines/tree/master/devex). 
-
-For more information about the guide, see the [Introduction](./index.Rmd). For more information about the devex package, see either the DESCRIPTION file or the Readme in [this subdirectory](https://github.com/amspector100/packageguidelines/tree/master/devex). 
-
-## To-do
-
-0. Add a floating link to the example package
-1. Some information may still be platform  dependent
-2. Eventually maybe add some kind of workflow for publishing packages
-
-### Questions
-
-0. Build/publicize sections okay?
-1. No vignette section for now
+![](images/readme-license.png)
