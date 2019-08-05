@@ -1,0 +1,10 @@
+Package: placeholder
+Type: Book
+Title: Does not matter.
+Version: 0.0.1
+Imports: 
+    bookdown, 
+    devtools,
+    usethis,
+    roxygen2,
+    testthat
