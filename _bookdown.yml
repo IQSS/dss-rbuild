@@ -1,15 +1,15 @@
-book_filename: 'packageguidelines'
+book_filename: 'Rbuild'
 
 output_dir: docs
 
-repo: https://github.com/stevenworthington/Rbuild-fork
+repo: https://github.com/IQSS/Rbuild
 
 rmd_files:
   - "index.Rmd"
   - "packagedev.Rmd"
   - "githubguide.Rmd"
   - "IDEs.Rmd"
-  - "resources.rmd"
+  - "resources.Rmd"
 
 clean: [packages.bib, bookdown.bbl]
 
