@@ -1,8 +1,8 @@
-book_filename: 'Rbuild'
+book_filename: 'dss-rbuild'
 
 output_dir: docs
 
-repo: https://github.com/IQSS/Rbuild
+repo: https://github.com/IQSS/dss-rbuild
 
 rmd_files:
   - "index.Rmd"
