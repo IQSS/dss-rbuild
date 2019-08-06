@@ -22,6 +22,13 @@ script:
 notifications:
   email: false
 
+before_deploy:
+  # Set up git user name and tag this commit
+  - git config --local user.name "YOUR GIT USER NAME"
+  - git config --local user.email "YOUR GIT USER EMAIL"
+  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+  - git tag $TRAVIS_TAG
+
 deploy:
   provider: pages               # Specify the gh-pages deployment method
   skip_cleanup: true            # Don't remove files
@@ -30,3 +37,15 @@ deploy:
   on:
     branch: master
   target_branch: gh-pages
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key: $GITHUB_PAT
+  file:
+    - "dss-rbuild.pdf"
+    - "dss-rbuild.tex"
+  on:
+    branch: gh-pages
+    tags: true
+  overwrite: true
