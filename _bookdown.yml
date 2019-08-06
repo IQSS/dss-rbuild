@@ -8,7 +8,7 @@ rmd_files:
   - "index.Rmd"
   - "01_package_development.Rmd"
   - "02_version_control.Rmd"
-  - "03_IDE.Rmd"
+  - "03_integrated_development_environments.Rmd"
   - "04_resources.Rmd"
 
 delete_merged_file: true
