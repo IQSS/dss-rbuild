@@ -177,7 +177,7 @@ This still leaves an important question - how does Git use the .gitignore file t
 
 ![](Images/gitignore3.PNG)
 
-Each line beginning with a '#' is just a comment explaining the function of that part of the .gitignore file. However, there are a couple basic syntactical rules you need to understand.
+Each line beginning with a `#` is just a comment explaining the function of that part of the .gitignore file. However, there are a couple basic syntactical rules you need to understand.
 
 1. If you write '.filetype', then all files which end with '.filetype' will be ignored by git. For example, the third line in the above example reads '.RHistory', so all files with a '.RHistory' in the file name (even if the files are in subdirectories) will be ignored.
 
@@ -193,7 +193,7 @@ The rules can seem confusing at times, but it's hard to go wrong - usually, ther
 
 Lastly (and most importantly), to save you time, the wonderful [NaLette Brodnax](https://www.iq.harvard.edu/people/nalette-brodnax) has created a template .gitignore file which you can use to declutter your GitHub repos. Using it requires three steps:
 
-Step 1: Download the file "template.gitignore" from [here](https://github.com/IQSS/Rbuild/blob/master/template.gitignore). It should look something like this when you open it:
+Step 1: Download the file 'template.gitignore' from [here](https://github.com/IQSS/Rbuild/blob/master/template.gitignore). It should look something like this when you open it:
 
 ![](Images/gitignore.PNG)
 
@@ -301,7 +301,7 @@ Again, Git is letting Grace know that it sees there's a conflict and that Git ne
 
 ![*Conflicted Version of Loss Script*](Images/lossConflict.PNG)
 
-The "<<<<" and ">>>>" lines are in the script to signal the beginning and end of a merge conflict, whereas the "===" line separates the two different versions. On the top is Grace's version and on the bottom is Carlos's. To resolve the merge conflict, Grace should manually select the two lines she prefers and then delete all of the "<, =, >" symbols to let Git know that the conflict has been resolved. Then, she can commit and push the file to Git, and she'll be good to go!
+The `<<<<` and `>>>>` lines are in the script to signal the beginning and end of a merge conflict, whereas the `===` line separates the two different versions. On the top is Grace's version and on the bottom is Carlos's. To resolve the merge conflict, Grace should manually select the two lines she prefers and then delete all of the `<, =, >` symbols to let Git know that the conflict has been resolved. Then, she can commit and push the file to Git, and she'll be good to go!
 
 Overall: merge conflicts are rather annoying and can be confusing, so the best way to avoid them is to clearly delineate which programmers will be working on which sections of which scripts. This will prevent Git (and you) from getting confused.
 
@@ -366,7 +366,7 @@ This workflow allows each developer to make changes in their own repo and contin
 
 ### Setting up Integrated Tests
 
-**Step 1**: To get started using continuous integration services, head to the Travis CI (Linux/Mac OS) or AppVeyor (Windows) website. Once you are on AppVeyor website, click "SIGNUP FOR HOSTED SERVICE". We recommend that you create a new AppVeyor account to sign up by signing into GitHub. At some point, Travis/AppVeyor will ask you to authorize its connection to GitHub, which you should authorize.
+**Step 1**: To get started using continuous integration services, head to the Travis CI (Linux/Mac OS) or AppVeyor (Windows) website. Once you are on AppVeyor website, click 'SIGNUP FOR HOSTED SERVICE'. We recommend that you create a new AppVeyor account to sign up by signing into GitHub. At some point, Travis/AppVeyor will ask you to authorize its connection to GitHub, which you should authorize.
 
 **Step 2**: Once you authorize the connection, you need to specifically select which repos you'd like to use Travis/AppVeyor with. For example (in AppVeyor), upon signing up, you'll see something like this screen:
 
@@ -388,7 +388,7 @@ build_script:
 ```
  under *build_script* section in the .yml file (this will install the package the same way that R installs it when you run `install.packages()`). If you'd like to install a package using a different method (i.e. from a GitHub version of the package), there are lots of options listed in the [R-specific Travis documentation](https://docs.travis-ci.com/user/languages/r/). However, it's important to remember that this is generally NOT necessary - Travis/Appveyor do a pretty good job of automatically detecting/installing dependencies as long as your DESCRIPTION file specifies them.
 
-**Step 5**: If you are working with many other developers on a single package, you should also add a '.gitattributes' file into the root of your directory. This is because different operating systems handle different characters, for example line terminators, slightly differently. Modern Mac and Unix/Linux systems use '$\n$' to terminate the end of each line, in what is called the "line feed" or "LF" system, whereas Windows uses '$\r\n$' in the 'Carriage Return Line Feed' or CRLF system. The point is that the '.gitattributes' file will ensure that each developer uses exactly the same line endings, because you can set the 'text' setting which controls the method of writing line terminators.
+**Step 5**: If you are working with many other developers on a single package, you should also add a '.gitattributes' file into the root of your directory. This is because different operating systems handle different characters, for example line terminators, slightly differently. Modern Mac and Unix/Linux systems use `\n` to terminate the end of each line, in what is called the 'line feed' or 'LF' system, whereas Windows uses `\r\n` in the 'Carriage Return Line Feed' or 'CRLF' system. The point is that the '.gitattributes' file will ensure that each developer uses exactly the same line endings, because you can set the 'text' setting which controls the method of writing line terminators.
 
 The way it works is that the '.gitattribute' file should be a line of path-patterns followed by specific attributes. These path-patterns (for a refresher, see the Atlanian guide [here](https://www.atlassian.com/git/tutorials/saving-changes/gitignore)) are exactly the same path-patterns used in the .gitignore file, just for a different purpose. For example, one line might be
 ```{r, eval=FALSE}
