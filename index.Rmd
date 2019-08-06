@@ -1,14 +1,19 @@
 ---
 title: "Package Development in R"
 author: "Asher Spector, Simo Goshev, Steve Worthington, and Jinjie Liu"
-date: "July 30, 2019"
+date: "`r format(Sys.Date(), '%B %Y')`"
 description: "This guide walks through the process of developing an R package"
-github-repo: "IQSS/Rbuild"
+github-repo: "IQSS/dss-rbuild"
+site: "bookdown::bookdown_site"
+documentclass: book
+geometry: "margin=1.5in"
+biblio-style: apalike
+link-citations: yes
 ---
 
-# Introduction
+# Introduction {-}
 
-## Table of Contents
+## Table of Contents {-}
 
 This guide is organized into three parts.
 
@@ -22,7 +27,7 @@ We also wrote a small development example package (called `devex`) which you can
 
 Also, this guide is still under development, and we take feedback! If you find anything confusing or think the guide misses important content, please email help@iq.harvard.edu
 
-## Sources
+## Sources {-}
 
 It's worth acknowledging a few people who helped make this guide possible. First of all, Simo Goshev and Steve Worthington at Harvard's IQSS helped design the structure of the guide and edited the content. Second, Asher Spector at Harvard College did the hard work of actually writing the tutorial. Third, Jinjie Liu at IQSS helped to polish the content. Fourth, this guide was written for a different audience, but a lot of its structure and content is based on Hadley Wickham's book [R Packages](http://r-pkgs.had.co.nz/). To help write the sections on testing, we also referenced [Christopher Gandrud's 'Failing Faster' Presentation](
 http://slides.com/christophergandrud/failing-faster#/24), and [Christopher Gandrud's Broader Testing Guidelines](https://github.com/IQSS/social_science_software_toolkit/blob/master/testing/recommended_testing_tools_R.md#recommended-testing-tools-and-process-for-r-packages). For the section on on Version Control, we referenced [Karl Broman's Book](https://kbroman.org/github_tutorial/), a [Git-Tower post](https://www.git-tower.com/learn/git/faq/restore-repo-to-previous-revision

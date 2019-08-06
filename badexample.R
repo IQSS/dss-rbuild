@@ -28,8 +28,8 @@ scalep <- function(d, x=1){
 
 
 #Remember: For example use:
-setwd('C:/Users/amspe/Documents/R/packageguidelines')
+setwd('~/Documents/R/Rbuild')
 d <- read.csv('datapath.csv', header=TRUE, sep=',')
 scalep(d)
 
-#Remember - there is a bug in this example!!! Super important! In line 17, it should say length(d[,1])+1, otherwise it will ignore the last row.
+# Remember - there is a bug in this example!!! Super important! In line 17, it should say length(d[,1])+1, otherwise it will ignore the last row.

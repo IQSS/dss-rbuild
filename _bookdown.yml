@@ -6,10 +6,12 @@ repo: https://github.com/IQSS/Rbuild
 
 rmd_files:
   - "index.Rmd"
-  - "packagedev.Rmd"
-  - "githubguide.Rmd"
-  - "IDEs.Rmd"
-  - "resources.Rmd"
+  - "01_package_development.Rmd"
+  - "02_version_control.Rmd"
+  - "03_IDE.Rmd"
+  - "04_resources.Rmd"
+
+delete_merged_file: true
 
 clean: [packages.bib, bookdown.bbl]
 
