@@ -1,11 +1,18 @@
 language: r
-
 cache: packages
+
+r_packages:
+  - bookdown
 
 pandoc_version: 1.19.2.1
 
 before_script:
   - chmod +x ./_build_bookdown.sh
+  - chmod +x ./_deploy_pages.sh
 
 script:
   - ./_build_bookdown.sh
+  - ./_deploy_pages.sh
+
+notifications:
+  email: false
