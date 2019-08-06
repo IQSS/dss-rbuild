@@ -11,5 +11,5 @@ Rscript -e "bookdown::render_book('rmd_files', 'bookdown::pdf_book')"
 # copy .nojekyll into docs directory
 cp .nojekyll docs/
 
-# remove temp .rds files
-rm *.rds
+# remove temp .rds and .log files
+rm -rf *.rds *.log
