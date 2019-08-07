@@ -4,8 +4,8 @@
 ## Media
 View this tutorial via a:
 * [browser](https://iqss.github.io/dss-rbuild/)
-* [PDF](https://github.com/IQSS/dss-rbuild/blob/gh-pages/dss-rbuild.pdf)
-* [EPUB](https://github.com/IQSS/dss-rbuild/blob/gh-pages/dss-rbuild.epub)
+* [PDF](https://github.com/IQSS/dss-rbuild/blob/gh-pages/Rbuild.pdf)
+* [EPUB](https://github.com/IQSS/dss-rbuild/blob/gh-pages/Rbuild.epub)
 
 ## Aim
 To outline best practices for developing packages using R.
