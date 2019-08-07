@@ -47,5 +47,5 @@ deploy:
       - "dss-rbuild.tex"
     on:
       branch: gh-pages
-      tags: true
+      tags: false
     overwrite: true
