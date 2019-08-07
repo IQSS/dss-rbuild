@@ -7,6 +7,7 @@ set -ev
 
 Rscript -e "bookdown::render_book('rmd_files', 'bookdown::gitbook')"
 Rscript -e "bookdown::render_book('rmd_files', 'bookdown::pdf_book')"
+Rscript -e "bookdown::render_book('rmd_files', 'bookdown::epub_book')"
 
 # copy .nojekyll into docs directory
 cp .nojekyll docs/
