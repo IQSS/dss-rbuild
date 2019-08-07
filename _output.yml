@@ -4,12 +4,13 @@ bookdown::gitbook:
   config:
     toc:
       collapse: section
+      scroll_highlight: yes
       before: |
         <li><a href="./">An R package development tutorial</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
     download: ["pdf", "epub"]
-    edit : https://github.com/IQSS/dss-build/edit/master/%s
+    edit : https://github.com/IQSS/dss-rbuild/edit/master/%s
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex
