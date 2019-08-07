@@ -38,14 +38,14 @@ deploy:
       branch: master
     target_branch: gh-pages
 
-deploy:
-    provider: releases
-    skip_cleanup: true
-    api_key: $GITHUB_PAT
-    file:
-      - "dss-rbuild.pdf"
-      - "dss-rbuild.tex"
-    on:
-      branch: gh-pages
-      tags: false
-    overwrite: true
+#deploy:
+#    provider: releases
+#    skip_cleanup: true
+#    api_key: $GITHUB_PAT
+#    file:
+#      - "dss-rbuild.pdf"
+#      - "dss-rbuild.tex"
+#    on:
+#      branch: gh-pages
+#      tags: false
+#    overwrite: true
