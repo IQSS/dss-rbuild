@@ -10,11 +10,11 @@ As a quick reminder, you can find the `devex` example package linked [here, on G
 
 The paths used to locate files differ between UNIX (e.g., MacOS, Linux) and Windows based operating systems. Windows systems used a single backslash `\`, while UNIX systems use a single forward slash `/` to delimit files or directories in the path. R follows the UNIX convention of using forward slashes, but forces this on Window's users too. So, file paths should look like this:
 
-1) MacOS and Linux
+1. MacOS and Linux
 
 `~/Documents/myproject/myRfile.R`
 
-2) Windows
+2. Windows
 
 `C:/Documents/myproject/myRfile.R`
 
