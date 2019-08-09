@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Version Control | Package Development in R</title>
+  <meta name="description" content="This guide walks through the process of developing an R package" />
+  <meta name="generator" content="bookdown 0.12.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Version Control | Package Development in R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This guide walks through the process of developing an R package" />
+  <meta name="github-repo" content="IQSS/dss-rbuild" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Version Control | Package Development in R" />
+  
+  <meta name="twitter:description" content="This guide walks through the process of developing an R package" />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="package-development.html"/>
+<link rel="next" href="integrated-development-environments.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">An R package development tutorial</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#table-of-contents"><i class="fa fa-check"></i>Table of Contents</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#authors-and-sources"><i class="fa fa-check"></i>Authors and Sources</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="package-development.html"><a href="package-development.html"><i class="fa fa-check"></i><b>1</b> Package Development</a><ul>
+<li class="chapter" data-level="1.1" data-path="package-development.html"><a href="package-development.html#file-paths"><i class="fa fa-check"></i><b>1.1</b> File Paths</a></li>
+<li class="chapter" data-level="1.2" data-path="package-development.html"><a href="package-development.html#downloading-development-tools"><i class="fa fa-check"></i><b>1.2</b> Downloading Development Tools</a></li>
+<li class="chapter" data-level="1.3" data-path="package-development.html"><a href="package-development.html#initializing-the-package"><i class="fa fa-check"></i><b>1.3</b> Initializing the Package</a></li>
+<li class="chapter" data-level="1.4" data-path="package-development.html"><a href="package-development.html#the-description"><i class="fa fa-check"></i><b>1.4</b> The DESCRIPTION</a></li>
+<li class="chapter" data-level="1.5" data-path="package-development.html"><a href="package-development.html#writing-code"><i class="fa fa-check"></i><b>1.5</b> Writing Code</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="package-development.html"><a href="package-development.html#general-coding-guidelines"><i class="fa fa-check"></i><b>1.5.1</b> General Coding Guidelines</a></li>
+<li class="chapter" data-level="1.5.2" data-path="package-development.html"><a href="package-development.html#code-style"><i class="fa fa-check"></i><b>1.5.2</b> Code Style</a></li>
+<li class="chapter" data-level="1.5.3" data-path="package-development.html"><a href="package-development.html#warnings-and-simplicity"><i class="fa fa-check"></i><b>1.5.3</b> Warnings and Simplicity</a></li>
+<li class="chapter" data-level="1.5.4" data-path="package-development.html"><a href="package-development.html#loading-your-code"><i class="fa fa-check"></i><b>1.5.4</b> Loading Your Code</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="package-development.html"><a href="package-development.html#testing"><i class="fa fa-check"></i><b>1.6</b> Testing</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="package-development.html"><a href="package-development.html#why-should-you-test"><i class="fa fa-check"></i><b>1.6.1</b> Why should you test?</a></li>
+<li class="chapter" data-level="1.6.2" data-path="package-development.html"><a href="package-development.html#what-are-unit-tests"><i class="fa fa-check"></i><b>1.6.2</b> What are unit tests?</a></li>
+<li class="chapter" data-level="1.6.3" data-path="package-development.html"><a href="package-development.html#setting-up-the-testing-environment"><i class="fa fa-check"></i><b>1.6.3</b> Setting up the testing environment</a></li>
+<li class="chapter" data-level="1.6.4" data-path="package-development.html"><a href="package-development.html#expectations"><i class="fa fa-check"></i><b>1.6.4</b> Expectations</a></li>
+<li class="chapter" data-level="1.6.5" data-path="package-development.html"><a href="package-development.html#structure-and-location-of-unit-tests"><i class="fa fa-check"></i><b>1.6.5</b> Structure and Location of Unit Tests</a></li>
+<li class="chapter" data-level="1.6.6" data-path="package-development.html"><a href="package-development.html#writing-good-tests"><i class="fa fa-check"></i><b>1.6.6</b> Writing Good Tests</a></li>
+<li class="chapter" data-level="1.6.7" data-path="package-development.html"><a href="package-development.html#automated-checking"><i class="fa fa-check"></i><b>1.6.7</b> Automated Checking</a></li>
+<li class="chapter" data-level="1.6.8" data-path="package-development.html"><a href="package-development.html#bonus-the-goodpractice-package"><i class="fa fa-check"></i><b>1.6.8</b> Bonus: The goodpractice Package</a></li>
+<li class="chapter" data-level="1.6.9" data-path="package-development.html"><a href="package-development.html#tips-and-tricks"><i class="fa fa-check"></i><b>1.6.9</b> Tips and Tricks</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="package-development.html"><a href="package-development.html#documentation"><i class="fa fa-check"></i><b>1.7</b> Documentation</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="package-development.html"><a href="package-development.html#documenting-functions"><i class="fa fa-check"></i><b>1.7.1</b> Documenting Functions</a></li>
+<li class="chapter" data-level="1.7.2" data-path="package-development.html"><a href="package-development.html#adding-a-readme"><i class="fa fa-check"></i><b>1.7.2</b> Adding a README</a></li>
+</ul></li>
+<li class="chapter" data-level="1.8" data-path="package-development.html"><a href="package-development.html#vignettes"><i class="fa fa-check"></i><b>1.8</b> Vignettes</a></li>
+<li class="chapter" data-level="1.9" data-path="package-development.html"><a href="package-development.html#adding-and-documenting-data"><i class="fa fa-check"></i><b>1.9</b> Adding and Documenting Data</a><ul>
+<li class="chapter" data-level="1.9.1" data-path="package-development.html"><a href="package-development.html#including-data-which-should-be-available-to-users"><i class="fa fa-check"></i><b>1.9.1</b> Including data which should be available to users</a></li>
+<li class="chapter" data-level="1.9.2" data-path="package-development.html"><a href="package-development.html#including-data-for-your-functions"><i class="fa fa-check"></i><b>1.9.2</b> Including data for your functions</a></li>
+</ul></li>
+<li class="chapter" data-level="1.10" data-path="package-development.html"><a href="package-development.html#releasing-your-package"><i class="fa fa-check"></i><b>1.10</b> Releasing Your Package</a><ul>
+<li class="chapter" data-level="1.10.1" data-path="package-development.html"><a href="package-development.html#pushing-to-github"><i class="fa fa-check"></i><b>1.10.1</b> Pushing to GitHub</a></li>
+<li class="chapter" data-level="1.10.2" data-path="package-development.html"><a href="package-development.html#cran"><i class="fa fa-check"></i><b>1.10.2</b> CRAN</a></li>
+<li class="chapter" data-level="1.10.3" data-path="package-development.html"><a href="package-development.html#publicizing"><i class="fa fa-check"></i><b>1.10.3</b> Publicizing</a></li>
+</ul></li>
+<li class="chapter" data-level="1.11" data-path="package-development.html"><a href="package-development.html#tips-and-tricks-1"><i class="fa fa-check"></i><b>1.11</b> Tips and Tricks</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>2</b> Version Control</a><ul>
+<li class="chapter" data-level="2.1" data-path="version-control.html"><a href="version-control.html#why-use-gitgithub"><i class="fa fa-check"></i><b>2.1</b> Why use Git/GitHub?</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="version-control.html"><a href="version-control.html#what-is-git"><i class="fa fa-check"></i><b>2.1.1</b> What is Git?</a></li>
+<li class="chapter" data-level="2.1.2" data-path="version-control.html"><a href="version-control.html#what-is-github"><i class="fa fa-check"></i><b>2.1.2</b> What is GitHub?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="version-control.html"><a href="version-control.html#setting-up-gitgithub"><i class="fa fa-check"></i><b>2.2</b> Setting up Git/GitHub</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="version-control.html"><a href="version-control.html#making-a-github-account"><i class="fa fa-check"></i><b>2.2.1</b> Making a GitHub account</a></li>
+<li class="chapter" data-level="2.2.2" data-path="version-control.html"><a href="version-control.html#how-to-install-and-set-up-git"><i class="fa fa-check"></i><b>2.2.2</b> How to Install and Set Up Git</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="version-control.html"><a href="version-control.html#using-gitgithub"><i class="fa fa-check"></i><b>2.3</b> Using Git/GitHub</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="version-control.html"><a href="version-control.html#initializing-projects-and-repositories"><i class="fa fa-check"></i><b>2.3.1</b> Initializing Projects and Repositories</a></li>
+<li class="chapter" data-level="2.3.2" data-path="version-control.html"><a href="version-control.html#modifying-projects"><i class="fa fa-check"></i><b>2.3.2</b> Modifying Projects</a></li>
+<li class="chapter" data-level="2.3.3" data-path="version-control.html"><a href="version-control.html#accessing-older-versions-of-code"><i class="fa fa-check"></i><b>2.3.3</b> Accessing older versions of code</a></li>
+<li class="chapter" data-level="2.3.4" data-path="version-control.html"><a href="version-control.html#the-.gitignore-file"><i class="fa fa-check"></i><b>2.3.4</b> The .gitignore file</a></li>
+<li class="chapter" data-level="2.3.5" data-path="version-control.html"><a href="version-control.html#branching"><i class="fa fa-check"></i><b>2.3.5</b> Branching</a></li>
+<li class="chapter" data-level="2.3.6" data-path="version-control.html"><a href="version-control.html#conflicts"><i class="fa fa-check"></i><b>2.3.6</b> Conflicts</a></li>
+<li class="chapter" data-level="2.3.7" data-path="version-control.html"><a href="version-control.html#tips-and-tricks-2"><i class="fa fa-check"></i><b>2.3.7</b> Tips and Tricks</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="version-control.html"><a href="version-control.html#optional-integrated-testing"><i class="fa fa-check"></i><b>2.4</b> Optional: Integrated Testing</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="version-control.html"><a href="version-control.html#why-use-integrated-tests"><i class="fa fa-check"></i><b>2.4.1</b> Why use Integrated Tests?</a></li>
+<li class="chapter" data-level="2.4.2" data-path="version-control.html"><a href="version-control.html#the-integrated-testing-workflow"><i class="fa fa-check"></i><b>2.4.2</b> The integrated testing workflow</a></li>
+<li class="chapter" data-level="2.4.3" data-path="version-control.html"><a href="version-control.html#setting-up-integrated-tests"><i class="fa fa-check"></i><b>2.4.3</b> Setting up Integrated Tests</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="version-control.html"><a href="version-control.html#further-reading"><i class="fa fa-check"></i><b>2.5</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="integrated-development-environments.html"><a href="integrated-development-environments.html"><i class="fa fa-check"></i><b>3</b> Integrated Development Environments</a><ul>
+<li class="chapter" data-level="3.1" data-path="integrated-development-environments.html"><a href="integrated-development-environments.html#general-suggestions"><i class="fa fa-check"></i><b>3.1</b> General Suggestions</a></li>
+<li class="chapter" data-level="3.2" data-path="integrated-development-environments.html"><a href="integrated-development-environments.html#rstudio"><i class="fa fa-check"></i><b>3.2</b> RStudio</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="integrated-development-environments.html"><a href="integrated-development-environments.html#why-use-rstudio"><i class="fa fa-check"></i><b>3.2.1</b> Why use RStudio?</a></li>
+<li class="chapter" data-level="3.2.2" data-path="integrated-development-environments.html"><a href="integrated-development-environments.html#getting-started"><i class="fa fa-check"></i><b>3.2.2</b> Getting Started</a></li>
+<li class="chapter" data-level="3.2.3" data-path="integrated-development-environments.html"><a href="integrated-development-environments.html#ex-initializing-packages"><i class="fa fa-check"></i><b>3.2.3</b> Ex: Initializing Packages</a></li>
+<li class="chapter" data-level="3.2.4" data-path="integrated-development-environments.html"><a href="integrated-development-environments.html#ex-building-packages"><i class="fa fa-check"></i><b>3.2.4</b> Ex: Building Packages</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="resources.html"><a href="resources.html"><i class="fa fa-check"></i><b>4</b> Resources</a><ul>
+<li class="chapter" data-level="4.1" data-path="resources.html"><a href="resources.html#general"><i class="fa fa-check"></i><b>4.1</b> General</a></li>
+<li class="chapter" data-level="4.2" data-path="resources.html"><a href="resources.html#package-development-1"><i class="fa fa-check"></i><b>4.2</b> Package Development</a></li>
+<li class="chapter" data-level="4.3" data-path="resources.html"><a href="resources.html#version-control-1"><i class="fa fa-check"></i><b>4.3</b> Version Control</a></li>
+<li class="chapter" data-level="4.4" data-path="resources.html"><a href="resources.html#ides"><i class="fa fa-check"></i><b>4.4</b> IDEs</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Package Development in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="version-control" class="section level1">
+<h1><span class="header-section-number">2</span> Version Control</h1>
+<p><strong>Version Control</strong> is the process of organizing and sharing different versions of your code, and it’s surprisingly important. This chapter is a beginner-friendly introduction to Version Control with Git and GitHub. In it, we’ll motivate Git/GitHub, and then discuss what precisely Git/GitHub do and how to use them.</p>
+<p>There are other tools for Version Control out there, but Git/GitHub are by far the most common, so we’ve chosen to focus on them. As you might expect, much (but not all) of the logic behind GitHub applies to other version control systems too.</p>
+<div id="why-use-gitgithub" class="section level2">
+<h2><span class="header-section-number">2.1</span> Why use Git/GitHub?</h2>
+<p>Git and GitHub are actually two different things, and deserve their own sections. Before diving into specifics, however, we should talk about why Git/GitHub exist in the first place. Broadly, Git and GitHub are just tools that developers use to organize their code, which specifically solve three main organizational problems.</p>
+<p>First, imagine that two imaginary programmers named Carlos and Grace are working together to build a website that automatically displays polling results from US elections, and suppose Grace modifies a script to change the method for aggregating polling data. It would be tedious for Carlos and Grace to email the script back and forth each time they updated it. Instead, they need a <em>repository</em> where they can update and sync their code to make sure they’re on the same page. GitHub allows programmers to create such repositories.</p>
+<p>Second, imagine that farther along in the project, Grace decides that she needs to totally rewrite the code which stores and organizes polling data. Unfortunately, while Grace modifies the system which stores the data, it will be offline, which is unfortunate because Carlos needs to use the data for his work on the project. To avoid this dilemma, Git and GitHub allow programmers to create different versions, called <em>branches</em>, of their code. By branching, Grace can modify the storage system, and in the meantime, Carlos can continue to use the old storage system for his work.</p>
+<p>Third, suppose that once Grace and Carlos have finished their website, they want to publish all the statistical functions and tools they built so that other researchers can use those tools to reproduce Grace and Carlos’s research. Putting all of their work on GitHub is probably the quickest and easiest way to make it accessible to other researchers.</p>
+<div id="what-is-git" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> What is Git?</h3>
+<div class="figure">
+<img src="images/gitgraphic.PNG" />
+
+</div>
+<p>Git is a local version control system. In other words, Git automatically organizes and saves versions of code on your computer, but does not connect to the internet: it’s purely accessible through the command prompt on a computer (there are also other ways to use Git, but it’s generally best to use the command prompt). Git organizes code in two ways.</p>
+<p>First, Git sends discrete versions of code to a local database or repository on the computer on which it is installed. To understand this, imagine that Carlos is writing an R script which determines the proper weights for aggregating polling data, and at some point he finishes the first version of the script. At this point, Carlos can send his code to the local repository, in an action called <em>commiting</em> his script. We’ll discuss how to do this later, but note that scripts are not automatically committed to the repository. If Carlos deleted all the code in the script and saved it, he could still access the script by going into the repository. Moreover, the repository also stores all of the previous versions of code, and can backtrack through the various commits, so if Carlos decides the version of the script he built last year worked better, he can use Git to access it.</p>
+<p>Second, Git can create branches, or separate versions of code, on the computer it’s installed to. Remember how Grace wanted to revamp the storage system for polling data without preventing Carlos from accessing the old storage system? Using Git, Grace should create a new <em>branch</em> in the repository. For most practical purposes, each branch exists as a separate version of the entire polling project in the Git repository, allowing Grace to modify and experiment without compromising the functionality of the <em>master</em> or original branch.</p>
+<p>While she’s working, Grace can use Git to move back and forth between the branches. Then, when she finishes designing and testing the new storage system, she can <em>merge</em> the two branches together, and Carlos’s scripts will automatically start using the new storage system.</p>
+</div>
+<div id="what-is-github" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> What is GitHub?</h3>
+<p>Where Git creates <em>local</em> repositories on an individual computer, GitHub allows programmers to create <em>remote</em> repositories, stored online, for their code. This is a pretty simple concept, but it’s extroardinarily useful. It means that when Grace finishes updating a series of scripts, she can simply <em>push</em> (push means send) them to GitHub, and then Carlos can in one command <em>pull</em> (download) the modified versions onto his computer to work with them. GitHub provides other important tools, but we will not discuss those until later.</p>
+</div>
+</div>
+<div id="setting-up-gitgithub" class="section level2">
+<h2><span class="header-section-number">2.2</span> Setting up Git/GitHub</h2>
+<div id="making-a-github-account" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Making a GitHub account</h3>
+<p>Signing up for a GitHub is fairly simple - just go to GitHub.com, click “sign up” in the upper right hand corner, and follow the instructions. We recommend, at least to begin with, getting a free version of GitHub.</p>
+</div>
+<div id="how-to-install-and-set-up-git" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> How to Install and Set Up Git</h3>
+<p>Because Git is a form of <em>local</em> source control, it does require installation. To install Git onto your computer, go to one of the following sites:</p>
+<ul>
+<li><p>For Linux: Head to <a href="https://git-scm.com/download/linux" class="uri">https://git-scm.com/download/linux</a> and follow the instructions.</p></li>
+<li><p>For Windows: Go to <a href="https://git-scm.com/download/win" class="uri">https://git-scm.com/download/win</a> and the download should automatically start.</p></li>
+<li><p>For Mac: Click on <a href="https://git-scm.com/download/mac" class="uri">https://git-scm.com/download/mac</a> and the download should automatically start.</p></li>
+</ul>
+<p>If you are running Windows/Mac and the websites above download an installer, simply follow the instructions from the installer - it’s fine to just use default settings.</p>
+<p>Before you can start using Git, you do have to do a one time set up. Git is built to track and organize old versions of code, so it will need you to set your username and email before it will let you start modifying programs. To set your username and email after installing, open the command line on your computer and type the following commands into it:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">$</span><span class="st"> </span>git config <span class="op">--</span>global user.name <span class="st">&quot;Your Name&quot;</span>
+<span class="op">$</span><span class="st"> </span>git config <span class="op">--</span>global user.email <span class="st">&quot;youremail@email.com&quot;</span></code></pre></div>
+<p>You might not get explicit confirmation from the command line - for example, when I set the username/email, I see the image below - but don’t worry, Git has still received the message.</p>
+<div class="figure">
+<img src="images/configglobals.PNG" />
+
+</div>
+<p>Now you’re ready to start using Git/GitHub!</p>
+</div>
+</div>
+<div id="using-gitgithub" class="section level2">
+<h2><span class="header-section-number">2.3</span> Using Git/GitHub</h2>
+<div id="initializing-projects-and-repositories" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> Initializing Projects and Repositories</h3>
+<p>The first step to using Git is creating a project, or repository (repo for short). To do so, log into your GitHub account. Look near the top-right for your profile icon, click it, and click “Your Profile.” Then you should see “Repositories” in the top tab, and click on “Repositories”. Then click the green “New” button on the right.</p>
+<div class="figure">
+<img src="images/gitdashboard.PNG" />
+
+</div>
+<p>GitHub will prompt you to choose a repository name and description of the repo, which you should enter, and will also ask you whether you’d like to initialize the repository with a README, a .gitignore file, and a license. For now, just initialize the repo with the README file.</p>
+<p>Once you’ve created the repository on GitHub, the next step is to link it with a local Git repository. To do this, open the <em>command prompt</em> on your computer. You’ll need to enter a couple of commands to get the repo set up on your computer.</p>
+<p>First, you’ll need to set the <em>working directory</em> in the command prompt. The working directory is the location where Git and command prompt will execute all of your commands - ie. if you tell Git to create a new file, the new file will be located your working directory. Thus, before you download your repository, you’ll want to navigate to the folder in which you want the repository to be located. For example, Carlos might want to put a repo in his “R” folder inside the “Documents” folder on his computer. To do this, he’d use the <code>cd</code> command, which stands for “change directory,” and then copy and paste the path of the folder he’d like to place the repository in. An example is given below:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">$</span><span class="st"> </span>cd <span class="op">~</span><span class="er">/</span>Documents<span class="op">/</span>R</code></pre></div>
+<p>Next, you will need to tell Git to download, or <em>clone</em>, the repo. You can do this using the <code>git clone</code> command, which allows you to download and sync a repository <em>for the first time.</em> This will download the repo, with all its contents, onto your computer and automatically set up a local version of the repo. See an example of the command below:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">$</span><span class="st"> </span>git clone https<span class="op">:</span><span class="er">//</span>GitHub.com<span class="op">/</span>Carlos_Account<span class="op">/</span>repository_name<span class="op">/</span></code></pre></div>
+</div>
+<div id="modifying-projects" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> Modifying Projects</h3>
+<p>It’s best practice to create new R code files in your local project repository. When you save your code files, initially git will not be aware of them - that is, they will not be <em>tracked</em>, but we can change this by <em>adding</em> them to the local repository using the command <code>git add .</code>. Here, the period following <code>git add</code> tells Git that we want to start tracking all the files in the directory.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">$</span><span class="st"> </span>cd <span class="op">~</span><span class="er">/</span>Documents<span class="op">/</span>R<span class="op">/</span>repository_name
+<span class="op">$</span><span class="st"> </span>git add .</code></pre></div>
+<p>Once new files are being tracked, we can put them under version control by <em>commiting</em> them, using the command <code>git commit</code>. You can add a message to indicate the changes you’ve made by typing <code>git commit -m &quot;&lt;message-here&gt;&quot;</code> followed by your message in quotes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">$</span><span class="st"> </span>cd <span class="op">~</span><span class="er">/</span>Documents<span class="op">/</span>R<span class="op">/</span>repository_name
+<span class="op">$</span><span class="st"> </span>git commit <span class="op">-</span>m <span class="st">&quot;Fixed small bug&quot;</span></code></pre></div>
+<p>Lastly, you need to <em>push</em> the files, which means sending them to GitHub online. You can do this by writing <code>git push origin master</code>, which will send the file to the remote GitHub repo.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">$</span><span class="st"> </span>git push origin master</code></pre></div>
+<p>If you move new files into your local repository, they will need to be tracked using <code>git add .</code> and then committed using <code>git commit -m &quot;&lt;message-here&gt;&quot;</code> before they are under version control.</p>
+</div>
+<div id="accessing-older-versions-of-code" class="section level3">
+<h3><span class="header-section-number">2.3.3</span> Accessing older versions of code</h3>
+<p>You should never be scared of Git/GitHub, because they only add information - they almost never delete it. In practice, this means that if you commit horrible changes to your code, you can easily revert to a previous version. For example, let’s say Grace wrote some new functions for a script, deleted them and committed the deletes later on, but now wants the functions back. She can easily access the older script using Git. First, she should use the <code>git log</code> command to see what commits have been made recently.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">$</span><span class="st"> </span>git log</code></pre></div>
+<p>This command might give an output like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">commit 06c347sa (HEAD -&gt;<span class="st"> </span>master, origin<span class="op">/</span>master, origin<span class="op">/</span>HEAD)
+Author<span class="op">:</span><span class="st"> </span>Grace Smith <span class="op">&lt;</span>gracesmith<span class="op">@</span>gmail.com<span class="op">&gt;</span>
+Date<span class="op">:</span><span class="st">   </span>Sun Feb <span class="dv">18</span> <span class="dv">23</span><span class="op">:</span><span class="dv">13</span><span class="op">:</span><span class="dv">32</span> <span class="dv">2018</span> <span class="op">-</span><span class="dv">0500</span>
+
+    Remove storage functions
+
+commit b69a14b
+Author<span class="op">:</span><span class="st"> </span>Grace Smith <span class="op">&lt;</span>gracesmith<span class="op">@</span>gmail.com<span class="op">&gt;</span>
+Date<span class="op">:</span><span class="st">   </span>Sat Feb <span class="dv">17</span> <span class="dv">23</span><span class="op">:</span><span class="dv">11</span><span class="op">:</span><span class="dv">28</span> <span class="dv">2018</span> <span class="op">-</span><span class="dv">0500</span>
+
+    Add storage functions
+
+commit 8a237d1
+Author<span class="op">:</span><span class="st"> </span>Grace Smith <span class="op">&lt;</span>gracesmith<span class="op">@</span>gmail.com<span class="op">&gt;</span>
+Date<span class="op">:</span><span class="st">   </span>Fri Feb <span class="dv">16</span> <span class="dv">21</span><span class="op">:</span><span class="dv">28</span><span class="op">:</span><span class="dv">46</span> <span class="dv">2018</span> <span class="op">-</span><span class="dv">0500</span>
+
+    Initial commit</code></pre></div>
+<p>Clearly, Grace should restore the second commit listed, named ‘b69a14b,’ in order to access the functions she deleted. There are generally two situations:</p>
+<ol style="list-style-type: decimal">
+<li><p>If the changes have not been pushed onto the remote repository, to access the deleted functions, Grace can use the <code>git reset</code> command with the <code>--hard</code> option and the commit number: <code>git reset --hard b69a14b</code>. This will update the current version of the script to the <code>b69a14b</code> version, which Grace can then inspect and test until she’s ready to commit it to Git/GitHub. Note that this is a pretty serious action to take because it will effectively delete all the commits after the version being restored.</p></li>
+<li><p>If the changes have been pushed onto the remote repository, Grace can access the deleted functions using the following commands:</p></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">$</span><span class="st"> </span>git revert <span class="op">--</span>no<span class="op">-</span>commit head
+<span class="op">$</span><span class="st"> </span>git commit <span class="op">-</span>m <span class="st">&quot;&lt;message-here&gt;&quot;</span></code></pre></div>
+<p>This will update the current version of the script to the <code>b69a14b</code> version in Grace’s local repository. Then Grace can push it onto the remote repository using <code>git push origin master</code> command.</p>
+</div>
+<div id="the-.gitignore-file" class="section level3">
+<h3><span class="header-section-number">2.3.4</span> The .gitignore file</h3>
+<p>There’s one more thing you should know about adding/modifying files that will make your life a lot easier. Sometimes, when modifying and commiting projects, you won’t want to type out every individual file you’ve modified: you’ll instead want to use the <code>git add .</code> command which will simply queue every modified file to be committed.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">$</span><span class="st"> </span>git add .
+<span class="op">$</span><span class="st"> </span>git commit <span class="op">-</span>m <span class="st">&quot;&lt;message-here&gt;&quot;</span>
+<span class="op">$</span><span class="st"> </span>git push</code></pre></div>
+<p>However, often, you’ll have files in your directory which you do not want to commit or push to GitHub because they’ll clutter up the directory. For example, R directories create “.RHistory” and “.RData” files which will save your history and working environment. These are useful perhaps when writing code, but you don’t want them taking up space in your final packaged product.</p>
+<p>To solve this problem, you can use a <em>.gitignore file.</em> A .gitignore file tells Git to ignore certain kinds of files when you write <code>git add .</code>. For example, gitignore files are frequently configured to tell git to ignore csv files, .RData files, installer logs, and more.</p>
+<p>Let’s discuss how <em>.gitignore</em> files actually work. A .gitignore file is really just a glorified text file. However, its filename should be just ‘.gitignore’, because that’s how Git recognizes it - then, if you put a file titled ‘.gitignore’ in a directory you’re working on, Git will use the .gitignore file to decide what to ignore in that specific directory. For example, if Grace is working on a project in ‘~/Documents/R/repo_name’, she should create a ‘.gitignore’ file inside that folder.</p>
+<p>This still leaves an important question - how does Git use the .gitignore file to determine which files to ignore? Essentially, .gitignore files are just a bunch of independent lines of text, and each line tells git another specific pattern of filepath to ignore. For example, consider the following example of a .gitignore file:</p>
+<div class="figure">
+<img src="images/gitignore3.PNG" />
+
+</div>
+<p>Each line beginning with a <code>#</code> is just a comment explaining the function of that part of the .gitignore file. However, there are a couple basic syntactical rules you need to understand.</p>
+<ol style="list-style-type: decimal">
+<li><p>If you write ‘.filetype’, then all files which end with ‘.filetype’ will be ignored by git. For example, the third line in the above example reads ‘.RHistory’, so all files with a ‘.RHistory’ in the file name (even if the files are in subdirectories) will be ignored.</p></li>
+<li><p>If you write ‘string’, then everything in the directory which contains that ‘string’ in it will be ignored. For example, if Grace wrote ‘dog’ in her .gitignore, then git would ignore both a file called ‘dog.csv’ and every file in a subdirectory called ‘dog’.</p></li>
+<li><p>If you prepend a pattern with an asterisk *, then the asterisk * serves as a wildcard which can match 0 or more characters. For example, if I write “*car“, then git will ignore the file ‘mycar.R’.</p></li>
+<li><p>If you prepend a pattern with a forward slash ‘/’, then git will only ignore files which match that pattern in the parent (root) directory. For example, I might write ‘/.csv’ in my gitignore file. This would cause git to ignore a file with the path ‘dog.csv’, but it would not ignore a file called ‘data/dog.csv’.</p></li>
+<li><p>If you prepend a pattern with an exclamation mark, git will <em>not</em> ignore that pattern. For example, if Grace really wanted to make sure her pictures of her dog were pushed to Git, she might write ‘!dog.PNG’ to ensure git did not ignore that picture.</p></li>
+</ol>
+<p>The rules can seem confusing at times, but it’s hard to go wrong - usually, there are at least 10 ways to ignore any given file you want to ignore. Moreover, if you’re still confused, you might visit Atlassian, which has a wonderful table of all of the various syntactical tricks you can use in your own gitignores, linked <a href="https://www.atlassian.com/git/tutorials/gitignore">here</a>.</p>
+<p>Lastly (and most importantly), to save you time, the wonderful <a href="https://www.iq.harvard.edu/people/nalette-brodnax">NaLette Brodnax</a> has created a template .gitignore file which you can use to declutter your GitHub repos. Using it requires three steps:</p>
+<p>Step 1: Download the file ‘template.gitignore’ from <a href="https://github.com/IQSS/Rbuild/blob/master/template.gitignore">here</a>. It should look something like this when you open it:</p>
+<div class="figure">
+<img src="images/gitignore.PNG" />
+
+</div>
+<p>Step 2: Manually move the template file from your downloads folder to the directory of interest. For example, if Grace is working on a project in ‘~/Documents/R/repo_name’, she should copy the template into that folder.</p>
+<p>Step 3: Open the ‘template.gitignore’ file in the folder and save it just as ‘.gitignore’. This will help git recognize that your .gitignore file is in fact a .gitignore file. Your operating system might protest at this - Windows in particular freaks out at ‘.gitignore’ files, which is why we initially named the template ‘templates.gitignore’ instead of just ‘.gitignore’. However, once the .gitignore file is in the correct directory, it’s safe to change the path. Your end result should look something like this:</p>
+<div class="figure">
+<img src="images/gitignore2.PNG" alt="A .gitignore file" />
+<p class="caption">A .gitignore file</p>
+</div>
+<p>It has no name, but it will serve its intended purpose.</p>
+<p>If you decide to create your own .gitignore file, you can follow very similar steps.</p>
+<ol style="list-style-type: decimal">
+<li><p>Go into the directory you want and create a blank text file called ‘template.gitignore’. It’s necessary at first to keep the ‘template’ part because otherwise some operating systems will not let you create the file.</p></li>
+<li><p>Start writing your gitignore file.</p></li>
+<li><p>Save the file as ‘.gitignore.’</p></li>
+</ol>
+<p>.gitignore files aren’t glamorous, but they really are important - nobody wants to work with cluttered repositories.</p>
+</div>
+<div id="branching" class="section level3">
+<h3><span class="header-section-number">2.3.5</span> Branching</h3>
+<div class="figure">
+<img src="images/branchinggraphic.PNG" />
+
+</div>
+<p>As we discussed earlier, branches allow you to modify scripts while simultaneous keeping the old versions easily accessible. In practice, the way this works is that the branch you select in git changes the appearance of the directory structure and files therein, when viewed in explorer/finder. For example, if Carlos has the following script as the master (default) branch in Git, the script might look something like this when he opens it on his computer:</p>
+<div class="figure">
+<img src="images/hello1.PNG" alt="Master Branch of the Hello World Script" />
+<p class="caption"><em>Master Branch of the Hello World Script</em></p>
+</div>
+<p>However, if he uses Git to switch to a test branch, he might open the exact same file using his file explorer and see the following:</p>
+<div class="figure">
+<img src="images/hello2.PNG" alt="Test Branch of the Hello World Script" />
+<p class="caption"><em>Test Branch of the Hello World Script</em></p>
+</div>
+<p>Let’s discuss how to actually use Git to branch.</p>
+<div id="creating-and-switching-branches" class="section level5">
+<h5><span class="header-section-number">2.3.5.0.1</span> Creating and Switching Branches</h5>
+<p>To create a branch, use the <code>git checkout</code> command followed with a <code>-b</code> and the name of the branch:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">$</span><span class="st"> </span>git checkout <span class="op">-</span>b branch_name</code></pre></div>
+<p>This will create a new branch which is identical to the initial (master) branch. You can modify it as you like, and you will still be able to easily access the initial (master) branch. To do this, simply use the <code>git checkout</code> command without the <code>-b</code> and type the name of the branch you want to switch to:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">$</span><span class="st"> </span>git checkout switch_to_this_branch</code></pre></div>
+<p>Remember, switching to a branch will change the way the file shows up once you open it from your computer.</p>
+</div>
+<div id="merging-branches" class="section level5">
+<h5><span class="header-section-number">2.3.5.0.2</span> Merging Branches</h5>
+<p>Suppose you have created a test branch, tested it to make sure it works, and now want to combine it with the original master branch. To do this, use the <code>git checkout</code> command in combination with the <code>git merge</code> command as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">$</span><span class="st"> </span>git checkout master
+<span class="op">$</span><span class="st"> </span>git merge test_branch_name</code></pre></div>
+<p>These two commands will merge the test branch into the master branch, meaning that the master branch at the end of the merging will look like the test branch.</p>
+</div>
+</div>
+<div id="conflicts" class="section level3">
+<h3><span class="header-section-number">2.3.6</span> Conflicts</h3>
+<p>Sometimes Git will be unable to push or pull branches because it is getting conflicting information from two users. For example, suppose Grace has written the following function, which calculates the squared error between two values:</p>
+<div class="figure">
+<img src="images/loss0.PNG" alt="Original Version of Loss Script" />
+<p class="caption"><em>Original Version of Loss Script</em></p>
+</div>
+<p>This function clearly has a bug in it, because it claims to return the squared error, but instead, it returns the absolute value of the error. Carlos notices this, and modifies the function so that it accurately reports that it calculates the absolute value, and pushes his modified version to GitHub:</p>
+<div class="figure">
+<img src="images/lossCarlos.PNG" alt="Carlos’s Pushed Version of Loss Script" />
+<p class="caption"><em>Carlos’s Pushed Version of Loss Script</em></p>
+</div>
+<p>But before Grace realizes Carlos has modified the script, she also fixes the bug, but instead by changing the absolute value to a squaring function:</p>
+<div class="figure">
+<img src="images/lossGrace.PNG" alt="Grace’s Modified Version of Loss Script" />
+<p class="caption"><em>Grace’s Modified Version of Loss Script</em></p>
+</div>
+<p>Git is smart, so when Grace tries to push her version to GitHub, Git will recognize that the two versions of the script conflict. As a result, it will throw the following error:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">C<span class="op">:</span>\Users\gracesmith\Documents\R\repo_name<span class="op">&gt;</span>git push
+To https<span class="op">:</span><span class="er">//</span>GitHub.com<span class="op">/</span>gracesmith<span class="op">/</span>repo_name
+ <span class="op">!</span><span class="st"> </span>[rejected]        master -&gt;<span class="st"> </span><span class="kw">master</span> (fetch first)
+error<span class="op">:</span><span class="st"> </span>failed to push some refs to <span class="st">&#39;https://GitHub.com/gracesmith/repo_name&#39;</span>
+hint<span class="op">:</span><span class="st"> </span>Updates were rejected because the remote contains work that you do
+hint<span class="op">:</span><span class="st"> </span>not have locally. This is usually caused by another repository pushing
+hint<span class="op">:</span><span class="st"> </span>to the same ref. You may want to first integrate the remote changes
+hint<span class="op">:</span><span class="st"> </span>(e.g., <span class="st">&#39;git pull ...&#39;</span>) before pushing again.
+hint<span class="op">:</span><span class="st"> </span>See the <span class="st">&#39;Note about fast-forwards&#39;</span> <span class="cf">in</span> <span class="st">&#39;git push --help&#39;</span> <span class="cf">for</span> details.</code></pre></div>
+<p>Effectively, Git recognizes that Carlos has made modifications to the script which were pushed to GitHub that Grace doesn’t have. This usually happens <em>when two programmers modify exactly the same line in a single script</em>, such as line 6 in the above examples. To solve this problem, Grace should follow Git’s advice, and try the <code>git pull</code> command. This will lead to the following message from git:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">C<span class="op">:</span>\Users\gracesmith\Documents\R\repo_name<span class="op">&gt;</span>git pull
+remote<span class="op">:</span><span class="st"> </span>Counting objects<span class="op">:</span><span class="st"> </span><span class="dv">3</span>, done.
+remote<span class="op">:</span><span class="st"> </span>Compressing objects<span class="op">:</span><span class="st"> </span><span class="dv">100</span>% (<span class="dv">3</span><span class="op">/</span><span class="dv">3</span>), done.
+remote<span class="op">:</span><span class="st"> </span>Total <span class="dv">3</span> (delta <span class="dv">1</span>), reused <span class="dv">0</span> (delta <span class="dv">0</span>), pack<span class="op">-</span>reused <span class="dv">0</span>
+Unpacking objects<span class="op">:</span><span class="st"> </span><span class="dv">100</span>% (<span class="dv">3</span><span class="op">/</span><span class="dv">3</span>), done.
+From https<span class="op">:</span><span class="er">//</span>GitHub.com<span class="op">/</span>gracesmith<span class="op">/</span>repo_name
+   e719863..59fc0ba  master     -&gt;<span class="st"> </span>origin<span class="op">/</span>master
+Auto<span class="op">-</span>merging scriptname.R
+<span class="kw">CONFLICT</span> (content)<span class="op">:</span><span class="st"> </span>Merge conflict <span class="cf">in</span> scriptname.R
+Automatic merge failed; fix conflicts and then commit the result.</code></pre></div>
+<p>Again, Git is letting Grace know that it sees there’s a conflict and that Git needs human help to fix it. Once Grace has pulled Carlos’s changes, she can go open the script in her computer and should see something like the following:</p>
+<div class="figure">
+<img src="images/lossConflict.PNG" alt="Conflicted Version of Loss Script" />
+<p class="caption"><em>Conflicted Version of Loss Script</em></p>
+</div>
+<p>The <code>&lt;&lt;&lt;&lt;</code> and <code>&gt;&gt;&gt;&gt;</code> lines are in the script to signal the beginning and end of a merge conflict, whereas the <code>===</code> line separates the two different versions. On the top is Grace’s version and on the bottom is Carlos’s. To resolve the merge conflict, Grace should manually select the two lines she prefers and then delete all of the <code>&lt;, =, &gt;</code> symbols to let Git know that the conflict has been resolved. Then, she can commit and push the file to Git, and she’ll be good to go!</p>
+<p>Overall: merge conflicts are rather annoying and can be confusing, so the best way to avoid them is to clearly delineate which programmers will be working on which sections of which scripts. This will prevent Git (and you) from getting confused.</p>
+<div id="suggested-workflow" class="section level5">
+<h5><span class="header-section-number">2.3.6.0.1</span> Suggested Workflow</h5>
+<p>There are many ways to use Git, but <a href="https://nvie.com/posts/a-successful-git-branching-model/">this article by Vincent Driessen</a> describes a pretty intuitive and productive model for Git branching. It’s worth reading or skimming the article (it includes some great graphics), but it basically involves a couple of core kinds of branches:</p>
+<ul>
+<li>The <strong>master</strong> branch is only used for new releases of a package/software.</li>
+<li>There are <strong>hotfixes</strong> branches which are used to fix relatively important bugs on releases.</li>
+<li>The <strong>development</strong> branch is the central branch on which most of the development happens; i.e. fixing minor bugs and adding new features between releases.</li>
+<li>There are <strong>feature branches</strong> which are used to develop new features between releases, which are periodically updated with the development branch.</li>
+<li>Finally, there are <strong>release branches</strong> which are used exclusively to fix bugs pre-release.</li>
+</ul>
+<p>Here’s an illustration of the core model which Driessen made:</p>
+<div class="figure">
+<img src="images/gitflow-model.png" />
+
+</div>
+</div>
+</div>
+<div id="tips-and-tricks-2" class="section level3">
+<h3><span class="header-section-number">2.3.7</span> Tips and Tricks</h3>
+<p>Git can be confusing, but there are three general rules of thumb you can follow to figure out any bugs that come up.</p>
+<ol style="list-style-type: decimal">
+<li><p>Git is super smart. If there’s a bug and Git is recommending a particular way of fixing it, there’s a very high chance that Git is right.</p></li>
+<li><p>Use the <code>git status</code> command. After entering <code>git status</code>, Git will give you a rundown of the status of the entire repository.</p></li>
+<li><p>If that doesn’t work (or you don’t understand what is going on), you can always copy and paste the error from the command line into Google and reference <a href="https://stackoverflow.com/questions/tagged/git">stackoverflow</a>. There is a wealth of online help!</p></li>
+</ol>
+<p>Remember that Git almost exclusively <em>adds information</em>, meaning that you can always just go back and restore a previous version - you’ll never lose your work.</p>
+<p>Lastly, there are a couple of cheat sheets that you can use to make your life easier.</p>
+<ul>
+<li><p><a href="https://stackoverflow.com/questions/tagged/r">Stackoverflow</a> provides online help for programming in R</p></li>
+<li><p><a href="http://kbroman.org/github_tutorial/pages/init.html">Karl Broman’s tutorial</a> runs you through initializing a repository</p></li>
+<li><p><a href="https://github.github.com/training-kit/downloads/github-git-cheat-sheet.pdf">This official GitHub cheat sheet</a> lists all of the general commands you’ll need</p></li>
+</ul>
+</div>
+</div>
+<div id="optional-integrated-testing" class="section level2">
+<h2><span class="header-section-number">2.4</span> Optional: Integrated Testing</h2>
+<div id="why-use-integrated-tests" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Why use Integrated Tests?</h3>
+<p>When working on packages alone, you may not push to GitHub too often. However, in large projects/packages where many programmers are working on the same package at once, it’s important to ensure each programmer continuously commits changes to GitHub to make sure all the changes are compatible with each other. This process of rapid updating of packages is referred to as <em>continuous integration</em>, and it can be very difficult to manage properly (it is sometimes referred to as <em>integration hell</em>, specifically because developers often waste lots of hours trying to make code integrate properly). When you commit changes continuously, it does not guarantee that all the changes will be compatible. However, if there are compatibility problems in updates, it does ensure that you’ll be able to find those problems more easily, because each individual change/commit is smaller. For reasons we’ll discuss in a second, continuous integration is a bit easier said than done. Thankfully, there are two wonderful free continuous integration services that will make your life a lot easier. If you’re using windows, you’ll want to use the service called <em>Appveyor</em> - if you’re using Mac or Linux, you’ll want to use the service called <em>Travis CI</em>. These services will make continuous integration easy, specifically because both Appveyor and Travis CI link to GitHub and will run your build and tests for you on what are called virtual machines in the cloud.</p>
+<p>Maybe the principle of continuous integration makes sense, but why are continuous integration services useful? Why can’t each developer build packages, run the tests locally, and then only push changes to GitHub if the tests are successful? There are three answers to this question.</p>
+<ol style="list-style-type: decimal">
+<li>For large projects, it often takes a long time to build them. Being able to build them on the cloud (using Appveyor/Travis) saves an enormous amount of time. (This is especially true for programming languages besides R, but it’s true for R too!)</li>
+<li>Sometimes there may be global environmental settings on your particular computer which change the way the package works and the way tests run. Building and testing the package in a “clean” environment online makes the testing more robust.</li>
+<li>Lastly, CI services offer settings to automatically ‘deploy’ or publish successful builds, for example by publishing code for a website. These are a bit beyond the scope of this guide, but they are documented <a href="https://www.appveyor.com/docs/deployment/">here (Appveyor)</a> and <a href="https://docs.travis-ci.com/user/deployment/">here (Travis)</a>.</li>
+</ol>
+</div>
+<div id="the-integrated-testing-workflow" class="section level3">
+<h3><span class="header-section-number">2.4.2</span> The integrated testing workflow</h3>
+<p>It’s important to note that Travis/Appveyor do not prevent you from pushing bad code to a repo - if you break your package and all your tests fail on Travis/Appveyor, you can still push the broken version to the master branch on GitHub. As a result, most developer teams use the following workflow to keep the master branch working at all times.</p>
+<ol style="list-style-type: decimal">
+<li>Someone sets up a “master repo” with a master branch on GitHub.</li>
+<li>Each developer on the team creates a copy (also called a <em>fork</em>) of the master repo. Thus, each developer has their own repository.</li>
+<li>Each developer makes changes to the project and then pushes those changes to their personal fork. After each push, Appveyor or Travis builds the package and test it.</li>
+<li>If the Appveyor/Travis builds are successful, the developer will likely send a pull request to the master branch of the master repo, which will probably be accepted.</li>
+</ol>
+<p>This workflow allows each developer to make changes in their own repo and continuously build them using Travis/Appveyor without potentially breaking the master repo’s copy.</p>
+</div>
+<div id="setting-up-integrated-tests" class="section level3">
+<h3><span class="header-section-number">2.4.3</span> Setting up Integrated Tests</h3>
+<p><strong>Step 1</strong>: To get started using continuous integration services, head to the Travis CI (Linux/Mac OS) or AppVeyor (Windows) website. Once you are on AppVeyor website, click ‘SIGNUP FOR HOSTED SERVICE’. We recommend that you create a new AppVeyor account to sign up by signing into GitHub. At some point, Travis/AppVeyor will ask you to authorize its connection to GitHub, which you should authorize.</p>
+<p><strong>Step 2</strong>: Once you authorize the connection, you need to specifically select which repos you’d like to use Travis/AppVeyor with. For example (in AppVeyor), upon signing up, you’ll see something like this screen:</p>
+<div class="figure">
+<img src="images/testSS/appveyor1.PNG" />
+
+</div>
+<p>You should click “new project” and then select the specific repo you’d like to use in combination with Travis/Appveyor by clicking on “ADD”. This means that you should at least initialize your project and push it to GitHub before you start using Travis/Appveyor.</p>
+<p><strong>Step 3</strong>: Depending on whether you’re using Appveyor or Travis, you should run <code>usethis::use_appveyor()</code> or <code>usethis::use_travis()</code> in the console with your local repository open. This will create a file named ‘appveyor.yml’ or ‘travis.yml’ in the root directory of your local repository. These ‘.yml’ files will tell AppVeyor/Travis what to do. It’s actually not too important to understand everything they do, just because the devtools template generally works pretty well. However, you occasionally will have to modify it to suit specific needs. AppVeyor and Travis CI both have great documentation, linked <a href="https://www.appveyor.com/docs/build-configuration/">here for Appveyor</a> and <a href="https://docs.travis-ci.com/user/languages/r/">here for Travis</a>.</p>
+<p>(Note - <code>usethis</code> also adds ‘appveyor.yml’ and ‘travis.yml’ to the .Rbuildignore to reduce clutter in your package.)</p>
+<p><strong>Step 4: Dependency Issues</strong>: If you’re using Travis, it’s important to talk quickly about dependencies in packages. Travis was not originally designed for R projects, so occasionally it’s a bit shaky, specifically with regard to dependencies in packages (i.e. Travis will build your package online, but if your package depends on <code>ggplot2</code>, then Travis will have to install <code>ggplot2</code> before building your package). By default, Travis/Appveyor automatically install anything listed in the dependencies listed in the DESCRIPTION file for your project. However, occasionally something goes wrong. If you get error messages that look like Travis did not install all of the dependencies, it’s worth specifying them in the .yml file. You can by adding a line like the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">build_script<span class="op">:</span>
+<span class="st">  </span><span class="op">-</span><span class="st"> </span>r_packages<span class="op">:</span><span class="st"> </span>package_name</code></pre></div>
+<p>under <em>build_script</em> section in the .yml file (this will install the package the same way that R installs it when you run <code>install.packages()</code>). If you’d like to install a package using a different method (i.e. from a GitHub version of the package), there are lots of options listed in the <a href="https://docs.travis-ci.com/user/languages/r/">R-specific Travis documentation</a>. However, it’s important to remember that this is generally NOT necessary - Travis/Appveyor do a pretty good job of automatically detecting/installing dependencies as long as your DESCRIPTION file specifies them.</p>
+<p><strong>Step 5</strong>: If you are working with many other developers on a single package, you should also add a ‘.gitattributes’ file into the root of your directory. This is because different operating systems handle different characters, for example line terminators, slightly differently. Modern Mac and Unix/Linux systems use <code>\n</code> to terminate the end of each line, in what is called the ‘line feed’ or ‘LF’ system, whereas Windows uses <code>\r\n</code> in the ‘Carriage Return Line Feed’ or ‘CRLF’ system. The point is that the ‘.gitattributes’ file will ensure that each developer uses exactly the same line endings, because you can set the ‘text’ setting which controls the method of writing line terminators.</p>
+<p>The way it works is that the ‘.gitattribute’ file should be a line of path-patterns followed by specific attributes. These path-patterns (for a refresher, see the Atlanian guide <a href="https://www.atlassian.com/git/tutorials/saving-changes/gitignore">here</a>) are exactly the same path-patterns used in the .gitignore file, just for a different purpose. For example, one line might be</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">*</span><span class="st"> </span>text=auto</code></pre></div>
+<p>where the “*&quot; refers to all files in the root directory, and the ‘text=auto’ sets the ‘text’ attribute to auto. Alternatively, you could write</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">R<span class="op">/</span><span class="er">*</span><span class="st"> </span>text=lf</code></pre></div>
+<p>which forces all the scripts directly in the R subdirectory to use the ‘lf’ line terminator. You can personalize the .gitattributes file if you like, but you can also just use the sample .gitattributes linked <a href="https://GitHub.com/krlmlr/r-appveyor/blob/master/.gitattributes">here</a>. You can download this file and move it to the root directory of your package (it must be in the root directory).</p>
+<p>The .gitattributes file actually is useful for setting a variety of other attributes besides line endings, although some of them are a bit technical. If you’re curious to find out more about what the .gitattributes file can do, the full documentation is linked <a href="https://git-scm.com/docs/gitattributes">here</a>.</p>
+<p>Once you do all of this, you’re set to go! When you push changes to GitHub, all the new files (.yml, .gitignore, .gitattributes) you created will be pushed to the remote. By clicking “NEW BUILD”, Travis/AppVeyor will automatically build and test the package for you. For example on Appveyor, if you sign in, you should see something like this:</p>
+<div class="figure">
+<img src="images/testSS/appveyor2.PNG" />
+
+</div>
+<p>and if your build succeeded, you’ll see a green line at the bottom like this:</p>
+<div class="figure">
+<img src="images/testSS/appveyor3.PNG" />
+
+</div>
+<p>otherwise you’ll see an error. If your build takes a while, that’s okay - you don’t need to wait for it to build, because Travis/Appveyor will email you automatically if the test fails. And that’s all there is to it!</p>
+</div>
+</div>
+<div id="further-reading" class="section level2">
+<h2><span class="header-section-number">2.5</span> Further reading</h2>
+<p>If you’re interested in learning more about Git and GitHub, you might want to take a look at the following resources:</p>
+<ul>
+<li><p>The Software Carpentry Foundation has a great mid level Git tutorial <a href="https://swcarpentry.GitHub.io/git-novice/">here</a></p></li>
+<li><p>Atlassian has some wonderful advanced Git tutorials <a href="https://www.atlassian.com/git/tutorials/advanced-overview">here</a></p></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="package-development.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="integrated-development-environments.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/IQSS/dss-rbuild/edit/master/02_version_control.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["Rbuild.pdf", "Rbuild.epub"],
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
