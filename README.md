@@ -16,4 +16,4 @@ This repo walks through the process of package development in R, highlighting be
 ## Contributing
 This material is maintained under a GPL License, and other individuals are welcome to fork, clone, or make copies of the material. Comments and suggestions are also always welcome.
 
-![](mages/readme-license.png)
+![](images/readme-license.png)
