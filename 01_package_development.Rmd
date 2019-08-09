@@ -2,7 +2,7 @@
 
 The following graphic outlines this entire chapter:
 
-![](mages/package_workflow2.png)
+![](images/package_workflow2.png)
 
 As a quick reminder, you can find the `devex` example package linked [here, on GitHub](https://github.com/IQSS/Rbuild/tree/master/devex), if you'd like to look through it while reading the guide.
 
@@ -70,7 +70,7 @@ The DESCRIPTION file gives an extremely brief overview to the package. It includ
 
 DESCRIPTION is a DCF file (Debian control format). This file format may be unfamiliar, but it's quite simple. Each line contains a field name and value, separated by a colon. Sometimes, values are long enough to require multiple lines, in which case they are indented by four spaces. For example, the DESCRIPTION file for a newly created package will look like this:
 
-![](mages/PackageSS/description_blank.png)
+![](images/ackageSS/description_blank.png)
 
 Let's go through the fields and discuss what they mean. The first seven fields listed are mandatory, meaning that if you do not include them, the development environment will throw an error later on when you're trying to build your package.
 
@@ -93,7 +93,7 @@ Let's go through the fields and discuss what they mean. The first seven fields l
 
 12. **Imports**: In this field, you should list the packages which your package needs to function. Each package should be indented by two spaces, separated by a comma, and given its own line. For example, a pacakge which requires `ggplot2`, `nlme`, and `rpart` might have an 'imports' field which looks like this:
 
-![](mages/PackageSS/imports.PNG)
+![](images/ackageSS/imports.PNG)
 
 13. **Suggests**: Sometimes, your package will not really *require* the use of other packages, but it might offer a couple of extra wrappers/functions with those other packages. When those extra functions aren't strictly necessary, it's a good idea to have your package *suggest* imports. For example, a package which includes the following function should include `ggplot2` in the 'suggests' part of the description.
 
@@ -124,7 +124,7 @@ In general, it's best to suggest functions instead of requiring them if you bare
 
 All of your code should be in scripts in the 'R' file created in the package development environment, as shown below:
 
-![](mages/PackageSS/code1.PNG)
+![](images/ackageSS/code1.PNG)
 
 The coding you will do in package development is slightly different than the coding you'll normally do when writing R scripts. This is for a couple of reasons:
 
@@ -359,7 +359,7 @@ usethis::use_testthat()
 
 This will do a couple of things. First, it will add `testthat` to the Suggests part of the DESCRIPTION, which will help other collaborators know to use `testthat` when modifying/working on the package. It will also create a 'tests/testthat' directory in your project, as well a file called 'test/testthat.R', as shown below.
 
-![](mages/TestSS/devtoolstestthat.PNG)
+![](images/TestSS/devtoolstestthat.PNG)
 
 ### Expectations
 
@@ -375,7 +375,7 @@ library(testthat)
 testthat::expect_equal(2, 2)
 testthat::expect_equal(2, 4)
 ```
-![](mages/TestSS/expectationerror.PNG)
+![](images/TestSS/expectationerror.PNG)
 
 Here's an (abbreviated) list of the expectation functions:
 
@@ -453,7 +453,7 @@ devtools::test()
 
 If any test throws an error, R will report two things. First, it will report the string given in the test which was given to the `test_that()` function call. Second, it will report the filename of the test file as well as the line of code that threw an error. For example, running the above tests yields the following result:
 
-![](mages/TestSS/testthaterror1.PNG)
+![](images/TestSS/testthaterror1.PNG)
 
 This indicates that line 18 of testhelpers.R failed in the test "Warnings for vectors of length > 1." Looking at the test code reveals that the `general_sqrt()` function does not return a warning for positive vectors of length greater than one.
 
@@ -574,7 +574,7 @@ devtools::check()
 
 Running the check function will ensure your documentation is up to date, automatically run all of your unit tests, and even check your code for common problems. It will also create a new directory called 'Man' within your package folder, which will later be populated with the help files for your functions. Note that even if your package passes all of its tests, you might still see additional warnings for other reasons, as exemplified below:
 
-![](mages/TestSS/autobuildresults.PNG)
+![](images/TestSS/autobuildresults.PNG)
 
 Although it's not necessary to understand every check that the check function runs, it's worth noting that every check it performs is relatively important, and if it signals any warnings or errors, it's definitely worth fixing them. It's also probably worth fixing any "notes" it issues. If you're curious, you can read more about what each type of check in the automated check does [here](http://r-pkgs.had.co.nz/check.html#check).
 
@@ -582,7 +582,7 @@ Although it's not necessary to understand every check that the check function ru
 
 The aforementioned automated checking system for R is pretty good, but there is a slightly more comprehensive version: the [goodpractice package](https://github.com/MangoTheCat/goodpractice/blob/master/vignettes/goodpractice.Rmd). The `goodpractice` package has an informative name - the entire purpose of the package is to check whether your package follows proper package development conventions and procedures (i.e. whether your package follows good practices). For example, running the `goodpractice` package on the `devex` package yielded the following helpful results:
 
-![](mages/TestSS/goodpractice1.PNG)
+![](images/TestSS/goodpractice1.PNG)
 
 Let's run through the key points of using `goodpractice` below.
 
@@ -604,7 +604,7 @@ gp(package_path)
 
 And that's it! The `goodpractice` package is a bit picky, so it's okay to leave a few concerns unresolved, but in general it gives good advice. If you're diligent, you might eventually see a result like this:
 
-![](mages/TestSS/goodpractice2.PNG)
+![](images/TestSS/goodpractice2.PNG)
 
 which signals that your package conforms to all good practices. Lastly, although it's beyond the scope of this guide, you ought to know that you can create custom checks using the `goodpractice` package, as documented [here](https://github.com/MangoTheCat/goodpractice/blob/master/vignettes/custom_checks.Rmd).
 
@@ -663,7 +663,7 @@ general_sqrt <- function (x) {
 }
 ```
 
-![](mages/PackageSS/gensqrtdoc.PNG)
+![](images/ackageSS/gensqrtdoc.PNG)
 
 Inside the R script, the documentation appears right above the definition of the function - this is helpful because it will help you remember to keep your documentations/functions up to date with each other. Let's work through how this documentation was generated.
 
@@ -724,7 +724,7 @@ usethis::use_vignette('vignette-name')
 
 This function will create a 'vignettes' subdirectory and populate it with a file based on the name you specified. The file should look something like this:
 
-![](mages/PackageSS/vignette1.PNG)
+![](images/ackageSS/vignette1.PNG)
 
 The top of the file, between the two lines of dashes, is written in the YAML language. It's simply a convenient way to specify metadata about a vignette, and you should fill in the title and author fields.
 
@@ -733,11 +733,11 @@ The rest of the vignette should be written in RMarkdown, which is basically a mi
 1. By default, text in RMarkdown files is assumed to be written in [pandoc's flavor of Markdown](http://pandoc.org/MANUAL.html).
 2. If you would like to include inline equations, you can do so by surrounding math symbols with a single dollar sign on each end. If you'd like to give an equation its own line, you can use two dollar signs on each end of the equations.
 
-![*Including math is easy in RMarkdown*](mages/PackageSS/vignettemath.PNG)
+![*Including math is easy in RMarkdown*](images/ackageSS/vignettemath.PNG)
 
 3. You can add chunks of R code (and even other languages!) to your Vignette file by wrapping R code in "```" symbols, as demonstrated below:
 
-![](mages/PackageSS/vignettecode.PNG)
+![](images/ackageSS/vignettecode.PNG)
 
 Once you've modified your vignette, you can *knit* it into a beautiful HTML document by running the following function in the console:
 
