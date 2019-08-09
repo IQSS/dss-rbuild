@@ -370,7 +370,7 @@ This workflow allows each developer to make changes in their own repo and contin
 
 **Step 2**: Once you authorize the connection, you need to specifically select which repos you'd like to use Travis/AppVeyor with. For example (in AppVeyor), upon signing up, you'll see something like this screen:
 
-![](images/TestSS/appveyor1.PNG)
+![](images/estSS/appveyor1.PNG)
 
 You should click "new project" and then select the specific repo you'd like to use in combination with Travis/Appveyor by clicking on "ADD". This means that you should at least initialize your project and push it to GitHub before you start using Travis/Appveyor.
 
@@ -404,11 +404,11 @@ The .gitattributes file actually is useful for setting a variety of other attrib
 
 Once you do all of this, you're set to go! When you push changes to GitHub, all the new files (.yml, .gitignore, .gitattributes) you created will be pushed to the remote. By clicking "NEW BUILD", Travis/AppVeyor will automatically build and test the package for you. For example on Appveyor, if you sign in, you should see something like this:
 
-![](images/TestSS/appveyor2.PNG)
+![](images/estSS/appveyor2.PNG)
 
 and if your build succeeded, you'll see a green line at the bottom like this:
 
-![](images/TestSS/appveyor3.PNG)
+![](images/estSS/appveyor3.PNG)
 
 otherwise you'll see an error. If your build takes a while, that's okay - you don't need to wait for it to build, because Travis/Appveyor will email you automatically if the test fails. And that's all there is to it!
 
