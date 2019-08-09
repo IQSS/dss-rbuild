@@ -359,7 +359,7 @@ usethis::use_testthat()
 
 This will do a couple of things. First, it will add `testthat` to the Suggests part of the DESCRIPTION, which will help other collaborators know to use `testthat` when modifying/working on the package. It will also create a 'tests/testthat' directory in your project, as well a file called 'test/testthat.R', as shown below.
 
-![](images/TestSS/devtoolstestthat.PNG)
+![](images/estSS/devtoolstestthat.PNG)
 
 ### Expectations
 
@@ -375,7 +375,7 @@ library(testthat)
 testthat::expect_equal(2, 2)
 testthat::expect_equal(2, 4)
 ```
-![](images/TestSS/expectationerror.PNG)
+![](images/estSS/expectationerror.PNG)
 
 Here's an (abbreviated) list of the expectation functions:
 
@@ -453,7 +453,7 @@ devtools::test()
 
 If any test throws an error, R will report two things. First, it will report the string given in the test which was given to the `test_that()` function call. Second, it will report the filename of the test file as well as the line of code that threw an error. For example, running the above tests yields the following result:
 
-![](images/TestSS/testthaterror1.PNG)
+![](images/estSS/testthaterror1.PNG)
 
 This indicates that line 18 of testhelpers.R failed in the test "Warnings for vectors of length > 1." Looking at the test code reveals that the `general_sqrt()` function does not return a warning for positive vectors of length greater than one.
 
@@ -574,7 +574,7 @@ devtools::check()
 
 Running the check function will ensure your documentation is up to date, automatically run all of your unit tests, and even check your code for common problems. It will also create a new directory called 'Man' within your package folder, which will later be populated with the help files for your functions. Note that even if your package passes all of its tests, you might still see additional warnings for other reasons, as exemplified below:
 
-![](images/TestSS/autobuildresults.PNG)
+![](images/estSS/autobuildresults.PNG)
 
 Although it's not necessary to understand every check that the check function runs, it's worth noting that every check it performs is relatively important, and if it signals any warnings or errors, it's definitely worth fixing them. It's also probably worth fixing any "notes" it issues. If you're curious, you can read more about what each type of check in the automated check does [here](http://r-pkgs.had.co.nz/check.html#check).
 
@@ -582,7 +582,7 @@ Although it's not necessary to understand every check that the check function ru
 
 The aforementioned automated checking system for R is pretty good, but there is a slightly more comprehensive version: the [goodpractice package](https://github.com/MangoTheCat/goodpractice/blob/master/vignettes/goodpractice.Rmd). The `goodpractice` package has an informative name - the entire purpose of the package is to check whether your package follows proper package development conventions and procedures (i.e. whether your package follows good practices). For example, running the `goodpractice` package on the `devex` package yielded the following helpful results:
 
-![](images/TestSS/goodpractice1.PNG)
+![](images/estSS/goodpractice1.PNG)
 
 Let's run through the key points of using `goodpractice` below.
 
@@ -604,7 +604,7 @@ gp(package_path)
 
 And that's it! The `goodpractice` package is a bit picky, so it's okay to leave a few concerns unresolved, but in general it gives good advice. If you're diligent, you might eventually see a result like this:
 
-![](images/TestSS/goodpractice2.PNG)
+![](images/estSS/goodpractice2.PNG)
 
 which signals that your package conforms to all good practices. Lastly, although it's beyond the scope of this guide, you ought to know that you can create custom checks using the `goodpractice` package, as documented [here](https://github.com/MangoTheCat/goodpractice/blob/master/vignettes/custom_checks.Rmd).
 
