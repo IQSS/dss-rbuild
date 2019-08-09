@@ -70,7 +70,7 @@ The DESCRIPTION file gives an extremely brief overview to the package. It includ
 
 DESCRIPTION is a DCF file (Debian control format). This file format may be unfamiliar, but it's quite simple. Each line contains a field name and value, separated by a colon. Sometimes, values are long enough to require multiple lines, in which case they are indented by four spaces. For example, the DESCRIPTION file for a newly created package will look like this:
 
-![](images/ackageSS/description_blank.png)
+![](images/packageSS/description_blank.png)
 
 Let's go through the fields and discuss what they mean. The first seven fields listed are mandatory, meaning that if you do not include them, the development environment will throw an error later on when you're trying to build your package.
 
@@ -93,7 +93,7 @@ Let's go through the fields and discuss what they mean. The first seven fields l
 
 12. **Imports**: In this field, you should list the packages which your package needs to function. Each package should be indented by two spaces, separated by a comma, and given its own line. For example, a pacakge which requires `ggplot2`, `nlme`, and `rpart` might have an 'imports' field which looks like this:
 
-![](images/ackageSS/imports.PNG)
+![](images/packageSS/imports.PNG)
 
 13. **Suggests**: Sometimes, your package will not really *require* the use of other packages, but it might offer a couple of extra wrappers/functions with those other packages. When those extra functions aren't strictly necessary, it's a good idea to have your package *suggest* imports. For example, a package which includes the following function should include `ggplot2` in the 'suggests' part of the description.
 
@@ -124,7 +124,7 @@ In general, it's best to suggest functions instead of requiring them if you bare
 
 All of your code should be in scripts in the 'R' file created in the package development environment, as shown below:
 
-![](images/ackageSS/code1.PNG)
+![](images/packageSS/code1.PNG)
 
 The coding you will do in package development is slightly different than the coding you'll normally do when writing R scripts. This is for a couple of reasons:
 
@@ -663,7 +663,7 @@ general_sqrt <- function (x) {
 }
 ```
 
-![](images/ackageSS/gensqrtdoc.PNG)
+![](images/packageSS/gensqrtdoc.PNG)
 
 Inside the R script, the documentation appears right above the definition of the function - this is helpful because it will help you remember to keep your documentations/functions up to date with each other. Let's work through how this documentation was generated.
 
@@ -724,7 +724,7 @@ usethis::use_vignette('vignette-name')
 
 This function will create a 'vignettes' subdirectory and populate it with a file based on the name you specified. The file should look something like this:
 
-![](images/ackageSS/vignette1.PNG)
+![](images/packageSS/vignette1.PNG)
 
 The top of the file, between the two lines of dashes, is written in the YAML language. It's simply a convenient way to specify metadata about a vignette, and you should fill in the title and author fields.
 
@@ -733,11 +733,11 @@ The rest of the vignette should be written in RMarkdown, which is basically a mi
 1. By default, text in RMarkdown files is assumed to be written in [pandoc's flavor of Markdown](http://pandoc.org/MANUAL.html).
 2. If you would like to include inline equations, you can do so by surrounding math symbols with a single dollar sign on each end. If you'd like to give an equation its own line, you can use two dollar signs on each end of the equations.
 
-![*Including math is easy in RMarkdown*](images/ackageSS/vignettemath.PNG)
+![*Including math is easy in RMarkdown*](images/packageSS/vignettemath.PNG)
 
 3. You can add chunks of R code (and even other languages!) to your Vignette file by wrapping R code in "```" symbols, as demonstrated below:
 
-![](images/ackageSS/vignettecode.PNG)
+![](images/packageSS/vignettecode.PNG)
 
 Once you've modified your vignette, you can *knit* it into a beautiful HTML document by running the following function in the console:
 
