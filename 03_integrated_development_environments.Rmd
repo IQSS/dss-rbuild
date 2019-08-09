@@ -76,25 +76,25 @@ On the bottom right hand side is the *Viewer.* Any plots you generate in R will 
 
 RStudio makes it easy to create packages. To start, click File>New Project. Then, click "New Directory" when you see the screen below:
 
-![](images/ackageSS/createproj1.PNG)
+![](images/packageSS/createproj1.PNG)
 
 Then click "R Package" when you see the screen below:
 
-![](images/ackageSS/createproj2.PNG)
+![](images/packageSS/createproj2.PNG)
 
 Lastly, name your package. Your name should be something short and descriptive. Since we'll be walking through a development example, we'll title our new package `devex`.
 
-![](images/ackageSS/createproj3.PNG)
+![](images/packageSS/createproj3.PNG)
 
 Once you've created your package, your RStudio should look something like this. It should come preloaded with a "Hello World" script which includes a handy function that prints "Hello world."
 
-![](images/ackageSS/projectinit.PNG)
+![](images/packageSS/projectinit.PNG)
 
 Everything should look mostly the same as normal except for the "Files" tab on the bottom right, which should include an ".Rproj" file, a "DESCRIPTION" file, a "NAMESPACE" file, and a folder titled "R." You should start by checking the little boxes next to the "NAMESPACE" file and the "Hello.R" R script inside the R file and clicking "delete" above them, just because we will have Roxygen2 automatically generate the namespace, and because presumably your package doesn't need a "Hello World" function.
 
 You should also go to "Tools > Project Options" and select the following options, which will help you generate documentation using roxygen2. This requires "roxygen2" package to be loaded into the search path first to have the "Generate documentation with Roxygen" option displayed.
 
-![](images/ackageSS/userox.PNG)
+![](images/packageSS/userox.PNG)
 
 ### Ex: Building Packages
 
