@@ -45,7 +45,7 @@ To download and set up RStudio, follow the instructions below:
 
 2. Download the *installer* for your operating system, not the *zip/tarball.* The picture below illustrates what the webpage should look like.
 
-![*RStudio Webpage*](./Images/rstudio.PNG)
+![*RStudio Webpage*](./mages/rstudio.PNG)
 
 3. Let the installer run - it's fine again to just use the default options.
 
@@ -57,7 +57,7 @@ and now you're ready!
 
 RStudio will split your screen into four parts, as shown below. We'll refer to them as the *script*, the *environment*, the *shell* or *console*, and the *Viewer.*
 
-![The RStudio Interface](./Images/rstudio2.PNG)
+![The RStudio Interface](./mages/rstudio2.PNG)
 
 
 The *script* is in the upper left hand corner of the screen, and it's where you will do the bulk of your programming. To write an R script, click File>New File>R Script in the top left hand corner. You can execute multiple lines of a script (or the entire thing) at a time by selecting the lines you want to run and clicking the green "Run" button on the right hand side of the script box or by holding down the command key (MacOS) or control key (Windows) and pressing return/enter.
@@ -76,25 +76,25 @@ On the bottom right hand side is the *Viewer.* Any plots you generate in R will 
 
 RStudio makes it easy to create packages. To start, click File>New Project. Then, click "New Directory" when you see the screen below:
 
-![](Images/PackageSS/createproj1.PNG)
+![](mages/PackageSS/createproj1.PNG)
 
 Then click "R Package" when you see the screen below:
 
-![](Images/PackageSS/createproj2.PNG)
+![](mages/PackageSS/createproj2.PNG)
 
 Lastly, name your package. Your name should be something short and descriptive. Since we'll be walking through a development example, we'll title our new package `devex`.
 
-![](Images/PackageSS/createproj3.PNG)
+![](mages/PackageSS/createproj3.PNG)
 
 Once you've created your package, your RStudio should look something like this. It should come preloaded with a "Hello World" script which includes a handy function that prints "Hello world."
 
-![](Images/PackageSS/projectinit.PNG)
+![](mages/PackageSS/projectinit.PNG)
 
 Everything should look mostly the same as normal except for the "Files" tab on the bottom right, which should include an ".Rproj" file, a "DESCRIPTION" file, a "NAMESPACE" file, and a folder titled "R." You should start by checking the little boxes next to the "NAMESPACE" file and the "Hello.R" R script inside the R file and clicking "delete" above them, just because we will have Roxygen2 automatically generate the namespace, and because presumably your package doesn't need a "Hello World" function.
 
 You should also go to "Tools > Project Options" and select the following options, which will help you generate documentation using roxygen2. This requires "roxygen2" package to be loaded into the search path first to have the "Generate documentation with Roxygen" option displayed.
 
-![](Images/PackageSS/userox.PNG)
+![](mages/PackageSS/userox.PNG)
 
 ### Ex: Building Packages
 

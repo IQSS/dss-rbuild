@@ -16,7 +16,7 @@ Third, suppose that once Grace and Carlos have finished their website, they want
 
 ### What is Git?
 
-![](Images/gitgraphic.PNG)
+![](mages/gitgraphic.PNG)
 
 Git is a local version control system. In other words, Git automatically organizes and saves versions of code on your computer, but does not connect to the internet: it's purely accessible through the command prompt on a computer (there are also other ways to use Git, but it's generally best to use the command prompt). Git organizes code in two ways.
 
@@ -58,7 +58,7 @@ $ git config --global user.email "youremail@email.com"
 
 You might not get explicit confirmation from the command line - for example, when I set the username/email, I see the image below - but don't worry, Git has still received the message.
 
-![](Images/configglobals.PNG)
+![](mages/configglobals.PNG)
 
 Now you're ready to start using Git/GitHub!
 
@@ -68,7 +68,7 @@ Now you're ready to start using Git/GitHub!
 
 The first step to using Git is creating a project, or repository (repo for short). To do so, log into your GitHub account. Look near the top-right for your profile icon, click it, and click "Your Profile." Then you should see "Repositories" in the top tab, and click on "Repositories". Then click the green "New" button on the right.
 
-![](Images/gitdashboard.PNG)
+![](mages/gitdashboard.PNG)
 
 GitHub will prompt you to choose a repository name and description of the repo, which you should enter, and will also ask you whether you'd like to initialize the repository with a README, a .gitignore file, and a license. For now, just initialize the repo with the README file.
 
@@ -175,7 +175,7 @@ Let's discuss how *.gitignore* files actually work. A .gitignore file is really 
 
 This still leaves an important question - how does Git use the .gitignore file to determine which files to ignore? Essentially, .gitignore files are just a bunch of independent lines of text, and each line tells git another specific pattern of filepath to ignore. For example, consider the following example of a .gitignore file:
 
-![](Images/gitignore3.PNG)
+![](mages/gitignore3.PNG)
 
 Each line beginning with a `#` is just a comment explaining the function of that part of the .gitignore file. However, there are a couple basic syntactical rules you need to understand.
 
@@ -195,13 +195,13 @@ Lastly (and most importantly), to save you time, the wonderful [NaLette Brodnax]
 
 Step 1: Download the file 'template.gitignore' from [here](https://github.com/IQSS/Rbuild/blob/master/template.gitignore). It should look something like this when you open it:
 
-![](Images/gitignore.PNG)
+![](mages/gitignore.PNG)
 
 Step 2: Manually move the template file from your downloads folder to the directory of interest. For example, if Grace is working on a project in '~/Documents/R/repo_name', she should copy the template into that folder.
 
 Step 3: Open the 'template.gitignore' file in the folder and save it just as '.gitignore'. This will help git recognize that your .gitignore file is in fact a .gitignore file. Your operating system might protest at this - Windows in particular freaks out at '.gitignore' files, which is why we initially named the template 'templates.gitignore' instead of just '.gitignore'. However, once the .gitignore file is in the correct directory, it's safe to change the path. Your end result should look something like this:
 
-![A .gitignore file](Images/gitignore2.PNG)
+![A .gitignore file](mages/gitignore2.PNG)
 
 It has no name, but it will serve its intended purpose.
 
@@ -217,15 +217,15 @@ If you decide to create your own .gitignore file, you can follow very similar st
 
 ### Branching
 
-![](Images/branchinggraphic.PNG)
+![](mages/branchinggraphic.PNG)
 
 As we discussed earlier, branches allow you to modify scripts while simultaneous keeping the old versions easily accessible. In practice, the way this works is that the branch you select in git changes the appearance of the directory structure and files therein, when viewed in explorer/finder. For example, if Carlos has the following script as the master (default) branch in Git, the script might look something like this when he opens it on his computer:
 
-![*Master Branch of the Hello World Script*](Images/hello1.PNG)
+![*Master Branch of the Hello World Script*](mages/hello1.PNG)
 
 However, if he uses Git to switch to a test branch, he might open the exact same file using his file explorer and see the following:
 
-![*Test Branch of the Hello World Script*](Images/hello2.PNG)
+![*Test Branch of the Hello World Script*](mages/hello2.PNG)
 
 Let's discuss how to actually use Git to branch.
 
@@ -258,15 +258,15 @@ These two commands will merge the test branch into the master branch, meaning th
 
 Sometimes Git will be unable to push or pull branches because it is getting conflicting information from two users. For example, suppose Grace has written the following function, which calculates the squared error between two values:
 
-![*Original Version of Loss Script*](Images/loss0.PNG)
+![*Original Version of Loss Script*](mages/loss0.PNG)
 
 This function clearly has a bug in it, because it claims to return the squared error, but instead, it returns the absolute value of the error. Carlos notices this, and modifies the function so that it accurately reports that it calculates the absolute value, and pushes his modified version to GitHub:
 
-![*Carlos's Pushed Version of Loss Script*](Images/lossCarlos.PNG)
+![*Carlos's Pushed Version of Loss Script*](mages/lossCarlos.PNG)
 
 But before Grace realizes Carlos has modified the script, she also fixes the bug, but instead by changing the absolute value to a squaring function:
 
-![*Grace's Modified Version of Loss Script*](Images/lossGrace.PNG)
+![*Grace's Modified Version of Loss Script*](mages/lossGrace.PNG)
 
 Git is smart, so when Grace tries to push her version to GitHub, Git will recognize that the two versions of the script conflict. As a result, it will throw the following error:
 
@@ -299,7 +299,7 @@ Automatic merge failed; fix conflicts and then commit the result.
 
 Again, Git is letting Grace know that it sees there's a conflict and that Git needs human help to fix it. Once Grace has pulled Carlos's changes, she can go open the script in her computer and should see something like the following:
 
-![*Conflicted Version of Loss Script*](Images/lossConflict.PNG)
+![*Conflicted Version of Loss Script*](mages/lossConflict.PNG)
 
 The `<<<<` and `>>>>` lines are in the script to signal the beginning and end of a merge conflict, whereas the `===` line separates the two different versions. On the top is Grace's version and on the bottom is Carlos's. To resolve the merge conflict, Grace should manually select the two lines she prefers and then delete all of the `<, =, >` symbols to let Git know that the conflict has been resolved. Then, she can commit and push the file to Git, and she'll be good to go!
 
@@ -317,7 +317,7 @@ There are many ways to use Git, but [this article by Vincent Driessen](https://n
 
 Here's an illustration of the core model which Driessen made:
 
-![](Images/gitflow-model.png)
+![](mages/gitflow-model.png)
 
 
 ### Tips and Tricks
@@ -370,7 +370,7 @@ This workflow allows each developer to make changes in their own repo and contin
 
 **Step 2**: Once you authorize the connection, you need to specifically select which repos you'd like to use Travis/AppVeyor with. For example (in AppVeyor), upon signing up, you'll see something like this screen:
 
-![](Images/TestSS/appveyor1.PNG)
+![](mages/TestSS/appveyor1.PNG)
 
 You should click "new project" and then select the specific repo you'd like to use in combination with Travis/Appveyor by clicking on "ADD". This means that you should at least initialize your project and push it to GitHub before you start using Travis/Appveyor.
 
@@ -404,11 +404,11 @@ The .gitattributes file actually is useful for setting a variety of other attrib
 
 Once you do all of this, you're set to go! When you push changes to GitHub, all the new files (.yml, .gitignore, .gitattributes) you created will be pushed to the remote. By clicking "NEW BUILD", Travis/AppVeyor will automatically build and test the package for you. For example on Appveyor, if you sign in, you should see something like this:
 
-![](Images/TestSS/appveyor2.PNG)
+![](mages/TestSS/appveyor2.PNG)
 
 and if your build succeeded, you'll see a green line at the bottom like this:
 
-![](Images/TestSS/appveyor3.PNG)
+![](mages/TestSS/appveyor3.PNG)
 
 otherwise you'll see an error. If your build takes a while, that's okay - you don't need to wait for it to build, because Travis/Appveyor will email you automatically if the test fails. And that's all there is to it!
 

@@ -12,7 +12,7 @@ These functions are simple but they help illustrate some important principles of
 
 ### Getting Started
 
-If you want to use `devex`, the easiest thing to do is simply to clone it, and before cloning, you should take a look at the [DESCRIPTION](https://github.com/amspector100/packageguidelines/blob/master/devex/DESCRIPTION) to make sure you have the proper prerequisites installed.
+If you want to use `devex`, the easiest thing to do is simply to clone it, and before cloning, you should take a look at the [DESCRIPTION](https://github.com/IQSS/dss-rbuild/blob/master/devex/DESCRIPTION) to make sure you have the proper prerequisites installed.
 
 ### Running the Tests
 
