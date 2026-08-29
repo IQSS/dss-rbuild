@@ -1,231 +1,408 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Resources | Package Development in R</title>
-  <meta name="description" content="This guide walks through the process of developing an R package" />
-  <meta name="generator" content="bookdown 0.12.1 and GitBook 2.6.7" />
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
 
-  <meta property="og:title" content="4 Resources | Package Development in R" />
-  <meta property="og:type" content="book" />
-  
-  
-  <meta property="og:description" content="This guide walks through the process of developing an R package" />
-  <meta name="github-repo" content="IQSS/dss-rbuild" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 Resources | Package Development in R" />
-  
-  <meta name="twitter:description" content="This guide walks through the process of developing an R package" />
-  
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="integrated-development-environments.html"/>
-
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-
-<style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+<title>Resources – Package Development in R</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
 </style>
 
-<link rel="stylesheet" href="style.css" type="text/css" />
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./integrated-development-environments.html" rel="prev">
+<link href="site_libs/quarto-contrib/quarto-project/IQSS/dss-theme/assets/favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-4b2e561824cdecea3686c6e2c01ced6c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-5f5aec8d004891c7d4c4f5bfc3123b8c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-4b2e561824cdecea3686c6e2c01ced6c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<meta name="theme-color" content="#3C72B4">
+
+
 </head>
 
-<body>
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">An R package development tutorial</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#table-of-contents"><i class="fa fa-check"></i>Table of Contents</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#authors-and-sources"><i class="fa fa-check"></i>Authors and Sources</a></li>
-</ul></li>
-<li class="chapter" data-level="1" data-path="package-development.html"><a href="package-development.html"><i class="fa fa-check"></i><b>1</b> Package Development</a><ul>
-<li class="chapter" data-level="1.1" data-path="package-development.html"><a href="package-development.html#file-paths"><i class="fa fa-check"></i><b>1.1</b> File Paths</a></li>
-<li class="chapter" data-level="1.2" data-path="package-development.html"><a href="package-development.html#downloading-development-tools"><i class="fa fa-check"></i><b>1.2</b> Downloading Development Tools</a></li>
-<li class="chapter" data-level="1.3" data-path="package-development.html"><a href="package-development.html#initializing-the-package"><i class="fa fa-check"></i><b>1.3</b> Initializing the Package</a></li>
-<li class="chapter" data-level="1.4" data-path="package-development.html"><a href="package-development.html#the-description"><i class="fa fa-check"></i><b>1.4</b> The DESCRIPTION</a></li>
-<li class="chapter" data-level="1.5" data-path="package-development.html"><a href="package-development.html#writing-code"><i class="fa fa-check"></i><b>1.5</b> Writing Code</a><ul>
-<li class="chapter" data-level="1.5.1" data-path="package-development.html"><a href="package-development.html#general-coding-guidelines"><i class="fa fa-check"></i><b>1.5.1</b> General Coding Guidelines</a></li>
-<li class="chapter" data-level="1.5.2" data-path="package-development.html"><a href="package-development.html#code-style"><i class="fa fa-check"></i><b>1.5.2</b> Code Style</a></li>
-<li class="chapter" data-level="1.5.3" data-path="package-development.html"><a href="package-development.html#warnings-and-simplicity"><i class="fa fa-check"></i><b>1.5.3</b> Warnings and Simplicity</a></li>
-<li class="chapter" data-level="1.5.4" data-path="package-development.html"><a href="package-development.html#loading-your-code"><i class="fa fa-check"></i><b>1.5.4</b> Loading Your Code</a></li>
-</ul></li>
-<li class="chapter" data-level="1.6" data-path="package-development.html"><a href="package-development.html#testing"><i class="fa fa-check"></i><b>1.6</b> Testing</a><ul>
-<li class="chapter" data-level="1.6.1" data-path="package-development.html"><a href="package-development.html#why-should-you-test"><i class="fa fa-check"></i><b>1.6.1</b> Why should you test?</a></li>
-<li class="chapter" data-level="1.6.2" data-path="package-development.html"><a href="package-development.html#what-are-unit-tests"><i class="fa fa-check"></i><b>1.6.2</b> What are unit tests?</a></li>
-<li class="chapter" data-level="1.6.3" data-path="package-development.html"><a href="package-development.html#setting-up-the-testing-environment"><i class="fa fa-check"></i><b>1.6.3</b> Setting up the testing environment</a></li>
-<li class="chapter" data-level="1.6.4" data-path="package-development.html"><a href="package-development.html#expectations"><i class="fa fa-check"></i><b>1.6.4</b> Expectations</a></li>
-<li class="chapter" data-level="1.6.5" data-path="package-development.html"><a href="package-development.html#structure-and-location-of-unit-tests"><i class="fa fa-check"></i><b>1.6.5</b> Structure and Location of Unit Tests</a></li>
-<li class="chapter" data-level="1.6.6" data-path="package-development.html"><a href="package-development.html#writing-good-tests"><i class="fa fa-check"></i><b>1.6.6</b> Writing Good Tests</a></li>
-<li class="chapter" data-level="1.6.7" data-path="package-development.html"><a href="package-development.html#automated-checking"><i class="fa fa-check"></i><b>1.6.7</b> Automated Checking</a></li>
-<li class="chapter" data-level="1.6.8" data-path="package-development.html"><a href="package-development.html#bonus-the-goodpractice-package"><i class="fa fa-check"></i><b>1.6.8</b> Bonus: The goodpractice Package</a></li>
-<li class="chapter" data-level="1.6.9" data-path="package-development.html"><a href="package-development.html#tips-and-tricks"><i class="fa fa-check"></i><b>1.6.9</b> Tips and Tricks</a></li>
-</ul></li>
-<li class="chapter" data-level="1.7" data-path="package-development.html"><a href="package-development.html#documentation"><i class="fa fa-check"></i><b>1.7</b> Documentation</a><ul>
-<li class="chapter" data-level="1.7.1" data-path="package-development.html"><a href="package-development.html#documenting-functions"><i class="fa fa-check"></i><b>1.7.1</b> Documenting Functions</a></li>
-<li class="chapter" data-level="1.7.2" data-path="package-development.html"><a href="package-development.html#adding-a-readme"><i class="fa fa-check"></i><b>1.7.2</b> Adding a README</a></li>
-</ul></li>
-<li class="chapter" data-level="1.8" data-path="package-development.html"><a href="package-development.html#vignettes"><i class="fa fa-check"></i><b>1.8</b> Vignettes</a></li>
-<li class="chapter" data-level="1.9" data-path="package-development.html"><a href="package-development.html#adding-and-documenting-data"><i class="fa fa-check"></i><b>1.9</b> Adding and Documenting Data</a><ul>
-<li class="chapter" data-level="1.9.1" data-path="package-development.html"><a href="package-development.html#including-data-which-should-be-available-to-users"><i class="fa fa-check"></i><b>1.9.1</b> Including data which should be available to users</a></li>
-<li class="chapter" data-level="1.9.2" data-path="package-development.html"><a href="package-development.html#including-data-for-your-functions"><i class="fa fa-check"></i><b>1.9.2</b> Including data for your functions</a></li>
-</ul></li>
-<li class="chapter" data-level="1.10" data-path="package-development.html"><a href="package-development.html#releasing-your-package"><i class="fa fa-check"></i><b>1.10</b> Releasing Your Package</a><ul>
-<li class="chapter" data-level="1.10.1" data-path="package-development.html"><a href="package-development.html#pushing-to-github"><i class="fa fa-check"></i><b>1.10.1</b> Pushing to GitHub</a></li>
-<li class="chapter" data-level="1.10.2" data-path="package-development.html"><a href="package-development.html#cran"><i class="fa fa-check"></i><b>1.10.2</b> CRAN</a></li>
-<li class="chapter" data-level="1.10.3" data-path="package-development.html"><a href="package-development.html#publicizing"><i class="fa fa-check"></i><b>1.10.3</b> Publicizing</a></li>
-</ul></li>
-<li class="chapter" data-level="1.11" data-path="package-development.html"><a href="package-development.html#tips-and-tricks-1"><i class="fa fa-check"></i><b>1.11</b> Tips and Tricks</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>2</b> Version Control</a><ul>
-<li class="chapter" data-level="2.1" data-path="version-control.html"><a href="version-control.html#why-use-gitgithub"><i class="fa fa-check"></i><b>2.1</b> Why use Git/GitHub?</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="version-control.html"><a href="version-control.html#what-is-git"><i class="fa fa-check"></i><b>2.1.1</b> What is Git?</a></li>
-<li class="chapter" data-level="2.1.2" data-path="version-control.html"><a href="version-control.html#what-is-github"><i class="fa fa-check"></i><b>2.1.2</b> What is GitHub?</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="version-control.html"><a href="version-control.html#setting-up-gitgithub"><i class="fa fa-check"></i><b>2.2</b> Setting up Git/GitHub</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="version-control.html"><a href="version-control.html#making-a-github-account"><i class="fa fa-check"></i><b>2.2.1</b> Making a GitHub account</a></li>
-<li class="chapter" data-level="2.2.2" data-path="version-control.html"><a href="version-control.html#how-to-install-and-set-up-git"><i class="fa fa-check"></i><b>2.2.2</b> How to Install and Set Up Git</a></li>
-</ul></li>
-<li class="chapter" data-level="2.3" data-path="version-control.html"><a href="version-control.html#using-gitgithub"><i class="fa fa-check"></i><b>2.3</b> Using Git/GitHub</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="version-control.html"><a href="version-control.html#initializing-projects-and-repositories"><i class="fa fa-check"></i><b>2.3.1</b> Initializing Projects and Repositories</a></li>
-<li class="chapter" data-level="2.3.2" data-path="version-control.html"><a href="version-control.html#modifying-projects"><i class="fa fa-check"></i><b>2.3.2</b> Modifying Projects</a></li>
-<li class="chapter" data-level="2.3.3" data-path="version-control.html"><a href="version-control.html#accessing-older-versions-of-code"><i class="fa fa-check"></i><b>2.3.3</b> Accessing older versions of code</a></li>
-<li class="chapter" data-level="2.3.4" data-path="version-control.html"><a href="version-control.html#the-.gitignore-file"><i class="fa fa-check"></i><b>2.3.4</b> The .gitignore file</a></li>
-<li class="chapter" data-level="2.3.5" data-path="version-control.html"><a href="version-control.html#branching"><i class="fa fa-check"></i><b>2.3.5</b> Branching</a></li>
-<li class="chapter" data-level="2.3.6" data-path="version-control.html"><a href="version-control.html#conflicts"><i class="fa fa-check"></i><b>2.3.6</b> Conflicts</a></li>
-<li class="chapter" data-level="2.3.7" data-path="version-control.html"><a href="version-control.html#tips-and-tricks-2"><i class="fa fa-check"></i><b>2.3.7</b> Tips and Tricks</a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="version-control.html"><a href="version-control.html#optional-integrated-testing"><i class="fa fa-check"></i><b>2.4</b> Optional: Integrated Testing</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="version-control.html"><a href="version-control.html#why-use-integrated-tests"><i class="fa fa-check"></i><b>2.4.1</b> Why use Integrated Tests?</a></li>
-<li class="chapter" data-level="2.4.2" data-path="version-control.html"><a href="version-control.html#the-integrated-testing-workflow"><i class="fa fa-check"></i><b>2.4.2</b> The integrated testing workflow</a></li>
-<li class="chapter" data-level="2.4.3" data-path="version-control.html"><a href="version-control.html#setting-up-integrated-tests"><i class="fa fa-check"></i><b>2.4.3</b> Setting up Integrated Tests</a></li>
-</ul></li>
-<li class="chapter" data-level="2.5" data-path="version-control.html"><a href="version-control.html#further-reading"><i class="fa fa-check"></i><b>2.5</b> Further reading</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="integrated-development-environments.html"><a href="integrated-development-environments.html"><i class="fa fa-check"></i><b>3</b> Integrated Development Environments</a><ul>
-<li class="chapter" data-level="3.1" data-path="integrated-development-environments.html"><a href="integrated-development-environments.html#general-suggestions"><i class="fa fa-check"></i><b>3.1</b> General Suggestions</a></li>
-<li class="chapter" data-level="3.2" data-path="integrated-development-environments.html"><a href="integrated-development-environments.html#rstudio"><i class="fa fa-check"></i><b>3.2</b> RStudio</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="integrated-development-environments.html"><a href="integrated-development-environments.html#why-use-rstudio"><i class="fa fa-check"></i><b>3.2.1</b> Why use RStudio?</a></li>
-<li class="chapter" data-level="3.2.2" data-path="integrated-development-environments.html"><a href="integrated-development-environments.html#getting-started"><i class="fa fa-check"></i><b>3.2.2</b> Getting Started</a></li>
-<li class="chapter" data-level="3.2.3" data-path="integrated-development-environments.html"><a href="integrated-development-environments.html#ex-initializing-packages"><i class="fa fa-check"></i><b>3.2.3</b> Ex: Initializing Packages</a></li>
-<li class="chapter" data-level="3.2.4" data-path="integrated-development-environments.html"><a href="integrated-development-environments.html#ex-building-packages"><i class="fa fa-check"></i><b>3.2.4</b> Ex: Building Packages</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="resources.html"><a href="resources.html"><i class="fa fa-check"></i><b>4</b> Resources</a><ul>
-<li class="chapter" data-level="4.1" data-path="resources.html"><a href="resources.html#general"><i class="fa fa-check"></i><b>4.1</b> General</a></li>
-<li class="chapter" data-level="4.2" data-path="resources.html"><a href="resources.html#package-development-1"><i class="fa fa-check"></i><b>4.2</b> Package Development</a></li>
-<li class="chapter" data-level="4.3" data-path="resources.html"><a href="resources.html#version-control-1"><i class="fa fa-check"></i><b>4.3</b> Version Control</a></li>
-<li class="chapter" data-level="4.4" data-path="resources.html"><a href="resources.html#ides"><i class="fa fa-check"></i><b>4.4</b> IDEs</a></li>
-</ul></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="https://www.iq.harvard.edu/data-science-services" class="navbar-brand navbar-brand-logo">
+    <img src="site_libs/quarto-contrib/quarto-project/IQSS/dss-theme/assets/dss-logo.svg" alt="" class="navbar-logo light-content">
+    <img src="site_libs/quarto-contrib/quarto-project/IQSS/dss-theme/assets/dss-logo-dark.svg" alt="" class="navbar-logo dark-content">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://iqss.github.io/dss-training/"> 
+<span class="menu-text">Training materials</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.iq.harvard.edu/data-science-services"> 
+<span class="menu-text">Data Science Services</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.iq.harvard.edu/data-science-services/contact-us"> 
+<span class="menu-text">Request help</span></a>
+  </li>  
 </ul>
-
-      </nav>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./resources.html">Resources</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
     </div>
-
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Package Development in R</a>
-          </h1>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
         </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./package-development.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Package Development</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./version-control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Version Control</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./integrated-development-environments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Integrated Development Environments</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./resources.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Resources</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#general" id="toc-general" class="nav-link active" data-scroll-target="#general">General</a></li>
+  <li><a href="#package-development" id="toc-package-development" class="nav-link" data-scroll-target="#package-development">Package Development</a></li>
+  <li><a href="#version-control" id="toc-version-control" class="nav-link" data-scroll-target="#version-control">Version Control</a></li>
+  <li><a href="#ides" id="toc-ides" class="nav-link" data-scroll-target="#ides">IDEs</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
 
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
 
-            <section class="normal" id="section-">
-<div id="resources" class="section level1">
-<h1><span class="header-section-number">4</span> Resources</h1>
-<div id="general" class="section level2">
-<h2><span class="header-section-number">4.1</span> General</h2>
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Resources</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="general" class="level2">
+<h2 class="anchored" data-anchor-id="general">General</h2>
 <ul>
 <li><a href="https://www.rstudio.com/resources/cheatsheets/">This link</a> contains a number of truly fantastic cheat sheets, documenting everything from RStudio itself to data visualization and machine learning.</li>
 <li>To read more about using R, <a href="http://adv-r.had.co.nz/">take a look at the following website, built by Chapman and Hall</a></li>
-<li>As always, it’s worth referencing <a href="https://stackoverflow.com/questions/tagged/r/">stackoverflow</a> if you’re ever confused. <!--
-- A list of useful packages can be found [here](https://support.rstudio.com/hc/en-us/articles/201057987-Quick-list-of-useful-R-packages).
---></li>
+<li>As always, it’s worth referencing <a href="https://stackoverflow.com/questions/tagged/r/">stackoverflow</a> if you’re ever confused. &lt;!–</li>
+<li>A list of useful packages can be found <a href="https://support.rstudio.com/hc/en-us/articles/201057987-Quick-list-of-useful-R-packages">here</a>. –&gt;</li>
 </ul>
-</div>
-<div id="package-development-1" class="section level2">
-<h2><span class="header-section-number">4.2</span> Package Development</h2>
+</section>
+<section id="package-development" class="level2">
+<h2 class="anchored" data-anchor-id="package-development">Package Development</h2>
 <ul>
 <li>There’s a wonderful cheat sheet for package development linked <a href="https://www.rstudio.com/wp-content/uploads/2015/06/devtools-cheatsheet.pdf">here</a>. This also describes a lot of key components of the testthat package.</li>
 <li>If you are looking for a very simple example of a package, the <a href="https://github.com/IQSS/Rbuild/tree/master/devex">devex package</a> can be found here. If you’re having trouble understanding the workflow for package development, it’s worth looking through the <code>devex</code> package and making sure you understand all its components. Better yet, you can practice using <code>roxygen2</code> and <code>devtools</code> by creating a very small/useless package (2-3 simple functions)</li>
 <li>It can sometimes be instructive to look through the <a href="https://www.rdocumentation.org/packages/devtools/versions/1.13.3/source">source code</a> and <a href="https://www.rdocumentation.org/packages/devtools/versions/1.13.3">documentation</a> for <code>devtools</code>.</li>
 </ul>
 <p>Additionally, as you build larger and more complex packages, you might need a deeper understanding of package structure. For a slightly more in-depth explanation of package development, you’ll want to reference Hadley Wickham’s <a href="http://r-pkgs.had.co.nz/">R Packages</a>. For a serious dive into package mechanics, you should consult the official <a href="https://cran.r-project.org/doc/manuals/R-exts.html#Creating-R-packages">R Extensions Manual</a>, which is published by CRAN. However, at least for mid-sized packages, this guide probably has given you most of what you need to know.</p>
-</div>
-<div id="version-control-1" class="section level2">
-<h2><span class="header-section-number">4.3</span> Version Control</h2>
+</section>
+<section id="version-control" class="level2">
+<h2 class="anchored" data-anchor-id="version-control">Version Control</h2>
 <ul>
 <li><a href="https://github.github.com/training-kit/downloads/github-git-cheat-sheet.pdf">The official GitHub cheat sheet</a> lists all of the general commands you’ll need</li>
 <li><a href="http://kbroman.org/github_tutorial/pages/init.html">Karl Broman’s tutorial</a> runs you through initializing a repository</li>
@@ -237,81 +414,539 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>The Software Carpentry Foundation has a great mid level Git tutorial <a href="https://swcarpentry.GitHub.io/git-novice/">here</a></li>
 <li>Atlassian has some wonderful advanced Git tutorials <a href="https://www.atlassian.com/git/tutorials/advanced-overview">here</a></li>
 </ul>
-</div>
-<div id="ides" class="section level2">
-<h2><span class="header-section-number">4.4</span> IDEs</h2>
+</section>
+<section id="ides" class="level2">
+<h2 class="anchored" data-anchor-id="ides">IDEs</h2>
 <ul>
 <li><a href="https://www.theanalysisfactor.com/the-advantages-of-rstudio/">This page</a> lists some more of RStudio’s advantages.</li>
 </ul>
 
-</div>
-</div>
-            </section>
 
-          </div>
-        </div>
-      </div>
-<a href="integrated-development-environments.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+</section>
 
+</main> <!-- /main -->
+<script>
+// Light / Dark / System switch, built on Quarto's own light-dark mechanism (Quarto 1.7+ with
+// respect-user-color-scheme: true). Quarto stores an explicit choice in localStorage["quarto-color-scheme"]
+// ("default" = light, "alternate" = dark) and, when nothing is stored, follows prefers-color-scheme and
+// tracks OS changes live. "System" here therefore means: remove the stored choice and apply the OS preference.
+(function () {
+  const KEY = "quarto-color-scheme";
+  const mq = window.matchMedia("(prefers-color-scheme: dark)");
+  const stored = () => { try { return window.localStorage.getItem(KEY); } catch { return null; } };
+  const mode = () => { const s = stored(); return s === "alternate" ? "dark" : s === "default" ? "light" : "system"; };
+  const isDark = () => document.body.classList.contains("quarto-dark");
+  const apply = (dark) => {
+    if (isDark() === dark) return;
+    if (typeof window.quartoToggleColorScheme === "function") { window.quartoToggleColorScheme(); }
+  };
+  const choose = (m) => {
+    const dark = m === "dark" ? true : m === "light" ? false : mq.matches;
+    apply(dark);
+    try {
+      if (m === "system") { window.localStorage.removeItem(KEY); }
+      else { window.localStorage.setItem(KEY, dark ? "alternate" : "default"); }
+    } catch {}
+    mark();
+  };
+  const items = [["light", "Light", "bi-sun"], ["dark", "Dark", "bi-moon"], ["system", "System", "bi-circle-half"]];
+  let menu;
+  const mark = () => {
+    if (!menu) return;
+    const m = mode();
+    menu.querySelectorAll("[data-mode]").forEach((a) => {
+      const on = a.dataset.mode === m;
+      a.classList.toggle("active", on);
+      a.setAttribute("aria-current", on ? "true" : "false");
+    });
+    const icon = menu.parentElement.querySelector(".dss-switch-icon");
+    if (icon) icon.className = "bi dss-switch-icon " + items.find((i) => i[0] === m)[2];
+  };
+  const build = () => {
+    const nav = document.querySelector(".navbar .navbar-nav.ms-auto") || document.querySelector(".navbar .navbar-nav");
+    if (!nav || nav.querySelector(".dss-theme-switch")) return;
+    const li = document.createElement("li");
+    li.className = "nav-item dropdown dss-theme-switch";
+    li.innerHTML =
+      '<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Colour scheme" title="Colour scheme">' +
+      '<i class="bi dss-switch-icon bi-circle-half"></i></a>' +
+      '<ul class="dropdown-menu dropdown-menu-end">' +
+      items.map(([m, label, icon]) => '<li><a class="dropdown-item" href="#" data-mode="' + m + '"><i class="bi ' + icon + '"></i> ' + label + "</a></li>").join("") +
+      "</ul>";
+    nav.appendChild(li);
+    menu = li.querySelector(".dropdown-menu");
+    menu.addEventListener("click", (e) => {
+      const a = e.target.closest("[data-mode]");
+      if (!a) return;
+      e.preventDefault();
+      choose(a.dataset.mode);
+    });
+    mark();
+  };
+  if (document.readyState === "loading") { document.addEventListener("DOMContentLoaded", build); } else { build(); }
+  // Quarto's listener re-applies the OS preference on change when nothing is stored; keep the tick in step.
+  mq.addEventListener("change", () => setTimeout(mark, 0));
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/iqss\.github\.io\/dss-rbuild\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./integrated-development-environments.html" class="pagination-link" aria-label="Integrated Development Environments">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Integrated Development Environments</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><a href="https://www.iq.harvard.edu/" class="footer-logo" aria-label="IQSS, the Institute for Quantitative Social Science"></a><span>Data Science Services · Institute for Quantitative Social Science · Harvard University</span></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://www.iq.harvard.edu/data-science-services">
+<p>Data Science Services</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://www.iq.harvard.edu/data-science-services/contact-us">
+<p>Request help</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://www.iq.harvard.edu/">
+<p>IQSS</p>
+</a>
+  </li>  
+</ul>
     </div>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"google": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/IQSS/dss-rbuild/edit/master/04_resources.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"download": ["Rbuild.pdf", "Rbuild.epub"],
-"toc": {
-"collapse": "section",
-"scroll_highlight": true
-}
-});
-});
-</script>
+</footer>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
-</body>
 
-</html>
+
+
+</body></html>
