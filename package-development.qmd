@@ -1,4 +1,9 @@
-# Package Development
+---
+title: "Package Development"
+execute:
+  warning: false
+  message: false
+---
 
 The following graphic outlines this entire chapter:
 
@@ -20,12 +25,12 @@ The paths used to locate files differ between UNIX (e.g., MacOS, Linux) and Wind
 
 In the examples provided in this guide, we will show MacOS file paths. If you're using Windows, you will need to modify these paths slightly to show the drive letter at the beginning, followed by a colon.
 
-
 ## Downloading Development Tools
 
 Before we get started, you'll want to download four packages that are extremely useful for package development. For Mac/Linux users, head to the R Gui (or your favorite IDE) and run the code below to download the packages. If you are prompted to choose a CRAN mirror for your session, simply pick the mirror closest to your location.
 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 install.packages('devtools')
 install.packages('usethis')
 install.packages('roxygen2')
@@ -40,13 +45,12 @@ If you are using Windows, prior to running the above code, you will need to inst
 
 3. Let the installer run itself (the defaults are fine).
 
-
-
 ## Initializing the Package
 
 Now we can begin to walk through the process of creating an R package. The first thing you'll always want to do is run the following function to initialize the package:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 usethis::create_package('path/to/desired/location/packagename')
 ```
 
@@ -58,7 +62,8 @@ Note that the path specified by `usethis::create_package()` must currently be em
 
 You can then set the working directory for your project to an "active" status:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 usethis::proj_set('path/to/desired/location/packagename')
 ```
 
@@ -97,8 +102,8 @@ Let's go through the fields and discuss what they mean. The first seven fields l
 
 13. **Suggests**: Sometimes, your package will not really *require* the use of other packages, but it might offer a couple of extra wrappers/functions with those other packages. When those extra functions aren't strictly necessary, it's a good idea to have your package *suggest* imports. For example, a package which includes the following function should include `ggplot2` in the 'suggests' part of the description.
 
-```{r, eval=FALSE}
-
+```{r}
+#| eval: false
 
 scalep <- function(d, x=1){
   ...
@@ -132,7 +137,8 @@ The coding you will do in package development is slightly different than the cod
 2. Unlike your personal scripts, other people will be using your package, and if your package is good, they'll be using it in ways you didn't anticipate. This means you ought to really try to make sure your code is as general as possible and can support a variety of approaches and implementations.
 3. Also, because other people will be using your package, you should avoid modifying the global environment with your package. This means avoiding using functions like `require()`, `library()`, or `source()`; instead, there are other alternatives which can accomplish the same goal without changing the global environment and potentially giving other users an unwanted surprise. For example, instead of using `library()` and `require()`, you should be listing your necessary imports in the DESCRIPTION file, as outlined above, and then R will make sure anyone who installs and loads your package also has any other packages your package depends on. The one catch is that you'll now have to append `packagename::` in front of the imported functions you want to use, otherwise R won't recognize them. For example, to use the `qplot()` function from the `ggplot2` package, the code should look like:
 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
  ...
 scalep <- function(d, x=1){
  ...
@@ -144,7 +150,8 @@ scalep <- function(d, x=1){
 
 The last thing you should know is that if you want your package to plot things, you will have to surround the `plot()` commands with a `print()` statement, like this:
 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
  ...
 scalep <- function(d, x=1){
  ...
@@ -153,7 +160,6 @@ scalep <- function(d, x=1){
 }
 
 ```
-
 
 You should also take care to organize your functions properly. It's probably a bad idea to stick them all into one script and title it "functions." Instead, you should organize functions by their purposes - for example, a variety of loss functions might go into a single script. Of course, some very complicated functions might deserve their own script. The file names of the script should be descriptive - for example, a script of loss functions might be named "loss_functions.R".
 
@@ -187,7 +193,8 @@ general_sqrt <- function (x) {
 
 2. **Names**: Variable and function names should be descriptive but concise, and variable names should generally be nouns whereas function names tend to be verbs. Most R developers keep their function/variable names all lowercase and separate multiple words with underscores. There are no strict rules on this, but it's nice to be consistent with *some* rules because it makes your code readable.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 # Bad example - function name
 f <- function(x) {
   return(sqrt(x))
@@ -208,7 +215,8 @@ car_data <- read.table(path)
 
 3. **Curly Braces**: You should start a new line after you write an opening curly brace, and ending curly braces should get their own lines, unless you have an else clause or the line is exceptionally simple.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 # Bad examples
 
 if (condition) {
@@ -237,7 +245,8 @@ Different organizations and programmers may have different styles, but in genera
 
 Consider the case of the `scalep()` function, which currently takes a 2-column dataframe as an input, divides the second column by the first, and returns/graphs some scaled proportion of the quotient vector. One version of this function, which follows almost all of the guidelines above, might look like this:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 scalep <- function(d, x=1){
 
   # Intialize resulting vector
@@ -266,7 +275,8 @@ scalep <- function(d, x=1){
 
 However, this function still has a couple of problems. It's not super easy to use because (a) it's understandably hard for other programmers to remember which column is divided by which and (b) there's a simpler way to accomplish the code above which will make it more readable. Specifically, it might be easier to just have arguments called 'factors' and 'divisors' and then divide them, like this:
 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 scalep <- function(factors, divisors, constant = 1) {
 
   # Divide and multiply by optional scalar
@@ -287,7 +297,8 @@ scalep <- function(factors, divisors, constant = 1) {
 
 The new argument structure will make it a bit easier to use. Similarly, the new structure simplifies the code, making it a bit more readable. However, it does pose one problem: whereas the previous structure mandated that the two vectors be the same length (because they were part of a dataframe), in this function, the two vectors might not be the same length and the function would not always throw an error (specifically, if 'factors' has a length which is is an integer multiple of the length of 'divisors', R will not warn the user at all). This problem is a type of **silent error** (silent errors are bugs which do not issue warnings or errors). Silent errors are terrible because they make bug-hunting extremely difficult: in large repositories of code, it becomes nearly impossible to find which specific line is causing problems without some kind of warning. Thus, it's also worth adding in a couple of lines to warn the user if the factors and divisors are of different lengths, as is outlined below:
 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 
   # Check divisors and factors are the same length
   if (length(divisors) != length(factors)) {
@@ -298,7 +309,8 @@ The new argument structure will make it a bit easier to use. Similarly, the new 
 
 Lastly, it's just worth adding an extra optional argument to let your users turn off the graphing feature of `scalep()`, just to make the function more useable, as follows:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 
 scalep <- function(factors, divisors, constant = 1, graph = FALSE) {
 
@@ -315,18 +327,18 @@ scalep <- function(factors, divisors, constant = 1, graph = FALSE) {
 
 ```
 
-
 To summarize, this subsection thus contained three core ideas: (1) make your code simple, (2) make it easy to use by labeling arguments, and (3) always avoid silent errors.
 
 ### Loading Your Code
 
 If you've finished writing your code and want to play with it a little bit, you can use the following function:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 devtools::load_all()
 ```
 
-which (according to its documentation) "roughly simulates what happens when a package is installed and loaded with library." As we'll see in the [build](#releasing-your-package), [testing](#testing), and [RStudio](./integrated-development-environments.html#ex-building-packages) sections, there are better ways to simulate the user experience and test your code, but `load_all()` is often a useful intermediate step.
+which (according to its documentation) "roughly simulates what happens when a package is installed and loaded with library." As we'll see in the [build](#releasing-your-package), [testing](#testing), and [RStudio](integrated-development-environments.qmd#ex-building-packages) sections, there are better ways to simulate the user experience and test your code, but `load_all()` is often a useful intermediate step.
 
 ## Testing
 
@@ -336,12 +348,12 @@ Suppose an imaginary programmer named Grace has created a package and has been u
 
 The solution to problems like this is to test your package *systematically* and *automatically*. If Grace had rigorously tested the entire package before publishing it, Carlos would never have had to deal with the new bug- Grace would have found out immediately. In other words, a good principle in package development is to make sure your code *fails as fast as possible,* so you can find out and fix it. Of course, all programmers test their code, but not everyone tests systematically and automatically.
 
-
 ### What are unit tests?
 
 Tests compare the *expected* output of a block of code to its *actual* output. For example, the following test tests whether the "generalized square root" function actually returns $2$ as the square root of $4$.
 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 expect_equal(general_sqrt(4), complex(real = 2, imaginary = 0))
 ```
 
@@ -353,7 +365,8 @@ We'll talk a little more about how exactly to create tests below, but hopefully 
 
 Creating unit tests is actually quite easy, thanks to a package called `testthat` which works in combination with `usethis`. To begin, you should run the following command in your favorite IDE, or even in the R Gui:
 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 usethis::use_testthat()
 ```
 
@@ -370,7 +383,9 @@ Before discussing how to write unit tests, we need to properly describe an expec
 
 For example, `expect_equal()` uses the base R function `all.equal()` to check whether an output is (approximately) equal to an expectation. In the following code, the first function call will do nothing - the second function call will throw an error, displayed below.
 
-```{r, eval = FALSE, error = TRUE}
+```{r}
+#| eval: false
+#| error: true
 library(testthat)
 testthat::expect_equal(2, 2)
 testthat::expect_equal(2, 4)
@@ -401,7 +416,8 @@ testthat::expect_is(sqrt(2), 'numeric')
 
 Each *unit test* (which is written in an R script) should use a couple of expectations to test a single core function. It should use the function `test_that()` (from the `testthat` package). `test_that()` takes two parameters: a string, which describes the test, and a couple of expectations, surrounded by curly braces. For example, the following code will test whether the `general_sqrt()` function from the `devex` package returns a complex number.
 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 test_that("Returns complex number", {
   expect_is(general_sqrt(-2), 'complex')
   expect_is(general_sqrt(2), 'complex')
@@ -411,7 +427,8 @@ test_that("Returns complex number", {
 
 Multiple tests with similar functions should be put in the same file, and those test files must be put in the tests/testthat/ directory. Moreover, their name must start with the word 'test' - this will help R automatically run your tests for you.  For example, in the `devex` package, there are two very simple helper functions (`general_sqrt()` and `loss()`) and one moderately complex function (`scalep()`). As a result, the `devex` package has exactly two testing files: one called 'testhelpers', which tests the helper functions, and another called 'testscalep', which tests the `scalep()` function. The 'testhelpers' file looks like this:
 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 library(devex)
 context("generalized sqrt and loss")
 
@@ -447,7 +464,8 @@ Each test file, as demonstrated above, needs to load the package of interest (us
 
 You can run all of the tests in the test/testthat directory by running the following `devtools` function:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 devtools::test()
 ```
 
@@ -457,7 +475,8 @@ If any test throws an error, R will report two things. First, it will report the
 
 This indicates that line 18 of testhelpers.R failed in the test "Warnings for vectors of length > 1." Looking at the test code reveals that the `general_sqrt()` function does not return a warning for positive vectors of length greater than one.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 expect_warning(general_sqrt(c(2, 0)))
 ```
 
@@ -469,7 +488,8 @@ Good tests have a couple of characteristics.
 
 **First**, good tests have high *coverage,* meaning that they test a large percentage of the lines of code of the package. For example, the code for the `general_sqrt()` function is as follows:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 # This function takes the complex square root of real numbers
 
 general_sqrt <- function (x){
@@ -496,7 +516,8 @@ general_sqrt <- function (x){
 
 The following test has low coverage for the `general_sqrt()` function:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 test_that("Returns correct sqrt", {
   expect_equal(general_sqrt(-1.53), complex(real = 0, imaginary = sqrt(1.53)))
   expect_equal(general_sqrt(-2), complex(real = 0, imaginary = sqrt(2)))
@@ -506,7 +527,8 @@ test_that("Returns correct sqrt", {
 
 because it only tests whether `general_sqrt()` returns the correct square root for negative numbers. This test thus only covers half of the code in `general_sqrt()`, because the mechanism for dealing with nonnegative numbers is entirely separate. The following test is a better example, because it tests both positive and negative numbers.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 
 test_that("Returns correct sqrt", {
   expect_equal(general_sqrt(1.53), complex(real = sqrt(1.53), imaginary = 0))
@@ -533,7 +555,8 @@ This expectation has 100% coverage because it will run every line of code (the e
 
 **Fourth**, tests should be clear to the reader, because sometimes there are bugs in tests too. If others eventually help develop or maintain your packages, they'll want to know what it means when a test fails. Moreover, for large packages, you yourself may have trouble remembering the exact details of every test you've written. Thus, your tests should return clear error messages and be readable. For example, the following test is a bad example, for two reasons:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 
 sigmoid <- function(x, a, b){
   return(exp(a*x)/(exp(a*x) + b))
@@ -547,7 +570,8 @@ test_that('sigmoid output', {
 
 The string 'sigmoid output' does not describe the purpose of the test, which is to test the precision of the sigmoid output. This means that if the test fails, it will be hard to tell what's wrong. Additionally, the purpose of the test is not clear to begin with - what do the seemingly random decimals mean? At the very least, it's probably worth putting comments in explaining the point of the test, as shown below.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 
 sigmoid <- function(x, a, b){
   return(exp(a*x)/(exp(a*x) + b))
@@ -568,7 +592,8 @@ This test is a bit more interpretable and delivers a better error message.
 
 The `usethis::test()` function is pretty nice, but all it does is run your unit tests - it doesn't check everything else in your package. Thankfully, the `devtools::check()` function fills this gap.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 devtools::check()
 ```
 
@@ -587,13 +612,15 @@ The aforementioned automated checking system for R is pretty good, but there is 
 Let's run through the key points of using `goodpractice` below.
 
 To install the goodpractice package, just run the following command in the R console:
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 install.packages('goodpractice')
 ```
 
 Once you've installed the `goodpractice` package, you basically only need to use a single function from it: the `gp()` or `goodpractice()` function (which call the same code). This function will run comprehensive automated checks on your package, and it takes exactly one input, the path of your built package. However, it's important to note that the path of your *built* package is not identical to the path of the repo containing it. For example, I work on the `devex` package in "/Users/name/Documents/R/packageguidelines/devex", but the built package lives at another location. For `goodpractice()` to work, you need to use this latter path. If you don't know what the path is, you can use the "system.file" function to retrieve it for you, as demonstrated below.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 # Retrieve path
 package_path <- system.file(package = 'devex')
 
@@ -618,7 +645,6 @@ When testing, there are a couple of key principles to keep in mind:
 
 The `devtools` cheatsheet, linked [here](https://www.rstudio.com/wp-content/uploads/2015/03/devtools-cheatsheet.pdf), references a lot of the key components of the `testthat` package.
 
-
 ## Documentation
 
 Documentation is an absolutely essential part of any package - most people won't be willing to read your source code to figure out how your functions work. Thankfully, creating documentation for your package is incredibly easy with `Roxygen2`.
@@ -629,7 +655,8 @@ Documentation is an absolutely essential part of any package - most people won't
 
 To understand how to use `Roxygen2`, it's best to start with an example. Consider the following code, which generates the documentation for the `general_sqrt()` function above.
 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 
 #' Generalized Square Roots
 #'
@@ -683,10 +710,10 @@ Note that most functions you write won't be exported - for example, if you write
 
 Once you've written all your documentation, it's fairly simple to check what it looks like. Simply run the following function:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 devtools::document()
 ```
-
 
 which will automatically generate your documentation. Then, if you've documented a function, you can type `?function-name` into the console, and the documentation should automatically pop up!
 
@@ -709,7 +736,6 @@ The README file is a bit different than the others, because your package will ac
 
 This [template](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) README is a good starting point. You could copy this file into your package directory and modify it to reflect the content of your project. Again, because your package will technically function without your README, the actual structure and content of a README can be flexible. However, just remember that if you don't have a README which outlines why and how to use your package, other developers are unlikely to want to use it.
 
-
 ## Vignettes
 
 Documentation is useful, but not necessarily a comprehensive guide to your package. You may want to include details about your implementation, extra examples, and more organization than your documentation provides, which is exactly what vignettes are for.
@@ -718,7 +744,8 @@ Documentation is useful, but not necessarily a comprehensive guide to your packa
 
 To write a vignette, start by running the `use_vignette()` function from the `usethis` package:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 usethis::use_vignette('vignette-name')
 ```
 
@@ -741,7 +768,8 @@ The rest of the vignette should be written in RMarkdown, which is basically a mi
 
 Once you've modified your vignette, you can *knit* it into a beautiful HTML document by running the following function in the console:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 rmarkdown::render('path/to/rmarkdown/file.Rmd')
 ```
 
@@ -757,13 +785,15 @@ All of the data you want to be available to users should be saved in a folder ca
 
 For example, when documenting the `scalep()` function, one might want to include data as an example of a way to use `scalep()`. To this end, we can use the built-in R dataset `mtcars` and include it in the package.
 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 usethis::use_data(mtcars)
 ```
 
 In this way, you can include in your package any data you want, providing it has been stored in an R object. Data in your 'data' folder will effectively always be exported, so you always must document it. To document data, you should create an R Script in your 'R' directory called ['data.R'] and use `Roxygen2` to document the data similarly to the way you'd document a function. For example, one might document the aforementioned data in the following way:
 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 #' Motor trend car road tests dataset
 #'
 #' This dataset lists the properties of 32 motorcars
@@ -793,7 +823,8 @@ This should all look pretty similar to documenting functions. Note that '@format
 
 Some functions may rely on a large, predefined set of coefficients or other inputs which need to be included in the package. However, users shouldn't generally have access to such data because otherwise they might accidentally radically change the way your function works. It's best to put such data in 'R/sysdata.rda', because then users won't easily be able to access and accidentally modify it. As before, the way to include data in this way is to write a script which loads the data into R and then use the `use_data()` function to save it, but you should also include a parameter `internal = TRUE` in the function call to let R know that this is interior, not exterior, data. For example, if a function depends on a matrix called "coefficients", one might run the following code:
 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 coefficients <- read.csv('Users/name/Documents/R/coefs.csv')
 usethis::use_data(coefficients, internal = TRUE)
 ```
@@ -816,7 +847,8 @@ Logistically, submitting your package to CRAN is pretty simple. The first step i
 
 The best way to build your package is to zip it as a .tar.gz file. `devtools` will do this for you if you run the following command:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 devtools::build(binary = FALSE)
 ```
 
@@ -828,7 +860,8 @@ The next step is to submit the bundled file to CRAN [at the link here](https://c
 
 tar.gz files are useful because anyone who has a working R development environment can install and unzip your package, regardless of their operating system. However, you do need a development environment to install packages built as tar.gz files, and some users (in particular on Windows) may not have development environments set up yet. To address this potential issue, another way to build your package is as a **precompiled binary file**. Precompiled binaries are useful because unlike tar.gz files, they do not require a development environment to install. However, they are platform specific: a precompiled binary built by a Windows machine can't be installed on Mac machine. Although tar.gz files are much more common, if you do want to build a binary, you can just change an argument of `devtools::build()`:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 devtools::build(binary = TRUE)
 ```
 

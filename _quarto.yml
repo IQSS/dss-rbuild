@@ -1,0 +1,30 @@
+# Package Development in R (dss-rbuild): a Quarto website on the dss-theme extension (quarto add IQSS/dss-theme).
+# Five pages named after the 2019 bookdown pages, so every old address still answers. The five chunks that run
+# (an R version, a function, three testthat expectations) are frozen; CI renders from _freeze/ with no R.
+project:
+  type: dss-theme
+  output-dir: _site
+  render:
+    - index.qmd
+    - package-development.qmd
+    - version-control.qmd
+    - integrated-development-environments.qmd
+    - resources.qmd
+
+website:
+  title: "Package Development in R"
+  site-url: https://iqss.github.io/dss-rbuild/
+  repo-url: https://github.com/IQSS/dss-rbuild
+  page-navigation: true
+  sidebar:
+    style: floating
+    search: true
+    contents:
+      - { href: index.qmd, text: "Introduction" }
+      - package-development.qmd
+      - version-control.qmd
+      - integrated-development-environments.qmd
+      - resources.qmd
+
+execute:
+  freeze: auto

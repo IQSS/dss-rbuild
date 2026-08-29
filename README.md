@@ -1,19 +1,22 @@
-# Rbuild - An R package development tutorial
-![](https://travis-ci.org/IQSS/dss-rbuild.svg?branch=master) [![Github All Releases](https://img.shields.io/github/downloads/IQSS/dss-rbuild/total.svg)]()
+# dss-rbuild
 
-## Media
-View this tutorial via a:
-* [browser](https://iqss.github.io/dss-rbuild/)
-* [PDF](https://github.com/IQSS/dss-rbuild/blob/gh-pages/Rbuild.pdf)
-* [EPUB](https://github.com/IQSS/dss-rbuild/blob/gh-pages/Rbuild.epub)
+Package Development in R: a guide to building an R package (structure,
+roxygen2 documentation, testthat, `devtools::check()`, vignettes, CRAN),
+version control with Git and GitHub, and the IDEs, with `devex/`, a small
+example package. Live at https://iqss.github.io/dss-rbuild/. Written 2019 by
+Asher Spector (Harvard College) with Jinjie Liu, Simo Goshev, and Steve
+Worthington (IQSS); moved from bookdown to Quarto on the `dss-theme`
+extension in 2026, content as it was.
 
-## Aim
-To outline best practices for developing packages using R.
+## Build
 
-## Contents
-This repo walks through the process of package development in R, highlighting best practices, including version control, and use of IDEs such as RStudio. The repo also includes the [devex](https://github.com/IQSS/dss-rbuild/tree/master/devex) package in a subdirectory, which serves as a very simple example of an R package.
+`quarto preview` or `quarto render`. The five chunks that run (an R version,
+a function, three testthat expectations) are frozen in `_freeze/`;
+re-executing them needs R with the packages in `renv.lock`
+(`renv::restore()`). Every push to `main` publishes the site to `gh-pages`
+(`.github/workflows/publish.yml`), rendering from the freeze with no R.
 
 ## Contributing
-This material is maintained under a GPL License, and other individuals are welcome to fork, clone, or make copies of the material. Comments and suggestions are also always welcome.
 
-![](images/readme-license.png)
+GPL-3.0 (`LICENSE`). Comments and suggestions through the Request help
+button on every page.
