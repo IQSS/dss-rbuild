@@ -16,6 +16,11 @@ website:
   site-url: https://iqss.github.io/dss-rbuild/
   repo-url: https://github.com/IQSS/dss-rbuild
   page-navigation: true
+  # The theme contributes the footer's left half; the licence is this site's own.
+  page-footer:
+    right:
+      - text: "GPL-3.0"
+        href: https://github.com/IQSS/dss-rbuild/blob/main/LICENSE
   sidebar:
     style: floating
     search: true
