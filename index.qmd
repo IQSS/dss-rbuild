@@ -1,6 +1,12 @@
 ---
 title: "Package Development in R"
 description: "This guide walks through the process of developing an R package"
+author:
+  - "Asher Spector"
+  - "Simo Goshev"
+  - "Steve Worthington"
+  - "Jinjie Liu"
+date: "last-modified"
 ---
 
 ## Introduction
