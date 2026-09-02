@@ -12,10 +12,12 @@
 # the failure. The two things it fails on:
 #
 #   1. the render failed        - a package changed in a way the materials do not survive
-#   2. a deprecation was raised - this guide already shows warnings, so anything new here is
-#                                 something a reader would now meet on the page itself.
+#   2. a deprecation was raised - the pages set `warning: false` in their front matter, so these
+#                                 are invisible on the site while a reader running the same chunk
+#                                 meets them in their own console.
 #
-# Everything worth reading is written to the run summary, which the notification links to.
+# Findings go to both the step log and the run summary. The summary is the readable one, but it
+# cannot be fetched from the API, which is how the first failing run left nothing to look at.
 #
 # There is no Stata or Python here: every chapter is R, so the whole freeze is thrown away and
 # rebuilt. See dss-training-ops/docs/notes/annual-bump.md.
@@ -46,6 +48,13 @@ jobs:
 
       - uses: r-lib/actions/setup-renv@v2
 
+      # Show the warnings the pages hide. warning: false sits in each page's YAML
+      # front matter, not in _quarto.yml.
+      - name: Unhide warnings and messages
+        run: |
+          sed -i 's/^  warning: false$/  warning: true/; s/^  message: false$/  message: true/' *.qmd
+          grep -c 'warning: true' *.qmd || true
+
       # Every chapter is R, so all of it re-executes.
       - name: Drop the freeze
         run: rm -rf _freeze/integrated-development-environments _freeze/package-development _freeze/version-control
@@ -60,6 +69,10 @@ jobs:
           grep -hoiE "[^<>]{0,80}(is deprecated|was deprecated|deprecated in|superseded|defunct)[^<>]{0,120}" \
             _site/*.html render.log 2>/dev/null \
             | sed 's/&quot;/"/g; s/&#39;/'"'"'/g' | sort -u > findings.txt || true
+
+          echo "--- findings ---"
+          cat findings.txt || true
+          echo "--- end findings ---"
 
           {
             echo "## Drift check"
