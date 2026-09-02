@@ -1,0 +1,8 @@
+# Deprecations the quarterly drift check should stop failing on.
+#
+# One extended regular expression per line. Blank lines and lines starting with #
+# are ignored. A line here means someone decided to live with the deprecation, so
+# record who decided, when, and why, directly above it. Remove the line when the
+# decision changes and the check will start reporting it again.
+
+# Nothing accepted yet.
