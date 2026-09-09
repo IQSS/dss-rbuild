@@ -704,7 +704,7 @@ Inside the R script, the documentation appears right above the definition of the
 
 5. You *must* provide examples of your function's use. These are pretty critical, because a lot of programmers will just skip straight to the examples (and only look at the rest of the documentation if the examples are unclear).
 
-6. You may choose to write '@export' at the end of your documentation block. You should only do this if you want other people to use the function that you're exporting, because exporting it will make sure it shows up in the **namespace**, a document that makes sure your package works in combination with other packages. For example, if your package includes data labelled 'lm', the namespace will prevent errors when using that data in combination with the R stats package (which has a function called 'lm') and will *not* throw an error. The [exact mechanics of the namespace](http://r-pkgs.had.co.nz/namespace.html) are slightly beyond the scope of this guide, but thankfully `Roxygen2` will automatically generate a namespace for you when you create documentation with "@export" tags.
+6. You may choose to write '@export' at the end of your documentation block. You should only do this if you want other people to use the function that you're exporting, because exporting it will make sure it shows up in the **namespace**, a document that makes sure your package works in combination with other packages. For example, if your package includes data labeled 'lm', the namespace will prevent errors when using that data in combination with the R stats package (which has a function called 'lm') and will *not* throw an error. The [exact mechanics of the namespace](http://r-pkgs.had.co.nz/namespace.html) are slightly beyond the scope of this guide, but thankfully `Roxygen2` will automatically generate a namespace for you when you create documentation with "@export" tags.
 
 Note that most functions you write won't be exported - for example, if you write a helper function like `loss()` which is only used in service of a larger function, it shouldn't be exported (exporting too many functions 'clutters' the namespace).
 
@@ -732,7 +732,7 @@ The README file is a bit different than the others, because your package will ac
 
 3. Tell developers what to do if they want to contribute to your package
 4. Help contributors figure out how to run the packages' unit tests (we'll talk more about unit tests in the next section)
-5. Offer some acknowledgements
+5. Offer some acknowledgments
 
 This [template](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) README is a good starting point. You could copy this file into your package directory and modify it to reflect the content of your project. Again, because your package will technically function without your README, the actual structure and content of a README can be flexible. However, just remember that if you don't have a README which outlines why and how to use your package, other developers are unlikely to want to use it.
 

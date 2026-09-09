@@ -22,6 +22,6 @@ The tests for `devex` should run automatically with `testthat` and `devtools` in
 
 If you want to contribute to this package or think we're missing something, email help@iq.harvard.edu
 
-### Acknowledgements
+### Acknowledgments
 
 One last huge thank you to Asher Spector at Harvard College, who wrote this tutorial under the guidance of Simo Goshev and Steve Worthington at Harvard's IQSS.
