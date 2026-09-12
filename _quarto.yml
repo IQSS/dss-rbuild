@@ -32,4 +32,4 @@ website:
       - resources.qmd
 
 execute:
-  freeze: auto
+  freeze: true
