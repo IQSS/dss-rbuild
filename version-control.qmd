@@ -198,7 +198,7 @@ The rules can seem confusing at times, but it's hard to go wrong - usually, ther
 
 Lastly (and most importantly), to save you time, the wonderful [NaLette Brodnax](https://www.iq.harvard.edu/people/nalette-brodnax) has created a template .gitignore file which you can use to declutter your GitHub repos. Using it requires three steps:
 
-Step 1: Download the file 'template.gitignore' from [here](https://github.com/IQSS/Rbuild/blob/master/template.gitignore). It should look something like this when you open it:
+Step 1: Download the file 'template.gitignore' from [here](https://github.com/IQSS/dss-rbuild/blob/main/template.gitignore). It should look something like this when you open it:
 
 ![](images/gitignore.PNG)
 
