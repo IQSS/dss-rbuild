@@ -81,9 +81,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-10a8614d5edbcfb62f4247fcc5f226a6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-ba686918b879777e5912dbe1a545fe5e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-10a8614d5edbcfb62f4247fcc5f226a6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-08ee8a756545d45ae79d04a038e7d566.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-58eb8971e32fb2b5faf6ff551ffe7aef.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-08ee8a756545d45ae79d04a038e7d566.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1049,7 +1049,7 @@ window.Quarto = {
 <li><p>You should describe your functions’ parameters using the ‘<span class="citation" data-cites="param">@param</span>’ signifier. This should succinctly describe the type (i.e.&nbsp;double, integer, character) of the parameter, as well as its function, as well as any potential default value.</p></li>
 <li><p>You should document the type of output your function returns. Is it an integer, a dataframe, a matrix? Does it depend on the input? Your documentation should answer these questions!</p></li>
 <li><p>You <em>must</em> provide examples of your function’s use. These are pretty critical, because a lot of programmers will just skip straight to the examples (and only look at the rest of the documentation if the examples are unclear).</p></li>
-<li><p>You may choose to write ‘<span class="citation" data-cites="export">@export</span>’ at the end of your documentation block. You should only do this if you want other people to use the function that you’re exporting, because exporting it will make sure it shows up in the <strong>namespace</strong>, a document that makes sure your package works in combination with other packages. For example, if your package includes data labelled ‘lm’, the namespace will prevent errors when using that data in combination with the R stats package (which has a function called ‘lm’) and will <em>not</em> throw an error. The <a href="http://r-pkgs.had.co.nz/namespace.html">exact mechanics of the namespace</a> are slightly beyond the scope of this guide, but thankfully <code>Roxygen2</code> will automatically generate a namespace for you when you create documentation with “<span class="citation" data-cites="export">@export</span>” tags.</p></li>
+<li><p>You may choose to write ‘<span class="citation" data-cites="export">@export</span>’ at the end of your documentation block. You should only do this if you want other people to use the function that you’re exporting, because exporting it will make sure it shows up in the <strong>namespace</strong>, a document that makes sure your package works in combination with other packages. For example, if your package includes data labeled ‘lm’, the namespace will prevent errors when using that data in combination with the R stats package (which has a function called ‘lm’) and will <em>not</em> throw an error. The <a href="http://r-pkgs.had.co.nz/namespace.html">exact mechanics of the namespace</a> are slightly beyond the scope of this guide, but thankfully <code>Roxygen2</code> will automatically generate a namespace for you when you create documentation with “<span class="citation" data-cites="export">@export</span>” tags.</p></li>
 </ol>
 <p>Note that most functions you write won’t be exported - for example, if you write a helper function like <code>loss()</code> which is only used in service of a larger function, it shouldn’t be exported (exporting too many functions ‘clutters’ the namespace).</p>
 <p>Once you’ve written all your documentation, it’s fairly simple to check what it looks like. Simply run the following function:</p>
@@ -1071,7 +1071,7 @@ window.Quarto = {
 <ol start="3" type="1">
 <li>Tell developers what to do if they want to contribute to your package</li>
 <li>Help contributors figure out how to run the packages’ unit tests (we’ll talk more about unit tests in the next section)</li>
-<li>Offer some acknowledgements</li>
+<li>Offer some acknowledgments</li>
 </ol>
 <p>This <a href="https://gist.github.com/PurpleBooth/109311bb0361f32d87a2">template</a> README is a good starting point. You could copy this file into your package directory and modify it to reflect the content of your project. Again, because your package will technically function without your README, the actual structure and content of a README can be flexible. However, just remember that if you don’t have a README which outlines why and how to use your package, other developers are unlikely to want to use it.</p>
 </section>
@@ -1159,7 +1159,7 @@ window.Quarto = {
 <p>You’re almost done at this point! You’ve written your functions, modified the description, documented your functions, presumably exported some of them, and hopefully tested all of them; you’re now ready to <em>release</em> and <em>publicize</em> your package. There are basically two main ways to do this.</p>
 <section id="pushing-to-github" class="level3">
 <h3 class="anchored" data-anchor-id="pushing-to-github">Pushing to GitHub</h3>
-<p>The easiest way to publish your package is to simply <a href=".\version-control">push it to GitHub</a>, (we’ll discuss how to do this later). The pros of this approach are that it makes it very easy for users to download your package - they can literally do it in one line. Additionally, Github offers free services <a href="https://pages.github.com/">to host a website for your package and its documentation</a>, and most importantly, it’s very easy for <strong>you</strong> to publish your package this way. Thus, pushing to Github is sort of the “default” way to publish a smaller package.</p>
+<p>The easiest way to publish your package is to simply <a href="./version-control.html">push it to GitHub</a>, (we’ll discuss how to do this later). The pros of this approach are that it makes it very easy for users to download your package - they can literally do it in one line. Additionally, Github offers free services <a href="https://pages.github.com/">to host a website for your package and its documentation</a>, and most importantly, it’s very easy for <strong>you</strong> to publish your package this way. Thus, pushing to Github is sort of the “default” way to publish a smaller package.</p>
 </section>
 <section id="cran" class="level3">
 <h3 class="anchored" data-anchor-id="cran">CRAN</h3>
